@@ -1,0 +1,67 @@
+#' @title Number of Records and Estimated Record Probability
+#' @description \code{M.record} and \code{P.record} calculates the number of 
+#'   records and mean number of records at each time \eqn{t} in a set of \eqn{M}
+#'   vectors (columns of the matrix), respectively. In particular, 
+#'   \code{P.record} is the estimated record probability at each time \eqn{t}.
+#' @details Given a matrix formed by \eqn{M} vectors (columns), measured at 
+#'   \eqn{T} times (rows), \code{M.record} calculates the number of records in 
+#'   the \eqn{M} vectors at each observed time \eqn{t}, \eqn{M_t}.
+#'
+#'   The function \code{P.record} is equivalent, but calculates the proportion 
+#'   of records at each time \eqn{t}, that is the ratio:
+#'   \deqn{\hat p_t = \frac{M_t}{M} = \frac{I_{t,1} + \ldots + I_{t,M}}{M},}
+#'   this proportion is an estimation of the probability of record at that time.
+#'  
+#'   Following the notation in \code{\link{I.record}}, summarily:
+#'   \deqn{\code{XM\_T} = \left(
+#'                  \begin{array}{cccc} 
+#'                    X_{1,1} & X_{1,2} & \cdots & X_{1,M} \\ 
+#'                    X_{2,1} & X_{2,2} & \cdots & X_{2,M} \\ 
+#'                    \vdots & \vdots &  & \vdots \\ 
+#'                    X_{T,1} & X_{T,2} & \cdots & X_{T,M} \\ 
+#'                  \end{array} \right) 
+#'                  \begin{array}{lc} 
+#'                  \stackrel{\code{M.record}}{\longrightarrow} &
+#'                  \Big( M_1, M_2, \cdots, M_T \Big) \\ \\ 
+#'                  \stackrel{\code{P.record}}{\longrightarrow} &
+#'                  \Big( \hat p_1, \hat p_2, \cdots, \hat p_T \Big) \\
+#'                  \end{array}}
+#' 
+#'   Summaries for both upper and lower records can be calculated.
+#' 
+#' @aliases M.record P.record
+#' @inheritParams I.record
+#' @return A vector with the number (or proportion in the case of 
+#'   \code{P.record}) of records at each time \eqn{t} (row).
+#' @author Jorge Castillo-Mateo
+#' @seealso \code{\link{I.record}}, \code{\link{L.record}}, 
+#'   \code{\link{N.record}}, \code{\link{Nmean.record}}, \code{\link{records}}
+#' @examples
+#' Y1 <- c( 1,  5,  3,  6,  6,  9,  2)
+#' Y2 <- c(10,  5,  3,  6,  6,  9,  2)
+#' Y3 <- c( 5,  7,  3,  6, 19,  2, 20)
+#' Y  <- cbind(Y1, Y2, Y3)
+#' 
+#' M.record(Y)
+#' P.record(Y)
+#' 
+#' M.record(ZaragozaSeries)
+#' P.record(ZaragozaSeries, record = 'l')
+#' 
+#' @export M.record
+M.record <- function(XM_T, record = c('upper', 'lower')) {
+  
+  XM_T <- I.record(XM_T, record = record)
+  
+  return(rowSums(XM_T))
+}
+
+#' @rdname M.record
+#' @export P.record
+P.record <- function(XM_T, record = c('upper', 'lower')) {
+  
+  XM_T <- I.record(XM_T, record = record)
+  
+  return(rowMeans(XM_T))
+}
+
