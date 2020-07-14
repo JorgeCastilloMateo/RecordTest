@@ -24,10 +24,10 @@ You can install the **development** version from
 remotes::install_github("JorgeCastilloMateo/RecordTest")
 ```
 
-or with the following argument to install the vignettes
+or with the following arguments to install the vignettes
 
 ```s
-remotes::install_github("JorgeCastilloMateo/RecordTest", build_vignettes = TRUE)
+remotes::install_github("JorgeCastilloMateo/RecordTest", build_vignettes = TRUE, dependencies = TRUE)
 ```
 
 ## How to start?
