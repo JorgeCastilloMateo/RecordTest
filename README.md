@@ -17,12 +17,19 @@ install.packages("RecordTest")
 ```
 
 You can install the **development** version from
-[GitHub](https://github.com/JorgeCastilloMateo/RecordTest).
+[GitHub](https://github.com/JorgeCastilloMateo/RecordTest)
 
 ```s
 # install.packages("remotes")
 remotes::install_github("JorgeCastilloMateo/RecordTest")
 ```
+
+or with the following argument to install the vignettes
+
+```s
+remotes::install_github("JorgeCastilloMateo/RecordTest", build_vignettes = TRUE)
+```
+
 ## How to start?
 Get started in *RecordTest* with the vignettes
 
