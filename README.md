@@ -1,8 +1,5 @@
----
-title: "RecordTest"
-output:
-  html_document
----
+RecordTest <img src="man/figures/logoRecordTest.png" width="175px" align="right" />
+======================
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/RecordTest)](http://cran.r-project.org/web/packages/RecordTest)
 [![cran_checks](https://cranchecks.info/badges/worst/RecordTest)](https://cran.r-project.org/web/checks/check_results_RecordTest.html)
