@@ -17,7 +17,7 @@ install.packages("RecordTest")
 ```
 
 You can install the **development** version from
-[GitHub](https://github.com/JorgeCastilloMateo/RecordTest)
+[GitHub](https://github.com/JorgeCastilloMateo/RecordTest).
 
 ```s
 # install.packages("remotes")

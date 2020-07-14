@@ -1,0 +1,170 @@
+---
+title: "An Introduction to the RecordTest Package"
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{An Introduction to the RecordTest Package}
+output:
+  knitr:::html_vignette
+---
+
+```{r loadLibs, include = FALSE}
+library(RecordTest)
+library(ggpubr)
+data("TX_Zaragoza")
+data("ZaragozaSeries")
+library(knitr)
+knitr::opts_chunk$set(
+  cache = TRUE,
+  comment = "#>",
+  collapse = TRUE,
+  digits = 5,
+  tidy = FALSE,
+  background = "#FFFF00",
+  fig.align = 'center',
+  warning = FALSE,
+  message = FALSE
+  )
+RNGkind(sample.kind = 'Rounding')
+options(width = 55, digits = 5)
+theme_set(theme_bw())
+```
+
+## Introduction
+
+The **RecordTest** package (Inference Tools in Time Series Based on Record Statistics) contains functions to visualize the behavior of the record occurrence, functions to calculate a wide variety of distribution-free tests for trend in location and tools to pre-process a time series in order to study its records.
+
+Install **RecordTest** using
+
+```{r install, eval = FALSE}
+install.packages("RecordTest")
+```
+
+The **introductory theory** for the package is at  
+
+```{r help, eval = FALSE}
+help("RecordTest-package")
+```
+
+Here, the main purpose of the package is developed as well as the definitions of the record statistics and an outline of the functions available in the package.
+
+**RecordTest** has several functions that attempt to test the classical record model which assumes randomness in its variables, that is, they are independent and identically distributed, by means of hypothesis tests and plots.
+
+## Data
+
+To begin with, **RecordTest** has a benchmark dataset `TX_Zaragoza` containing the time series `TX` of daily maximum temperature at Zaragoza (Spain), from 01/01/1953 to 31/12/2018 measured in tenths of a degree Celsius. 
+
+## Data preparation
+
+As a preview, the temperature series `TX_Zaragoza$TX` is drawn highlighting its upper and lower records.
+
+```{r records}
+library(RecordTest)
+library(ggpubr) # To join plots
+data(TX_Zaragoza)
+
+records(TX_Zaragoza$TX, alpha = c(1, 1, 0.05, 1))
+```
+
+A large number of upper records are observed in the first observations and very few lower records. Far from thinking that there is a big trend in the data, what happens is that this series has a strong seasonal component and serial correlation.
+
+To solve the above problems, splitting the observed series into $M$ independent series is especially useful in the presence of serial and seasonal component correlation. `series_split` splits `TX_Zaragoza$TX` into 365 subseries, each corresponding to each day of the year. `series_uncor` selects the larger number of columns or series  that are not correlated with their adjacent series.
+
+```{r pre-process}
+TxZ <- series_split(TX_Zaragoza$TX, Mcols = 365)
+
+TxZ <- TxZ[, series_uncor(TxZ)]
+```
+
+Since the observed series is measured and rounded to tenths of a degree Celsius, we are going to untie the possible records by adding a random value from a Uniform and independent distribution for each observation.
+
+```{r}
+TxZ <- series_untie(TxZ, a = -0.5, b = 0.5, seed = 23)
+```
+
+## Tests and graphics to detect trends
+
+The following plot shows the upper and lower record times in the forward and backward series. Many more points are observed in the graphics of the diagonal, giving evidence that there is a positive trend in the series.
+
+```{r}
+L.plot(TxZ)
+```
+
+`series_rev` allows to study the backward (or reversed) series. The following plots show the mean number of upper and lower records in the forward and backward series in the $M$ series. The trend in the forward series is not significant, but backward is highly significant.
+
+```{r}
+ggpubr::ggarrange(N.plot(TxZ) + ggplot2::ylim(1, 5.7),
+        N.plot(series_rev(TxZ)) + ggplot2::ylim(1, 5.7),
+        ncol = 2, nrow = 1, common.legend = TRUE, legend='bottom')
+```
+
+A plot that gathers the information of the four types of record is as follows.
+
+```{r}
+foster.plot(TxZ) + ggplot2::ylim(-1.80, 1.80)
+```
+
+If we choose incremental weights $\omega_t = t-1$ to the records within the statistic, the trend becomes more significant earlier. Many more plots of this style can be implemented (see `help(foster.plot)`).
+
+```{r}
+foster.plot(TxZ, weights = function(t) t-1) + 
+  ggplot2::ylim(-80, 80)
+```
+
+We can apply the contrast related to the previous plot to detect trend in the series, the result is highly significant.
+
+```{r}
+foster.test(TxZ, distribution = 'normal', weights = function(t) t-1)
+foster.test(TxZ, distribution = 't', weights = function(t) t-1)
+```
+
+Under the null hypothesis of i.i.d series, the record probability meets $t p_t = 1$. A regression test can be proposed where $E(t \hat p_t) = \alpha t + \beta$ and the hypothesis are
+\[
+H_0:\,\alpha=0,\,\beta=1 \qquad \text{and} \qquad H_1:\,\alpha\neq0\,\text{or}\,\beta\neq1.
+\]
+The plots related to this test detect a clear positive trend, with more upper records and fewer lower records in the forward series and the opposite in the reverse series.
+
+```{r}
+ggpubr::ggarrange(P_regression.plot(TxZ, record = 'upper') + 
+            ggplot2::ylim(0, 6),
+          P_regression.plot(TxZ, record = 'lower') +
+            ggplot2::ylim(0, 6),
+          P_regression.plot(series_rev(TxZ), record = 'upper') +
+            ggplot2::ylim(0, 6),
+          P_regression.plot(series_rev(TxZ), record = 'lower') +
+            ggplot2::ylim(0, 6),
+          ncol = 2, nrow = 2, common.legend = TRUE, legend='bottom')
+```
+
+Those tests can be inplemented as follows, where in addition the estimation of the parameters of the line is obtained.
+```{r}
+P_regression.test(TxZ, record = 'upper')
+P_regression.test(TxZ, record = 'lower')
+P_regression.test(series_rev(TxZ), record = 'upper')
+P_regression.test(series_rev(TxZ), record = 'lower')
+```
+
+One of the most powerful contrasts and based on a Monte Carlo approach is the following. Of the 10000 simulations considered under the null hypothesis, none has a statistic with a value greater than that of the observed series, making the contrast highly significant.
+
+```{r}
+L_global.test(TxZ, test = 'LM', statistic = 'G1', B = 10000, seed = 1:10000)
+```
+
+Other tests in the package can be implemented as follows:
+
+```{r}
+N_normal.test(TxZ, weights = function(t) t-1)
+L_lm.test(TxZ, B = 10000, seed = 1:10000)
+L_lr.test(TxZ, B = 10000, seed = 1:10000)
+P_exactPB.test(TxZ)
+```
+
+Other plots:
+
+```{r}
+ggpubr::ggarrange(
+  P_regression.plot(TxZ, plot = 2),
+  P_regression.plot(TxZ, plot = 3),
+  ncol = 2, nrow = 1)
+```
+
+There are still more tools! Try them yourself.
