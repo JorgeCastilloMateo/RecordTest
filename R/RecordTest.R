@@ -34,8 +34,8 @@
 #'
 #'   There is also available a set of functions to characterize the occurrence 
 #'   time, the value and other statistics related to the occurrence of records:
-#'   \code{\link{I.record}}, \code{\link{L.record}}, \\code{\link{M.record}},
-#'   code{\link{N.record}}, \code{\link{Nmean.record}} and \code{\link{records}}.
+#'   \code{\link{I.record}}, \code{\link{L.record}}, \code{\link{M.record}},
+#'   \code{\link{N.record}}, \code{\link{Nmean.record}} and \code{\link{records}}.
 #'
 #'   All the tests are based on the occurrence of records, but two families 
 #'   are distinguished: the first is based on the number of records up to time
