@@ -1,0 +1,62 @@
+#' @title Fisher's Method
+#' @importFrom stats pchisq
+#' @description Performs Fisher's method, which is used to combine the p-values
+#'   from several independent tests bearing upon the same overall null 
+#'   hypothesis.
+#' @details 
+#'   Fisher's method (Fisher, 1925) combines the p-values from \eqn{k} 
+#'   independent tests, into one test statistic using the following formula:
+#'   \deqn{-2 \sum_{i=1}^{k} \log(p_{i}) \sim \chi_{2k}^{2},}
+#'   where \eqn{p_i} is the p-value for the i-th hypothesis test.
+#'   
+#'   For example, Foster and Stuart (1954) proposed this method to combine the
+#'   information of the p-values from the D and S-statistics (see Examples),
+#'   since they are independent.
+#'   
+#' @param p.values A vector containing the p-values from the single tests.
+#' @return A \code{"htest"} object with elements:
+#'   \item{statistic}{Value of the test statistic.}
+#'   \item{parameter}{Degrees of freedom.}
+#'   \item{p.value}{P-value.}
+#'   \item{method}{A character string indicating the type of test performed.}
+#'   \item{data.name}{A character string giving the name of the data.}
+#' @author Jorge Castillo-Mateo
+#' @seealso \code{\link{brown.method}}, \code{\link{foster.test}}
+#' @references
+#' Fisher RA (1925). 
+#' \emph{Statistical Methods for Research Workers}. 
+#' Oliver and Boyd, Edinburgh. 
+#' 
+#' Foster FG, Stuart A (1954). 
+#' “Distribution-Free Tests in Time-Series Based on the Breaking of Records.”
+#' \emph{Journal of the Royal Statistical Society. Series B (Methodological)}, 
+#' \strong{16}(1), 1-22.
+#' 
+#' @examples
+#' # Join the independent p-values of the D and S-statistics
+#' fisher.method(c(foster.test(ZaragozaSeries, statistic = "D")$p.value,
+#'                 foster.test(ZaragozaSeries, statistic = "S")$p.value))
+#' # Adding weights
+#' fisher.method(c(foster.test(ZaragozaSeries, weights = function(t) t-1, statistic = "D")$p.value,
+#'                 foster.test(ZaragozaSeries, weights = function(t) t-1, statistic = "S")$p.value))
+#' 
+#' @export fisher.method
+
+fisher.method <- function(p.values) {
+  
+  DNAME <- deparse(substitute(p.values))
+  METHOD <- "Fisher's method (Fisher's combined probability test)"
+  
+  if (!all(p.values >= 0) || !all(p.values <= 1)) { 
+    stop("'p.values' should take values between 0 and 1") 
+  }
+  
+  X0 <- c("X-squared" = -2 * sum(log(p.values)))
+  df <- c("df" = 2 * length(p.values))
+  
+  pv <- stats::pchisq(q = X0, df = df, lower.tail = FALSE)
+  
+  structure(list(statistic = X0, parameter = df,
+                 p.value = pv, 
+                 method = METHOD, data.name = DNAME), class = "htest")
+}

@@ -2,116 +2,181 @@
 % Please edit documentation in R/foster.test.R
 \name{foster.test}
 \alias{foster.test}
-\title{Foster-Stuart, Diersen-Trenkler or t Tests for Randomness}
+\title{Foster-Stuart and Diersen-Trenkler Tests}
 \usage{
 foster.test(
-  XM_T,
-  statistic = c("D", "d", "TM"),
-  distribution = c("normal", "t"),
+  X,
   weights = function(t) 1,
-  trend = c("positive", "negative")
+  statistic = c("D", "d", "S", "s", "U", "L", "W"),
+  distribution = c("normal", "t"),
+  alternative = c("greater", "less"),
+  correct = FALSE,
+  simulate.p.value = FALSE,
+  B = 1000,
+  ...
 )
 }
 \arguments{
-\item{XM_T}{A numeric vector, matrix (or data frame).}
-
-\item{statistic}{A character string indicating the type of statistic to be 
-calculated, i.e., \code{"D"} (for \eqn{DM}, \eqn{DM^\omega} or 
-\eqn{DM^\omega_S}), \code{"d"} (for \eqn{dM}, \eqn{dM^\omega} or 
-\eqn{dM^\omega_S}) and \code{"TM"} (for \eqn{TM}, \eqn{TM^\omega} or 
-\eqn{TM^\omega_S}).}
-
-\item{distribution}{A character string indicating the asymptotic 
-distribution of the statistic, Normal distribution "normal" or 
-Student's t-distribution "t".}
+\item{X}{A numeric vector, matrix (or data frame).}
 
 \item{weights}{A function indicating the weight given to the different 
 records according to their position in the series,
 e.g., if \code{function(t) t-1} then \eqn{\omega_t = t-1}.}
 
-\item{trend}{A character string indicating the type of alternative 
-hypothesis, positive trend in location \code{"positive"} or
-negative trend in location \code{"negative"}.}
+\item{statistic}{A character string indicating the type of statistic to be 
+calculated, i.e., one of \code{"D"}, \code{"d"}, \code{"S"}, \code{"s"},
+\code{"U"}, \code{"L"} or \code{"W"} (see Details).}
+
+\item{distribution}{A character string indicating the asymptotic 
+distribution of the statistic, \code{"normal"} or Student's
+\code{"t"} distribution.}
+
+\item{alternative}{A character string indicating the type of alternative 
+hypothesis, \code{"greater"} number of records or \code{"less"} number of
+records.}
+
+\item{correct}{Logical. Indicates, whether a continuity correction 
+should be done; defaults to \code{FALSE}. No correction is done if
+\code{simulate.p.value = TRUE}.}
+
+\item{simulate.p.value}{Logical. Indicates whether to compute p-values by
+Monte Carlo simulation.}
+
+\item{B}{If \code{simulate.p.value = TRUE}, an integer specifying the 
+number of replicates used in the Monte Carlo estimation.}
+
+\item{...}{Further arguments in the Monte Carlo simulation:
+\itemize{
+\item \code{rdist} Function that simulates continuous random variables, e.g., 
+\code{\link{runif}} (fastest in stats package and default), 
+\code{\link{rnorm}} or \code{\link{rexp}}.
+\item \code{parallel} If \code{TRUE}, then the Monte Carlo algorithm is done in
+parallel. This can give a significant speedup on multicore machines if 
+\code{X} and \code{B} are big. Default \code{FALSE}.
+\item \code{numCores} (If \code{parallel = TRUE}) Allows the user to
+specify the amount of parallel processes to be used. If \code{NULL}, then
+the number of logical cores is automatically detected and all available 
+cores are used.
+}}
 }
 \value{
 A \code{"htest"} object with elements:
   \item{statistic}{Value of the test statistic.}
-  \item{parameter}{Only if \code{distribution = 't'}, degrees of freedom of 
-    \eqn{t} statistic equal to \eqn{M-1}.}
+  \item{parameter}{(If \code{distribution = "t"}) Degrees of freedom of
+    the \eqn{t} statistic (equal to \eqn{M-1}).}
   \item{p.value}{P-value.}
+  \item{alternative}{The alternative hypothesis.}
+  \item{estimate}{(If \code{distribution = "normal"}) A vector with the
+    value of the statistic, \eqn{\mu} and \eqn{\sigma^2}.}
   \item{method}{A character string indicating the type of test performed.}
   \item{data.name}{A character string giving the name of the data.}
 }
 \description{
-Performs Foster-Stuart, Diersen-Trenkler 
-  or t record tests for trend in location based on their normal 
-  or t asymptotic distribution, respectively.
-  The null hypothesis of randomness is tested against the 
-  alternative hypothesis.
+Performs Foster-Stuart, Diersen-Trenkler and 
+  ? record tests for trend in location or variation.
+  The hypothesis of the classical record model (i.e., of randomness) is 
+  tested against the alternative hypothesis.
 }
 \details{
 In this function, the tests are implemented as given by Foster and Stuart
-  (1954), Diersen and Trenkler (1996, 2001) and some modifications
-  standardizing the previous statistics. Let \eqn{(I_{t,m})} be the record 
-  indicator random variables of the mth series. The number of records up to
-  time \eqn{T} of the mth series, \eqn{N_{T,m} = \sum_{t=2}^{T} I_{t,m}}, 
-  or the weighted number of records up to time \eqn{T} of the mth series,
-  \eqn{N_{T,m}^\omega = \sum_{t=2}^{T} \omega_t I_{t,m}}; for the upper and
-  lower records and for the forward and backward series of the
-  \eqn{(X_{t,1}),\ldots,(X_{t,M})}, \eqn{t=1,\ldots,T}, series are used for
-  the statistics:
+  (1954), Diersen and Trenkler (1996, 2001) and some modifications in the
+  standardization of the previous statistics given by ? (2021). 
+  The null hypothesis is that the data come
+  from a population with independent and identically distributed
+  realisations. The one-sided alternative hypothesis is that the chosen
+  statistic is greater (or less) than under the null hypothesis. The
+  different statistics are calculated according to:
   
-  If \code{statistic == "d", distribution = "normal"}, 
-  \deqn{dM^\omega = \sum_{m=1}^{M} \sum_{t=2}^{T} \omega_t\,\Big( I_{t,m} - I_{t,m}^L\Big).}
+  If \code{statistic == "d"}, 
+  \deqn{\sum_{m=1}^{M} \sum_{t=1}^{T} \omega_t \left( I_{tm}^{(FU)} - I_{tm}^{(FL)}\right).}
 
-  If \code{statistic == "D", distribution = "normal"}, 
-  \deqn{DM^\omega = \sum_{m=1}^{M} \sum_{t=2}^{T} \Big( I_{t,m} - I_{t,m}^L - I_{t,m}^{rev} + I_{t,m}^{L,rev}\Big).}
+  If \code{statistic == "D"}, 
+  \deqn{\sum_{m=1}^{M} \sum_{t=1}^{T} \omega_t \left( I_{tm}^{(FU)} - I_{tm}^{(FL)} - I_{tm}^{(BU)} + I_{tm}^{(BL)}\right).}
 
-  If \code{statistic == "TM", distribution = "normal"}, 
-  \deqn{TM^\omega = \sum_{m=1}^{M} \sum_{t=1}^{T} \Big( I_{t,m} + I_{t,m}^{L,rev}\Big).}
+  If \code{statistic == "s"}, 
+  \deqn{\sum_{m=1}^{M} \sum_{t=1}^{T} \omega_t \left( I_{tm}^{(FU)} + I_{tm}^{(FL)}\right).}
+
+  If \code{statistic == "S"}, 
+  \deqn{\sum_{m=1}^{M} \sum_{t=1}^{T} \omega_t \left( I_{tm}^{(FU)} + I_{tm}^{(FL)} + I_{tm}^{(BU)} + I_{tm}^{(BL)}\right).}
+
+  If \code{statistic == "U"}, 
+  \deqn{\sum_{m=1}^{M} \sum_{t=1}^{T} \omega_t \left( I_{tm}^{(FU)} - I_{tm}^{(BU)}\right).}
+
+  If \code{statistic == "L"}, 
+  \deqn{\sum_{m=1}^{M} \sum_{t=1}^{T} \omega_t \left( I_{tm}^{(BL)} - I_{tm}^{(FL)}\right).}
+
+  If \code{statistic == "W"}, 
+  \deqn{\sum_{t=1}^{T} \omega_t \left( I_{tm}^{(FU)} + I_{tm}^{(BL)}\right).}
  
-  While their means are very simple to calculate, their variances become 
-  unwieldly expressions and are given by Diersen and Trenkler (2001). 
+  Where \eqn{\omega_t} are weights given to the different records
+  according to their position in the series, \eqn{I_{tm}} are the record
+  indicators (see \code{\link{I.record}}), and \eqn{(FU)}, \eqn{(FL)}, 
+  \eqn{(BU)} and \eqn{(BL)} represents forward upper, forward lower,
+  backward upper and backward lower records, respectively. The statistics 
+  \eqn{d}, \eqn{D} and \eqn{W} may be used for trend in location;
+  \eqn{s} and \eqn{S} may be used for trend in variation; and \eqn{U} and
+  \eqn{L} may be used for trend in the upper and lower tails of the 
+  distribution respectively.
   
-  The p-value is calculated with the Normal asymptotic distribution in the 
-  usual way with a one-sided alternative based on the \code{trend} value.
+  The statistics, say \eqn{X}, are approximately normally distributed, with
+  \deqn{Z = \frac{X - \mu}{\sigma},}
+  while the mean \eqn{\mu} of the particular statistic considered is simple
+  to calculate, its variance \eqn{\sigma^2} become a cumbersome expression
+  and some are given by Diersen and Trenkler (2001) and all of them can be
+  computed out of the expression of the covariances given by ? (2021). 
   
-  If \code{distribution = "t"}, for the above statistics it is calculated a
-  new one, e.g. for \eqn{DM^\omega},
-  \deqn{DM_S^\omega = \frac{DM^\omega - E(DM^\omega)}{\sqrt{\widehat{Var}(DM^\omega)}},}
-  where \eqn{E(DM^\omega)} is the expectation under the null, and 
-  \eqn{\widehat{Var}(DM^\omega)} is an estimation of the variance obtained 
-  from the sample, which is why \eqn{M>1} is required. The statistic above
-  is asymptotically t distributed and it has been proved that 
-  \eqn{DM_S^\omega} is highly robust against serial correlation.
+  If \code{correct = TRUE}, then a continuity correction will be employed:
+  \deqn{Z = \frac{X \pm 0.5 - \mu}{\sigma},}
+  with ``\eqn{-}'' if the alternative is greater and ``\eqn{+}'' if the 
+  alternative is less. Not recommended for the statistics with \eqn{\mu=0}.
+  
+  When \eqn{M>1}, the expression of the variance under the null hypothesis
+  can be substituted by the sample variance in the \eqn{M} series, 
+  \eqn{\hat{\sigma}^2}. In this case, the statistics are asymptotically
+  \eqn{t} distributed, which is a more robust alternative against serial 
+  correlation.
+  
+  If \code{simulate.p.value = TRUE}, the p-value is estimated by Monte Carlo
+  simulations.
 }
 \examples{
+# D-statistic
 foster.test(ZaragozaSeries)
-foster.test(ZaragozaSeries, statistic = 'd')
+# D-statistic with linear weights
 foster.test(ZaragozaSeries, weights = function(t) t-1)
-foster.test(ZaragozaSeries, distribution = 't')
-foster.test(ZaragozaSeries, distribution = 't', weights = function(t) t-1)
+# S-statistic with linear weights
+foster.test(ZaragozaSeries, statistic = "S", weights = function(t) t-1)
+# D-statistic with weights and t approach
+foster.test(ZaragozaSeries, distribution = "t", weights = function(t) t-1)
+# U-statistic with weights (upper tail)
+foster.test(ZaragozaSeries, statistic = "U", weights = function(t) t-1)
+# L-statistic with weights (lower tail)
+foster.test(ZaragozaSeries, statistic = "L", weights = function(t) t-1)
 
 }
 \references{
-Diersen J, Trenkler G (1996). Records Tests for Trend in Location.
+? (2021).
+“Statistical Tests to Detect Non-Stationarity Based on Records to Analyse Climate Change.”
+Unpublished manuscript.
+
+Diersen J, Trenkler G (1996). “Records Tests for Trend in Location.”
 \emph{Statistics}, \strong{28}(1), 1-12.
-doi: \href{https://doi.org/10.1080/02331889708802543}{10.1080/02331889708802543}
+\href{https://doi.org/10.1080/02331889708802543}{doi:10.1080/02331889708802543}
 
 Diersen J, Trenkler G (2001). 
-\emph{Weighted record tests for splitted series of observations}. 
-En J Kunert, G Trenkler (Eds.), 
-Mathematical Statistics with Applications in Biometry. 
-Festschrift in Honour of Prof. Dr. Siegfried Schach (pp. 163-178). 
-Lohmar: Josef Eul Verlang. 
+“Weighted Records Tests for Splitted Series of Observations.”
+In J Kunert, G Trenkler (eds.), 
+\emph{Mathematical Statistics with Applications in Biometry: Festschrift in Honour of Prof. Dr. Siegfried Schach}, 
+pp. 163–178. Lohmar: Josef Eul Verlag.
 
 Foster FG, Stuart A (1954). 
-Distribution-Free Tests in Time-Series Based on the Breaking of Records.
+“Distribution-Free Tests in Time-Series Based on the Breaking of Records.”
 \emph{Journal of the Royal Statistical Society. Series B (Methodological)}, 
 \strong{16}(1), 1-22.
 }
 \seealso{
-\code{\link{foster.plot}}
+\code{\link{foster.plot}}, \code{\link{N.plot}}, 
+  \code{\link{N.test}}
 }
 \author{
 Jorge Castillo-Mateo

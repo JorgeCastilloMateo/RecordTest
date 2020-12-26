@@ -5,37 +5,44 @@
 \alias{I.record.default}
 \alias{I.record.numeric}
 \alias{I.record.matrix}
-\title{Record Indicator random variables}
+\title{Record Indicators}
 \usage{
-I.record(XM_T, record = c("upper", "lower"))
+I.record(X, record = c("upper", "lower"), weak = FALSE)
 
-\method{I.record}{default}(XM_T, record = c("upper", "lower"))
+\method{I.record}{default}(X, record = c("upper", "lower"), weak = FALSE)
 
-\method{I.record}{numeric}(XM_T, record = c("upper", "lower"))
+\method{I.record}{numeric}(X, record = c("upper", "lower"), weak = FALSE)
 
-\method{I.record}{matrix}(XM_T, record = c("upper", "lower"))
+\method{I.record}{matrix}(X, record = c("upper", "lower"), weak = FALSE)
 }
 \arguments{
-\item{XM_T}{A numeric vector, matrix (or data frame).}
+\item{X}{A numeric vector, matrix (or data frame).}
 
 \item{record}{A character string indicating the type of record to be 
 calculated, "upper" or "lower".}
+
+\item{weak}{Logical. If \code{TRUE}, weak records are also counted. Default
+to \code{FALSE}.}
 }
 \value{
-A binary matrix, indicating the record occurrence.
+A binary matrix of the same length or dimension as \code{X}, 
+  indicating the record occurrence.
 }
 \description{
-This function calculates for each value in the vector a binary 
-  variable which takes the value 1 if the corresponding value in the vector 
-  is a record and 0 otherwise. If the argument \code{XM_T} is a matrix, 
-  each column is treated as a different vector.
+Returns the sample record indicators of the values in a vector.
+  The record indicator for each value in a vector is a binary variable which
+  takes the value 1 if the corresponding value in the vector is a record and
+  0 otherwise. 
+  
+  If the argument \code{X} is a matrix, then each column is treated as a 
+  different vector.
 }
 \details{
-Let \eqn{\{X_1,\ldots,X_T\}} be a sequence of random variables of 
+Let \eqn{\{X_1,\ldots,X_T\}} be a vector of random variables of 
   size \eqn{T}. An observation \eqn{X_t} will be called an upper record 
   value if its value exceeds that of all previous observations. An 
   analogous definition deals with lower record values.
-  Here \eqn{X_1} is referred to as the reference value or the trivial record.
+  Here, \eqn{X_1} is referred to as the reference value or the trivial record.
   Then, the sequence of record indicator random variables 
   \eqn{\{I_1,\ldots,I_T\}} is given by
       \deqn{I_t = \left\{ 
@@ -45,13 +52,13 @@ Let \eqn{\{X_1,\ldots,X_T\}} be a sequence of random variables of
         \end{array} \right.} 
 
   The method \code{I.record} calculates the sample sequence above if the 
-  argument \code{XM_T} is a numeric vector. If the argument \code{XM_T} is a 
+  argument \code{X} is a numeric vector. If the argument \code{X} is a 
   matrix (or data frame) with \eqn{M} columns, the method \code{I.record} 
   calculates the sample sequence above for each column of the object as if 
   all columns were different sequences.
  
   Summarily:
-  \deqn{\code{I.record}: \code{XM\_T} = \left(
+  \deqn{\code{I.record}: \code{X} = \left(
                  \begin{array}{cccc} 
                    X_{1,1} & X_{1,2} & \cdots & X_{1,M} \\ 
                    X_{2,1} & X_{2,2} & \cdots & X_{2,M} \\ 
@@ -69,24 +76,32 @@ Let \eqn{\{X_1,\ldots,X_T\}} be a sequence of random variables of
                  
   Indicators of record occurrence can be calculated for both upper and 
   lower records.
+  
+  All the procedure above can be extended to weak records, which also count
+  the ties as a new (weak) record. Ties are possible in discrete variables
+  or if a continuous variable has been rounded. Weak records can be computed
+  if \code{weak = TRUE}.
 }
 \examples{
 X <- c(1, 5, 3, 6, 6, 9, 2, 11, 17, 8)
 I.record(X)
+I.record(X, weak = TRUE)
 
 I.record(ZaragozaSeries)
 # record argument can be shortened
-I.record(ZaragozaSeries, record = 'l')
+I.record(ZaragozaSeries, record = "l")
 
 }
 \references{
 Arnold BC, Balakrishnan N, Nagaraja HN (1998). 
-\emph{Records}. New York: Wiley.
+\emph{Records}. 
+Wiley Series in Probability and Statistics. Wiley, New York.
 }
 \seealso{
-\code{\link{L.record}}, \code{\link{M.record}}, 
+\code{\link{L.record}}, 
   \code{\link{N.record}}, \code{\link{Nmean.record}}, 
-  \code{\link{P.record}}, \code{\link{records}}
+  \code{\link{p.record}}, \code{\link{R.record}},
+  \code{\link{records}}, \code{\link{S.record}}
 }
 \author{
 Jorge Castillo-Mateo

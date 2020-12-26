@@ -2,73 +2,124 @@
 % Please edit documentation in R/N.plot.R
 \name{N.plot}
 \alias{N.plot}
-\title{Plot of the mean number of records up to time t}
+\title{Plot on the Number of Records}
 \usage{
 N.plot(
-  XM_T,
+  X,
   weights = function(t) 1,
-  record = c("both", "upper", "lower"),
-  interval = c("ribbon", "errorbar"),
-  conf = 0.95,
-  colour = "salmon"
+  record = c(FU = 1, FL = 1, BU = 1, BL = 1),
+  backward = c("1", "2"),
+  point.col = c(FU = "red", FL = "blue", BU = "red", BL = "blue"),
+  point.shape = c(FU = 19, FL = 19, BU = 4, BL = 4),
+  conf.int = TRUE,
+  conf.level = 0.9,
+  conf.aes = c("ribbon", "errorbar"),
+  conf.col = "grey69"
 )
 }
 \arguments{
-\item{XM_T}{A numeric vector, matrix (or data frame).}
+\item{X}{A numeric vector, matrix (or data frame).}
 
 \item{weights}{A function indicating the weight given to the different 
 records according to their position in the series,
 e.g., if \code{function(t) t-1} then \eqn{\omega_t = t-1}.}
 
-\item{record}{A character string indicating the type of record, 
-\code{"upper"}, \code{"lower"} or \code{"both"}.}
+\item{record}{Logical vector. Vector with four elements indicating if 
+forward upper, forward lower, backward upper and backward lower are going
+to be shown, respectively. Logical values or 0,1 values are accepted.}
 
-\item{interval}{A character string indicating the type of display of 
-the confidence intervals, \code{"ribbon"} (grey area) or 
+\item{backward}{A character string \code{"1"} or \code{"2"} (character or 
+numeric class are both allowed) indicating if the backward number of 
+records shown are calculated up to time \eqn{t} for the backward series 
+in times \eqn{\{T,\ldots,1\}} or the backward number of records shown for 
+every \eqn{t} are the total number of records in the series with times 
+\eqn{\{t,\ldots,1\}}. While the first option considers the evolution of a
+series of records observed up to time \eqn{T}, the second considers
+that until each time \eqn{t} the series has only been observed up to 
+\eqn{t}.}
+
+\item{point.col, point.shape}{Vector with four elements indicating the colour
+and shape of the points. Every one of the four elements represents forward
+upper, forward lower, backward upper and backward lower, respectively.}
+
+\item{conf.int}{Logical. Indicates if the CIs are also shown.}
+
+\item{conf.level}{(If \code{conf.int == TRUE}) Confidence level of the CIs.}
+
+\item{conf.aes}{(If \code{conf.int == TRUE}) A character string indicating 
+the aesthetic to display for the CIs, \code{"ribbon"} (grey area) or 
 \code{"errorbar"} (vertical lines).}
 
-\item{conf}{Confidence level of the confidence intervals.}
-
-\item{colour}{Colour used to plot the expected values of \eqn{N_t}, 
-and the CI.}
+\item{conf.col}{Colour used to plot the expected value and (if 
+\code{conf.int == TRUE}) CIs.}
 }
 \value{
 A ggplot object.
 }
 \description{
 This function constructs a ggplot object to compare the sample
-  means of the number of records in a vector up to time \eqn{t}, 
-  \eqn{\bar N_t}, and the expected values \eqn{E(N_t)} under the classical 
-  record model.
+  means of the (weighted) number of records in a vector up to time \eqn{t}, 
+  \eqn{\bar N_t^\omega}, and the expected values \eqn{\textrm{E}(N_t)} under the
+  classical record model.
 }
 \details{
-First, this function calculates the sample means of the number of records
-  in a vector up to time \eqn{t}. These sample means \eqn{\bar N_t} are 
-  calculated from the sample of \eqn{M} values obtained from \eqn{M} 
-  vectors, the columns of matrix \code{XM_T}. Then, these values are plotted
-  and compared with the expected values \eqn{E(N_t)} and their confidence 
-  intervals (CI), under the hypothesis of the classical record model.
-
-  The CI of \eqn{E(N_t)} uses the fact that, under the classical record 
-  model, the statistic \eqn{\bar N_t} is asymptotically Normal.
+This plot is associated with the \code{\link{N.test}} test.
+  It calculates the sample means of the number of records
+  in a vector up to every time \eqn{t} (see \code{\link{Nmean.record}}). 
+  These sample means \eqn{\bar N_t} are calculated from the sample of
+  \eqn{M} values obtained from \eqn{M} vectors, the columns of matrix 
+  \code{X}. Then, these values are plotted and compared with the expected 
+  values \eqn{\textrm{E}(N_t)} and their confidence intervals (CIs), under
+  the hypothesis of the classical record model. The CIs of \eqn{E(N_t)} 
+  uses the fact that, under the classical record model, the statistic 
+  \eqn{\bar N_t} is asymptotically Normal.
+  
+  The plot can show the four types of record at the same time (i.e., 
+  forward upper, forward lower, backward upper and backward lower).
+  In their interpretations one must be careful, for forward records 
+  each time \eqn{t} corresponds to the same year of observation, but for 
+  the backward series, time \eqn{t} corresponds to the year of observation
+  \eqn{T-t+1} where \eqn{T} is the total number of observations in every 
+  series. Two types of backward records can be considered (see argument
+  \code{backward}).
+  
+  More details of this plot are shown in ? (2021).
 }
 \examples{
-N.plot(ZaragozaSeries, weights = function(t) t-1, interval = 'errorbar')
+# Plot at Zaragoza, with linear weights and error bar as CIs aesthetic
+N.plot(ZaragozaSeries, weights = function(t) t-1, conf.aes = "errorbar")
 
-Zplot <- N.plot(ZaragozaSeries, record = 'lower')
-Zplot
+# Plot only upper records
+N.plot(ZaragozaSeries, record = c(1, 0, 1, 0))
 
-library(ggplot2)
-# change the colour of the points
-colour_point <- 'black'
-Zplot + scale_colour_manual(name = '', values = c('Lower record' = colour_point)) 
+# Change point colour and shape
+Zplot <- N.plot(ZaragozaSeries, 
+  point.col = c("red", "red", "blue", "blue"), 
+  point.shape = c(19, 4, 19, 4))
 
-# remove legend
-Zplot + theme(legend.position = 'none')
-
+## Not run: Load package ggplot2 to change the plot
+#library("ggplot2")
+## Remove legend
+#Zplot + ggplot2::theme(legend.position = "none")
+## Fancy axis
+#Zplot + 
+# ggplot2::scale_x_continuous(name = "Forward (Year)", 
+#   breaks = c(8, 28, 48, 68), 
+#   labels=c("1960", "1980", "2000", "2020"), 
+#   sec.axis = ggplot2::sec_axis(~ nrow(ZaragozaSeries) - . + 1953, name = "Backward (Year)")) +
+# ggplot2::theme(axis.title.x = ggplot2::element_text(color = "red"), 
+#   axis.text.x = ggplot2::element_text(color = "red"),
+#   axis.title.x.top = ggplot2::element_text(color = "blue"), 
+#   axis.text.x.top = ggplot2::element_text(color = "blue"))
+}
+\references{
+? (2021).
+“Statistical Tests to Detect Non-Stationarity Based on Records to Analyse Climate Change.”
+Unpublished manuscript.
 }
 \seealso{
-\code{\link{N_normal.test}}, \code{\link{foster.test}}
+\code{\link{N.record}}, \code{\link{N.test}}, 
+  \code{\link{foster.test}}, \code{\link{foster.plot}}
 }
 \author{
 Jorge Castillo-Mateo

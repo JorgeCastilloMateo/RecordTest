@@ -1,14 +1,17 @@
-#' @title Transforms a \eqn{T \times M} in a 
-#'   \eqn{\lfloor T/\code{k} \rfloor \times \code{k}\,M} matrix
-#' @description This function changes the format of a matrix, 
-#'   in the following way.
+#' @title Double the Number of Series
+#' @description This function changes the format of a matrix transforming a
+#'   \eqn{T \times M} matrix in a 
+#'   \eqn{\lfloor T/\code{k} \rfloor \times \code{k}\,M} matrix in the 
+#'   following way.
+#'   
 #'   First, the matrix is divided into \code{k} matrices 
 #'   \eqn{\lfloor T/\code{k} \rfloor \times M}, containing the rows whose 
 #'   remainder of the division of the row number by \code{k} is 
 #'   \eqn{1,2,\ldots,\code{k}-1,0}, respectively;
-#'   and secondly those matrices are cbinded.
+#'   and secondly those matrices are \code{cbind}ed.
 #' @details This function is used in the data preparation (or pre-processing) 
-#'   often required to apply the record inference tools in this package.
+#'   often required to apply the exploratory and inference tools based on 
+#'   theory of records within this package.
 #'
 #'   Most of the record inference tools require a high number of independent 
 #'   series \eqn{M} (number of columns) to be applied.
@@ -16,7 +19,7 @@
 #'   enough, the following procedure can be applied in order to multiply by
 #'   \code{k} the value \eqn{M}.
 #'   The approach  consists of considering that the observations at two 
-#'   (or more) consesutive times, \eqn{t} and \eqn{t+1} (or \eqn{t+\code{k}-1}),
+#'   (or more) consecutive times, \eqn{t} and \eqn{t+1} (or \eqn{t+\code{k}-1}),
 #'   are independent observations measured at the same time unit.
 #'   That means that we are doubling (or multiplying by \code{k}) the original 
 #'   time unit of the records, so that the length of the observation period 
@@ -24,13 +27,14 @@
 #'   This function rearranges the original data matrix into the new format.
 #'
 #'   If the number of rows of the original matrix is not divisible by \code{k},
-#'   the first \code{nrow(XM_T) \%\% k} rows are deleted.
+#'   the first \code{nrow(X) \%\% k} rows are deleted.
 #'
-#' @param XM_T A numeric vector, matrix (or data frame).
+#' @param X A numeric vector, matrix (or data frame).
 #' @param k Integer \eqn{> 1}, times to increase the number of columns.
 #' @return A \eqn{\lfloor T/\code{k} \rfloor \times \code{k}\,M} matrix.
 #' @author Jorge Castillo-Mateo
-#' @seealso \code{\link{series_rev}}, \code{\link{series_split}}, 
+#' @seealso \code{\link{series_record}}, \code{\link{series_rev}},
+#'   \code{\link{series_split}}, \code{\link{series_ties}}
 #'   \code{\link{series_uncor}}, \code{\link{series_untie}}
 #' @examples
 #' series_double(matrix(1:100, 10, 10))
@@ -38,15 +42,15 @@
 #' series_double(ZaragozaSeries, k = 4)
 #' 
 #' @export series_double
-series_double <- function(XM_T, k = 2) {
+series_double <- function(X, k = 2) {
   
-  XM_T <- as.matrix(XM_T)
-  Trows <- nrow(XM_T)
+  X <- as.matrix(X)
+  Trows <- nrow(X)
   
-  if (Trows < k) stop(paste("XM_T does not have enough elements for k =", k))
+  if (Trows < k) { stop(paste("'X' does not have enough elements for 'k' =", k)) }
   
   remainder <- Trows %% k
-  if (remainder != 0) XM_T <- XM_T[(remainder + 1):Trows, , drop = FALSE]
+  if (remainder != 0) X <- X[(remainder + 1):Trows, , drop = FALSE]
     
-  series_split(c(t(XM_T)), Mcols = ncol(XM_T) * k)
+  return(series_split(c(t(X)), Mcols = ncol(X) * k))
 }

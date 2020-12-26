@@ -1,53 +1,54 @@
-#' @title Avoid record ties
+#' @title Avoid Record Ties
+#' @importFrom stats runif rnorm
 #' @description Avoids record ties when observations have been rounded.
-#' @param XM_T A numeric vector, matrix (or data frame).
-#' @param a,b Lower and upper limits of the uniform distribution.
-#' @param seed Allows the user to specify the seed of the random sampling. 
-#'   If \code{NULL}, then no seed is specified.
-#' @details This function is used in the data preparation (or pre-processing). 
-#'  Its use is recommended but not necessary to apply the record inference 
-#'  tools in this package.
+#' @param X A numeric vector, matrix (or data frame).
+#' @details This function is used in the data preparation (or pre-processing) 
+#'  often required to apply the exploratory and inference tools based on 
+#'  theory of records within this package.
 #'  
-#'  The record theory on which the hypothesis tests are based assumes 
+#'  The theory of records on which the hypothesis tests are based assumes 
 #'  that the random variables are continuous, proving that the probability 
 #'  that two observations take the same value is zero. Most of the data 
 #'  collected is rounded, giving a certain probability to the tie between 
-#'  records, slightly skewing the results, in general obtaining a fewer 
-#'  amount of records if it has been rounded a lot. 
+#'  records, thereby reducing the number of new records (see, e.g., Wergen 
+#'  et al. 2012). 
 #'  
-#'  This function avoids ties by adding a sample from a uniform variable 
-#'  in the interval \eqn{(\code{a}, \code{b})} to each element of \code{XM_T}.
-#'  If rounding is in units it is recommended to take \code{a = -0.5, b = 0.5},
-#'  while if it is in tenths it is recommended \code{a = -0.05, b = 0.05}
-#'  and so on.
-#'  
-#'  If the function is used correctly (appropiate \code{a,b} values) the records
-#'  in the original series will also be in the new series.
+#'  This function avoids ties by adding a sample from a uniform random variable 
+#'  to each element of \code{X}. The function computes the maximum number of 
+#'  decimal digits (let it be \eqn{n}) for any element in \code{X}. Then the
+#'  uniform variable is sampled in the interval 
+#'  \eqn{(-5 \times 10^{-(n+1)}, 5 \times 10^{-(n+1)})}, so the records in the
+#'  original (rounded) series will also be in the new series.
 #'
-#' @return A matrix equal to \code{XM_T} whose elements have been added a 
-#'   sample from a uniform variable.
+#' @return A matrix equal to \code{X} whose elements have been added a 
+#'   sample from a uniform variable, different for every element.
 #' @author Jorge Castillo-Mateo
-#' @seealso \code{\link{series_double}}, \code{\link{series_rev}}
-#'   \code{\link{series_split}}, \code{\link{series_uncor}} 
+#' @seealso \code{\link{series_double}}, \code{\link{series_record}}, 
+#'   \code{\link{series_rev}}, \code{\link{series_split}}, 
+#'   \code{\link{series_ties}}, \code{\link{series_uncor}} 
+#' @references 
+#' Wergen G, Volovik D, Redner S, Krug J (2012). 
+#' “Rounding Effects in Record Statistics.”
+#' \emph{Physical Review Letters}, \strong{109}(16), 164102. 
+#' doi:\href{https://doi.org/10.1103/PhysRevLett.109.164102}{10.1103/PhysRevLett.109.164102}.
 #' @examples
 #' set.seed(23)
-#' series_untie(matrix(round(rnorm(100), digits = 1), 10, 10), a = -0.05, b = 0.05)
+#' X <- matrix(round(stats::rnorm(100), digits = 1), nrow = 10, ncol = 10)
+#' series_untie(X)
 #' 
-#' series_untie(ZaragozaSeries, seed = 23)
+#' series_untie(ZaragozaSeries)
 #' 
 #' @export series_untie
-series_untie <- function(XM_T, a = -0.5, b = 0.5, seed = NULL) {
+series_untie <- function(X) {
   
-  if (!is.null(seed)) {
-    old <- .Random.seed
-    on.exit( { .Random.seed <<- old } )
-    set.seed(seed)
-  }
+  Trows <- NROW(X)
+  Mcols <- NCOL(X)
   
-  Trows <- NROW(XM_T)
-  Mcols <- NCOL(XM_T)
+  digits <- max(nchar(sub("^0+", "", sub("\\.", "", X %% 1)))) + 1
+  a <- -5 * 10^-digits
+  b <-  5 * 10^-digits
   
-  XM_T <- XM_T + matrix(runif(Trows * Mcols, min = a, max = b), nrow = Trows, ncol = Mcols)
+  X <- X + matrix(stats::runif(Trows * Mcols, min = a, max = b), nrow = Trows, ncol = Mcols)
   
-  return(XM_T)
+  return(X)
 }

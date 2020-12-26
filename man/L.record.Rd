@@ -4,27 +4,35 @@
 \alias{L.record}
 \title{Record Times}
 \usage{
-L.record(XM_T, record = c("upper", "lower"))
+L.record(X, record = c("upper", "lower"), weak = FALSE)
 }
 \arguments{
-\item{XM_T}{A numeric vector, matrix (or data frame).}
+\item{X}{A numeric vector, matrix (or data frame).}
 
 \item{record}{A character string indicating the type of record to be 
 calculated, "upper" or "lower".}
+
+\item{weak}{Logical. If \code{TRUE}, weak records are also counted. Default
+to \code{FALSE}.}
 }
 \value{
-If \code{XM_T} is a vector, the function returns a column matrix 
-  containing the record times. If \code{XM_T} is a matrix, the function 
+If \code{X} is a vector, the function returns a column matrix 
+  containing the record times. If \code{X} is a matrix, the function 
   returns a list where each element is a vector indicating the record times 
-  of the corresponding \code{XM_T} column.
+  of the corresponding \code{X} column.
 }
 \description{
-This function calculates the times (positions in the vector) 
-  where records occur.
+Returns the sample record times of the values in a vector.
+  The record times are the positions in a vector where a record occurs. 
+  
+  If the argument \code{X} is a matrix, then each column is treated as a 
+  different vector.
 }
 \details{
-If \code{XM_T} is a matrix, the approach to obtain record times is 
-  applied to each column of the matrix. 
+The sequence of record times \eqn{\{L_1,\ldots,L_I\}} can be 
+  expressed in terms of the record indicator random variables 
+  \code{\link{I.record}} by
+  \deqn{L_i = \min\{ t \mid I_1 + I_2 + \ldots + I_t = i \}.}
   
   Record times can be calculated for both upper and lower records.
 }
@@ -38,10 +46,15 @@ L.record(Y1)
 L.record(Y)
 
 }
+\references{
+Arnold BC, Balakrishnan N, Nagaraja HN (1998). 
+\emph{Records}. 
+Wiley Series in Probability and Statistics. Wiley, New York.
+}
 \seealso{
-\code{\link{I.record}}, \code{\link{M.record}},
-  \code{\link{N.record}}, \code{\link{P.record}}, \code{\link{Nmean.record}},
-  \code{\link{records}}
+\code{\link{I.record}}, \code{\link{N.record}},
+  \code{\link{Nmean.record}}, \code{\link{p.record}}, 
+  \code{\link{R.record}}, \code{\link{records}}, \code{\link{S.record}}
 }
 \author{
 Jorge Castillo-Mateo

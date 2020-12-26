@@ -2,56 +2,57 @@
 % Please edit documentation in R/series_untie.R
 \name{series_untie}
 \alias{series_untie}
-\title{Avoid record ties}
+\title{Avoid Record Ties}
 \usage{
-series_untie(XM_T, a = -0.5, b = 0.5, seed = NULL)
+series_untie(X)
 }
 \arguments{
-\item{XM_T}{A numeric vector, matrix (or data frame).}
-
-\item{a, b}{Lower and upper limits of the uniform distribution.}
-
-\item{seed}{Allows the user to specify the seed of the random sampling. 
-If \code{NULL}, then no seed is specified.}
+\item{X}{A numeric vector, matrix (or data frame).}
 }
 \value{
-A matrix equal to \code{XM_T} whose elements have been added a 
-  sample from a uniform variable.
+A matrix equal to \code{X} whose elements have been added a 
+  sample from a uniform variable, different for every element.
 }
 \description{
 Avoids record ties when observations have been rounded.
 }
 \details{
-This function is used in the data preparation (or pre-processing). 
- Its use is recommended but not necessary to apply the record inference 
- tools in this package.
+This function is used in the data preparation (or pre-processing) 
+ often required to apply the exploratory and inference tools based on 
+ theory of records within this package.
  
- The record theory on which the hypothesis tests are based assumes 
+ The theory of records on which the hypothesis tests are based assumes 
  that the random variables are continuous, proving that the probability 
  that two observations take the same value is zero. Most of the data 
  collected is rounded, giving a certain probability to the tie between 
- records, slightly skewing the results, in general obtaining a fewer 
- amount of records if it has been rounded a lot. 
+ records, thereby reducing the number of new records (see, e.g., Wergen 
+ et al. 2012). 
  
- This function avoids ties by adding a sample from a uniform variable 
- in the interval \eqn{(\code{a}, \code{b})} to each element of \code{XM_T}.
- If rounding is in units it is recommended to take \code{a = -0.5, b = 0.5},
- while if it is in tenths it is recommended \code{a = -0.05, b = 0.05}
- and so on.
- 
- If the function is used correctly (appropiate \code{a,b} values) the records
- in the original series will also be in the new series.
+ This function avoids ties by adding a sample from a uniform random variable 
+ to each element of \code{X}. The function computes the maximum number of 
+ decimal digits (let it be \eqn{n}) for any element in \code{X}. Then the
+ uniform variable is sampled in the interval 
+ \eqn{(-5 \times 10^{-(n+1)}, 5 \times 10^{-(n+1)})}, so the records in the
+ original (rounded) series will also be in the new series.
 }
 \examples{
 set.seed(23)
-series_untie(matrix(round(rnorm(100), digits = 1), 10, 10), a = -0.05, b = 0.05)
+X <- matrix(round(stats::rnorm(100), digits = 1), nrow = 10, ncol = 10)
+series_untie(X)
 
-series_untie(ZaragozaSeries, seed = 23)
+series_untie(ZaragozaSeries)
 
 }
+\references{
+Wergen G, Volovik D, Redner S, Krug J (2012). 
+“Rounding Effects in Record Statistics.”
+\emph{Physical Review Letters}, \strong{109}(16), 164102. 
+doi:\href{https://doi.org/10.1103/PhysRevLett.109.164102}{10.1103/PhysRevLett.109.164102}.
+}
 \seealso{
-\code{\link{series_double}}, \code{\link{series_rev}}
-  \code{\link{series_split}}, \code{\link{series_uncor}}
+\code{\link{series_double}}, \code{\link{series_record}}, 
+  \code{\link{series_rev}}, \code{\link{series_split}}, 
+  \code{\link{series_ties}}, \code{\link{series_uncor}}
 }
 \author{
 Jorge Castillo-Mateo

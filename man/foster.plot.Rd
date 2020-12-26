@@ -2,76 +2,102 @@
 % Please edit documentation in R/foster.plot.R
 \name{foster.plot}
 \alias{foster.plot}
-\title{Plot based on Foster-Stuart and Diersen-Trenkler statistics}
+\title{Plot Based on Foster-Stuart and Diersen-Trenkler Statistics}
 \usage{
 foster.plot(
-  XM_T,
-  statistic = c("D", "d", "TM"),
+  X,
   weights = function(t) 1,
-  interval = c("ribbon", "errorbar"),
-  conf = 0.95,
-  colour = "salmon"
+  statistic = c("D", "d", "S", "s", "U", "L", "W"),
+  point.col = "black",
+  point.shape = 19,
+  conf.int = TRUE,
+  conf.level = 0.9,
+  conf.aes = c("ribbon", "errorbar"),
+  conf.col = "gray69"
 )
 }
 \arguments{
-\item{XM_T}{A numeric vector, matrix (or data frame).}
-
-\item{statistic}{A character string indicating the statistic to be 
-calculated, i.e., \code{"D"} (for \eqn{\overline{DM}} or 
-\eqn{\overline{DM}^\omega}), \code{"d"} (for \eqn{\overline{dM}} or 
-\eqn{\overline{dM}^\omega}) and \code{"TM"} (for \eqn{\overline{TM}} or 
-\eqn{\overline{TM}^\omega}).}
+\item{X}{A numeric vector, matrix (or data frame).}
 
 \item{weights}{A function indicating the weight given to the different 
 records according to their position in the series,
 e.g., if \code{function(t) t-1} then \eqn{\omega_t = t-1}.}
 
-\item{interval}{A character string indicating the type of display of the 
-confidence intervals, \code{"ribbon"} (grey area) or \code{"errorbar"} 
-(vertical lines).}
+\item{statistic}{A character string indicating the type of statistic to be 
+calculated, i.e., one of \code{"D"}, \code{"d"}, \code{"S"}, \code{"s"},
+\code{"U"}, \code{"L"} or \code{"W"} (see \code{\link{foster.test}}).}
 
-\item{conf}{Numeric value in \eqn{(0,1)}. Confidence level of the two-sided
-confidence intervals.}
+\item{point.col, point.shape}{Value with the colour and shape of the points.}
 
-\item{colour}{Colour used to plot the expected values and the CI.}
+\item{conf.int}{Logical. Indicates if the CIs are also shown.}
+
+\item{conf.level}{(If \code{conf.int == TRUE}) Confidence level of the CIs.}
+
+\item{conf.aes}{(If \code{conf.int == TRUE}) A character string indicating 
+the aesthetic to display for the CIs, \code{"ribbon"} (grey area) or 
+\code{"errorbar"} (vertical lines).}
+
+\item{conf.col}{Colour used to plot the expected value and (if 
+\code{conf.int == TRUE}) CIs.}
 }
 \value{
 A ggplot graph object.
 }
 \description{
 This function constructs a ggplot object to display two-sided
-  confidence intervals based on Foster-Stuart and Diersen-Trenkler statistics
-  for randomness.
+  confidence intervals based on Foster-Stuart and Diersen-Trenkler 
+  statistics to study the hypothesis of the classical record model.
 }
 \details{
-See \code{\link{foster.test}}.
+The mean value of the statistic in every vector (columns of the matrix 
+  \code{X}) observed up to the instant \eqn{t} (\eqn{t=1,\ldots,T}) is shown 
+  together with expected values and confidence intervals (CIs) based on the 
+  asymptotic normal distribution of the statistics under the null hypothesis
+  of randomness.
+
+  This function implements the same ideas that \code{\link{N.plot}} with
+  the statistics computed in \code{\link{foster.test}}. 
+  
+  These plots are useful to see the evolution in the record occurrence 
+  and to follow the evolution of the trend. The plot was proposed by ? 
+  (2021) where its application is shown.
 }
 \examples{
+# D-statistic
 foster.plot(ZaragozaSeries)
-foster.plot(ZaragozaSeries, interval = 'error', conf = 0.9, colour = 1)
-foster.plot(ZaragozaSeries, statistic = 'd', weights = function(t) t-1)
+# D-statistic with linear weights
+foster.plot(ZaragozaSeries, weights = function(t) t-1)
+# S-statistic with linear weights
+foster.plot(ZaragozaSeries, statistic = "S", weights = function(t) t-1)
+# U-statistic with weights (upper tail)
+foster.plot(ZaragozaSeries, statistic = "U", weights = function(t) t-1)
+# L-statistic with weights (lower tail)
+foster.plot(ZaragozaSeries, statistic = "L", weights = function(t) t-1)
 
 }
 \references{
-Diersen J, Trenkler G (1996). Records Tests for Trend in Location.
+? (2021).
+“Statistical Tests to Detect Non-Stationarity Based on Records to Analyse Climate Change.”
+Unpublished manuscript.
+
+Diersen J, Trenkler G (1996). “Records Tests for Trend in Location.”
 \emph{Statistics}, \strong{28}(1), 1-12.
-doi:\href{https://doi.org/10.1080/02331889708802543}{10.1080/02331889708802543}
+\href{https://doi.org/10.1080/02331889708802543}{doi:10.1080/02331889708802543}
 
 Diersen J, Trenkler G (2001). 
-\emph{Weighted record tests for splitted series of observations}. 
-En J Kunert, G Trenkler (Eds.), 
-Mathematical Statistics with Applications in Biometry. 
-Festschrift in Honour of Prof. Dr. Siegfried Schach (pp. 163-178). 
-Lohmar: Josef Eul Verlang. 
+“Weighted Records Tests for Splitted Series of Observations.”
+In J Kunert, G Trenkler (eds.), 
+\emph{Mathematical Statistics with Applications in Biometry: Festschrift in Honour of Prof. Dr. Siegfried Schach}, 
+pp. 163–178. Lohmar: Josef Eul Verlag.
 
 Foster FG, Stuart A (1954). 
-Distribution-Free Tests in Time-Series Based on the Breaking of Records.
+“Distribution-Free Tests in Time-Series Based on the Breaking of Records.”
 \emph{Journal of the Royal Statistical Society. Series B (Methodological)}, 
 \strong{16}(1), 1-22.
 }
 \seealso{
 \code{\link{foster.test}}, \code{\link{N.plot}}, 
-  \code{\link{N_normal.test}}
+  \code{\link{N.test}}
 }
 \author{
 Jorge Castillo-Mateo

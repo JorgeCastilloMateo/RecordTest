@@ -3,16 +3,22 @@
 \docType{data}
 \name{ZaragozaSeries}
 \alias{ZaragozaSeries}
-\title{Splitted and uncorrelated time series \code{\link{TX_Zaragoza}}}
+\title{Splitted and Uncorrelated Time Series \code{\link{TX_Zaragoza}}}
 \format{
-A matrix with 66 rows and 75 columns.
+A matrix with 66 rows and 76 columns.
 }
 \usage{
 data(ZaragozaSeries)
 }
 \description{
-The matrix resulting from the preprocessing of 
-  \code{TX_Zaragoza$TX}. The matrix is the result from applying consecutively:
-  \code{\link{series_split}} and \code{\link{series_uncor}}.
+The matrix resulting from the pre-processing of 
+  \code{\link{TX_Zaragoza}$TX}.
+}
+\details{
+The matrix is the result from applying:
+  \code{\link{series_uncor}(\link{series_split}(\link{TX_Zaragoza}$TX))}.
+}
+\seealso{
+\code{\link{TX_Zaragoza}}
 }
 \keyword{datasets}

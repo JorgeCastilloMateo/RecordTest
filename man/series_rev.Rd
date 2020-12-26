@@ -2,16 +2,17 @@
 % Please edit documentation in R/series_rev.R
 \name{series_rev}
 \alias{series_rev}
-\title{Reverse elements by columns}
+\title{Reverse Elements by Columns}
 \usage{
-series_rev(XM_T)
+series_rev(X)
 }
 \arguments{
-\item{XM_T}{A numeric matrix (or data frame).}
+\item{X}{A numeric vector, matrix (or data frame).}
 }
 \description{
-Result from apply \code{rev} function by columns to the matrix.
-  This allows studying the series backwards and not just forward.
+Result of applying \code{\link[base]{rev}} function by columns
+  to the matrix. This allows the study of the series backwards and not only 
+  forward.
 }
 \examples{
 series_rev(matrix(1:100, 10, 10))
@@ -20,7 +21,8 @@ series_rev(ZaragozaSeries)
 
 }
 \seealso{
-\code{\link{series_double}}, \code{\link{series_split}}, 
+\code{\link{series_double}}, \code{\link{series_record}}, 
+  \code{\link{series_split}}, \code{\link{series_ties}},
   \code{\link{series_uncor}}, \code{\link{series_untie}}
 }
 \author{
