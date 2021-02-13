@@ -147,7 +147,6 @@ Unpublished manuscript.
 
 Diersen J, Trenkler G (1996). “Records Tests for Trend in Location.”
 \emph{Statistics}, \strong{28}(1), 1-12.
-\href{https://doi.org/10.1080/02331889708802543}{doi:10.1080/02331889708802543}
 
 Diersen J, Trenkler G (2001). 
 “Weighted Records Tests for Splitted Series of Observations.”

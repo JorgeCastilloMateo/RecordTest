@@ -35,8 +35,7 @@ A dataset containing the series of daily maximum temperature at
 Klein Tank AMG and Coauthors (2002). 
 Daily Dataset of 20th-century Surface Air Temperature and Precipitation 
 Series for the European Climate Assessment.
-\emph{International Journal of Climatology}, \strong{22}(12), 1441-1453. 
-\href{https://doi.org/10.1002/joc.773}{doi:10.1002/joc.773}
+\emph{International Journal of Climatology}, \strong{22}(12), 1441-1453.
 }
 \seealso{
 \code{\link{ZaragozaSeries}}

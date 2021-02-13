@@ -129,7 +129,6 @@ N.test(ZaragozaSeries, weights = function(t) t-1, correct = TRUE)
 Butler K, Stephens MA (2016).
 “The Distribution of a Sum of Independent Binomial Random Variables.”
 \emph{Methodology and Computing in Applied Probability}, \strong{19}(2), 557-571.
-\href{https://doi.org/10.1007/s11009-016-9533-4}{doi:10.1007/s11009-016-9533-4}
 
 Cebrián A, Castillo-Mateo J and Asín J (2021).
 “Record Tests to detect non stationarity in the tails with an application to climate change.”
@@ -138,7 +137,6 @@ Unpublished manuscript.
 Hong Y (2013). 
 “On Computing the Distribution Function for the Poisson Binomial Distribution.”
 \emph{Computational Statistics & Data Analysis}, \strong{59}(1), 41-51.
-\href{https://doi.org/10.1016/j.csda.2012.10.006}{doi:10.1016/j.csda.2012.10.006}
 }
 \seealso{
 \code{\link{N.record}}, \code{\link{N.plot}}, 

@@ -57,7 +57,6 @@ L.plot(ZaragozaSeries, point.col = 1)
 \references{
 Benestad RE (2004). “Record-Values, Nonstationarity Tests and Extreme Value Distributions.”
 \emph{Global and Planetary Change}, \strong{44}(1-4), 11-26.
-\href{https://doi.org/10.1016/j.gloplacha.2004.06.002}{doi:10.1016/j.gloplacha.2004.06.002}
 }
 \seealso{
 \code{\link{L.record}}
