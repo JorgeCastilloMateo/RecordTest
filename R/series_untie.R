@@ -30,7 +30,6 @@
 #' Wergen G, Volovik D, Redner S, Krug J (2012). 
 #' “Rounding Effects in Record Statistics.”
 #' \emph{Physical Review Letters}, \strong{109}(16), 164102. 
-#' doi:\href{https://doi.org/10.1103/PhysRevLett.109.164102}{10.1103/PhysRevLett.109.164102}.
 #' @examples
 #' set.seed(23)
 #' X <- matrix(round(stats::rnorm(100), digits = 1), nrow = 10, ncol = 10)

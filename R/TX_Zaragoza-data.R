@@ -25,7 +25,6 @@
 #' Daily Dataset of 20th-century Surface Air Temperature and Precipitation 
 #' Series for the European Climate Assessment.
 #' \emph{International Journal of Climatology}, \strong{22}(12), 1441-1453. 
-#' \href{https://doi.org/10.1002/joc.773}{doi:10.1002/joc.773}
 #' @usage data(TX_Zaragoza)
 #' @seealso \code{\link{ZaragozaSeries}}
 #' @format A data frame with 25550 rows and 5 variables.

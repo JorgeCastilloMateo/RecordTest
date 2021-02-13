@@ -66,7 +66,6 @@
 #' 
 #' Kost JT, McDermott MP (2002). “Combining Dependent P-Values.”
 #' \emph{Statistics & Probability Letters}, \strong{60}(2), 183-190.
-#' \href{https://doi.org/10.1016/S0167-7152(02)00310-3}{doi:10.1016/S0167-7152(02)00310-3}.
 #' 
 #' @examples
 #' brown.method(ZaragozaSeries)

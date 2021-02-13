@@ -41,7 +41,6 @@
 #' Hong Y (2013). 
 #' “On Computing the Distribution Function for the Poisson Binomial Distribution.”
 #' \emph{Computational Statistics & Data Analysis}, \strong{59}(1), 41-51.
-#' \href{https://doi.org/10.1016/j.csda.2012.10.006}{doi:10.1016/j.csda.2012.10.006}
 #' @rdname dpoisbinom
 #' @export dpoisbinom
 dpoisbinom <- function(x, size = 1, prob, log = FALSE) {
