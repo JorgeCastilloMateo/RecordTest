@@ -39,7 +39,7 @@ A list of class \code{"htest"} with the following elements:
   \item{statistic}{Value of the statistic.}
   \item{parameter}{Degrees of freedom of the approximate \eqn{\chi^2} 
     distribution.}
-  \item{p.value}{P-value.}
+  \item{p.value}{(Estimated) P-value.}
   \item{method}{A character string indicating the type of test.}
   \item{data.name}{A character string giving the name of the data.}
   \item{alternative}{A character string indicating the alternative
@@ -51,10 +51,10 @@ This function performs likelihood-ratio tests
   hypothesis of the classical record model.
 }
 \details{
-The null hypothesis of the score tests is that in every vector 
+The null hypothesis of the likelihood-ratio tests is that in every vector 
   (columns of the matrix \code{X}), the probability of record at 
-  time \eqn{t} is \eqn{1/t} as in the classical record model (i.e., 
-  sequences of independent and identically distributed realisations), and 
+  time \eqn{t} is \eqn{1 / t} as in the classical record model (i.e., 
+  sequences of independent and identically distributed realizations), and 
   the alternative depends on the \code{alternative} and \code{probabilities}
   arguments. The probability at time \eqn{t} is any value, but equal in the
   \eqn{M} series if \code{probabilities = "equal"}  or different in the 
@@ -63,34 +63,32 @@ The null hypothesis of the score tests is that in every vector
   Furthermore, the \code{"two.sided"} \code{alternative} is tested with 
   the usual likelihood ratio statistic, while the one-sided 
   \code{alternatives} use specific statistics based on likelihoods. 
-  (See ? (2021) for details on these tests.)
+  (See Cebrián, Castillo-Mateo and Asín (2021) for details on these tests.)
 
   If \code{alternative = "two.sided" & probabilities = "equal"}, under the
   null, the likelihood ratio statistic has an asymptotic \eqn{\chi^2} 
   distribution with \eqn{T-1} degrees of freedom. It has been seen that for
   the approximation to be adequate \eqn{M} must be between 4 and 5 times 
-  greater than \eqn{T}. Otherwise, a \code{simulate.p.value} can be 
-  computed.
+  greater than \eqn{T}. Otherwise, a \code{simulate.p.value} is recommended.
   
   If \code{alternative = "two.sided" & probabilities = "different"}, the 
-  asymptotic behaviour is not fulfilled, but the Monte Carlo approach to 
+  asymptotic behavior is not fulfilled, but the Monte Carlo approach to 
   simulate the p-value is applied. This statistic is the same as \eqn{\ell} 
   below multiplied by a factor of 2, so the p-value is the same.
   
   If \code{alternative} is one-sided and \code{probabilities = "equal"},
   the statistic of the test is
-  \deqn{\mathcal{R} = -2 \sum_{t=2}^T \left\{-S_t \log\left(\frac{tS_t}{M}\right)+(M-S_t)\left( \log\left(1-\frac{1}{t}\right) - \log\left(1-\frac{S_t}{M}\right) I_{\{S_t<M\}} \right) \right\} I_{\{S_t > M/t\}}}
+  \deqn{-2 \sum_{t=2}^T \left\{-S_t \log\left(\frac{tS_t}{M}\right)+(M-S_t)\left( \log\left(1-\frac{1}{t}\right) - \log\left(1-\frac{S_t}{M}\right) I_{\{S_t<M\}} \right) \right\} I_{\{S_t > M/t\}}.}
   The p-value of this test is estimated with Monte Carlo simulations,
-  since the compute the exact distribution of \eqn{\mathcal{R}} is very 
-  expensive.   
+  because the computation of its exact distribution is very expensive.   
   
   If \code{alternative} is one-sided and \code{probabilities = "different"},
   the statistic of the test is
-  \deqn{\ell = \sum_{t=2}^T  S_{t} \log(t-1) - M \log\left(1-\frac{1}{t}\right),}
+  \deqn{\ell = \sum_{t=2}^T  S_{t} \log(t-1) - M \log\left(1-\frac{1}{t}\right).}
   The p-value of this test is estimated with Monte Carlo simulations. 
   However, it is equivalent to the statistic of the weighted number of 
-  records \code{\link{N.test}} with weights \eqn{\omega_t = \log(t-1)}, 
-  \eqn{t=2,\ldots,T}.
+  records \code{\link{N.test}} with weights \eqn{\omega_t = \log(t-1)} 
+  \eqn{(t=2,\ldots,T)}.
 }
 \examples{
 set.seed(23)
@@ -110,12 +108,12 @@ lr.test(ZaragozaSeries, alternative = "greater", probabilities = "different",
 lr.test(ZaragozaSeries, alternative = "greater", probabilities = "equal")
 }
 \references{
-? (2021).
-“Statistical Tests to Detect Non-Stationarity Based on Records to Analyse Climate Change.”
+Cebrián A, Castillo-Mateo J, Asín J (2021).
+“Record Tests to detect non stationarity in the tails with an application to climate change.”
 Unpublished manuscript.
 }
 \seealso{
-\code{\link{score.test}}, \code{\link{global.test}}
+\code{\link{global.test}}, \code{\link{score.test}}
 }
 \author{
 Jorge Castillo-Mateo

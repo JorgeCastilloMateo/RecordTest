@@ -2,15 +2,15 @@
 % Please edit documentation in R/L.plot.R
 \name{L.plot}
 \alias{L.plot}
-\title{Plot of the Record Times}
+\title{Times of Record Plot}
 \usage{
 L.plot(
   X,
   all = TRUE,
   record = c("upper", "lower"),
-  point.col = "skyblue3",
-  point.alpha = 1,
-  line.col = "grey95"
+  point.col = "gray23",
+  point.alpha = 0.8,
+  line.col = "gray95"
 )
 }
 \arguments{
@@ -22,15 +22,15 @@ are displayed.}
 \item{record}{If \code{all = FALSE}, a character string indicating the type
 of record to be calculated, "upper" or "lower".}
 
-\item{point.col, point.alpha}{Colour and transparency of the points.}
+\item{point.col, point.alpha}{Color and transparency of the points.}
 
-\item{line.col}{Colour to plot lines.}
+\item{line.col}{Color to plot lines.}
 }
 \value{
 A ggplot object.
 }
 \description{
-This function constructs a ggplot object to display the upper 
+This function builds a ggplot object to display the upper 
   and lower record times for both forward and backward directions.
 }
 \details{
@@ -45,7 +45,7 @@ The function can be applied to plot the record times in a vector
   directions. Otherwise, only one type of forward record is displayed.
   
   An example of use of a plot with similar ideas is shown in Benestad 
-  (2004, Figures 3 and 8). The same plot is described in ? (2021).
+  (2004, Figures 3 and 8).
 }
 \examples{
 Y <- c(1, 5, 3, 6, 6, 9, 2, 11, 17, 8)
@@ -58,10 +58,6 @@ L.plot(ZaragozaSeries, point.col = 1)
 Benestad RE (2004). “Record-Values, Nonstationarity Tests and Extreme Value Distributions.”
 \emph{Global and Planetary Change}, \strong{44}(1-4), 11-26.
 \href{https://doi.org/10.1016/j.gloplacha.2004.06.002}{doi:10.1016/j.gloplacha.2004.06.002}
-
-? (2021).
-“Statistical Tests to Detect Non-Stationarity Based on Records to Analyse Climate Change.”
-Unpublished manuscript.
 }
 \seealso{
 \code{\link{L.record}}

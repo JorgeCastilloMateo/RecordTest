@@ -5,18 +5,24 @@
 \alias{ZaragozaSeries}
 \title{Splitted and Uncorrelated Time Series \code{\link{TX_Zaragoza}}}
 \format{
-A matrix with 66 rows and 76 columns.
+A matrix with 70 rows and 76 columns.
 }
 \usage{
 data(ZaragozaSeries)
 }
 \description{
-The matrix resulting from the pre-processing of 
-  \code{\link{TX_Zaragoza}$TX}.
+The matrix resulting from the data-preparation (or 
+  pre-processing) of \code{\link{TX_Zaragoza}$TX}.
 }
 \details{
 The matrix is the result from applying:
   \code{\link{series_uncor}(\link{series_split}(\link{TX_Zaragoza}$TX))}.
+  
+  The data matrix corresponds to the 70 years with observations in 
+  \code{\link{TX_Zaragoza}$TX} and to the 76 days in the year where adjacent
+  daily maximum temperature sub-series are uncorrelated. Casually, none of 
+  the sub-series 4, 90 or 278 with imputed values is kept within the 76 
+  uncorrelated days.
 }
 \seealso{
 \code{\link{TX_Zaragoza}}

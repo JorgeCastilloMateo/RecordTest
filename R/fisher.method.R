@@ -10,8 +10,8 @@
 #'   where \eqn{p_i} is the p-value for the i-th hypothesis test.
 #'   
 #'   For example, Foster and Stuart (1954) proposed this method to combine the
-#'   information of the p-values from the D and S-statistics (see Examples),
-#'   since they are independent.
+#'   information of the p-values from the \eqn{D} and \eqn{S}-statistics (see 
+#'   Examples), since they are independent.
 #'   
 #' @param p.values A vector containing the p-values from the single tests.
 #' @return A \code{"htest"} object with elements:

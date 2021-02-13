@@ -1,11 +1,11 @@
-#' @title Tests on the Number of Records
+#' @title Number of Records Test
 #' @importFrom stats pnorm pt rbinom sd fft dbinom
-#' @description Performs a test based on the (weighted) number of records, 
+#' @description Performs tests based on the (weighted) number of records, 
 #'   \eqn{N^\omega}. The hypothesis of the classical record model
 #'   (i.e., of randomness) is tested against the alternative hypothesis.
 #' @details 
 #'   The null hypothesis is that the data come from a population with 
-#'   independent and identically distributed realisations. The one-sided
+#'   independent and identically distributed realizations. The one-sided
 #'   alternative hypothesis is that the (weighted) number of records is 
 #'   greater (or less) than under the null hypothesis. The 
 #'   (weighted)-number-of-records statistic is calculated according to:
@@ -20,7 +20,7 @@
 #'   \deqn{Z = \frac{N_{..}^\omega - \mu}{\sigma},}
 #'   where its mean and variance are
 #'   \deqn{\mu = M \sum_{t=1}^T \omega_t \frac{1}{t},} 
-#'   \deqn{\sigma^2 = \sum_{t=1}^T \omega_t^2 \frac{1}{t} \left(1-\frac{1}{t}\right).} 
+#'   \deqn{\sigma^2 = M \sum_{t=2}^T \omega_t^2 \frac{1}{t} \left(1-\frac{1}{t}\right).} 
 #'   
 #'   If \code{correct = TRUE}, then a continuity correction will be employed:
 #'   \deqn{Z = \frac{N_{..}^\omega \pm 0.5 - \mu}{\sigma},}
@@ -36,7 +36,9 @@
 #'   If \code{simulate.p.value = TRUE}, the p-value is estimated by Monte Carlo
 #'   simulations.
 #'   
-#'   Some comments and size and power studies are given by ? (2021).
+#'   The size of the tests is adequate for any values of \eqn{T} and \eqn{M}.
+#'   Some comments and a power study are given by Cebrián, Castillo-Mateo and
+#'   Asín (2021).
 #'   
 #' @param X A numeric vector, matrix (or data frame).
 #' @param weights A function indicating the weight given to the different 
@@ -80,14 +82,14 @@
 #'   \code{\link{foster.test}}, \code{\link{foster.plot}},
 #'   \code{\link{brown.method}}
 #' @references 
-#' ? (2021).
-#' “Statistical Tests to Detect Non-Stationarity Based on Records to Analyse Climate Change.”
-#' Unpublished manuscript.
-#' 
 #' Butler K, Stephens MA (2016).
 #' “The Distribution of a Sum of Independent Binomial Random Variables.”
 #' \emph{Methodology and Computing in Applied Probability}, \strong{19}(2), 557-571.
 #' \href{https://doi.org/10.1007/s11009-016-9533-4}{doi:10.1007/s11009-016-9533-4}
+#' 
+#' Cebrián A, Castillo-Mateo J and Asín J (2021).
+#' “Record Tests to detect non stationarity in the tails with an application to climate change.”
+#' Unpublished manuscript.
 #' 
 #' Hong Y (2013). 
 #' “On Computing the Distribution Function for the Poisson Binomial Distribution.”
@@ -117,8 +119,8 @@ N.test <- function(X,
                    record = c("upper", "lower"), 
                    distribution = c("normal", "t", "poisson-binomial"),
                    alternative = c("greater", "less"), 
-                   method = c("mixed", "dft", "butler"),
                    correct = TRUE,
+                   method = c("mixed", "dft", "butler"),
                    simulate.p.value = FALSE,
                    B = 1000) {
   
@@ -127,9 +129,6 @@ N.test <- function(X,
   distribution <- match.arg(distribution)
   alternative  <- match.arg(alternative)
   method  <- match.arg(method)
-  
-  DNAME <- deparse(substitute(X))
-  METHOD <- paste("Test on the number of", record, "records")
   
   Trows <- NROW(X)
   Mcols <- NCOL(X)
@@ -140,7 +139,12 @@ N.test <- function(X,
   t <- 1:Trows
   w <- weights(t)
   fun   <- deparse(weights)[2]
-  if (!all(w == 1)) { METHOD <- paste(METHOD, "with weights =", fun) }
+  DNAME <- deparse(substitute(X))
+  if (all(w == 1)) {
+    METHOD <- paste("Test on the number of", record, "records")
+  } else {
+    METHOD <- paste("Test on the weighted number of", record, "records with weights =", fun)
+  }
   
   # Continuity correction
   n <- ifelse(correct && !simulate.p.value, 0.5, 0)

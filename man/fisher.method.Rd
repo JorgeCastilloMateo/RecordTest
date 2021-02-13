@@ -29,8 +29,8 @@ Fisher's method (Fisher, 1925) combines the p-values from \eqn{k}
   where \eqn{p_i} is the p-value for the i-th hypothesis test.
   
   For example, Foster and Stuart (1954) proposed this method to combine the
-  information of the p-values from the D and S-statistics (see Examples),
-  since they are independent.
+  information of the p-values from the \eqn{D} and \eqn{S}-statistics (see 
+  Examples), since they are independent.
 }
 \examples{
 # Join the independent p-values of the D and S-statistics

@@ -1,7 +1,7 @@
-#' @title Plot of the Record Times
+#' @title Times of Record Plot
 #' @importFrom ggplot2 ggplot aes theme_bw theme element_blank element_rect
 #'   element_text labs geom_hline geom_point xlim facet_grid vars 
-#' @description This function constructs a ggplot object to display the upper 
+#' @description This function builds a ggplot object to display the upper 
 #'   and lower record times for both forward and backward directions.
 #' @details The function can be applied to plot the record times in a vector 
 #'   (if argument \code{X} is a vector) or to plot and compare the record 
@@ -14,15 +14,15 @@
 #'   directions. Otherwise, only one type of forward record is displayed.
 #'   
 #'   An example of use of a plot with similar ideas is shown in Benestad 
-#'   (2004, Figures 3 and 8). The same plot is described in ? (2021).
+#'   (2004, Figures 3 and 8).
 #'
 #' @param X A numeric vector, matrix (or data frame).
 #' @param all Logical. If \code{TRUE} (the default) the four types of record
 #'   are displayed.
 #' @param record If \code{all = FALSE}, a character string indicating the type
 #'   of record to be calculated, "upper" or "lower".
-#' @param point.col,point.alpha Colour and transparency of the points.
-#' @param line.col Colour to plot lines.
+#' @param point.col,point.alpha Color and transparency of the points.
+#' @param line.col Color to plot lines.
 #' @return A ggplot object.
 #' @author Jorge Castillo-Mateo
 #' @seealso \code{\link{L.record}}
@@ -31,9 +31,6 @@
 #' \emph{Global and Planetary Change}, \strong{44}(1-4), 11-26.
 #' \href{https://doi.org/10.1016/j.gloplacha.2004.06.002}{doi:10.1016/j.gloplacha.2004.06.002}
 #' 
-#' ? (2021).
-#' “Statistical Tests to Detect Non-Stationarity Based on Records to Analyse Climate Change.”
-#' Unpublished manuscript.
 #' @examples
 #' Y <- c(1, 5, 3, 6, 6, 9, 2, 11, 17, 8)
 #' L.plot(Y, all = FALSE)
@@ -45,9 +42,9 @@
 L.plot <- function(X, 
                    all = TRUE, 
                    record = c("upper", "lower"), 
-                   point.col = "skyblue3", 
-                   point.alpha = 1, 
-                   line.col = "grey95"){
+                   point.col = "gray23", 
+                   point.alpha = 0.8, 
+                   line.col = "gray95"){
   
   record <- match.arg(record)
   
@@ -93,9 +90,9 @@ L.plot <- function(X,
       ggplot2::theme_bw() + 
       ggplot2::theme(axis.text.y = ggplot2::element_blank(),
                      axis.ticks.y = ggplot2::element_blank(),
-                     strip.background = ggplot2::element_rect(fill = "gray23"),
+                     strip.background = ggplot2::element_rect(fill = "black"),
                      strip.text = ggplot2::element_text(colour = "white")) +
-      ggplot2::labs(title = "Record times", 
+      ggplot2::labs(title = "Times of record", 
                     subtitle = paste("Data:", DNAME),
                     x = "Time", y = "Series") +
       ggplot2::geom_hline(ggplot2::aes(yintercept = L[,2]), colour = line.col) + 
@@ -113,7 +110,7 @@ L.plot <- function(X,
       ggplot2::theme_bw() + 
       ggplot2::theme(axis.text.y = ggplot2::element_blank(),
                      axis.ticks.y = ggplot2::element_blank()) +
-      ggplot2::labs(title = paste(ifelse(record == "upper", "Upper", "Lower"), "record times"), 
+      ggplot2::labs(title = paste("Times of", ifelse(record == "upper", "upper", "lower"), "record"), 
                     subtitle = paste("Data:", DNAME),
                     x = "Time", y = "Series") +
       ggplot2::geom_hline(ggplot2::aes(yintercept = L[,2]), colour = line.col) + 

@@ -10,9 +10,6 @@
   FUN,
   B = 1000,
   rdist = stats::runif,
-  parallel = FALSE,
-  numCores = NULL,
-  seed = NULL,
   Trows,
   Mcols,
   ...
@@ -32,18 +29,6 @@ Carlo approach.}
 \item{rdist}{function that simulates continuous random variables, 
 e.g., \code{\link{runif}} (fastest in \code{stats} package), 
 \code{\link{rnorm}} or \code{\link{rexp}}.}
-
-\item{parallel}{If \code{TRUE}, then the Monte Carlo algorithm is done in 
-parallel. This can give a significant speedup on multicore machines but
-only if \code{B} is approximately bigger than 5000 or \code{X} is big.}
-
-\item{numCores}{Allows the user to specify the amount of parallel processes 
-to be used if \code{parallel = TRUE}. If \code{NULL}, then the number of
-logical cores is automatically detected and all available cores are used.}
-
-\item{seed}{A vector of the same length as the value of \code{samples}. 
-Allows the user to specify the seed of each Monte Carlo simulation. 
-If \code{NULL}, then no seed is specified.}
 
 \item{Trows, Mcols}{Number of rows and columns respectively, of the desired 
 sample \code{rdist}.}

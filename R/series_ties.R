@@ -19,11 +19,13 @@
 #'  strong records and the weak records.
 #'
 #' @return A \code{list} object with elements:
-#'   \item{`Number of records:`}{A vector containing the observed total, strong
-#'     and weak number of records and the expected under IID.}
-#'   \item{`\% of weak records:`}{Percentage of weak records within the total.}
-#'   \item{`\% of weak records by position:`}{A vector with the percentage of
-#'     weak records with \code{names} corresponding to its observed instant.}
+#'   \item{number}{Number of records: A vector containing the observed total, 
+#'     strong and weak number of records and the expected under IID.}
+#'   \item{percentage}{\% of weak records: Percentage of weak records within
+#'     the total.}
+#'   \item{percentage.position}{\% of weak records by position: A vector with
+#'     the percentage of weak records with \code{names} corresponding to its
+#'     observed instant.}
 #' @author Jorge Castillo-Mateo
 #' @seealso \code{\link{series_double}}, \code{\link{series_record}}, 
 #'   \code{\link{series_rev}}, \code{\link{series_split}}, 
@@ -58,7 +60,7 @@ series_ties <- function(X, record = c("upper", "lower")) {
   
   names(sum_total) <- c("Total", "Strong", "Weak", "Expected under IID")
   
-  return(list("Number of records:" = sum_total, 
-              "% of weak records:" = percent, 
-              "% of weak records by position:" = I_weak / rowSums(I_total) * 100))
+  return(list("number" = sum_total, 
+              "percentage" = percent, 
+              "percentage.position" = I_weak / rowSums(I_total) * 100))
 }

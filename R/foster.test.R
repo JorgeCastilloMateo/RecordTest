@@ -1,16 +1,16 @@
 #' @title Foster-Stuart and Diersen-Trenkler Tests
 #' @importFrom stats pnorm pt sd
 #' @description Performs Foster-Stuart, Diersen-Trenkler and 
-#'   ? record tests for trend in location or variation.
-#'   The hypothesis of the classical record model (i.e., of randomness) is 
-#'   tested against the alternative hypothesis.
+#'   Cebrián-Castillo-Asín records tests for trend in location, variation or 
+#'   the tails. The hypothesis of the classical record model (i.e., of 
+#'   randomness) is tested against the alternative hypothesis.
 #' @details 
 #'   In this function, the tests are implemented as given by Foster and Stuart
 #'   (1954), Diersen and Trenkler (1996, 2001) and some modifications in the
-#'   standardization of the previous statistics given by ? (2021). 
-#'   The null hypothesis is that the data come
+#'   standardization of the previous statistics given by Cebrián, 
+#'   Castillo-Mateo and Asín (2021). The null hypothesis is that the data come
 #'   from a population with independent and identically distributed
-#'   realisations. The one-sided alternative hypothesis is that the chosen
+#'   realizations. The one-sided alternative hypothesis is that the chosen
 #'   statistic is greater (or less) than under the null hypothesis. The
 #'   different statistics are calculated according to:
 #'   
@@ -50,7 +50,8 @@
 #'   while the mean \eqn{\mu} of the particular statistic considered is simple
 #'   to calculate, its variance \eqn{\sigma^2} become a cumbersome expression
 #'   and some are given by Diersen and Trenkler (2001) and all of them can be
-#'   computed out of the expression of the covariances given by ? (2021). 
+#'   computed out of the expression of the covariances given by Cebrián, 
+#'   Castillo-Mateo and Asín (2021). 
 #'   
 #'   If \code{correct = TRUE}, then a continuity correction will be employed:
 #'   \deqn{Z = \frac{X \pm 0.5 - \mu}{\sigma},}
@@ -86,19 +87,6 @@
 #'   Monte Carlo simulation. 
 #' @param B If \code{simulate.p.value = TRUE}, an integer specifying the 
 #'   number of replicates used in the Monte Carlo estimation.
-#' @param ... Further arguments in the Monte Carlo simulation:
-#'   \itemize{
-#'   \item \code{rdist} Function that simulates continuous random variables, e.g., 
-#'   \code{\link{runif}} (fastest in stats package and default), 
-#'   \code{\link{rnorm}} or \code{\link{rexp}}.
-#'   \item \code{parallel} If \code{TRUE}, then the Monte Carlo algorithm is done in
-#'   parallel. This can give a significant speedup on multicore machines if 
-#'   \code{X} and \code{B} are big. Default \code{FALSE}.
-#'   \item \code{numCores} (If \code{parallel = TRUE}) Allows the user to
-#'   specify the amount of parallel processes to be used. If \code{NULL}, then
-#'   the number of logical cores is automatically detected and all available 
-#'   cores are used.
-#'   }
 #' @return A \code{"htest"} object with elements:
 #'   \item{statistic}{Value of the test statistic.}
 #'   \item{parameter}{(If \code{distribution = "t"}) Degrees of freedom of
@@ -113,8 +101,8 @@
 #' @seealso \code{\link{foster.plot}}, \code{\link{N.plot}}, 
 #'   \code{\link{N.test}}
 #' @references
-#' ? (2021).
-#' “Statistical Tests to Detect Non-Stationarity Based on Records to Analyse Climate Change.”
+#' Cebrián A, Castillo-Mateo J, Asín J (2021).
+#' “Record Tests to detect non stationarity in the tails with an application to climate change.”
 #' Unpublished manuscript.
 #' 
 #' Diersen J, Trenkler G (1996). “Records Tests for Trend in Location.”
@@ -154,8 +142,7 @@ foster.test <- function(X,
                         alternative = c("greater", "less"), 
                         correct = FALSE,
                         simulate.p.value = FALSE,
-                        B = 1000,
-                        ...) {
+                        B = 1000) {
   
   if (!is.function(weights)) stop("'weights' should be a function")
   statistic    <- match.arg(statistic)
@@ -167,8 +154,8 @@ foster.test <- function(X,
                    "d" = {"Foster-Stuart d-statistic test"},
                    "S" = {"Foster-Stuart S-statistic test"},
                    "s" = {"Foster-Stuart s-statistic test"},
-                   "U" = {"forward-backward upper records test"},
-                   "L" = {"forward-backward lower records test"},
+                   "U" = {"Forward - backward upper records test"},
+                   "L" = {"Backward - forward lower records test"},
                    "W" = {"Diersen-Trenkler W-statistic test"})
   DNAME <- deparse(substitute(X))
   
@@ -413,7 +400,7 @@ foster.test <- function(X,
            if (simulate.p.value) {
              METHOD <- paste(METHOD, "with simulated p-value (based on", B, "replicates)")
              pv <- .MonteCarlo(stat, alternative = alternative,
-                               FUN = stat.fun, B = B, ..., 
+                               FUN = stat.fun, B = B,
                                Trows = Trows, Mcols = Mcols)
            } else {
              pv <- switch(alternative,
@@ -436,8 +423,8 @@ foster.test <- function(X,
                return((mean(statB) - mu) / stats::sd(statB))
              }
              pv <- .MonteCarlo(statB.fun(X), alternative = alternative,
-                               FUN = statB.fun, B = 1000, parallel = FALSE, 
-                               numCores = 2, seed = NULL, Trows = Trows, Mcols = Mcols)
+                               FUN = statB.fun, B = B,
+                               Trows = Trows, Mcols = Mcols)
            } else {
              pv <- switch(alternative,
                           "greater" = {stats::pt(statS, df = Mcols - 1, lower.tail = FALSE)},

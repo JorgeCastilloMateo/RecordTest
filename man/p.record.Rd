@@ -70,6 +70,11 @@ S.record(ZaragozaSeries)
 p.record(ZaragozaSeries, record = "l")
 
 }
+\references{
+Cebrián A, Castillo-Mateo J, Asín J (2021).
+“Record Tests to detect non stationarity in the tails with an application to climate change.”
+Unpublished manuscript.
+}
 \seealso{
 \code{\link{I.record}}, \code{\link{L.record}}, 
   \code{\link{N.record}}, \code{\link{Nmean.record}}, 

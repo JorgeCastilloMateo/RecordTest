@@ -1,8 +1,12 @@
 #' @title Time Series of Daily Maximum Temperature at Zaragoza (Spain)
 #' @description A dataset containing the series of daily maximum temperature at 
-#'   Zaragoza (Spain), from 01/01/1953 to 31/12/2018. This series is obtaned 
-#'   from the ECA series but it has been transformed, by removing days February 
-#'   29th and imputing the two missing values. The variables are the following:
+#'   Zaragoza aeropuerto (Spain), from 01/01/1951 to 31/12/2020. Zaragoza is 
+#'   located at the north-east (+41:39:42 N, -001:00:29 W) of Iberian Peninsula
+#'   at 247 m above mean sea level. This series is obtained from the ECA&D 
+#'   series but it has been transformed, by removing days February
+#'   29th and imputing the three missing values in the original series (by
+#'   exponential weighted moving average expanded four days to each side). The
+#'   variables are the following:
 #'
 #' \itemize{
 #'   \item STAID : Station identifier
@@ -24,5 +28,5 @@
 #' \href{https://doi.org/10.1002/joc.773}{doi:10.1002/joc.773}
 #' @usage data(TX_Zaragoza)
 #' @seealso \code{\link{ZaragozaSeries}}
-#' @format A data frame with 28670 rows and 5 variables.
+#' @format A data frame with 25550 rows and 5 variables.
 "TX_Zaragoza"

@@ -1,16 +1,16 @@
-#' @title Plot on the Number of Records
+#' @title Number of Records Plot
 #' @importFrom ggplot2 ggplot aes theme_bw labs geom_line theme
 #'   scale_colour_manual scale_shape_manual scale_linetype_manual geom_ribbon 
 #'   geom_errorbar geom_point annotate guides guide_legend
 #' @importFrom stats qnorm
-#' @description This function constructs a ggplot object to compare the sample
+#' @description This function builds a ggplot object to compare the sample
 #'   means of the (weighted) number of records in a vector up to time \eqn{t}, 
-#'   \eqn{\bar N_t^\omega}, and the expected values \eqn{\textrm{E}(N_t)} under the
-#'   classical record model.
+#'   \eqn{\bar N_t^\omega}, and the expected values \eqn{\textrm{E}(N_t)} 
+#'   under the classical record model.
 #' @details 
 #'   This plot is associated with the \code{\link{N.test}} test.
-#'   It calculates the sample means of the number of records
-#'   in a vector up to every time \eqn{t} (see \code{\link{Nmean.record}}). 
+#'   It calculates the sample means of the number of records in a set of
+#'   vectors up to every time \eqn{t} (see \code{\link{Nmean.record}}). 
 #'   These sample means \eqn{\bar N_t} are calculated from the sample of
 #'   \eqn{M} values obtained from \eqn{M} vectors, the columns of matrix 
 #'   \code{X}. Then, these values are plotted and compared with the expected 
@@ -28,7 +28,8 @@
 #'   series. Two types of backward records can be considered (see argument
 #'   \code{backward}).
 #'   
-#'   More details of this plot are shown in ? (2021).
+#'   More details of this plot are shown in Cebrián, Castillo-Mateo, Asín 
+#'   (2021).
 #'   
 #' @param X A numeric vector, matrix (or data frame).
 #' @param weights A function indicating the weight given to the different 
@@ -37,32 +38,31 @@
 #' @param record Logical vector. Vector with four elements indicating if 
 #'   forward upper, forward lower, backward upper and backward lower are going
 #'   to be shown, respectively. Logical values or 0,1 values are accepted.
-#' @param backward A character string \code{"1"} or \code{"2"} (character or 
-#'   numeric class are both allowed) indicating if the backward number of 
-#'   records shown are calculated up to time \eqn{t} for the backward series 
-#'   in times \eqn{\{T,\ldots,1\}} or the backward number of records shown for 
-#'   every \eqn{t} are the total number of records in the series with times 
-#'   \eqn{\{t,\ldots,1\}}. While the first option considers the evolution of a
-#'   series of records observed up to time \eqn{T}, the second considers
-#'   that until each time \eqn{t} the series has only been observed up to 
-#'   \eqn{t}.
-#' @param point.col,point.shape Vector with four elements indicating the colour
+#' @param backward A character string \code{"T"} or \code{"t"} indicating if 
+#'   the backward number of records shown are calculated up to time \eqn{t} for 
+#'   the backward series in times \eqn{\{T,\ldots,1\}} or the backward number of
+#'   records shown for every \eqn{t} are the total number of records in the 
+#'   series with times \eqn{\{t,\ldots,1\}}. While the first option considers 
+#'   the evolution of a series of records observed up to time \eqn{T}, the second
+#'   considers that until each time \eqn{t} the series has only been observed up
+#'   to \eqn{t}.
+#' @param point.col,point.shape Vector with four elements indicating the color
 #'   and shape of the points. Every one of the four elements represents forward
 #'   upper, forward lower, backward upper and backward lower, respectively.
 #' @param conf.int Logical. Indicates if the CIs are also shown.
 #' @param conf.level (If \code{conf.int == TRUE}) Confidence level of the CIs.
 #' @param conf.aes (If \code{conf.int == TRUE}) A character string indicating 
-#'   the aesthetic to display for the CIs, \code{"ribbon"} (grey area) or 
+#'   the aesthetic to display for the CIs, \code{"ribbon"} (gray area) or 
 #'   \code{"errorbar"} (vertical lines).
-#' @param conf.col Colour used to plot the expected value and (if 
+#' @param conf.col Color used to plot the expected value and (if 
 #'   \code{conf.int == TRUE}) CIs.
 #' @return A ggplot object.
 #' @author Jorge Castillo-Mateo
 #' @seealso \code{\link{N.record}}, \code{\link{N.test}}, 
 #'   \code{\link{foster.test}}, \code{\link{foster.plot}}
 #' @references 
-#' ? (2021).
-#' “Statistical Tests to Detect Non-Stationarity Based on Records to Analyse Climate Change.”
+#' Cebrián A, Castillo-Mateo J, Asín J (2021).
+#' “Record Tests to detect non stationarity in the tails with an application to climate change.”
 #' Unpublished manuscript.
 #' 
 #' @examples
@@ -72,7 +72,7 @@
 #' # Plot only upper records
 #' N.plot(ZaragozaSeries, record = c(1, 0, 1, 0))
 #' 
-#' # Change point colour and shape
+#' # Change point color and shape
 #' Zplot <- N.plot(ZaragozaSeries, 
 #'   point.col = c("red", "red", "blue", "blue"), 
 #'   point.shape = c(19, 4, 19, 4))
@@ -95,17 +95,16 @@
 N.plot <- function(X, 
                    weights = function(t) 1, 
                    record = c("FU" = 1, "FL" = 1, "BU" = 1, "BL" = 1),
-                   backward = c("1", "2"),
+                   backward = c("T", "t"),
                    point.col = c("FU" = "red", "FL" = "blue", "BU" = "red", "BL" = "blue"),
                    point.shape = c("FU" = 19, "FL" = 19, "BU" = 4, "BL" = 4),
                    conf.int = TRUE,
                    conf.level = 0.9, 
                    conf.aes = c("ribbon", "errorbar"), 
-                   conf.col = "grey69") {
+                   conf.col = "gray69") {
 
   # Intro
   if (!is.function(weights)) { stop("'weights' should be a function") }
-  backward <- as.character(backward)
   backward <- match.arg(backward)
   conf.aes <- match.arg(conf.aes)
   
@@ -121,10 +120,10 @@ N.plot <- function(X,
   
   if (all(w == 1)) {
     METHOD <- "Number of records"
-    ylabel <- "Mean number of records"
+    ylabel <- ifelse(Mcols == 1, "Number of records", "Mean number of records")
   } else {
-    METHOD <- paste("Weighted number of records, weights =", fun)
-    ylabel <- "Mean weighted number of records"
+    METHOD <- paste("Weighted number of records with weights =", fun)
+    ylabel <- ifelse(Mcols == 1, "Weighted number of records", "Mean weighted number of records")
   }
   ###################################  
   # Statistic
@@ -133,7 +132,7 @@ N.plot <- function(X,
   } 
   
   NmeanB.fun <- function(X, record) {
-    if (backward == "1") {
+    if (backward == "T") {
       return(cumsum(w * rowMeans(I.record(X, record = record))))
     } else {
       N <- rep(w[1], Trows)
@@ -180,11 +179,11 @@ N.plot <- function(X,
   if (conf.int && conf.aes == "ribbon") {
     graf <- graf +
       ggplot2::geom_ribbon(ggplot2::aes(ymin = CI1, ymax = CI2, linetype = "CI"), alpha = 0.1, colour = conf.col) +
-      ggplot2::scale_linetype_manual(name = "Null hyp. IID", values = c("CI" = 1), label = c("CI" = paste0("Expectation and ", 100 * conf.level, "% Normal CI")))
+      ggplot2::scale_linetype_manual(name = "Null hyp. IID", values = c("CI" = 1), label = c("CI" = paste0("Expectation and ", 100 * conf.level, "% Normal CIs")))
   } else if (conf.int && conf.aes == "errorbar") { 
     graf <- graf +
       ggplot2::geom_errorbar(ggplot2::aes(ymin = CI1, ymax = CI2, linetype = 'CI'), width = 0.2, colour = conf.col) +
-      ggplot2::scale_linetype_manual(name = "Null hyp. IID", values = c("CI" = 1), label = c("CI" = paste0("Expectation and ", 100 * conf.level, "% Normal CI")))
+      ggplot2::scale_linetype_manual(name = "Null hyp. IID", values = c("CI" = 1), label = c("CI" = paste0("Expectation and ", 100 * conf.level, "% Normal CIs")))
   } else {
     graf <- graf +
       ggplot2::scale_linetype_manual(name = "Null hyp. IID", values = c("CI" = 1), label = c("CI" = "Expectation"))

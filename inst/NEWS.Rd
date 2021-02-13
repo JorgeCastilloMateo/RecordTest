@@ -3,7 +3,7 @@
 \newcommand{\cpkg}{\href{https://CRAN.R-project.org/package=#1}{\pkg{#1}}}
 \newcommand{\issue}{\href{https://github.com/JorgeCastilloMateo/RecordTest/issues/#1}{(issue #1)}}
 
-\section{Changes in Version 2.0.0 ()}{
+\section{Changes in Version 2.0.0 (13 February 2021)}{
   \subsection{NEW FEATURES}{
     \itemize{
       \item New function \code{brown.method} to perform the the Brown's method in the (weighted)-number-of-records was added.
@@ -23,13 +23,14 @@
       \item All functions have undergone a change in their arguments, providing new features in most cases.
       \item The functions \code{foster.test} and \code{foster.plot} now admit more statistics based on different combinations of records.
       \item The function \code{series_uncor} has change the criteria of considering the first and last columns uncorrelated, thus slightly different results can come from previous Versions. As new features it admits more types of uncorrelation and more arguments.
-      \item The matrix \code{ZaragozaSeries} has one more column according to the changes in \code{series_uncor}.
+      \item The dataset \code{TX_Zaragoza} has been updated with more data.
+      \item The matrix \code{ZaragozaSeries} has more rows and one more column according to the changes in \code{TX_Zaragoza} and \code{series_uncor}.
       \item Functions have been joined or renamed as follows:
       \itemize{
         \item From \code{L_global.test} renamed to \code{global.test}, and now a global statistic for different types of record can be computed for the tests with two-sided alternatives \code{p.test}, \code{chisq.test}, \code{lr.test} and \code{score.test}.
         \item From \code{N_normal.test}, \code{N_exactPB.test} and \code{P_exactPB.test} joint to \code{N.test}, and new features added.
-        \item From \code{P_regression.test} and \code{P_regression.plot} renamed to \code{p.test} and \code{p.plot}, and new features added.
-        \item From \code{P_chisq.test} renamed to \code{chisq.test}.
+        \item From \code{P_regression.test} and \code{P_regression.plot} renamed to \code{p.regression.test} and \code{p.plot}, and new features added.
+        \item From \code{P_chisq.test} renamed to \code{p.chisq.test}.
         \item From \code{L_lr.test} and \code{L_lm.test} renamed to \code{lr.test} and \code{score.test}.
         \item From \code{M.record} renamed to \code{S.record}.
       }
@@ -38,7 +39,7 @@
   \subsection{BUG FIXES}{
     \itemize{
       \item The p-values in Monte-Carlo and Poisson-Binomial tests were computed with the expression \eqn{P(X > X_0)} instead of \eqn{P(X \ge X_0)} in all previous Versions, this problem was fixed.
-      \item Function \code{foster.plot} showed the \eqn{D} and \eqn{TM} statistics improperly, this problem was fixed.
+      \item Function \code{foster.plot} showed the evolution of the \eqn{D} statistic improperly, this problem was fixed.
     }
   }
 }

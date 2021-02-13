@@ -7,7 +7,7 @@
 #'   The null hypothesis of the score tests is that in every vector 
 #'   (columns of the matrix \code{X}), the probability of record at 
 #'   time \eqn{t} is \eqn{1/t} as in the classical record model (i.e., 
-#'   sequences of independent and identically distributed realisations), and 
+#'   sequences of independent and identically distributed realizations), and 
 #'   the alternative depends on the \code{alternative} and \code{probabilities}
 #'   arguments. The probability at time \eqn{t} is any value, but equal in the
 #'   \eqn{M} series if \code{probabilities = "equal"}  or different in the 
@@ -16,7 +16,7 @@
 #'   Furthermore, the \code{"two.sided"} \code{alternative} is tested with 
 #'   the usual Lagrange multiplier statistic, while the one-sided 
 #'   \code{alternatives} use specific statistics based on scores. 
-#'   (See ? (2021) for details on these tests.)
+#'   (See Cebrián, Castillo-Mateo and Asín (2021) for details on these tests.)
 #'
 #'   If \code{alternative = "two.sided" & probabilities = "equal"}, under the
 #'   null, the Lagrange multiplier statistic has an asymptotic \eqn{\chi^2} 
@@ -25,7 +25,7 @@
 #'   Otherwise, a \code{simulate.p.value} can be computed.
 #'   
 #'   If \code{alternative = "two.sided" & probabilities = "different"}, the 
-#'   asymptotic behaviour of the Lagrange multiplier statistic is not 
+#'   asymptotic behavior of the Lagrange multiplier statistic is not 
 #'   fulfilled, but the Monte Carlo approach to simulate the p-value is 
 #'   applied.
 #'   
@@ -38,11 +38,11 @@
 #'   
 #'   If \code{alternative} is one-sided and \code{probabilities = "different"},
 #'   the statistic of the test is
-#'   \deqn{\mathcal{S} = \frac{\sum_{t=2}^T t (t S_t - M) / (t - 1)}{\sqrt{M \sum_{t=2}^T t^2 / (t - 1)},}}
+#'   \deqn{\mathcal{S} = \frac{\sum_{t=2}^T t (t S_t - M) / (t - 1)}{\sqrt{M \sum_{t=2}^T t^2 / (t - 1)}},}
 #'   which is asymptotically standarnd normal distributed in \eqn{M}. It is 
 #'   equivalent to the statistic of the weighted number of records 
-#'   \code{\link{N.test}} with weights \eqn{\omega_t = t^2 / (t-1)}, 
-#'   \eqn{t=2,\ldots,T}.
+#'   \code{\link{N.test}} with weights \eqn{\omega_t = t^2 / (t-1)}  
+#'   \eqn{(t=2,\ldots,T)}.
 #' 
 #' @param X A numeric vector, matrix (or data frame).
 #' @param record A character string indicating the type of record, 
@@ -70,8 +70,8 @@
 #' @author Jorge Castillo-Mateo
 #' @seealso \code{\link{lr.test}}, \code{\link{global.test}}
 #' @references 
-#' ? (2021).
-#' “Statistical Tests to Detect Non-Stationarity Based on Records to Analyse Climate Change.”
+#' Cebrián A, Castillo-Mateo J, Asín J (2021).
+#' “Record Tests to detect non stationarity in the tails with an application to climate change.”
 #' Unpublished manuscript.
 #' 
 #' @examples

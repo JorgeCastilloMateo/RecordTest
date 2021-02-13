@@ -9,7 +9,8 @@
 #'   \code{Mcols = 12}.
 #' @details This function is used in the data preparation (or pre-processing) 
 #'   often required to apply the exploratory and inference tools based on 
-#'   theory of records within this package.
+#'   theory of records within this package when the time series presents 
+#'   seasonality.
 #'
 #'   This function transforms a vector into a matrix, applying the 
 #'   following procedure: the first row of the matrix is built of the first 
@@ -47,19 +48,15 @@
 #'   \code{\link{series_rev}}, \code{\link{series_ties}},
 #'   \code{\link{series_uncor}}, \code{\link{series_untie}}
 #' @references 
-#' Diersen J, Trenkler G (1996). 
-#' “Records Tests for Trend in Location.” 
-#' \emph{Statistics}, \strong{28}(1), 1–12.
-#' \href{https://doi.org/10.1080/02331889708802543}{doi:10.1080/02331889708802543}.
+#' Cebrián A, Castillo-Mateo J, Asín J (2021).
+#' “Record Tests to detect non stationarity in the tails with an application to climate change.”
+#' Unpublished manuscript.
 #' 
-#' Hirsch RM, Slack JR, Smith RA (1982). 
-#' “Techniques of Trend Analysis for Monthly Water Quality Data.” 
-#' \emph{Water Resources Research}, \strong{18}(1), 107–121. 
-#' \href{https://doi.org/10.1029/WR018i001p00107}{doi:10.1029/WR018i001p00107}.
 #' @examples
 #' series_split(1:100, Mcols = 10)
 #' 
-#' series_split(TX_Zaragoza$TX)
+#' TxZ <- series_split(TX_Zaragoza$TX)
+#' dim(TxZ)
 #'
 #' @export series_split
 series_split <- function(X, Mcols = 365) {

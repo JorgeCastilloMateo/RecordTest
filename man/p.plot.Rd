@@ -2,7 +2,7 @@
 % Please edit documentation in R/p.plot.R
 \name{p.plot}
 \alias{p.plot}
-\title{Plot for Record Probabilities}
+\title{Probabilities of Record Plots}
 \usage{
 p.plot(
   X,
@@ -13,7 +13,7 @@ p.plot(
   conf.int = TRUE,
   conf.level = 0.9,
   conf.aes = c("ribbon", "errorbar"),
-  conf.col = "grey69",
+  conf.col = "gray69",
   smooth = TRUE,
   smooth.formula = y ~ x,
   smooth.method = stats::lm,
@@ -33,7 +33,7 @@ Details).}
 forward upper, forward lower, backward upper and backward lower are going
 to be shown, respectively. Logical values or 0,1 values are accepted.}
 
-\item{point.col, point.shape}{Vector with four elements indicating the colour
+\item{point.col, point.shape}{Vector with four elements indicating the color
 and shape of the points. Every one of the four elements represents forward
 upper, forward lower, backward upper and backward lower, respectively.}
 
@@ -42,10 +42,10 @@ upper, forward lower, backward upper and backward lower, respectively.}
 \item{conf.level}{(If \code{conf.int == TRUE}) Confidence level of the CIs.}
 
 \item{conf.aes}{(If \code{conf.int == TRUE}) A character string indicating 
-the aesthetic to display for the CIs, \code{"ribbon"} (grey area) or 
+the aesthetic to display for the CIs, \code{"ribbon"} (gray area) or 
 \code{"errorbar"} (vertical lines).}
 
-\item{conf.col}{Colour used to plot the expected value and (if 
+\item{conf.col}{Color used to plot the expected value and (if 
 \code{conf.int == TRUE}) CIs.}
 
 \item{smooth}{(If \code{plot = 1} or \code{3}) Logical. If \code{TRUE}, a
@@ -73,7 +73,7 @@ lower, respectively.}
 A ggplot object.
 }
 \description{
-This function constructs a ggplot object to display different 
+This function builds a ggplot object to display different 
   functions of the record probabilities at time \eqn{t}, \eqn{p_t}.
   A graphical tool to study the hypothesis of the classical record model.
 }
@@ -86,7 +86,8 @@ Three different types of plots which aim to analyse the hypothesis
   \code{\link{p.record}}).
 
   Type 1 is the plot of the observed values \eqn{t \hat p_t} versus time 
-  \eqn{t} (see \code{\link{p.test}} for its associated test and details). 
+  \eqn{t} (see \code{\link{p.regression.test}} for its associated test and
+  details). 
   The expected values under the classical record model are \eqn{1} for any
   value \eqn{t}, so that a cloud of points around \eqn{1} and with no trend
   should be expected. The estimated values are plotted, together with 
@@ -101,8 +102,9 @@ Three different types of plots which aim to analyse the hypothesis
   expected value is \eqn{-\log(t)}. In this case, another smoothing 
   function can be fitted to the cloud of points.
   
-  Type 1 plot was proposed by ? (2021), while type 2 and 3 appear in 
-  Benestad (2003, 2004) in Figures 8 and 9 (2003) and Figure 4 (2004).
+  Type 1 plot was proposed by Cebrián, Castillo-Mateo, Asín (2021), while 
+  type 2 and 3 appear in Benestad (2003, 2004) in Figures 8 and 9 (2003) 
+  and Figure 4 (2004).
 }
 \examples{
 # three plots available
@@ -136,12 +138,12 @@ Benestad RE (2004).
 \emph{Global and Planetary Change}, \strong{44}(1–4), 11–26. 
 \href{https://doi.org/10.1016/j.gloplacha.2004.06.002}{doi:10.1016/j.gloplacha.2004.06.002}.
 
-? (2021).
-“Statistical Tests to Detect Non-Stationarity Based on Records to Analyse Climate Change.”
+Cebrián A, Castillo-Mateo J, Asín J (2021).
+“Record Tests to detect non stationarity in the tails with an application to climate change.”
 Unpublished manuscript.
 }
 \seealso{
-\code{\link{p.test}}
+\code{\link{p.regression.test}}
 }
 \author{
 Jorge Castillo-Mateo

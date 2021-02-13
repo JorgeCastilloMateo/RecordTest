@@ -2,7 +2,7 @@
 % Please edit documentation in R/N.test.R
 \name{N.test}
 \alias{N.test}
-\title{Tests on the Number of Records}
+\title{Number of Records Test}
 \usage{
 N.test(
   X,
@@ -10,8 +10,8 @@ N.test(
   record = c("upper", "lower"),
   distribution = c("normal", "t", "poisson-binomial"),
   alternative = c("greater", "less"),
-  method = c("mixed", "dft", "butler"),
   correct = TRUE,
+  method = c("mixed", "dft", "butler"),
   simulate.p.value = FALSE,
   B = 1000
 )
@@ -34,6 +34,10 @@ distribution of the statistic, \code{"normal"} distribution, Student's
 hypothesis, \code{"greater"} number of records or \code{"less"} number of
 records.}
 
+\item{correct}{Logical. Indicates, whether a continuity correction 
+should be done; defaults to \code{TRUE}. No correction is done if
+\code{simulate.p.value = TRUE} or \code{distribution = "poisson-binomial"}.}
+
 \item{method}{(If \code{distribution = "poisson-binomial"}) A character 
 string that indicates the method by which the cdf
 of the Poisson binomial distribution is calculated and therefore the 
@@ -41,10 +45,6 @@ p-value. \code{"mixed"} is the preferred (and default) method, it is a
 more efficient combination of the later algorithms. \code{"dft"} uses the 
 discrete Fourier transform which algorithm is given in Hong (2013). 
 \code{"butler"} use the algorithm given by Butler and Stephens (2016).}
-
-\item{correct}{Logical. Indicates, whether a continuity correction 
-should be done; defaults to \code{TRUE}. No correction is done if
-\code{simulate.p.value = TRUE} or \code{distribution = "poisson-binomial"}.}
 
 \item{simulate.p.value}{Logical. Indicates whether to compute p-values by
 Monte Carlo simulation. No simulation is done if 
@@ -66,13 +66,13 @@ A \code{"htest"} object with elements:
   \item{data.name}{A character string giving the name of the data.}
 }
 \description{
-Performs a test based on the (weighted) number of records, 
+Performs tests based on the (weighted) number of records, 
   \eqn{N^\omega}. The hypothesis of the classical record model
   (i.e., of randomness) is tested against the alternative hypothesis.
 }
 \details{
 The null hypothesis is that the data come from a population with 
-  independent and identically distributed realisations. The one-sided
+  independent and identically distributed realizations. The one-sided
   alternative hypothesis is that the (weighted) number of records is 
   greater (or less) than under the null hypothesis. The 
   (weighted)-number-of-records statistic is calculated according to:
@@ -87,7 +87,7 @@ The null hypothesis is that the data come from a population with
   \deqn{Z = \frac{N_{..}^\omega - \mu}{\sigma},}
   where its mean and variance are
   \deqn{\mu = M \sum_{t=1}^T \omega_t \frac{1}{t},} 
-  \deqn{\sigma^2 = \sum_{t=1}^T \omega_t^2 \frac{1}{t} \left(1-\frac{1}{t}\right).} 
+  \deqn{\sigma^2 = M \sum_{t=2}^T \omega_t^2 \frac{1}{t} \left(1-\frac{1}{t}\right).} 
   
   If \code{correct = TRUE}, then a continuity correction will be employed:
   \deqn{Z = \frac{N_{..}^\omega \pm 0.5 - \mu}{\sigma},}
@@ -103,7 +103,9 @@ The null hypothesis is that the data come from a population with
   If \code{simulate.p.value = TRUE}, the p-value is estimated by Monte Carlo
   simulations.
   
-  Some comments and size and power studies are given by ? (2021).
+  The size of the tests is adequate for any values of \eqn{T} and \eqn{M}.
+  Some comments and a power study are given by Cebrián, Castillo-Mateo and
+  Asín (2021).
 }
 \examples{
 # Forward Upper records
@@ -124,14 +126,14 @@ N.test(ZaragozaSeries, weights = function(t) t-1, correct = TRUE)
 
 }
 \references{
-? (2021).
-“Statistical Tests to Detect Non-Stationarity Based on Records to Analyse Climate Change.”
-Unpublished manuscript.
-
 Butler K, Stephens MA (2016).
 “The Distribution of a Sum of Independent Binomial Random Variables.”
 \emph{Methodology and Computing in Applied Probability}, \strong{19}(2), 557-571.
 \href{https://doi.org/10.1007/s11009-016-9533-4}{doi:10.1007/s11009-016-9533-4}
+
+Cebrián A, Castillo-Mateo J and Asín J (2021).
+“Record Tests to detect non stationarity in the tails with an application to climate change.”
+Unpublished manuscript.
 
 Hong Y (2013). 
 “On Computing the Distribution Function for the Poisson Binomial Distribution.”

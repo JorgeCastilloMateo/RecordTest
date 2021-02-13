@@ -1,11 +1,11 @@
-#' @title Regression Test for Record Probabilities
+#' @title Probabilities of Record Regression Test
 #' @importFrom stats pf lm
 #' @description This function performs a linear hypothesis test based on a
 #'   regression for the record probabilities \eqn{p_t} to study the hypothesis
 #'   of the classical record model.
 #' @details 
 #'   The null hypothesis is that the data come from a population with 
-#'   independent and identically distributed realisations. This implies that
+#'   independent and identically distributed realizations. This implies that
 #'   in all the vectors (columns in matrix \code{X}), the sample probability 
 #'   of record at time \eqn{t} (\code{\link{p.record}}) is \eqn{1/t}, so that
 #'   \deqn{t \, \textrm{E}(\hat p_t) = 1.} 
@@ -22,10 +22,10 @@
 #'   responses must be nested in the bigger one, either leaving the intercept 
 #'   free or setting the intercept to 1 (see Examples for possible models).
 #'
-#'   The \eqn{F} statistic is computed for carrying out a Wald-test-based 
+#'   The \eqn{F} statistic is computed for carrying out an \eqn{F}-test-based
 #'   comparison between the restricted model under the null hypothesis and
-#'   the more general model (e.g., the alterantive hypothesis 
-#'   where \eqn{t \, \textrm{E}(\hat p_t)} is a linear function of time \eqn{t}). 
+#'   the more general model (e.g., the alterantive hypothesis where 
+#'   \eqn{t \, \textrm{E}(\hat p_t)} is a linear function of time \eqn{t}). 
 #'   This alternative hypothesis may be reasonable in many real examples, 
 #'   but not always.
 #'   
@@ -59,38 +59,39 @@
 #' @note IMPORTANT: In \code{formula} the intercept has to be free or fixed
 #'   to 1 so that the test is correct.
 #' @author Jorge Castillo-Mateo
-#' @seealso \code{\link{chisq.test}}, \code{\link{p.plot}}
+#' @seealso \code{\link{p.chisq.test}}, \code{\link{p.plot}}
 #' @examples
 #' # Simple test for upper records (p-value = 0.01047)
-#' p.test(ZaragozaSeries)
+#' p.regression.test(ZaragozaSeries)
 #' # Simple test for lower records (p-value = 9.178e-05)
-#' p.test(ZaragozaSeries, record = "lower")
+#' p.regression.test(ZaragozaSeries, record = "lower")
 #' 
 #' # Fit a 2nd term polynomial for upper records (p-value = 0.01187)
-#' p.test(ZaragozaSeries, formula = y ~ I(x^2))
+#' p.regression.test(ZaragozaSeries, formula = y ~ I(x^2))
 #' # Fit a 2nd term polynomial for lower records (p-value = 8.007e-05)
-#' p.test(ZaragozaSeries, record = "lower", formula = y ~ I(x^2))
+#' p.regression.test(ZaragozaSeries, record = "lower", formula = y ~ I(x^2))
 #' 
 #' # Fix the intercept to 1 for upper records (p-value = 0.005557)
-#' p.test(ZaragozaSeries, formula = y ~ I(x-1) - 1 + offset(rep(1, length(x))))
+#' p.regression.test(ZaragozaSeries, formula = y ~ I(x-1) - 1 + offset(rep(1, length(x))))
 #' # Fix the intercept to 1 for lower records (p-value = 2.467e-05)
-#' p.test(ZaragozaSeries, record = "lower", formula = y ~ I(x-1) - 1 + offset(rep(1, length(x))))
+#' p.regression.test(ZaragozaSeries, record = "lower", 
+#'                   formula = y ~ I(x-1) - 1 + offset(rep(1, length(x))))
 #' 
 #' # Simulate p-value when the number of series is small
 #' TxZ <- apply(series_split(TX_Zaragoza$TX), 1, max)
-#' p.test(TxZ, simulate.p.value = TRUE)
-#' @export p.test
+#' p.regression.test(TxZ, simulate.p.value = TRUE)
+#' @export p.regression.test
 
-p.test <- function(X, 
-                   record = c("upper", "lower"), 
-                   formula = y ~ x, 
-                   simulate.p.value = FALSE, 
-                   B = 1000) {
+p.regression.test <- function(X, 
+                              record = c("upper", "lower"), 
+                              formula = y ~ x, 
+                              simulate.p.value = FALSE, 
+                              B = 1000) {
   
   record <- match.arg(record)
   
   DNAME  <- deparse(substitute(X))
-  METHOD <- paste("Regression test on", record, "record probabilities")
+  METHOD <- paste("Regression test on the", record, "records probabilities")
   
   Trows <- NROW(X)
   Mcols <- NCOL(X)

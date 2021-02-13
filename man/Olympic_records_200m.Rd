@@ -14,20 +14,21 @@ A data frame with 12 rows and 3 variables.
 data(Olympic_records_200m)
 }
 \description{
-A data set containing the series of record times and record
-  values of the Olympic 200-meter, from 1900 to 2020.
+A data set containing the record times and record values of the
+  200-meter competition at the Olympic games, from 1900 to 2020.
   The variables are the following:
 
 \itemize{
   \item year  : Year of the record time
   \item time  : Record time
-  \item value : Record value
+  \item value : Record value in seconds
 }
 }
 \note{
-In this dataset, the interest lies in the lower records. The Olympics
-  are held every 4 years, but not on all those occasions it has been held, 
-  so those moments do not count as time.
+In this data set, the interest lies in the lower records. Although 
+  the Olympic Games are held every 4 years, not all of these occasions have
+  been held, so only the games that have taken place are considered in the 
+  definition of time.
 }
 \seealso{
 \code{\link{series_record}}

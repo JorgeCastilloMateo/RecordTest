@@ -5,23 +5,31 @@
 #'   \code{plot = TRUE}) the record values (\eqn{R_i}), and the record times 
 #'   (\eqn{L_i}) in a vector, for all upper and lower records in forward and
 #'   backward directions. 
+#' @details 
+#'   Customarily, the records in a time series \eqn{(X_t)} observed in \eqn{T} 
+#'   instances \eqn{t = 1, 2, \ldots, T} can be obtained using chronological 
+#'   order. Besides, we could also compute the records in similar sequences of 
+#'   random variables if we consider reversed chronological order starting 
+#'   from the last observation, i.e., \eqn{t' = T, \ldots, 2, 1}. The analysis 
+#'   of series with reversed order is customarily referred to as backward, as 
+#'   opposed to a forward analysis. 
 #' @param X A numeric vector.
 #' @param plot Logical. If \code{TRUE} (the default) the records are plotted.
 #' @param direction A character string indicating the type of record to show 
 #'   in the plot if \code{plot == TRUE}: \code{"forward"}, \code{"backward"} or
-#'   \code{"both"}. 
+#'   \code{"both"} (see Details). 
 #' @param variable Optional. A vector, containing other variable related 
 #'   to \code{X} and measured at the same times. Only used if 
 #'   \code{plot = FALSE}.
 #' @param col,alpha Character and numeric vectors of length four, respectively.
-#'   This arguments represent respectively the colour and transparency of the
+#'   These arguments represent respectively the color and transparency of the
 #'   points: trivial record, upper records, lower records and observations
 #'   respectively. Vector names in the default are only indicative.
 #' @param shape Integer vector of length 3 indicating the shape of the points
 #'   for forward records, backward records and observations.
 #'   Vector names in the default are only indicative.
 #' @param linetype Integer vector of length 2 indicating the line type of the
-#'   step functions indicating forward and backward records, respectively.
+#'   step functions in the forward and backward records, respectively.
 #'   Vector names in the default are only indicative.
 #' @return If \code{plot = TRUE} a ggplot object, otherwise a list with four 
 #'   data frames where the first column are the record times, the second the 
@@ -36,15 +44,22 @@
 #' Y <- c(5, 7, 3, 6, 19, 2, 20)
 #' records(Y, plot = FALSE, variable = seq_along(Y))
 #' 
+#' # Show the whole series and its upper and lower records
+#' records(TX_Zaragoza$TX)
+#' # Compute tables for the whole series
+#' TxZ.record <- records(TX_Zaragoza$TX, plot = FALSE, variable = TX_Zaragoza$DATE)
+#' TxZ.record
+#' names(TxZ.record)
+#' # To show the Forward Upper records
+#' TxZ.record[[1]]
+#' plot(TxZ.record[[1]]$Times, TxZ.record[[1]]$Values)
+#' 
 #' # Annual maximum daily maximum temperatures
 #' TxZ <- apply(series_split(TX_Zaragoza$TX), 1, max)
-#' # compute tables for the whole series and for the one of annual maximum
-#' records(TX_Zaragoza$TX, plot = FALSE, variable = TX_Zaragoza$DATE)
-#' records(TxZ, plot = FALSE, variable = 1953:2018)
-#' # compute plot for records in forward direction
-#' records(TxZ)
-#' # compute plot for records in forward and backward direction
+#' # Plot for the records in forward and backward directions
 #' records(TxZ, direction = "both")
+#' # Compute tables for the annual maximum 
+#' records(TxZ, plot = FALSE, variable = 1951:2020)
 #' 
 #' @export records
 
@@ -185,17 +200,17 @@ records <- function(X,
     Var_L.FL <- variable[L.FL]
     Var_L.BU <- variable[Tlength - L.BU + 1]
     Var_L.BL <- variable[Tlength - L.BL + 1]
-    table <- list("Forward Upper record"  = data.frame("Times" = L.FU, "Values" = R.FU, "Variable" = Var_L.FU), 
-                  "Forward Lower record"  = data.frame("Times" = L.FL, "Values" = R.FL, "Variable" = Var_L.FL),
-                  "Backward Upper record" = data.frame("Times" = L.BU, "Values" = R.BU, "Variable" = Var_L.BU), 
-                  "Backward Lower record" = data.frame("Times" = L.BL, "Values" = R.BL, "Variable" = Var_L.BL))
+    table <- list("Forward.Upper.record"  = data.frame("Times" = L.FU, "Values" = R.FU, "Variable" = Var_L.FU), 
+                  "Forward.Lower.record"  = data.frame("Times" = L.FL, "Values" = R.FL, "Variable" = Var_L.FL),
+                  "Backward.Upper.record" = data.frame("Times" = L.BU, "Values" = R.BU, "Variable" = Var_L.BU), 
+                  "Backward.Lower.record" = data.frame("Times" = L.BL, "Values" = R.BL, "Variable" = Var_L.BL))
     
   } else {
     
-    table <- list("Forward Upper record"  = data.frame("Times" = L.FU, "Values" = R.FU), 
-                  "Forward Lower record"  = data.frame("Times" = L.FL, "Values" = R.FL),
-                  "Backward Upper record" = data.frame("Times" = L.BU, "Values" = R.BU), 
-                  "Backward Lower record" = data.frame("Times" = L.BL, "Values" = R.BL))
+    table <- list("Forward.Upper.record"  = data.frame("Times" = L.FU, "Values" = R.FU), 
+                  "Forward.Lower.record"  = data.frame("Times" = L.FL, "Values" = R.FL),
+                  "Backward.Upper.record" = data.frame("Times" = L.BU, "Values" = R.BU), 
+                  "Backward.Lower.record" = data.frame("Times" = L.BL, "Values" = R.BL))
   }
   
   return(table)

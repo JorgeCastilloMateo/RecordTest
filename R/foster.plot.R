@@ -1,24 +1,23 @@
-#' @title Plot Based on Foster-Stuart and Diersen-Trenkler Statistics
+#' @title Plots Based on Foster-Stuart and Diersen-Trenkler Statistics
 #' @importFrom ggplot2 ggplot aes geom_point theme_bw geom_line theme
 #'   geom_ribbon geom_errorbar labs
 #' @importFrom stats qnorm
-#' @description This function constructs a ggplot object to display two-sided
+#' @description This function builds a ggplot object to display two-sided
 #'   confidence intervals based on Foster-Stuart and Diersen-Trenkler 
 #'   statistics to study the hypothesis of the classical record model.
-#'
 #' @details 
 #'   The mean value of the statistic in every vector (columns of the matrix 
-#'   \code{X}) observed up to the instant \eqn{t} (\eqn{t=1,\ldots,T}) is shown 
+#'   \code{X}) observed up to the time \eqn{t} (\eqn{t=1,\ldots,T}) is shown 
 #'   together with expected values and confidence intervals (CIs) based on the 
 #'   asymptotic normal distribution of the statistics under the null hypothesis
-#'   of randomness.
+#'   of the classical record model (i.e., of randomness).
 #' 
 #'   This function implements the same ideas that \code{\link{N.plot}} with
 #'   the statistics computed in \code{\link{foster.test}}. 
 #'   
 #'   These plots are useful to see the evolution in the record occurrence 
-#'   and to follow the evolution of the trend. The plot was proposed by ? 
-#'   (2021) where its application is shown. 
+#'   and to follow the evolution of the trend. The plot was proposed by 
+#'   Cebrián, Castillo-Mateo, Asín (2021) where its application is shown. 
 #'   
 #' @param X A numeric vector, matrix (or data frame).
 #' @param weights A function indicating the weight given to the different 
@@ -27,21 +26,21 @@
 #' @param statistic A character string indicating the type of statistic to be 
 #'   calculated, i.e., one of \code{"D"}, \code{"d"}, \code{"S"}, \code{"s"},
 #'   \code{"U"}, \code{"L"} or \code{"W"} (see \code{\link{foster.test}}).
-#' @param point.col,point.shape Value with the colour and shape of the points. 
+#' @param point.col,point.shape Value with the color and shape of the points. 
 #' @param conf.int Logical. Indicates if the CIs are also shown.
 #' @param conf.level (If \code{conf.int == TRUE}) Confidence level of the CIs.
 #' @param conf.aes (If \code{conf.int == TRUE}) A character string indicating 
-#'   the aesthetic to display for the CIs, \code{"ribbon"} (grey area) or 
+#'   the aesthetic to display for the CIs, \code{"ribbon"} (gray area) or 
 #'   \code{"errorbar"} (vertical lines).
-#' @param conf.col Colour used to plot the expected value and (if 
+#' @param conf.col Color used to plot the expected value and (if 
 #'   \code{conf.int == TRUE}) CIs.
 #' @return A ggplot graph object.
 #' @author Jorge Castillo-Mateo
 #' @seealso \code{\link{foster.test}}, \code{\link{N.plot}}, 
 #'   \code{\link{N.test}}
 #' @references
-#' ? (2021).
-#' “Statistical Tests to Detect Non-Stationarity Based on Records to Analyse Climate Change.”
+#' Cebrián A, Castillo-Mateo J, Asín J (2021).
+#' “Record Tests to detect non stationarity in the tails with an application to climate change.”
 #' Unpublished manuscript.
 #' 
 #' Diersen J, Trenkler G (1996). “Records Tests for Trend in Location.”
@@ -96,52 +95,66 @@ foster.plot <- function(X,
   
   switch(statistic,
     "D" = {
-      METHOD <- "Plot based on Foster-Stuart D-statistic"
+      METHOD <- "Foster-Stuart D-statistic"
       ylabel <- ifelse(all(w == 1), 
-                       expression(bar(N)[t]^list((FU)) - bar(N)[t]^list((FL)) - bar(N)[t]^list((BU)) + bar(N)[t]^list((BL))),
-                       expression(bar(N)[t]^list(omega,(FU)) - bar(N)[t]^list(omega,(FL)) - bar(N)[t]^list(omega,(BU)) + bar(N)[t]^list(omega,(BL)))
+                       "Mean D-statistic",
+                       "Mean weighted D-statistic"
+                       #expression(bar(N)[t]^list((FU)) - bar(N)[t]^list((FL)) - bar(N)[t]^list((BU)) + bar(N)[t]^list((BL))),
+                       #expression(bar(N)[t]^list(omega,(FU)) - bar(N)[t]^list(omega,(FL)) - bar(N)[t]^list(omega,(BU)) + bar(N)[t]^list(omega,(BL)))
       )
       },
     "d" = {
-      METHOD <- "Plot based on Foster-Stuart d-statistic"
+      METHOD <- "Foster-Stuart d-statistic"
       ylabel <- ifelse(all(w == 1), 
-                       expression(bar(N)[t]^list((FU)) - bar(N)[t]^list((FL))),
-                       expression(bar(N)[t]^list(omega,(FU)) - bar(N)[t]^list(omega,(FL)))
+                       "Mean d-statistic",
+                       "Mean weighted d-statistic"
+                       #expression(bar(N)[t]^list((FU)) - bar(N)[t]^list((FL))),
+                       #expression(bar(N)[t]^list(omega,(FU)) - bar(N)[t]^list(omega,(FL)))
       )
       },
     "S" = {
-      METHOD <- "Plot based on Foster-Stuart S-statistic"
+      METHOD <- "Foster-Stuart S-statistic"
       ylabel <- ifelse(all(w == 1), 
-                       expression(bar(N)[t]^list((FU)) + bar(N)[t]^list((FL)) + bar(N)[t]^list((BU)) + bar(N)[t]^list((BL))),
-                       expression(bar(N)[t]^list(omega,(FU)) + bar(N)[t]^list(omega,(FL)) + bar(N)[t]^list(omega,(BU)) + bar(N)[t]^list(omega,(BL)))
+                       "Mean S-statistic",
+                       "Mean weighted S-statistic"
+                       #expression(bar(N)[t]^list((FU)) + bar(N)[t]^list((FL)) + bar(N)[t]^list((BU)) + bar(N)[t]^list((BL))),
+                       #expression(bar(N)[t]^list(omega,(FU)) + bar(N)[t]^list(omega,(FL)) + bar(N)[t]^list(omega,(BU)) + bar(N)[t]^list(omega,(BL)))
       )
       },
     "s" = {
-      METHOD <- "Plot based on Foster-Stuart s-statistic"
+      METHOD <- "Foster-Stuart s-statistic"
       ylabel <- ifelse(all(w == 1), 
-                       expression(bar(N)[t]^list((FU)) + bar(N)[t]^list((FL))),
-                       expression(bar(N)[t]^list(omega,(FU)) + bar(N)[t]^list(omega,(FL)))
+                       "Mean s-statistic",
+                       "Mean weighted s-statistic"
+                       #expression(bar(N)[t]^list((FU)) + bar(N)[t]^list((FL))),
+                       #expression(bar(N)[t]^list(omega,(FU)) + bar(N)[t]^list(omega,(FL)))
       )
       },
     "U" = {
-      METHOD <- "Plot based on forward-backward upper records"
+      METHOD <- "Forward - backward upper records"
       ylabel <- ifelse(all(w == 1), 
-                       expression(bar(N)[t]^list((FU)) - bar(N)[t]^list((BU))),
-                       expression(bar(N)[t]^list(omega,(FU)) - bar(N)[t]^list(omega,(BU)))
+                       "Mean U-statistic",
+                       "Mean weighted U-statistic"
+                       #expression(bar(N)[t]^list((FU)) - bar(N)[t]^list((BU))),
+                       #expression(bar(N)[t]^list(omega,(FU)) - bar(N)[t]^list(omega,(BU)))
       )
       },
     "L" = {
-      METHOD <- "Plot based on forward-backward lower records"
+      METHOD <- "Backward - forward lower records"
       ylabel <- ifelse(all(w == 1), 
-                       expression(bar(N)[t]^list((BL)) - bar(N)[t]^list((FL))),
-                       expression(bar(N)[t]^list(omega,(BL)) - bar(N)[t]^list(omega,(FL)))
+                       "Mean L-statistic",
+                       "Mean weighted L-statistic"
+                       #expression(bar(N)[t]^list((BL)) - bar(N)[t]^list((FL))),
+                       #expression(bar(N)[t]^list(omega,(BL)) - bar(N)[t]^list(omega,(FL)))
       )
       },
     "W" = {
-      METHOD <- "Plot based on Diersen-Trenkler W-statistic records"
+      METHOD <- "Diersen-Trenkler W-statistic"
       ylabel <- ifelse(all(w == 1), 
-                       expression(bar(N)[t]^list((FU)) + bar(N)[t]^list((BL))),
-                       expression(bar(N)[t]^list(omega,(FU)) + bar(N)[t]^list(omega,(BL)))
+                       "Mean W-statistic",
+                       "Mean weighted W-statistic"
+                       #expression(bar(N)[t]^list((FU)) + bar(N)[t]^list((BL))),
+                       #expression(bar(N)[t]^list(omega,(FU)) + bar(N)[t]^list(omega,(BL)))
       )
       })
   fun   <- deparse(weights)[2]

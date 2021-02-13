@@ -9,9 +9,9 @@ global.test(X, FUN, record = c(FU = 1, FL = 1, BU = 1, BL = 1), B = 1000, ...)
 \arguments{
 \item{X}{A numeric vector, matrix (or data frame).}
 
-\item{FUN}{One of the functions whose statistic you want to use. One of
-\code{\link{chisq.test}}, \code{\link{lr.test}}, 
-\code{\link{p.test}} or \code{\link{score.test}}.}
+\item{FUN}{One of the functions whose statistic is going to be used. One of
+\code{\link{p.chisq.test}}, \code{\link{p.regression.test}}, 
+\code{\link{lr.test}} or \code{\link{score.test}}.}
 
 \item{record}{Logical vector. Vector with four elements indicating if 
 forward upper, forward lower, backward upper and backward lower are going
@@ -34,18 +34,19 @@ This function performs a more powerful generalization
   of the two-sided tests in this package by means of the sum of the 
   statistics of upper and lower records in the forward and backward 
   directions to study the hypothesis of the classical record model. The
-  tests considered are the regression test \code{\link{p.test}},
-  the chi-square goodness-of-fit test \code{\link{chisq.test}},
+  tests considered are the chi-square goodness-of-fit test 
+  \code{\link{p.chisq.test}}, the regression test 
+  \code{\link{p.regression.test}},
   the likelihood-ratio test \code{\link{lr.test}} and the score test
   \code{\link{score.test}}.
 }
 \details{
-The statistics, say \eqn{X}, of the tests \code{\link{p.test}}, 
-  \code{\link{chisq.test}}, \code{\link{lr.test}} or
+The statistics, say \eqn{X}, of the tests \code{\link{p.chisq.test}},
+  \code{\link{p.regression.test}}, \code{\link{lr.test}} or
   \code{\link{score.test}} for the forward upper, forward lower, backward
   upper and backward lower records are summed to develop a more powerful 
   statistic:
-  \deqn{X^{G} = X^{(FU)} + X^{(FL)} + X^{(BU)} + X^{(BL)},}
+  \deqn{X^{(FU)} + X^{(FL)} + X^{(BU)} + X^{(BL)},}
   where those are the statistics for their respective type of record. 
   Other sums of statistics are allowed.
   
@@ -54,10 +55,10 @@ The statistics, say \eqn{X}, of the tests \code{\link{p.test}},
 }
 \examples{
 # not run because the simulations take a while if B > 1000
-## global statistic with 4 types of record for p.test
-#global.test(ZaragozaSeries, FUN = p.test)
-## global statistic with 4 types of record for chisq.test
-#global.test(ZaragozaSeries, FUN = chisq.test)
+## global statistic with 4 types of record for p.chisq.test
+#global.test(ZaragozaSeries, FUN = p.chisq.test)
+## global statistic with 4 types of record for p.regression.test
+#global.test(ZaragozaSeries, FUN = p.regression.test)
 ## global statistic with 4 types of record for score.test with restricted alternative
 #global.test(ZaragozaSeries, FUN = score.test, alternative = "restricted")
 ## global statistic with 4 types of record for lr.test with restricted alternative
@@ -67,8 +68,8 @@ The statistics, say \eqn{X}, of the tests \code{\link{p.test}},
 
 }
 \seealso{
-\code{\link{chisq.test}}, \code{\link{lr.test}}, 
-  \code{\link{p.test}}, \code{\link{score.test}}
+\code{\link{p.chisq.test}}, \code{\link{p.regression.test}}, 
+  \code{\link{lr.test}}, \code{\link{score.test}}
 }
 \author{
 Jorge Castillo-Mateo

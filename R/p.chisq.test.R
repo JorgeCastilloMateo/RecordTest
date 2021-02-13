@@ -1,4 +1,4 @@
-#' @title Pearson's Chi-Square Test for Record Probabilities
+#' @title Pearson's Chi-Square Test for Probabilities of Record
 #' @importFrom stats pchisq
 #' @description This function performs a chi-square goodness-of-fit test
 #'   based on the record probabiliteis \eqn{p_t} to study the hypothesis
@@ -7,7 +7,7 @@
 #'   The null hypothesis of this chi-square test is that in every vector 
 #'   (columns of the matrix \code{X}), the probability of record at 
 #'   time \eqn{t} is \eqn{1/t} as in the classical record model (i.e., 
-#'   sequences of independent and identically distributed realisations), 
+#'   sequences of independent and identically distributed realizations), 
 #'   and the alternative that the probabilities are not equal to those values. 
 #'   First, the chi-square goodness-of-fit statistics to study the  null 
 #'   hypothesis \eqn{H_0:\,p_t = 1/t} are calculated for each time 
@@ -39,22 +39,23 @@
 #'   \item{data.name}{A character string giving the name of the data.}
 #' @author Jorge Castillo-Mateo
 #' @seealso \code{\link{global.test}}, \code{\link{score.test}},
-#'   \code{\link{p.record}}, \code{\link{p.test}}, \code{\link{lr.test}}
-#' @export chisq.test
+#'   \code{\link{p.record}}, \code{\link{p.regression.test}}, 
+#'   \code{\link{lr.test}}
+#' @export p.chisq.test
 #' @examples
 #' # Warning, M = 76 small for the value of T = 66
-#' chisq.test(ZaragozaSeries)
+#' p.chisq.test(ZaragozaSeries)
 #' # Simulate p-value
-#' chisq.test(ZaragozaSeries, simulate.p.value = TRUE, B = 10000)
+#' p.chisq.test(ZaragozaSeries, simulate.p.value = TRUE, B = 10000)
 #'
-chisq.test <- function(X, 
-                       record = c("upper", "lower"), 
-                       simulate.p.value = FALSE, 
-                       B = 1000) {
+p.chisq.test <- function(X, 
+                         record = c("upper", "lower"), 
+                         simulate.p.value = FALSE, 
+                         B = 1000) {
   
-  METHOD <- "Chi-square test for record probabilities"
   record <- match.arg(record)
   DNAME <- deparse(substitute(X))
+  METHOD <- paste("Chi-square test on the", record, "records probabilities")
 
   Trows <- NROW(X)
   Mcols <- NCOL(X)

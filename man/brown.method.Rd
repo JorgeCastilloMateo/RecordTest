@@ -33,7 +33,7 @@ records will be less than under the null, but other combinations (e.g.,
 for trend in variability) could be considered.}
 
 \item{correct}{Logical. Indicates, whether a continuity correction 
-should be done in \code{\link{N.test}}; defaults to \code{TRUE}.}
+should be applied in \code{\link{N.test}}; defaults to \code{TRUE}.}
 }
 \value{
 A \code{"htest"} object with elements:
@@ -45,21 +45,21 @@ A \code{"htest"} object with elements:
 }
 \description{
 Performs Brown's method on the p-values of \code{\link{N.test}}
-  as proposed by ?. The null 
+  as proposed by Cebrián, Castillo-Mateo and Asín (2021). The null 
   hypothesis of the classical record model (i.e., of randomness) is tested
   against the alternative hypothesis.
 }
 \details{
-In this function, the test is implemented as given by ? (2021), where the
+In this function, the test is implemented as given by Cebrián, 
+  Castillo-Mateo and Asín (2021), where the
   p-values \eqn{p^{(FU)}}, \eqn{p^{(FL)}}, \eqn{p^{(BU)}} and \eqn{p^{(BL)}}
   of the test \code{\link{N.test}} for the four types of record are used for
   the statistic:
-  \deqn{\mathcal{B} = -2 \left(\log(p^{(FU)}) + \log(p^{(FL)}) + \log(p^{(BU)}) + \log(p^{(BL)})\right).}
-  (Any other combination of p-values of the test with alternative 
-  \code{"greater"} or \code{"less"} is also allowed.)
+  \deqn{-2 \left(\log(p^{(FU)}) + \log(p^{(FL)}) + \log(p^{(BU)}) + \log(p^{(BL)})\right).}
+  (Any other combination of p-values for the test is also allowed.)
   
-  According to the Brown's method (Brown, 1975) for the union of dependent 
-  p-values, \eqn{\mathcal{B}} follows a \eqn{c \chi^2_{df}} distribution, 
+  According to Brown's method (Brown, 1975) for the union of dependent 
+  p-values, the statistic follows a \eqn{c \chi^2_{df}} distribution, 
   with a scale parameter \eqn{c} and \eqn{df} degrees of freedom that 
   depend on the covariance of the p-values. This covariances are 
   approximated according to Kost and McDermott (2002):
@@ -67,7 +67,13 @@ In this function, the test is implemented as given by ? (2021), where the
   where \eqn{\rho_{ij}} is the correlation between their respective 
   statistics.
   
-  See ? (2021) for more details.
+  Power studies indicate that this and \code{\link{foster.test}} using all
+  four types of records and linear weights are the two most powerful records
+  tests against a linear drift model. In particular, this is more powerful 
+  than Mann-Kendall test against alternatives with linear drift in series of
+  generalized Pareto variables and some cases of the generalized extreme 
+  value variables. See Cebrián, Castillo-Mateo and Asín (2021) for more 
+  details.
 }
 \examples{
 brown.method(ZaragozaSeries)
@@ -76,17 +82,16 @@ brown.method(ZaragozaSeries, weights = function(t) t-1, correct = FALSE)
 
 # Join p-values of upper records
 brown.method(ZaragozaSeries, weights = function(t) t-1, record = c(1,0,1,0))
-#  Join p-values of lower records
+# Join p-values of lower records
 brown.method(ZaragozaSeries, weights = function(t) t-1, record = c(0,1,0,1))
 
 }
 \references{
 Brown M (1975). “A Method for Combining Non-Independent, One-Sided Tests of Significance.” 
 \emph{Biometrics}. \strong{31}(4), 987–992. 
-\href{https://doi.org/10.2307/2529826}{doi:10.2307/2529826}.
 
-? (2021).
-“Statistical Tests to Detect Non-Stationarity Based on Records to Analyse Climate Change.”
+Cebrián A, Castillo-Mateo J, Asín J (2021).
+“Record Tests to detect non stationarity in the tails with an application to climate change.”
 Unpublished manuscript.
 
 Kost JT, McDermott MP (2002). “Combining Dependent P-Values.”
@@ -94,7 +99,8 @@ Kost JT, McDermott MP (2002). “Combining Dependent P-Values.”
 \href{https://doi.org/10.1016/S0167-7152(02)00310-3}{doi:10.1016/S0167-7152(02)00310-3}.
 }
 \seealso{
-\code{\link{fisher.method}}, \code{\link{N.test}}
+\code{\link{fisher.method}}, \code{\link{foster.test}}, 
+  \code{\link{N.test}}
 }
 \author{
 Jorge Castillo-Mateo

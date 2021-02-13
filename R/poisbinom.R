@@ -64,7 +64,7 @@ dpoisbinom <- function(x, size = 1, prob, log = FALSE) {
 }
 
 #' @rdname dpoisbinom
-#' @export qpoisbinom
+#' @export ppoisbinom
 ppoisbinom <- function(q, size = 1, prob, lower.tail = TRUE, log.p = FALSE) {
   
   if (size <= 0 | size %% 1 != 0) { stop("'size' should be a positive integer")}

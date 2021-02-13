@@ -14,11 +14,13 @@ assessed, "upper" or "lower".}
 }
 \value{
 A \code{list} object with elements:
-  \item{`Number of records:`}{A vector containing the observed total, strong
-    and weak number of records and the expected under IID.}
-  \item{`\% of weak records:`}{Percentage of weak records within the total.}
-  \item{`\% of weak records by position:`}{A vector with the percentage of
-    weak records with \code{names} corresponding to its observed instant.}
+  \item{number}{Number of records: A vector containing the observed total, 
+    strong and weak number of records and the expected under IID.}
+  \item{percentage}{\% of weak records: Percentage of weak records within
+    the total.}
+  \item{percentage.position}{\% of weak records by position: A vector with
+    the percentage of weak records with \code{names} corresponding to its
+    observed instant.}
 }
 \description{
 This function compares the number of strog and weak records

@@ -23,8 +23,8 @@ are extracted from.}
 for a vector with the position of the uncorrelated columns in \code{X}.}
 
 \item{type}{A character string indicating the type of uncorrelation wanted
-between the series (or columns), \code{"adjacent"} or \code{"all"} (see
-Details).}
+between the extracted series (or columns), \code{"adjacent"} or 
+\code{"all"} (see Details).}
 
 \item{first.last}{Logical. Indicates if the first and last columns have also
 to be uncorrelated (when \code{type = "adjacent"}).}
@@ -42,27 +42,30 @@ function (see \code{\link[stats]{cor.test}} for possible arguments).}
 A matrix or a vector as specified by \code{return.value}.
 }
 \description{
-Given a set of vectors (\code{X}'s columns), this function
-  extracts a subset of them which are uncorrelated in some sense (see 
-  Details).
+Given a matrix this function extracts a subset of columns which
+  are uncorrelated vector in some sense (see Details).
 }
 \details{
 This function is used in the data preparation (or pre-processing) 
   often required to apply the exploratory and inference tools based on 
   theory of records within this package.
 
-  Given a set of \eqn{M^*} vectors, which are the columns of matrix 
-  \code{X}, this function extracts the biggest subset of uncorrelated 
-  vectors (columns), using the following procedure: starting from column 
-  \code{m}, the test \code{\link[stats]{cor.test}} is applied to study the 
-  correlation between columns depending on argument \code{type}.
+  Given a matrix \code{X} considered as a set of \eqn{M^*} vectors, which
+  are the columns of \code{X}, this function extracts the biggest subset 
+  of uncorrelated vectors (columns), using the following procedure: starting
+  from column \code{m}, the test \code{\link[stats]{cor.test}} is applied to
+  study the correlation between columns depending on argument \code{type}.
   
   If \code{type = "adjacent"}, the test is computed between \code{m}
-  and \eqn{\code{m} + 1, \code{m} + 2, \ldots} an so on up to find a column 
+  and \eqn{\code{m} + 1, \code{m} + 2, \ldots} and so on up to find a column 
   \eqn{\code{m} + k} which is not significantly correlated with column 
   \code{m}. Then, the process is repeated starting at column 
-  \eqn{\code{m} + k}. All columns are checked and the first and last columns
-  may not have a significat correlation depending on \code{first.last}. 
+  \eqn{\code{m} + k}. All columns are checked. 
+  
+  When the first and last columns may not have a significant correlation, 
+  where \code{m} is the first column, the parameter \code{first.last} should
+  be \code{FALSE}. When the first and last columns could be correlated, 
+  the function requires \code{first.last = TRUE}.
   
   If \code{type = "all"}, the procedure is similar as above but the new kept
   column cannot be significant correlated with any other column already 
@@ -70,12 +73,21 @@ This function is used in the data preparation (or pre-processing)
   of columns.
 }
 \examples{
+# Split Zaragoza series
 TxZ <- series_split(TX_Zaragoza$TX)
 
+# Index of uncorrelated columns depending on the criteria
+series_uncor(TxZ, return.value = "indexes", type = "adjacent")
 series_uncor(TxZ, return.value = "indexes", type = "all")
 
+# Return the set of uncorrelated vectors
 ZaragozaSeries <- series_uncor(TxZ)
 
+}
+\references{
+Cebrián A, Castillo-Mateo J, Asín J (2021).
+“Record Tests to detect non stationarity in the tails with an application to climate change.”
+Unpublished manuscript.
 }
 \seealso{
 \code{\link{series_double}}, \code{\link{series_record}},

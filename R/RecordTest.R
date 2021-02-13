@@ -1,28 +1,29 @@
 #' @title \strong{RecordTest}: A Package for Testing the Classical Record Model
-#' @description \strong{RecordTest} provides pre-processing, exploratory data 
+#' @description \strong{RecordTest} provides data-preparation, exploratory data 
 #'   analysis and inference tools based on theory of records to describe the 
 #'   record occurrence and detect trends or non-stationarities in time series. 
 #' @details 
 #'   The Classical Record Model:
 #' 
-#'   Record statistics are used primarily to quantify the stochastic behaviour
+#'   Record statistics are used primarily to quantify the stochastic behavior
 #'   of a process at never-seen-before values, either upper or lower. The setup
 #'   of independent and identically distibuted (IID) continuous random 
 #'   variables (RVs), often called the classical record model, is 
 #'   particularly interesting because the common continuous distribution 
 #'   underlying the IID RVs will not affect the distribution of the variables 
 #'   relative to the record occurrence.  
-#'   Many fields have begun to use the theory of records to study these
-#'   remarkable events. Particuarly productive is the study of record-breaking
-#'   temperatures and their connection with climate change, but also records in
-#'   other environmental fields (precipitations, floods, earthquakes, etc.), 
-#'   economy, biology, physics or even sports have been analysed.
+#'   Many fields have begun to use the theory of records to study these 
+#'   remarkable events. Particularly productive is the study of 
+#'   record-breaking temperatures and their connection with climate change, 
+#'   but also records in other environmental fields (precipitations, floods, 
+#'   earthquakes, etc.), economy, biology, physics or even sports have been 
+#'   analysed.
 #'   See Arnold, Balakrishnan and Nagaraja (1998) for an extensive theoretical
 #'   introduction to the theory of records and in particular the classical 
 #'   record model. See Foster and Stuart (1954), Diersen and Trenkler (1996, 
-#'   2001) and ? (2021) for some nonparametric 
-#'   tests based on the classical record model. For an easy introduction to 
-#'   \strong{RecordTest} use \code{vignette("RecordTest")}.
+#'   2001) and Cebrián, Castillo-Mateo and Asín (2021) for some 
+#'   distribution-free tests based on the classical record model. For an easy
+#'   introduction to \strong{RecordTest} use \code{vignette("RecordTest")}.
 #' 
 #'   This package provides tests to study the hypothesis of the classical 
 #'   record model, that is that the record occurrence from a series of values 
@@ -31,25 +32,24 @@
 #'   the hypothesis of IID variables is equivalent to test the hypothesis of 
 #'   homogeneity and stationarity.
 #' 
-#'   The functions in the pre-processing step:
-#'
-#'   It is recommended to have \eqn{M} uncorrelated vectors to infere about
-#'   the sample. Then, the input of the functions to perform the statistical 
-#'   tools is a matrix \code{X} where each column corresponds to a vector 
-#'   formed by the values of a series \eqn{X_t}, from \eqn{t=1,\ldots,T},
-#'   so that each row of the matrix correspond to a time \eqn{t}. Although 
-#'   the functions also admit as an argument a vector corresponding to a single
-#'   series.
+#'   The functions in the data-preparation step:
+#'   
+#'   The functions admit a vector \code{X} corresponding to a single series as
+#'   an argument. However, some situations could take advantege of having 
+#'   \eqn{M} uncorrelated vectors to infer from the sample. Then, the input of
+#'   the functions to perform the statistical tools can be a matrix \code{X} 
+#'   where each column corresponds to a vector formed by the values of a 
+#'   series \eqn{X_t}, from \eqn{t=1,\ldots,T}, so that each row of the matrix
+#'   correspond to a time \eqn{t}.
 #'
 #'   In  many real problems, such as those related to environmental phenomena, 
-#'   the series of variables to analyse show a seasonal behaviour, and only one
+#'   the series of variables to analyse show a seasonal behavior, and only one
 #'   realization is available. In order to be able to apply the suggested tools
-#'   to detect the existence of a  trend, the seasonal component has to be 
+#'   to detect the existence of a trend, the seasonal component has to be 
 #'   removed and a sample of \eqn{M} uncorrelated series should be obtained. 
-#'   Those problems can be solved by pre-processing the data adequately. 
-#'   A wide set of tools to carry out a preliminary analysis and to pre-process 
-#'   daily data with an annual seasonal pattern are implemented in the 
-#'   following functions.
+#'   Those problems can be solved by preparing the data adequately. 
+#'   A wide set of tools to carry out a preliminary analysis and to prepare 
+#'   data with a seasonal pattern are implemented in the following functions.
 #'   
 #'   \code{\link{series_record}}: If only the record times are available.
 #'   
@@ -73,10 +73,10 @@
 #'   number of records up to time \eqn{t}.
 #'   
 #'   \code{\link{S.record}}: Computes the observed number of records at every
-#'   time \eqn{t}.
+#'   time \eqn{t}, using \eqn{M} series.
 #'   
 #'   \code{\link{p.record}}: Computes the estimated record probability at every
-#'   time \eqn{t}.
+#'   time \eqn{t}, using \eqn{M} series.
 #'   
 #'   \code{\link{L.record}}: Computes the observed record times.
 #'   
@@ -84,10 +84,10 @@
 #'   
 #'   The functions to compute the tests:
 #'   
-#'   All the tests performed are nonparametric/distribution-free tests in 
-#'   time series for trend and non-stationarity in the extremes of the 
+#'   All the tests performed are distribution-free/nonparametric tests in 
+#'   time series for trend and nonstationarity in the extremes of the 
 #'   distribution based on the null hypothesis that the record indicators are
-#'   independent and the probabilies of record at time \eqn{t} are 
+#'   independent and the probabilities of record at time \eqn{t} are 
 #'   \eqn{p_t = 1 / t}. 
 #'   
 #'   \code{\link{foster.test}}: Implements Foster-Stuart and Diersen-Trenkler
@@ -102,10 +102,10 @@
 #'   \code{\link{fisher.method}}: General function to apply Fisher's method to
 #'   independent p-values.
 #'   
-#'   \code{\link{p.test}}: Implements a regression test based on the record
-#'   probabilities.
+#'   \code{\link{p.regression.test}}: Implements a regression test based on the
+#'   record probabilities.
 #'   
-#'   \code{\link{chisq.test}}: Implements a \eqn{\chi^2}-test based on the 
+#'   \code{\link{p.chisq.test}}: Implements a \eqn{\chi^2}-test based on the 
 #'   record probabilities.
 #'   
 #'   \code{\link{lr.test}}: Implements likelihood ratio tests based on the 
@@ -151,7 +151,7 @@
 #'   \code{\link{TX_Zaragoza}} - Daily maximum temperatures at Zaragoza 
 #'   (Spain).
 #'   
-#'   \code{\link{ZaragozaSeries}} - Splitted and uncorrelated time series 
+#'   \code{\link{ZaragozaSeries}} - Splitted and uncorrelated sub-series 
 #'   \code{\link{TX_Zaragoza}$TX}.
 #'   
 #'   \code{\link{Olympic_records_200m}} - 200-meter Olympic records from 1900
@@ -159,14 +159,14 @@
 #'   
 #'   To see how to cite \strong{RecordTest} in publications or elsewhere,
 #'   use \code{citation("RecordTest")}. 
-#' @author Jorge Castillo-Mateo, Ana C. Cebrián
+#' @author Jorge Castillo-Mateo, AC Cebrián, J Asín
 #' @references 
 #' Arnold BC, Balakrishnan N, Nagaraja HN (1998). 
 #' \emph{Records}. 
 #' Wiley Series in Probability and Statistics. Wiley, New York.
 #' 
-#' ? (2021).
-#' “Statistical Tests to Detect Non-Stationarity Based on Records to Analyse Climate Change.”
+#' Cebrián A, Castillo-Mateo J, Asín J (2021).
+#' “Record Tests to detect non stationarity in the tails with an application to climate change.”
 #' Unpublished manuscript.
 #' 
 #' Diersen J, Trenkler G (1996). “Records Tests for Trend in Location.”

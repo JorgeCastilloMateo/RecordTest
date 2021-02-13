@@ -4,17 +4,18 @@
 #'   of the two-sided tests in this package by means of the sum of the 
 #'   statistics of upper and lower records in the forward and backward 
 #'   directions to study the hypothesis of the classical record model. The
-#'   tests considered are the regression test \code{\link{p.test}},
-#'   the chi-square goodness-of-fit test \code{\link{chisq.test}},
+#'   tests considered are the chi-square goodness-of-fit test 
+#'   \code{\link{p.chisq.test}}, the regression test 
+#'   \code{\link{p.regression.test}},
 #'   the likelihood-ratio test \code{\link{lr.test}} and the score test
 #'   \code{\link{score.test}}.
 #' @details 
-#'   The statistics, say \eqn{X}, of the tests \code{\link{p.test}}, 
-#'   \code{\link{chisq.test}}, \code{\link{lr.test}} or
+#'   The statistics, say \eqn{X}, of the tests \code{\link{p.chisq.test}},
+#'   \code{\link{p.regression.test}}, \code{\link{lr.test}} or
 #'   \code{\link{score.test}} for the forward upper, forward lower, backward
 #'   upper and backward lower records are summed to develop a more powerful 
 #'   statistic:
-#'   \deqn{X^{G} = X^{(FU)} + X^{(FL)} + X^{(BU)} + X^{(BL)},}
+#'   \deqn{X^{(FU)} + X^{(FL)} + X^{(BU)} + X^{(BL)},}
 #'   where those are the statistics for their respective type of record. 
 #'   Other sums of statistics are allowed.
 #'   
@@ -22,9 +23,9 @@
 #'   but the p-value can be estimated with Monte Carlo simulations
 #'
 #' @param X A numeric vector, matrix (or data frame).
-#' @param FUN One of the functions whose statistic you want to use. One of
-#'   \code{\link{chisq.test}}, \code{\link{lr.test}}, 
-#'   \code{\link{p.test}} or \code{\link{score.test}}.
+#' @param FUN One of the functions whose statistic is going to be used. One of
+#'   \code{\link{p.chisq.test}}, \code{\link{p.regression.test}}, 
+#'   \code{\link{lr.test}} or \code{\link{score.test}}.
 #' @param record Logical vector. Vector with four elements indicating if 
 #'   forward upper, forward lower, backward upper and backward lower are going
 #'   to be shown, respectively. Logical values or 0,1 values are accepted.
@@ -37,14 +38,14 @@
 #'   \item{method}{A character string indicating the type of test.}
 #'   \item{data.name}{A character string giving the name of the data.}
 #' @author Jorge Castillo-Mateo
-#' @seealso \code{\link{chisq.test}}, \code{\link{lr.test}}, 
-#'   \code{\link{p.test}}, \code{\link{score.test}}
+#' @seealso \code{\link{p.chisq.test}}, \code{\link{p.regression.test}}, 
+#'   \code{\link{lr.test}}, \code{\link{score.test}}
 #' @examples
 #' # not run because the simulations take a while if B > 1000
-#' ## global statistic with 4 types of record for p.test
-#' #global.test(ZaragozaSeries, FUN = p.test)
-#' ## global statistic with 4 types of record for chisq.test
-#' #global.test(ZaragozaSeries, FUN = chisq.test)
+#' ## global statistic with 4 types of record for p.chisq.test
+#' #global.test(ZaragozaSeries, FUN = p.chisq.test)
+#' ## global statistic with 4 types of record for p.regression.test
+#' #global.test(ZaragozaSeries, FUN = p.regression.test)
 #' ## global statistic with 4 types of record for score.test with restricted alternative
 #' #global.test(ZaragozaSeries, FUN = score.test, alternative = "restricted")
 #' ## global statistic with 4 types of record for lr.test with restricted alternative
@@ -114,10 +115,10 @@ global.test <- function(X,
     }
   }
   
-  stat <- FUN_B(X)
+  stat <- suppressWarnings(FUN_B(X))
   
-  pv <- .MonteCarlo(stat, alternative = "greater",
-              FUN = FUN_B, B = B, Trows = NROW(X), Mcols = NCOL(X))
+  pv <- suppressWarnings(.MonteCarlo(stat, alternative = "greater",
+              FUN = FUN_B, B = B, Trows = NROW(X), Mcols = NCOL(X)))
   
   names(stat) <- "Monte-Carlo"
   
