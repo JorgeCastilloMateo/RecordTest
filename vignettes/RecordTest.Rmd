@@ -32,7 +32,7 @@ theme_set(theme_bw())
 
 ## Introduction
 
-The **RecordTest** package (Inference Tools in Time Series Based on Record Statistics) contains functions to visualize the behavior of the record occurrence, functions to calculate a wide variety of distribution-free tests for trend in location, variation and non-stationarity and tools to prepare a time series in order to study its records.
+The **RecordTest** package (Inference Tools in Time Series Based on Record Statistics) contains functions to visualize the behavior of the record occurrence, functions to calculate a wide variety of distribution-free tests for trend in location, variation and non-stationarity, for change-point detection, and tools to prepare a time series in order to study its records.
 
 Install **RecordTest** using
 
@@ -46,7 +46,7 @@ The **introductory theory** and **summary** for the package is at
 help("RecordTest-package")
 ```
 
-Here, the main purpose of the package is developed as well as the definitions of the record statistics and an outline of the functions available in the package.
+Here, the main purpose of the package is developed as well as an outline of the functions available in the package.
 
 **RecordTest** has several functions that attempt to test the classical record model which assumes randomness in its variables, that is, they are independent and identically distributed, by means of hypothesis tests and graphical tools.
 
@@ -58,7 +58,7 @@ To begin with, **RecordTest** has a data set `Olympic_records_200m` containing t
 
 ### Data preparation
 
-The **RecordTest** functions need the complete series of observations to calculate its records. In order to apply these tools to the series of Olympic records, the function `series_record` is applied, which generates a series with the same records.
+The **RecordTest** functions need a complete series of observations to calculate its records. In order to apply these tools to the series of Olympic records, the function `series_record` is applied, which generates a series with the same records.
 
 ```{r Olympic data}
 library(RecordTest)
@@ -75,7 +75,7 @@ or200m <- series_record(L_lower = Olympic_records_200m$time,
 As a preview, the Olympic records series is drawn highlighting its lower records.
 
 ```{r}
-records(or200m, alpha = c(1,0,1,0)) + ggplot2::ylab("seconds")
+records(or200m, type = "points", alpha = c(1,0,1,0)) + ggplot2::ylab("seconds")
 ```
 
 The graph below shows the number of accumulated lower records together with its confidence intervals under the null hypothesis of randomness, from which we see that the observed sample departs significantly since time $t = 13$, corresponding to the 1960 Olympics.
@@ -102,7 +102,7 @@ As a preview, the temperature series `TX_Zaragoza$TX` is drawn highlighting its 
 
 ```{r records}
 data(TX_Zaragoza)
-records(TX_Zaragoza$TX, alpha = c(1, 1, 1, 0.05))
+records(TX_Zaragoza$TX, alpha = c(1, 1, 1, 0.1))
 ```
 
 A large number of upper records are observed in the first observations and very few lower records. The initial behavior in the records appear due to the seasonal increment of temperature between January and July, because this series has a strong seasonal component and serial correlation.
@@ -154,7 +154,7 @@ If we choose incremental weights $\omega_t = t-1$ to the records within the stat
 ```{r}
 foster.plot(TxZ, weights = function(t) t-1) + 
   ggplot2::ylim(-85, 85) +
-  ggplot2::geom_vline(xintercept = 45, linetype = "dashed")
+  ggplot2::geom_vline(xintercept = 44, linetype = "dashed")
 ```
 
 We can apply the associated test to detect non-stationary behavior in the records of the series. The result is highly significant.
@@ -171,11 +171,10 @@ H_0:\,\alpha=0,\,\beta=1 \qquad \text{and} \qquad H_1:\,\alpha\neq0\,\text{or}\,
 For Zaragoza data, plots related to this test detect a clear positive trend that is expressed with more upper records and less lower records in the forward series and the opposite in the backward series.
 
 ```{r}
-ggpubr::ggarrange(p.plot(TxZ, record = c(1,1,0,0)) + 
-            ggplot2::ylim(0, 6),
-          p.plot(TxZ, record = c(0,0,1,1)) +
-            ggplot2::ylim(0, 6),
-          ncol = 2, nrow = 1)
+ggpubr::ggarrange(
+  p.plot(TxZ, record = c(1,1,0,0)) + ggplot2::ylim(0, 5),
+  p.plot(TxZ, record = c(0,0,1,1)) + ggplot2::ylim(0, 5),
+  ncol = 2, nrow = 1, common.legend = TRUE, legend = "bottom")
 ```
 
 Those tests can be implemented as follows, where in addition the estimation of the parameters of the line is displayed.
@@ -193,7 +192,7 @@ set.seed(23)
 global.test(TxZ, FUN = p.regression.test, B = 1000)
 ```
 
-Other powerful tests in the package can be implemented as follows:
+Other powerful tests for trend detection can be implemented as follows:
 
 ```{r}
 brown.method(TxZ, weights = function(t) t-1)
@@ -220,6 +219,27 @@ ggpubr::ggarrange(
   p.plot(TxZ, plot = 2, record = c(1,1,0,0)),
   p.plot(TxZ, plot = 3, record = c(1,1,0,0)),
   ncol = 2, nrow = 2, common.legend = TRUE, legend = "bottom")
+```
+
+### Tests to detect change-points
+
+Signs of climate change have not been present since the beginning of the series. We can implement a test to detect change points in the series on a daily scale as follows.
+
+```{r}
+change.point(ZaragozaSeries)
+change.point(ZaragozaSeries, weights = function(t) sqrt(t), record = "d", simulate.p.value = TRUE, B = 10000)
+```
+
+The point of change is found at time 36 (1986). We can see analogous results for the annual mean temperature series, a change-point is significantly detected with time estimate 38 (1988).
+
+```{r}
+test.result <- change.point(rowMeans(TxZ365))
+test.result
+```
+
+```{r}
+records(rowMeans(TxZ365)) + 
+  ggplot2::geom_vline(xintercept = test.result$estimate, color = "red")
 ```
 
 There are still more tools! Try them yourself.

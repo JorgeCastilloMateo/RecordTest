@@ -1,7 +1,8 @@
 #' @title \strong{RecordTest}: A Package for Testing the Classical Record Model
 #' @description \strong{RecordTest} provides data-preparation, exploratory data 
 #'   analysis and inference tools based on theory of records to describe the 
-#'   record occurrence and detect trends or non-stationarities in time series. 
+#'   record occurrence and detect trends, change-points or non-stationarities 
+#'   in time series. 
 #' @details 
 #'   The Classical Record Model:
 #' 
@@ -22,8 +23,10 @@
 #'   introduction to the theory of records and in particular the classical 
 #'   record model. See Foster and Stuart (1954), Diersen and Trenkler (1996, 
 #'   2001) and Cebrián, Castillo-Mateo and Asín (2021) for some 
-#'   distribution-free tests based on the classical record model. For an easy
-#'   introduction to \strong{RecordTest} use \code{vignette("RecordTest")}.
+#'   distribution-free trend detection tests and Castillo-Mateo (2021) for some
+#'   distribution-free change-point detection tests based on the classical 
+#'   record model. For an easy introduction to \strong{RecordTest} use 
+#'   \code{vignette("RecordTest")}.
 #' 
 #'   This package provides tests to study the hypothesis of the classical 
 #'   record model, that is that the record occurrence from a series of values 
@@ -35,7 +38,7 @@
 #'   The functions in the data-preparation step:
 #'   
 #'   The functions admit a vector \code{X} corresponding to a single series as
-#'   an argument. However, some situations could take advantege of having 
+#'   an argument. However, some situations could take advantage of having 
 #'   \eqn{M} uncorrelated vectors to infer from the sample. Then, the input of
 #'   the functions to perform the statistical tools can be a matrix \code{X} 
 #'   where each column corresponds to a vector formed by the values of a 
@@ -84,14 +87,16 @@
 #'   
 #'   The functions to compute the tests:
 #'   
-#'   All the tests performed are distribution-free/nonparametric tests in 
-#'   time series for trend and nonstationarity in the extremes of the 
-#'   distribution based on the null hypothesis that the record indicators are
-#'   independent and the probabilities of record at time \eqn{t} are 
-#'   \eqn{p_t = 1 / t}. 
+#'   All the tests performed are distribution-free/non-parametric tests in 
+#'   time series for trend, change-point and non-stationarity in the extremes 
+#'   of the distribution based on the null hypothesis that the record 
+#'   indicators are independent and the probabilities of record at time \eqn{t}
+#'   are \eqn{p_t = 1 / t}. 
+#'   
+#'   \code{\link{change.point}}: Implements Castillo-Mateo change-point tests.
 #'   
 #'   \code{\link{foster.test}}: Implements Foster-Stuart and Diersen-Trenkler
-#'   tests. 
+#'   trend tests. 
 #'   
 #'   \code{\link{N.test}}: Implements tests based on the (weighted) number of
 #'   records.
@@ -165,12 +170,17 @@
 #' \emph{Records}. 
 #' Wiley Series in Probability and Statistics. Wiley, New York.
 #' 
+#' Castillo-Mateo J (2021).
+#' “Distribution-Free Changepoint Detection Tests Based on the Breaking of Records.”
+#' Available at \href{https://arxiv.org/abs/2105.08186}{arXiv:2105.08186} 
+#'
 #' Cebrián A, Castillo-Mateo J, Asín J (2021).
 #' “Record Tests to detect non stationarity in the tails with an application to climate change.”
-#' Unpublished manuscript.
+#' Available at Research Square \doi{10.21203/rs.3.rs-214787/v1}
 #' 
 #' Diersen J, Trenkler G (1996). “Records Tests for Trend in Location.”
 #' \emph{Statistics}, \strong{28}(1), 1-12.
+#' \doi{10.1080/02331889708802543}
 #' 
 #' Diersen J, Trenkler G (2001). 
 #' “Weighted Records Tests for Splitted Series of Observations.”

@@ -8,7 +8,7 @@
 A data frame with 12 rows and 3 variables.
 }
 \source{
-\href{https://www.olympic.org}{https://www.olympic.org}
+\url{https://olympics.com/en/}
 }
 \usage{
 data(Olympic_records_200m)

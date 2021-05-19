@@ -110,7 +110,7 @@ lr.test(ZaragozaSeries, alternative = "greater", probabilities = "equal")
 \references{
 Cebrián A, Castillo-Mateo J, Asín J (2021).
 “Record Tests to detect non stationarity in the tails with an application to climate change.”
-Unpublished manuscript.
+Available at Research Square \doi{10.21203/rs.3.rs-214787/v1}
 }
 \seealso{
 \code{\link{global.test}}, \code{\link{score.test}}

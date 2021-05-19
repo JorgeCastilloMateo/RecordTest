@@ -3,6 +3,20 @@
 \newcommand{\cpkg}{\href{https://CRAN.R-project.org/package=#1}{\pkg{#1}}}
 \newcommand{\issue}{\href{https://github.com/JorgeCastilloMateo/RecordTest/issues/#1}{(issue #1)}}
 
+\section{Changes in Version 2.1.0 ()}{
+  \subsection{NEW FEATURES}{
+    \itemize{
+      \item New function \code{change.point} to perform the Castillo-Mateo change-point detection tests was added. 
+      \item \code{records} function only allowed to show points, now it also shows lines.
+    }
+  }
+  \subsection{MODIFICATIONS}{
+    \itemize{
+      \item The \sQuote{VIGNETTES} file was updated.
+    }
+  }
+}
+
 \section{Changes in Version 2.0.0 (13 February 2021)}{
   \subsection{NEW FEATURES}{
     \itemize{
@@ -27,7 +41,7 @@
       \item The matrix \code{ZaragozaSeries} has more rows and one more column according to the changes in \code{TX_Zaragoza} and \code{series_uncor}.
       \item Functions have been joined or renamed as follows:
       \itemize{
-        \item From \code{L_global.test} renamed to \code{global.test}, and now a global statistic for different types of record can be computed for the tests with two-sided alternatives \code{p.test}, \code{chisq.test}, \code{lr.test} and \code{score.test}.
+        \item From \code{L_global.test} renamed to \code{global.test}, and now a global statistic for different types of record can be computed for the tests with two-sided alternatives \code{p.chisq.test}, \code{p.regression.test}, \code{lr.test} and \code{score.test}.
         \item From \code{N_normal.test}, \code{N_exactPB.test} and \code{P_exactPB.test} joint to \code{N.test}, and new features added.
         \item From \code{P_regression.test} and \code{P_regression.plot} renamed to \code{p.regression.test} and \code{p.plot}, and new features added.
         \item From \code{P_chisq.test} renamed to \code{p.chisq.test}.

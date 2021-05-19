@@ -22,7 +22,7 @@
 #' @source \href{https://www.ecad.eu}{EUROPEAN CLIMATE ASSESSMENT & DATASET (ECA&D)}
 #' @references 
 #' Klein Tank AMG and Coauthors (2002). 
-#' Daily Dataset of 20th-century Surface Air Temperature and Precipitation 
+#' Daily Dataset of 20th-Century Surface Air Temperature and Precipitation 
 #' Series for the European Climate Assessment.
 #' \emph{International Journal of Climatology}, \strong{22}(12), 1441-1453. 
 #' @usage data(TX_Zaragoza)

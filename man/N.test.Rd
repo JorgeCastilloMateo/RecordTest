@@ -132,7 +132,7 @@ Butler K, Stephens MA (2016).
 
 Cebrián A, Castillo-Mateo J and Asín J (2021).
 “Record Tests to detect non stationarity in the tails with an application to climate change.”
-Unpublished manuscript.
+Available at Research Square \doi{10.21203/rs.3.rs-214787/v1}
 
 Hong Y (2013). 
 “On Computing the Distribution Function for the Poisson Binomial Distribution.”

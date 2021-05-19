@@ -9,8 +9,9 @@ records(
   plot = TRUE,
   direction = c("forward", "backward", "both"),
   variable,
-  col = c(T = "black", U = "salmon", L = "skyblue", O = "limegreen"),
-  alpha = c(T = 1, U = 1, L = 1, O = 0.5),
+  type = c("lines", "points"),
+  col = c(T = "black", U = "salmon", L = "skyblue", O = "black"),
+  alpha = c(T = 1, U = 1, L = 1, O = 1),
   shape = c(F = 19, B = 4, O = 19),
   linetype = c(F = 1, B = 2)
 )
@@ -28,12 +29,17 @@ in the plot if \code{plot == TRUE}: \code{"forward"}, \code{"backward"} or
 to \code{X} and measured at the same times. Only used if 
 \code{plot = FALSE}.}
 
+\item{type}{Character string indicating if \code{X} is shown with 
+\code{"lines"} or \code{"points"}.}
+
 \item{col, alpha}{Character and numeric vectors of length four, respectively.
 These arguments represent respectively the color and transparency of the
-points: trivial record, upper records, lower records and observations
-respectively. Vector names in the default are only indicative.}
+points or lines: trivial record, upper records, lower records and 
+observations respectively. 
+Vector names in the default are only indicative.}
 
-\item{shape}{Integer vector of length 3 indicating the shape of the points
+\item{shape}{If \code{type == "points"}. 
+Integer vector of length 3 indicating the shape of the points
 for forward records, backward records and observations.
 Vector names in the default are only indicative.}
 
