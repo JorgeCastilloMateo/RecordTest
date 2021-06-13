@@ -5,9 +5,9 @@
 #'   (i.e., of randomness) is tested against the alternative hypothesis.
 #' @details 
 #'   The null hypothesis is that the data come from a population with 
-#'   independent and identically distributed realizations. The one-sided
-#'   alternative hypothesis is that the (weighted) number of records is 
-#'   greater (or less) than under the null hypothesis. The 
+#'   continuous independent and identically distributed realizations. The 
+#'   one-sided alternative hypothesis is that the (weighted) number of records
+#'   is greater (or less) than under the null hypothesis. The 
 #'   (weighted)-number-of-records statistic is calculated according to:
 #'   \deqn{N_{..}^\omega = \sum_{m=1}^M \sum_{t=1}^T \omega_t I_{tm},} 
 #'   where \eqn{\omega_t} are weights given to the different records
@@ -52,7 +52,7 @@
 #' @param alternative A character string indicating the type of alternative 
 #'   hypothesis, \code{"greater"} number of records or \code{"less"} number of
 #'   records.
-#' @param method (If \code{distribution = "poisson-binomial"}) A character 
+#' @param method (If \code{distribution = "poisson-binomial"}.) A character 
 #'   string that indicates the method by which the cdf
 #'   of the Poisson binomial distribution is calculated and therefore the 
 #'   p-value. \code{"mixed"} is the preferred (and default) method, it is a 
@@ -69,7 +69,7 @@
 #'   number of replicates used in the Monte Carlo estimation.
 #' @return A \code{"htest"} object with elements:
 #'   \item{statistic}{Value of the test statistic.}
-#'   \item{parameter}{(If \code{distribution = "t"}) Degrees of freedom of
+#'   \item{parameter}{(If \code{distribution = "t"}.) Degrees of freedom of
 #'     the \eqn{t} statistic (equal to \eqn{M-1}).}
 #'   \item{p.value}{P-value.}
 #'   \item{alternative}{The alternative hypothesis.}
@@ -82,9 +82,10 @@
 #'   \code{\link{foster.test}}, \code{\link{foster.plot}},
 #'   \code{\link{brown.method}}
 #' @references 
-#' Butler K, Stephens MA (2016).
+#' Butler K, Stephens MA (2017).
 #' “The Distribution of a Sum of Independent Binomial Random Variables.”
 #' \emph{Methodology and Computing in Applied Probability}, \strong{19}(2), 557-571.
+#' \doi{10.1007/s11009-016-9533-4}
 #' 
 #' Cebrián A, Castillo-Mateo J and Asín J (2021).
 #' “Record Tests to detect non stationarity in the tails with an application to climate change.”
@@ -93,6 +94,7 @@
 #' Hong Y (2013). 
 #' “On Computing the Distribution Function for the Poisson Binomial Distribution.”
 #' \emph{Computational Statistics & Data Analysis}, \strong{59}(1), 41-51.
+#' \doi{10.1016/j.csda.2012.10.006}
 #' @examples
 #' # Forward Upper records
 #' N.test(ZaragozaSeries)
@@ -106,9 +108,9 @@
 #' # Exact test
 #' N.test(ZaragozaSeries, distribution = "poisson-binom")
 #' # Exact test for records in the last decade
-#' N.test(ZaragozaSeries, weights = function(t) ifelse(t < 56, 0, 1), distribution = "poisson-binom")
-#' # Linear weights for a more powerful test (with continuity correction)
-#' N.test(ZaragozaSeries, weights = function(t) t-1, correct = TRUE)
+#' N.test(ZaragozaSeries, weights = function(t) ifelse(t < 61, 0, 1), distribution = "poisson-binom")
+#' # Linear weights for a more powerful test (without continuity correction)
+#' N.test(ZaragozaSeries, weights = function(t) t-1, correct = FALSE)
 #' 
 #' @export N.test
 

@@ -24,11 +24,11 @@
 #'   
 #'   Power studies indicate that this and \code{\link{foster.test}} using all
 #'   four types of records and linear weights are the two most powerful records
-#'   tests against a linear drift model. In particular, this is more powerful 
-#'   than Mann-Kendall test against alternatives with linear drift in series of
-#'   generalized Pareto variables and some cases of the generalized extreme 
-#'   value variables. See Cebrián, Castillo-Mateo and Asín (2021) for more 
-#'   details.
+#'   tests for trend detection against a linear drift model. In particular, 
+#'   this test is more powerful than Mann-Kendall test against alternatives 
+#'   with a linear drift in location in series of generalized Pareto variables
+#'   and some cases of the generalized extreme value variables. See Cebrián, 
+#'   Castillo-Mateo and Asín (2021) for the details.
 #'   
 #' @param X A numeric vector, matrix (or data frame).
 #' @param weights A function indicating the weight given to the different 

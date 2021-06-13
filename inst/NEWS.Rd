@@ -7,6 +7,7 @@
   \subsection{NEW FEATURES}{
     \itemize{
       \item New function \code{change.point} to perform the Castillo-Mateo change-point detection tests was added. 
+      \item Previously, if the series had \code{NA} values, all the record indicators from that time took \code{NA} value. This made the functions return \code{NA} p-values, etc. Now the \code{NA} values are treated as non-records, i.e., \eqn{I_t = 0}, unless they are the first observation, i.e., \eqn{I_1 = 1}.
       \item \code{records} function only allowed to show points, now it also shows lines.
     }
   }
@@ -93,7 +94,7 @@
   }
 }
 
-\section{Changes in Version 0.1.2 (9 February 2020)}{
+\section{Changes in Version 0.1.2 (09 February 2020)}{
   \subsection{OTHER CHANGES}{
     \itemize{
       \item Update by CRAN policies in some \sQuote{Imports} packages.

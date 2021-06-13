@@ -2,7 +2,7 @@
 % Please edit documentation in R/series_untie.R
 \name{series_untie}
 \alias{series_untie}
-\title{Avoid Record Ties}
+\title{Breaking Record Ties}
 \usage{
 series_untie(X)
 }
@@ -11,10 +11,10 @@ series_untie(X)
 }
 \value{
 A matrix equal to \code{X} whose elements have been added a 
-  sample from a uniform variable, different for every element.
+  sample from a uniform variable, different for each element.
 }
 \description{
-Avoids record ties when observations have been rounded.
+Breaks record ties when observations have been rounded.
 }
 \details{
 This function is used in the data preparation (or pre-processing) 
@@ -28,7 +28,7 @@ This function is used in the data preparation (or pre-processing)
  records, thereby reducing the number of new records (see, e.g., Wergen 
  et al. 2012). 
  
- This function avoids ties by adding a sample from a uniform random variable 
+ This function breaks ties by adding a sample from a uniform random variable 
  to each element of \code{X}. The function computes the maximum number of 
  decimal digits (let it be \eqn{n}) for any element in \code{X}. Then the
  uniform variable is sampled in the interval 

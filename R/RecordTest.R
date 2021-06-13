@@ -70,7 +70,8 @@
 #'
 #'   The functions to compute the record statistics are:
 #'   
-#'   \code{\link{I.record}}: Computes the observed record indicators.
+#'   \code{\link{I.record}}: Computes the observed record indicators. \code{NA} 
+#'   values are taken as no records unless they appear at \eqn{t = 1}.
 #'   
 #'   \code{\link{N.record}}, \code{\link{Nmean.record}}: Compute the observed
 #'   number of records up to time \eqn{t}.

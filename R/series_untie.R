@@ -1,6 +1,6 @@
-#' @title Avoid Record Ties
+#' @title Breaking Record Ties
 #' @importFrom stats runif rnorm
-#' @description Avoids record ties when observations have been rounded.
+#' @description Breaks record ties when observations have been rounded.
 #' @param X A numeric vector, matrix (or data frame).
 #' @details This function is used in the data preparation (or pre-processing) 
 #'  often required to apply the exploratory and inference tools based on 
@@ -13,7 +13,7 @@
 #'  records, thereby reducing the number of new records (see, e.g., Wergen 
 #'  et al. 2012). 
 #'  
-#'  This function avoids ties by adding a sample from a uniform random variable 
+#'  This function breaks ties by adding a sample from a uniform random variable 
 #'  to each element of \code{X}. The function computes the maximum number of 
 #'  decimal digits (let it be \eqn{n}) for any element in \code{X}. Then the
 #'  uniform variable is sampled in the interval 
@@ -21,7 +21,7 @@
 #'  original (rounded) series will also be in the new series.
 #'
 #' @return A matrix equal to \code{X} whose elements have been added a 
-#'   sample from a uniform variable, different for every element.
+#'   sample from a uniform variable, different for each element.
 #' @author Jorge Castillo-Mateo
 #' @seealso \code{\link{series_double}}, \code{\link{series_record}}, 
 #'   \code{\link{series_rev}}, \code{\link{series_split}}, 

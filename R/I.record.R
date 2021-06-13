@@ -49,6 +49,10 @@
 #'   the ties as a new (weak) record. Ties are possible in discrete variables
 #'   or if a continuous variable has been rounded. Weak records can be computed
 #'   if \code{weak = TRUE}.
+#'   
+#'   \code{NA} values in \code{X} are assigned \code{-Inf} for upper records
+#'   and \code{Inf} for lower records, so they are records only if they are 
+#'   placed at \eqn{t = 1}.
 #'  
 #' @aliases I.record.default I.record.numeric I.record.matrix I.record
 #' @param X A numeric vector, matrix (or data frame).
@@ -97,6 +101,11 @@ I.record.numeric <- function(X, record = c("upper", "lower"), weak = FALSE) {
   
   record       <- match.arg(record)
   record_upper <- record == "upper"
+  if (record_upper) {
+    X[is.na(X)] <- -Inf
+  } else {
+    X[is.na(X)] <- Inf
+  }
   
   if (record_upper & !weak) {
     I <- c(1, cummax(X)[-length(X)] < X[-1]) 
@@ -141,6 +150,11 @@ I.record.matrix <- function(X, record = c("upper", "lower"), weak = FALSE) {
 #' @method .I.record numeric
 .I.record.numeric <- function(X, record, Trows) {
   
+  if (anyNA(X)) {
+    if (record == "upper") { X[is.na(X)] <- -Inf }
+    else                   { X[is.na(X)] <-  Inf }
+  }
+  
   if (record == "upper") { I <- c(1, cummax(X)[-length(X)] < X[-1]) }
   else                   { I <- c(1, cummin(X)[-length(X)] > X[-1]) }
   
@@ -149,6 +163,11 @@ I.record.matrix <- function(X, record = c("upper", "lower"), weak = FALSE) {
 
 #' @method .I.record matrix
 .I.record.matrix <- function(X, record, Trows) {
+  
+  if (anyNA(X)) {
+    if (record == "upper") { X[is.na(X)] <- -Inf }
+    else                   { X[is.na(X)] <-  Inf }
+  }
   
   if (record == "upper") { I <- apply(X, 2, .I.upper, Trows = Trows) }
   else                   { I <- apply(X, 2, .I.lower, Trows = Trows) }

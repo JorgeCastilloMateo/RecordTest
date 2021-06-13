@@ -10,8 +10,8 @@
 #'   \deqn{H_0: p_t = 1/t, t=1,\ldots,T,}
 #'   where \eqn{p_t} is the probability of (upper and/or lower) record at time 
 #'   \eqn{t} and \eqn{T} is the length of the series, which corresponds to the 
-#'   setup where the data come from a population with independent and 
-#'   identically distributed realizations. The two-sided alternative 
+#'   setup where the data come from a population with continuous independent 
+#'   and identically distributed realizations. The two-sided alternative 
 #'   hypothesis is that 
 #'   \deqn{H_1: p_t = 1/t, t=1,\ldots,t_0, \qquad p_t \neq 1/t, t=t_0+1,\ldots,T,}
 #'   for a certain change-point \eqn{t_0}.
@@ -38,11 +38,11 @@
 #'   
 #'   The test statistic is the maximum of the absolute value of the vector
 #'   \deqn{
-#'   B^* = \max_{1\le t \le T} |B_T(s_{Tt})|,
+#'   B_T^* = \max_{1\le t \le T} |B_T(s_{Tt})|,
 #'   }
 #'   where \eqn{B_T(s) = W_T(s) - s W_T(1)}, \eqn{s \in [0,1]}.
 #'   
-#'   The probable change-point \eqn{t_0} is located where \eqn{B^*} has its 
+#'   The probable change-point \eqn{t_0} is located where \eqn{B_T^*} has its 
 #'   maximum. The p-value is calculated by means of the asymptotic Kolmogorov
 #'   distribution. When \eqn{\omega_t \neq 1}, the asymptotic result is not 
 #'   fulfilled. In that case, the p-value can be simulated using Monte Carlo 
@@ -53,10 +53,10 @@
 #'   continuity corrections can be used:
 #'   
 #'   If \code{correct = "fisher"},
-#'   \deqn{B^* = - \sqrt{T} \log\left(1 - \frac{B^*}{\sqrt{T}}\right).}
+#'   \deqn{B_T^* = - \sqrt{T} \log\left(1 - \frac{B_T^*}{\sqrt{T}}\right).}
 #'   
 #'   If \code{correct = "vrbik"},
-#'   \deqn{B^* = B^* + \frac{1}{6\sqrt{T}} + \frac{B^* - 1}{4T}.}
+#'   \deqn{B_T^* = B^* + \frac{1}{6\sqrt{T}} + \frac{B_T^* - 1}{4T}.}
 #' @param X A numeric vector, matrix (or data frame).
 #' @param weights A function indicating the weight given to the different 
 #'   records according to their position in the series. Castillo-Mateo (2021)
