@@ -1,9 +1,9 @@
 #' @title From Record Times to Time Series
-#' @description This function is useful to apply the plots and tests within
-#'   \code{\link{RecordTest-package}} to a vector of record times. If only the
-#'   record times are available (upper or lower, or both) and not the complete 
-#'   series, \code{series_record} builds a complete series with the same record 
-#'   occurrence as specified in the arguments. 
+#' @description If only the record times are available (upper or lower, or 
+#'   both) and not the complete series, \code{series_record} builds a complete 
+#'   series with the same record occurrence as specified in the arguments. 
+#'   This function is useful to apply the plots and tests within
+#'   \code{\link{RecordTest-package}} to a vector of record times.
 #' @param L_upper,L_lower A vector of (increasing) integers denoting the upper 
 #'   or/and lower record times.
 #' @param R_upper,R_lower (Optional) A vector of (increasing/decreasing)
@@ -14,7 +14,8 @@
 #' @return A vector of length \code{Trows} with \code{L_upper} upper or/and 
 #'   \code{L_lower} lower record times and \code{R_upper} upper or/and 
 #'   \code{R_lower} lower record values.
-#' @note Remember 1 is always a record time.
+#' @note Remember that the first observation in a series is always a record 
+#'   time.
 #' @author Jorge Castillo-Mateo
 #' @seealso \code{\link{series_double}}, \code{\link{series_rev}}, 
 #'   \code{\link{series_split}}, \code{\link{series_ties}},

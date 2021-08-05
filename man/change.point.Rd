@@ -58,21 +58,21 @@ A \code{"htest"} object with elements:
 }
 \description{
 Performs change-point detection tests based on the record
-  occurrence. The hypothesis of the classical record model (i.e., of 
-  randomness) is tested against the alternative hypothesis that after a 
+  occurrence. The hypothesis of the classical record model (i.e., of IID 
+  continuous RVs) is tested against the alternative hypothesis that after a 
   certain time the series stops being stationary.
 }
 \details{
 The test is implemented as given by Castillo-Mateo (2021). The null 
   hypothesis is that 
-  \deqn{H_0: p_t = 1/t, t=1,\ldots,T,}
+  \deqn{H_0: p_t = 1/t, \qquad t=1,\ldots,T,}
   where \eqn{p_t} is the probability of (upper and/or lower) record at time 
   \eqn{t} and \eqn{T} is the length of the series, which corresponds to the 
   setup where the data come from a population with continuous independent 
-  and identically distributed realizations. The two-sided alternative 
+  and identically distributed realisations. The two-sided alternative 
   hypothesis is that 
-  \deqn{H_1: p_t = 1/t, t=1,\ldots,t_0, \qquad p_t \neq 1/t, t=t_0+1,\ldots,T,}
-  for a certain change-point \eqn{t_0}.
+  \deqn{H_1: p_t = 1/t, \quad t=1,\ldots,t_0, \qquad p_t \neq 1/t, \quad t=t_0+1,\ldots,T,}
+  for a change-point \eqn{t_0}.
   
   The variables used for the statistic are
   \deqn{
@@ -80,7 +80,7 @@ The test is implemented as given by Castillo-Mateo (2021). The null
   }
   where \eqn{\sigma_t^2 = \sum_{k=1}^{t} \omega_k^2 Var(I_k) / M} and
   \eqn{\omega_t} are weights given to the different records according
-  to their position in the \eqn{m}-th series of length \eqn{T}. If 
+  to their position in the \eqn{m}th series of length \eqn{T}. If 
   \code{record = "upper"} or \code{= "lower"},
   the \eqn{I_{tm}}'s are the upper or lower record indicators, respectively
   (see \code{\link{I.record}}). If \code{record = "d"} or \code{= "s"},
@@ -96,11 +96,11 @@ The test is implemented as given by Castillo-Mateo (2021). The null
   
   The test statistic is the maximum of the absolute value of the vector
   \deqn{
-  B_T^* = \max_{1\le t \le T} |B_T(s_{Tt})|,
+  K_T = \max_{1\le t \le T} |B_T(s_{Tt})|,
   }
   where \eqn{B_T(s) = W_T(s) - s W_T(1)}, \eqn{s \in [0,1]}.
   
-  The probable change-point \eqn{t_0} is located where \eqn{B_T^*} has its 
+  The probable change-point \eqn{\hat{t}_0} is located where \eqn{|B_T(s_{Tt})|} has its 
   maximum. The p-value is calculated by means of the asymptotic Kolmogorov
   distribution. When \eqn{\omega_t \neq 1}, the asymptotic result is not 
   fulfilled. In that case, the p-value can be simulated using Monte Carlo 
@@ -111,10 +111,10 @@ The test is implemented as given by Castillo-Mateo (2021). The null
   continuity corrections can be used:
   
   If \code{correct = "fisher"},
-  \deqn{B_T^* = - \sqrt{T} \log\left(1 - \frac{B_T^*}{\sqrt{T}}\right).}
+  \deqn{K_T = - \sqrt{T} \log\left(1 - \frac{K_T}{\sqrt{T}}\right).}
   
   If \code{correct = "vrbik"},
-  \deqn{B_T^* = B^* + \frac{1}{6\sqrt{T}} + \frac{B_T^* - 1}{4T}.}
+  \deqn{K_T = K_T + \frac{1}{6\sqrt{T}} + \frac{K_T - 1}{4T}.}
 }
 \examples{
 change.point(ZaragozaSeries)
@@ -128,7 +128,7 @@ test.result
 ## Not run: Load package ggplot2 to plot the changepoint
 #library("ggplot2")
 #records(rowMeans(ZaragozaSeries)) + 
-#  ggplot2::geom_vline(xintercept = test.result$estimate, color = "red")
+#  ggplot2::geom_vline(xintercept = test.result$estimate, colour = "red")
 
 }
 \references{

@@ -4,7 +4,8 @@
 #' @importFrom stats qbinom
 #' @description This function builds a ggplot object to display different 
 #'   functions of the record probabilities at time \eqn{t}, \eqn{p_t}.
-#'   A graphical tool to study the hypothesis of the classical record model.
+#'   A graphical tool to study the hypothesis of the classical record model 
+#'   (i.e., of IID continuous RVs).
 #' @details 
 #'   Three different types of plots which aim to analyse the hypothesis
 #'   of the classical record model using the record probabilities are 
@@ -31,8 +32,7 @@
 #'   function can be fitted to the cloud of points.
 #'   
 #'   Type 1 plot was proposed by Cebrián, Castillo-Mateo, Asín (2021), while 
-#'   type 2 and 3 appear in Benestad (2003, 2004) in Figures 8 and 9 (2003) 
-#'   and Figure 4 (2004).
+#'   type 2 and 3 appear in Benestad (2003, Figures 8 and 9, 2004, Figure 4).
 #'
 #' @param X A numeric vector, matrix (or data frame).
 #' @param plot One of the values "1", "2" or "3" (character or numeric class 
@@ -41,15 +41,15 @@
 #' @param record Logical vector. Vector with four elements indicating if 
 #'   forward upper, forward lower, backward upper and backward lower are going
 #'   to be shown, respectively. Logical values or 0,1 values are accepted.
-#' @param point.col,point.shape Vector with four elements indicating the color
+#' @param point.col,point.shape Vector with four elements indicating the colour
 #'   and shape of the points. Every one of the four elements represents forward
 #'   upper, forward lower, backward upper and backward lower, respectively.
 #' @param conf.int Logical. Indicates if the CIs are also shown.
 #' @param conf.level (If \code{conf.int == TRUE}) Confidence level of the CIs.
 #' @param conf.aes (If \code{conf.int == TRUE}) A character string indicating 
-#'   the aesthetic to display for the CIs, \code{"ribbon"} (gray area) or 
+#'   the aesthetic to display for the CIs, \code{"ribbon"} (grey area) or 
 #'   \code{"errorbar"} (vertical lines).
-#' @param conf.col Color used to plot the expected value and (if 
+#' @param conf.col Colour used to plot the expected value and (if 
 #'   \code{conf.int == TRUE}) CIs.
 #' @param smooth (If \code{plot = 1} or \code{3}) Logical. If \code{TRUE}, a
 #'   smoothing in the probabilities is also plotted.
@@ -78,9 +78,9 @@
 #' “Record-Values, Nonstationarity Tests and Extreme Value Distributions.” 
 #' \emph{Global and Planetary Change}, \strong{44}(1–4), 11–26. 
 #' 
-#' Cebrián A, Castillo-Mateo J, Asín J (2021).
-#' “Record Tests to detect non stationarity in the tails with an application to climate change.”
-#' Unpublished manuscript.
+#' Cebrián A, Castillo-Mateo J and Asín J (2021).
+#' “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
+#' Available at Research Square \doi{10.21203/rs.3.rs-214787/v1}
 #' @examples
 #' # three plots available
 #' p.plot(ZaragozaSeries, plot = 1)
@@ -112,7 +112,7 @@ p.plot <- function(X,
                    conf.int = TRUE,
                    conf.level = 0.9, 
                    conf.aes = c("ribbon", "errorbar"),
-                   conf.col = "gray69",
+                   conf.col = "grey69",
                    smooth = TRUE,
                    smooth.formula = y ~ x,
                    smooth.method = stats::lm,
@@ -159,7 +159,7 @@ p.plot <- function(X,
         graf <- ggplot2::ggplot(data = df, mapping = ggplot2::aes(x = t)) +
           ggplot2::theme_bw() + 
           ggplot2::geom_line(ggplot2::aes(y = rep(1, Trows), size = "CI"), colour = conf.col) +
-          ggplot2::labs(title = "Normalized probabilities of record", subtitle = paste("Data:", DNAME), x = "t", y = expression(t %*% hat(p)[t]))
+          ggplot2::labs(title = "Normalised probabilities of record", subtitle = paste("Data:", DNAME), x = "t", y = expression(t %*% hat(p)[t]))
     },
     "2" = {
         ### type 2

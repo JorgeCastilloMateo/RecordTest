@@ -20,9 +20,9 @@ The matrix is the result from applying:
   
   The data matrix corresponds to the 70 years with observations in 
   \code{\link{TX_Zaragoza}$TX} and to the 76 days in the year where adjacent
-  daily maximum temperature sub-series are uncorrelated. Casually, none of 
-  the sub-series 4, 90 or 278 with imputed values is kept within the 76 
-  uncorrelated days.
+  daily maximum temperature subseries are uncorrelated. By coincidence, 
+  none of the subseries 4, 90 or 278 with imputed values is kept within the
+  76 uncorrelated days.
 }
 \seealso{
 \code{\link{TX_Zaragoza}}

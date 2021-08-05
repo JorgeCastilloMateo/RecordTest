@@ -5,20 +5,20 @@
 \alias{RecordTest-package}
 \title{\strong{RecordTest}: A Package for Testing the Classical Record Model}
 \description{
-\strong{RecordTest} provides data-preparation, exploratory data 
+\strong{RecordTest} provides data preparation, exploratory data 
   analysis and inference tools based on theory of records to describe the 
   record occurrence and detect trends, change-points or non-stationarities 
-  in time series.
+  in the tails of the time series.
 }
 \details{
 The Classical Record Model:
 
-  Record statistics are used primarily to quantify the stochastic behavior
+  Record statistics are used primarily to quantify the stochastic behaviour
   of a process at never-seen-before values, either upper or lower. The setup
   of independent and identically distibuted (IID) continuous random 
   variables (RVs), often called the classical record model, is 
   particularly interesting because the common continuous distribution 
-  underlying the IID RVs will not affect the distribution of the variables 
+  underlying the IID continuous RVs will not affect the distribution of the variables 
   relative to the record occurrence.  
   Many fields have begun to use the theory of records to study these 
   remarkable events. Particularly productive is the study of 
@@ -29,8 +29,8 @@ The Classical Record Model:
   See Arnold, Balakrishnan and Nagaraja (1998) for an extensive theoretical
   introduction to the theory of records and in particular the classical 
   record model. See Foster and Stuart (1954), Diersen and Trenkler (1996, 
-  2001) and Cebrián, Castillo-Mateo and Asín (2021) for some 
-  distribution-free trend detection tests and Castillo-Mateo (2021) for some
+  2001) and Cebrián, Castillo-Mateo and Asín (2021) for the 
+  distribution-free trend detection tests and Castillo-Mateo (2021) for the
   distribution-free change-point detection tests based on the classical 
   record model. For an easy introduction to \strong{RecordTest} use 
   \code{vignette("RecordTest")}.
@@ -42,19 +42,19 @@ The Classical Record Model:
   the hypothesis of IID variables is equivalent to test the hypothesis of 
   homogeneity and stationarity.
 
-  The functions in the data-preparation step:
+  The functions in the data preparation step:
   
   The functions admit a vector \code{X} corresponding to a single series as
   an argument. However, some situations could take advantage of having 
   \eqn{M} uncorrelated vectors to infer from the sample. Then, the input of
   the functions to perform the statistical tools can be a matrix \code{X} 
   where each column corresponds to a vector formed by the values of a 
-  series \eqn{X_t}, from \eqn{t=1,\ldots,T}, so that each row of the matrix
+  series \eqn{X_t}, for \eqn{t=1,\ldots,T}, so that each row of the matrix
   correspond to a time \eqn{t}.
 
   In  many real problems, such as those related to environmental phenomena, 
-  the series of variables to analyse show a seasonal behavior, and only one
-  realization is available. In order to be able to apply the suggested tools
+  the series of variables to analyse show a seasonal behaviour, and only one
+  realisation is available. In order to be able to apply the suggested tools
   to detect the existence of a trend, the seasonal component has to be 
   removed and a sample of \eqn{M} uncorrelated series should be obtained. 
   Those problems can be solved by preparing the data adequately. 
@@ -64,11 +64,10 @@ The Classical Record Model:
   \code{\link{series_record}}: If only the record times are available.
   
   \code{\link{series_split}}, \code{\link{series_double}}: To split the
-  series in several sub-series and remove the seasonal component and 
+  series in several subseries and remove the seasonal component and 
   autocorrelation.
   
-  \code{\link{series_uncor}}: To extract a subset of uncorrelated series 
-  out of the splitted series.
+  \code{\link{series_uncor}}: To extract a subset of uncorrelated subseries 
   
   \code{\link{series_ties}}, \code{\link{series_untie}}: To deal with record
   ties.
@@ -77,7 +76,8 @@ The Classical Record Model:
 
   The functions to compute the record statistics are:
   
-  \code{\link{I.record}}: Computes the observed record indicators.
+  \code{\link{I.record}}: Computes the observed record indicators. \code{NA} 
+  values are taken as no records unless they appear at \eqn{t = 1}.
   
   \code{\link{N.record}}, \code{\link{Nmean.record}}: Compute the observed
   number of records up to time \eqn{t}.
@@ -135,7 +135,7 @@ The Classical Record Model:
   \code{\link{foster.plot}}: Shows plots based on Foster-Stuart and
   Diersen-Trenkler statistics.
   
-  \code{\link{N.plot}}: Shows the number of records.
+  \code{\link{N.plot}}: Shows the (weighted) number of records.
    
   \code{\link{p.plot}}: Shows the record probabilities in different plots.
 
@@ -152,18 +152,18 @@ The Classical Record Model:
   distribution. Related to the probability distribution function of the 
   number of records under the null hypothesis.
   
-  Example data sets:
+  Example datasets:
 
-  There are two example data sets included with this package. It is possible
-  to load these data sets into R using the \code{data} function. The 
-  data sets have their own help file, which can be accessed by 
+  There are two example datasets included with this package. It is possible
+  to load these datasets into R using the \code{data} function. The 
+  datasets have their own help file, which can be accessed by 
   \code{help([dataset_name])}. 
   Data included with \strong{RecordTest} are:
   
   \code{\link{TX_Zaragoza}} - Daily maximum temperatures at Zaragoza 
   (Spain).
   
-  \code{\link{ZaragozaSeries}} - Splitted and uncorrelated sub-series 
+  \code{\link{ZaragozaSeries}} - Splitted and uncorrelated subseries 
   \code{\link{TX_Zaragoza}$TX}.
   
   \code{\link{Olympic_records_200m}} - 200-meter Olympic records from 1900
@@ -182,7 +182,7 @@ Castillo-Mateo J (2021).
 Available at \href{https://arxiv.org/abs/2105.08186}{arXiv:2105.08186} 
 
 Cebrián A, Castillo-Mateo J, Asín J (2021).
-“Record Tests to detect non stationarity in the tails with an application to climate change.”
+“Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
 Available at Research Square \doi{10.21203/rs.3.rs-214787/v1}
 
 Diersen J, Trenkler G (1996). “Records Tests for Trend in Location.”

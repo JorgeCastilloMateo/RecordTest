@@ -46,11 +46,11 @@ A \code{"htest"} object with elements:
 \description{
 This function performs a linear hypothesis test based on a
   regression for the record probabilities \eqn{p_t} to study the hypothesis
-  of the classical record model.
+  of the classical record model (i.e., of IID continuous RVs).
 }
 \details{
 The null hypothesis is that the data come from a population with 
-  independent and identically distributed realizations. This implies that
+  independent and identically distributed realisations. This implies that
   in all the vectors (columns in matrix \code{X}), the sample probability 
   of record at time \eqn{t} (\code{\link{p.record}}) is \eqn{1/t}, so that
   \deqn{t \, \textrm{E}(\hat p_t) = 1.} 
@@ -63,11 +63,10 @@ The null hypothesis is that the data come from a population with
   response is heteroskedastic.
   
   Other models can be considered with the \code{formula} argument. 
-  However, for the test to be correct, the model that assigns 1 to all 
-  responses must be nested in the bigger one, either leaving the intercept 
-  free or setting the intercept to 1 (see Examples for possible models).
+  However, for the test to be correct, the model must leave the intercept 
+  free or fix it to 1 (see Examples for possible models).
 
-  The \eqn{F} statistic is computed for carrying out an \eqn{F}-test-based
+  The \eqn{F} statistic is computed for carrying out a
   comparison between the restricted model under the null hypothesis and
   the more general model (e.g., the alterantive hypothesis where 
   \eqn{t \, \textrm{E}(\hat p_t)} is a linear function of time \eqn{t}). 
@@ -75,32 +74,31 @@ The null hypothesis is that the data come from a population with
   but not always.
   
   If the sample size (i.e., the number of series or columns of \code{X})
-  is lower than 8 or 12 the distribution \eqn{F} is not fulfilled, so the 
-  \code{simulate.p.value} option is recommended in this case.
+  is lower than 8 or 12 the \code{simulate.p.value} option is recommended.
 }
 \note{
 IMPORTANT: In \code{formula} the intercept has to be free or fixed
   to 1 so that the test is correct.
 }
 \examples{
-# Simple test for upper records (p-value = 0.01047)
+# Simple test for upper records (p-value = 0.01202)
 p.regression.test(ZaragozaSeries)
-# Simple test for lower records (p-value = 9.178e-05)
+# Simple test for lower records (p-value = 0.006175)
 p.regression.test(ZaragozaSeries, record = "lower")
 
-# Fit a 2nd term polynomial for upper records (p-value = 0.01187)
+# Fit a 2nd term polynomial for upper records (p-value = 0.0003933)
 p.regression.test(ZaragozaSeries, formula = y ~ I(x^2))
-# Fit a 2nd term polynomial for lower records (p-value = 8.007e-05)
+# Fit a 2nd term polynomial for lower records (p-value = 0.005108)
 p.regression.test(ZaragozaSeries, record = "lower", formula = y ~ I(x^2))
 
-# Fix the intercept to 1 for upper records (p-value = 0.005557)
+# Fix the intercept to 1 for upper records (p-value = 0.01416)
 p.regression.test(ZaragozaSeries, formula = y ~ I(x-1) - 1 + offset(rep(1, length(x))))
-# Fix the intercept to 1 for lower records (p-value = 2.467e-05)
+# Fix the intercept to 1 for lower records (p-value = 0.00138)
 p.regression.test(ZaragozaSeries, record = "lower", 
-                  formula = y ~ I(x-1) - 1 + offset(rep(1, length(x))))
+  formula = y ~ I(x-1) - 1 + offset(rep(1, length(x))))
 
 # Simulate p-value when the number of series is small
-TxZ <- apply(series_split(TX_Zaragoza$TX), 1, max)
+TxZ <- apply(series_split(TX_Zaragoza$TX), 1, max, na.rm = TRUE)
 p.regression.test(TxZ, simulate.p.value = TRUE)
 }
 \seealso{

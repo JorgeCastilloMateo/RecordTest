@@ -2,12 +2,11 @@
 #' @importFrom stats pchisq
 #' @description This function performs a chi-square goodness-of-fit test
 #'   based on the record probabiliteis \eqn{p_t} to study the hypothesis
-#'   of the classical record model (i.e., of randomness).
+#'   of the classical record model (i.e., of IID continuous RVs).
 #' @details 
 #'   The null hypothesis of this chi-square test is that in every vector 
 #'   (columns of the matrix \code{X}), the probability of record at 
-#'   time \eqn{t} is \eqn{1/t} as in the classical record model (i.e., 
-#'   sequences of independent and identically distributed realizations), 
+#'   time \eqn{t} is \eqn{1/t} as in the classical record model, 
 #'   and the alternative that the probabilities are not equal to those values. 
 #'   First, the chi-square goodness-of-fit statistics to study the  null 
 #'   hypothesis \eqn{H_0:\,p_t = 1/t} are calculated for each time 
@@ -41,9 +40,18 @@
 #' @seealso \code{\link{global.test}}, \code{\link{score.test}},
 #'   \code{\link{p.record}}, \code{\link{p.regression.test}}, 
 #'   \code{\link{lr.test}}
+#' @references 
+#' Benestad RE (2003). 
+#' “How Often Can We Expect a Record Event?” 
+#' \emph{Climate Research}, \strong{25}(1), 3–13.
+#' 
+#' Benestad RE (2004). 
+#' “Record-Values, Nonstationarity Tests and Extreme Value Distributions.” 
+#' \emph{Global and Planetary Change}, \strong{44}(1–4), 11–26. 
+#' 
 #' @export p.chisq.test
 #' @examples
-#' # Warning, M = 76 small for the value of T = 66
+#' # Warning, M = 76 small for the value of T = 70
 #' p.chisq.test(ZaragozaSeries)
 #' # Simulate p-value
 #' p.chisq.test(ZaragozaSeries, simulate.p.value = TRUE, B = 10000)

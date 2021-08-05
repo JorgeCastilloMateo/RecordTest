@@ -1,5 +1,5 @@
 #' @title Record Indicators
-#' @description Returns the sample record indicators of the values in a vector.
+#' @description Returns the record indicators of the values in a vector.
 #'   The record indicator for each value in a vector is a binary variable which
 #'   takes the value 1 if the corresponding value in the vector is a record and
 #'   0 otherwise. 
@@ -25,7 +25,7 @@
 #'   calculates the sample sequence above for each column of the object as if 
 #'   all columns were different sequences.
 #'  
-#'   Summarily:
+#'   In summary:
 #'   \deqn{\code{I.record}: \code{X} = \left(
 #'                  \begin{array}{cccc} 
 #'                    X_{1,1} & X_{1,2} & \cdots & X_{1,M} \\ 

@@ -1,11 +1,11 @@
 #' @title Number of Records Test
 #' @importFrom stats pnorm pt rbinom sd fft dbinom
 #' @description Performs tests based on the (weighted) number of records, 
-#'   \eqn{N^\omega}. The hypothesis of the classical record model
-#'   (i.e., of randomness) is tested against the alternative hypothesis.
+#'   \eqn{N^\omega}. The hypothesis of the classical record model (i.e., of IID
+#'   continuous RVs) is tested against the alternative hypothesis.
 #' @details 
 #'   The null hypothesis is that the data come from a population with 
-#'   continuous independent and identically distributed realizations. The 
+#'   independent and identically distributed continuous realisations. The 
 #'   one-sided alternative hypothesis is that the (weighted) number of records
 #'   is greater (or less) than under the null hypothesis. The 
 #'   (weighted)-number-of-records statistic is calculated according to:
@@ -88,7 +88,7 @@
 #' \doi{10.1007/s11009-016-9533-4}
 #' 
 #' Cebrián A, Castillo-Mateo J and Asín J (2021).
-#' “Record Tests to detect non stationarity in the tails with an application to climate change.”
+#' “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
 #' Available at Research Square \doi{10.21203/rs.3.rs-214787/v1}
 #' 
 #' Hong Y (2013). 

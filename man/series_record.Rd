@@ -23,14 +23,15 @@ A vector of length \code{Trows} with \code{L_upper} upper or/and
   \code{R_lower} lower record values.
 }
 \description{
-This function is useful to apply the plots and tests within
-  \code{\link{RecordTest-package}} to a vector of record times. If only the
-  record times are available (upper or lower, or both) and not the complete 
-  series, \code{series_record} builds a complete series with the same record 
-  occurrence as specified in the arguments.
+If only the record times are available (upper or lower, or 
+  both) and not the complete series, \code{series_record} builds a complete 
+  series with the same record occurrence as specified in the arguments. 
+  This function is useful to apply the plots and tests within
+  \code{\link{RecordTest-package}} to a vector of record times.
 }
 \note{
-Remember 1 is always a record time.
+Remember that the first observation in a series is always a record 
+  time.
 }
 \examples{
 # upper record times observed in a 100 length time series

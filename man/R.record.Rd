@@ -22,8 +22,8 @@ If \code{X} is a vector, the function returns a column matrix
   of the corresponding \code{X} column.
 }
 \description{
-Returns the sample record values of the values in a vector.
-  The record values are the values in a vector when a record occurs. 
+Returns the record values of the values in a vector.
+  A record value is the magnitude of a record observation. 
   
   If the argument \code{X} is a matrix, then each column is treated as a 
   different vector.

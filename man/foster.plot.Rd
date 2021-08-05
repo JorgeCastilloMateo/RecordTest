@@ -13,7 +13,7 @@ foster.plot(
   conf.int = TRUE,
   conf.level = 0.9,
   conf.aes = c("ribbon", "errorbar"),
-  conf.col = "gray69"
+  conf.col = "grey69"
 )
 }
 \arguments{
@@ -27,17 +27,17 @@ e.g., if \code{function(t) t-1} then \eqn{\omega_t = t-1}.}
 calculated, i.e., one of \code{"D"}, \code{"d"}, \code{"S"}, \code{"s"},
 \code{"U"}, \code{"L"} or \code{"W"} (see \code{\link{foster.test}}).}
 
-\item{point.col, point.shape}{Value with the color and shape of the points.}
+\item{point.col, point.shape}{Value with the colour and shape of the points.}
 
 \item{conf.int}{Logical. Indicates if the CIs are also shown.}
 
 \item{conf.level}{(If \code{conf.int == TRUE}) Confidence level of the CIs.}
 
 \item{conf.aes}{(If \code{conf.int == TRUE}) A character string indicating 
-the aesthetic to display for the CIs, \code{"ribbon"} (gray area) or 
+the aesthetic to display for the CIs, \code{"ribbon"} (grey area) or 
 \code{"errorbar"} (vertical lines).}
 
-\item{conf.col}{Color used to plot the expected value and (if 
+\item{conf.col}{Colour used to plot the expected value and (if 
 \code{conf.int == TRUE}) CIs.}
 }
 \value{
@@ -46,16 +46,17 @@ A ggplot graph object.
 \description{
 This function builds a ggplot object to display two-sided
   confidence intervals based on Foster-Stuart and Diersen-Trenkler 
-  statistics to study the hypothesis of the classical record model.
+  statistics to study the hypothesis of the classical record model (i.e., 
+  of IID continuous RVs).
 }
 \details{
-The mean value of the statistic in every vector (columns of the matrix 
-  \code{X}) observed up to the time \eqn{t} (\eqn{t=1,\ldots,T}) is shown 
-  together with expected values and confidence intervals (CIs) based on the 
-  asymptotic normal distribution of the statistics under the null hypothesis
-  of the classical record model (i.e., of randomness).
+The function plots the observed values of the statistic selected with 
+  \code{statistic}, obtained with the series up to time \eqn{t} for 
+  \eqn{t=1,\ldots,T}. The plot also includes the expected values and 
+  confidence intervals (CIs) based on the asymptotic normal distribution 
+  of the statistics under the null hypothesis.
 
-  This function implements the same ideas that \code{\link{N.plot}} with
+  This function implements the same ideas that \code{\link{N.plot}}, but with
   the statistics computed in \code{\link{foster.test}}. 
   
   These plots are useful to see the evolution in the record occurrence 
@@ -77,7 +78,7 @@ foster.plot(ZaragozaSeries, statistic = "L", weights = function(t) t-1)
 }
 \references{
 Cebrián A, Castillo-Mateo J, Asín J (2021).
-“Record Tests to detect non stationarity in the tails with an application to climate change.”
+“Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
 Available at Research Square \doi{10.21203/rs.3.rs-214787/v1}
 
 Diersen J, Trenkler G (1996). “Records Tests for Trend in Location.”

@@ -1,5 +1,5 @@
 #' @title Number of Records
-#' @description Returns the sample number of records up to time \eqn{t} of the
+#' @description Returns the number of records up to time \eqn{t} of the
 #'   values in a vector.
 #'   
 #'   If the argument \code{X} is a matrix, then each column is treated as a 
@@ -11,9 +11,9 @@
 #'
 #'   If \code{X} is a matrix with \eqn{M > 1} columns, each column is treated
 #'   as a vector and \code{Nmean.record} calculates for each \eqn{t},
-#'   \deqn{\bar N_t = \frac{N_{t,1}+ \ldots + N_{t,M}}{M}.}
+#'   \deqn{\bar N_t = \frac{N_{t1}+ \ldots + N_{tM}}{M}.}
 #'   
-#'   Summarily:
+#'   In summary:
 #'   \deqn{\code{N.record}: \code{X} = \left(
 #'                  \begin{array}{cccc} 
 #'                    X_{1,1} & X_{1,2} & \cdots & X_{1,M} \\ 
@@ -44,7 +44,7 @@
 #' @return \code{N.record} returns a numeric matrix with the number of records 
 #'   up to each time (row) \eqn{t} for a vector or each column in \code{X}. 
 #'   \code{Nmean.record} returns a numeric vector with the mean number of 
-#'   records up to each time (row) \eqn{t}. 
+#'   records in \eqn{M} series (columns) up to each time (row) \eqn{t}. 
 #' @author Jorge Castillo-Mateo
 #' @seealso \code{\link{I.record}}, \code{\link{L.record}}, 
 #'   \code{\link{p.record}}, \code{\link{R.record}},

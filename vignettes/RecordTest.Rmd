@@ -21,18 +21,18 @@ knitr::opts_chunk$set(
   digits = 5,
   tidy = FALSE,
   background = "#FFFF00",
-  fig.align = 'center',
+  fig.align = "center",
   warning = FALSE,
   message = FALSE
   )
-RNGkind(sample.kind = 'Rounding')
+RNGkind(sample.kind = "Rounding")
 options(width = 80, digits = 5)
 theme_set(theme_bw())
 ```
 
 ## Introduction
 
-The **RecordTest** package (Inference Tools in Time Series Based on Record Statistics) contains functions to visualize the behavior of the record occurrence, functions to calculate a wide variety of distribution-free tests for trend in location, variation and non-stationarity, for change-point detection, and tools to prepare a time series in order to study its records.
+The **RecordTest** package (Inference Tools in Time Series Based on Record Statistics) contains functions to visualize the behaviour of the record occurrence, functions to calculate a wide variety of distribution-free tests for trend in location, variation and non-stationarity, for change-point detection, and tools to prepare a time series in order to study its records.
 
 Install **RecordTest** using
 
@@ -48,13 +48,13 @@ help("RecordTest-package")
 
 Here, the main purpose of the package is developed as well as an outline of the functions available in the package.
 
-**RecordTest** has several functions that attempt to test the classical record model which assumes randomness in its variables, that is, they are independent and identically distributed, by means of hypothesis tests and graphical tools.
+**RecordTest** has several functions that attempt to test the classical record model which assumes randomness in its variables, that is, they are continuous independent and identically distributed, by means of hypothesis tests and graphical tools.
 
 ## Records in the 200-meter Olympic race
 
 ### Sports Data
 
-To begin with, **RecordTest** has a data set `Olympic_records_200m` containing the record times `time` and record values `value` of the Olympic 200-meter, from 1900 to 2020. In this case, only the lower records are available.
+To begin with, **RecordTest** has a dataset `Olympic_records_200m` containing the record times `time` and record values `value` of the Olympic 200-meter, from 1900 to 2020. In this case, only the lower records are available.
 
 ### Data preparation
 
@@ -63,7 +63,7 @@ The **RecordTest** functions need a complete series of observations to calculate
 ```{r Olympic data}
 library(RecordTest)
 library(ggpubr) # To join plots
-data(Olympic_records_200m)
+data(Olympic_records_200m, package = "RecordTest")
 
 or200m <- series_record(L_lower = Olympic_records_200m$time, 
                         R_lower = Olympic_records_200m$value,
@@ -78,7 +78,7 @@ As a preview, the Olympic records series is drawn highlighting its lower records
 records(or200m, type = "points", alpha = c(1,0,1,0)) + ggplot2::ylab("seconds")
 ```
 
-The graph below shows the number of accumulated lower records together with its confidence intervals under the null hypothesis of randomness, from which we see that the observed sample departs significantly since time $t = 13$, corresponding to the 1960 Olympics.
+The graph below shows the number of accumulated lower records together with its confidence intervals under the null hypothesis, from which we see that the observed sample departs significantly since time $t = 13$, corresponding to the 1960 Olympics.
 
 ```{r}
 N.plot(or200m, record = c(0,1,0,0))
@@ -94,20 +94,20 @@ N.test(or200m, record = "lower", distribution = "poisson-binomial")
 
 ### Temperature Data
 
-**RecordTest** has a benchmark temperature data set `TX_Zaragoza` containing the time series `TX` of daily maximum temperature at Zaragoza (Spain), from 01/01/1951 to 31/12/2020 measured in tenths of a degree Celsius. In this case, the whole series is available.
+**RecordTest** has a benchmark temperature dataset `TX_Zaragoza` containing the time series `TX` of daily maximum temperature at Zaragoza (Spain), from 01/01/1951 to 31/12/2020 measured in tenths of a degree Celsius. In this case, the whole series is available.
 
 ### Data preparation
 
 As a preview, the temperature series `TX_Zaragoza$TX` is drawn highlighting its upper and lower records.
 
 ```{r records}
-data(TX_Zaragoza)
+data(TX_Zaragoza, package = "RecordTest")
 records(TX_Zaragoza$TX, alpha = c(1, 1, 1, 0.1))
 ```
 
-A large number of upper records are observed in the first observations and very few lower records. The initial behavior in the records appear due to the seasonal increment of temperature between January and July, because this series has a strong seasonal component and serial correlation.
+A large number of upper records are observed in the first observations and very few lower records. The initial behaviour in the records appear due to the seasonal increment of temperature between January and July, because this series has a strong seasonal component and serial correlation.
 
-To take these characteristics into consideration, splitting the observed series into $M$ uncorrelated sub-series is especially useful in the presence of serial correlation and seasonality. `series_split` splits `TX_Zaragoza$TX` into 365 sub-series, each corresponding to each day of the year. `series_uncor` selects the larger number of columns or series that are not correlated with their adjacent series.
+To take these characteristics into consideration, splitting the observed series into $M$ uncorrelated subseries is especially useful in the presence of serial correlation and seasonality. `series_split` splits `TX_Zaragoza$TX` into 365 subseries, each corresponding to each day of the year. `series_uncor` selects the larger number of columns or subseries that are not correlated with their adjacent columns.
 
 ```{r pre-process}
 TxZ365 <- series_split(TX_Zaragoza$TX, Mcols = 365)
@@ -157,7 +157,7 @@ foster.plot(TxZ, weights = function(t) t-1) +
   ggplot2::geom_vline(xintercept = 44, linetype = "dashed")
 ```
 
-We can apply the associated test to detect non-stationary behavior in the records of the series. The result is highly significant.
+We can apply the associated test to detect non-stationary behaviour in the records of the series. The result is highly significant.
 
 ```{r}
 foster.test(TxZ, distribution = "normal", weights = function(t) t-1)
@@ -179,10 +179,10 @@ ggpubr::ggarrange(
 
 Those tests can be implemented as follows, where in addition the estimation of the parameters of the line is displayed.
 ```{r}
-p.regression.test(TxZ, record = 'upper')
-p.regression.test(TxZ, record = 'lower')
-p.regression.test(series_rev(TxZ), record = 'upper')
-p.regression.test(series_rev(TxZ), record = 'lower')
+p.regression.test(TxZ, record = "upper")
+p.regression.test(TxZ, record = "lower")
+p.regression.test(series_rev(TxZ), record = "upper")
+p.regression.test(series_rev(TxZ), record = "lower")
 ```
 
 Other alternative based on a Monte Carlo approach is to join the information of all previous regression tests. Of the 1000 simulations considered under the null hypothesis, none has a statistic with a value greater than that of the observed series, making the test highly significant.
@@ -223,23 +223,24 @@ ggpubr::ggarrange(
 
 ### Tests to detect change-points
 
-Signs of climate change have not been present since the beginning of the series. We can implement a test to detect change points in the series on a daily scale as follows.
+Signs of climate change have not been present since the beginning of the series. We can implement a test to detect change-points in the series on a daily scale as follows.
 
 ```{r}
 change.point(ZaragozaSeries)
-change.point(ZaragozaSeries, weights = function(t) sqrt(t), record = "d", simulate.p.value = TRUE, B = 10000)
+change.point(ZaragozaSeries, weights = function(t) sqrt(t), 
+  record = "d", simulate.p.value = TRUE, B = 10000)
 ```
 
-The point of change is found at time 36 (1986). We can see analogous results for the annual mean temperature series, a change-point is significantly detected with time estimate 38 (1988).
+The change-point is found at time 36 (1986). We can see analogous results for the annual mean temperature series, a change-point is significantly detected with time estimate 38 (1988).
 
 ```{r}
-test.result <- change.point(rowMeans(TxZ365))
+test.result <- change.point(rowMeans(TxZ365, na.rm = TRUE))
 test.result
 ```
 
 ```{r}
-records(rowMeans(TxZ365)) + 
-  ggplot2::geom_vline(xintercept = test.result$estimate, color = "red")
+records(rowMeans(TxZ365, na.rm = TRUE)) + 
+  ggplot2::geom_vline(xintercept = test.result$estimate, colour = "red")
 ```
 
 There are still more tools! Try them yourself.

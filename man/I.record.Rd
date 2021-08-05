@@ -29,7 +29,7 @@ A binary matrix of the same length or dimension as \code{X},
   indicating the record occurrence.
 }
 \description{
-Returns the sample record indicators of the values in a vector.
+Returns the record indicators of the values in a vector.
   The record indicator for each value in a vector is a binary variable which
   takes the value 1 if the corresponding value in the vector is a record and
   0 otherwise. 
@@ -57,7 +57,7 @@ Let \eqn{\{X_1,\ldots,X_T\}} be a vector of random variables of
   calculates the sample sequence above for each column of the object as if 
   all columns were different sequences.
  
-  Summarily:
+  In summary:
   \deqn{\code{I.record}: \code{X} = \left(
                  \begin{array}{cccc} 
                    X_{1,1} & X_{1,2} & \cdots & X_{1,M} \\ 
@@ -81,6 +81,10 @@ Let \eqn{\{X_1,\ldots,X_T\}} be a vector of random variables of
   the ties as a new (weak) record. Ties are possible in discrete variables
   or if a continuous variable has been rounded. Weak records can be computed
   if \code{weak = TRUE}.
+  
+  \code{NA} values in \code{X} are assigned \code{-Inf} for upper records
+  and \code{Inf} for lower records, so they are records only if they are 
+  placed at \eqn{t = 1}.
 }
 \examples{
 X <- c(1, 5, 3, 6, 6, 9, 2, 11, 17, 8)

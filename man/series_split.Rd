@@ -19,11 +19,10 @@ A matrix with \code{Mcols} columns.
 The vector \code{X} of length \eqn{T} is broken into 
   \code{Mcols} blocks, each part containing \eqn{T/\code{Mcols}} elements.
 
-  If the vector \code{X} represents consecutive daily values, e.g., then 
+  If the vector \code{X} represents consecutive daily values in a year, then 
   \code{Mcols = 365} is preferred. This function rearranges \code{X} into a 
   matrix format, where each column is the vector of values at the same day 
-  of the year. If it were monthly data it would be preferred, e.g., 
-  \code{Mcols = 12}.
+  of the year. For monthly data in a year, \code{Mcols = 12} should be used.
 }
 \details{
 This function is used in the data preparation (or pre-processing) 
@@ -69,7 +68,7 @@ dim(TxZ)
 }
 \references{
 Cebrián A, Castillo-Mateo J, Asín J (2021).
-“Record Tests to detect non stationarity in the tails with an application to climate change.”
+“Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
 Available at Research Square \doi{10.21203/rs.3.rs-214787/v1}
 }
 \seealso{

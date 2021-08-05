@@ -14,7 +14,7 @@ N.plot(
   conf.int = TRUE,
   conf.level = 0.9,
   conf.aes = c("ribbon", "errorbar"),
-  conf.col = "gray69"
+  conf.col = "grey69"
 )
 }
 \arguments{
@@ -29,15 +29,14 @@ forward upper, forward lower, backward upper and backward lower are going
 to be shown, respectively. Logical values or 0,1 values are accepted.}
 
 \item{backward}{A character string \code{"T"} or \code{"t"} indicating if 
-the backward number of records shown are calculated up to time \eqn{t} for 
-the backward series in times \eqn{\{T,\ldots,1\}} or the backward number of
-records shown for every \eqn{t} are the total number of records in the 
-series with times \eqn{\{t,\ldots,1\}}. While the first option considers 
-the evolution of a series of records observed up to time \eqn{T}, the second
-considers that until each time \eqn{t} the series has only been observed up
-to \eqn{t}.}
+the backward number of records shown are calculated up to time \eqn{t} in 
+the backward series \eqn{\{X_T,\ldots,X_1\}} or in the series 
+\eqn{\{X_t,\ldots,X_1\}}. While the first option considers the evolution 
+of a series of records observed up to time \eqn{T}, the second considers 
+that until each time \eqn{t} the series has only been observed up to 
+\eqn{t}.}
 
-\item{point.col, point.shape}{Vector with four elements indicating the color
+\item{point.col, point.shape}{Vector with four elements indicating the colour
 and shape of the points. Every one of the four elements represents forward
 upper, forward lower, backward upper and backward lower, respectively.}
 
@@ -46,10 +45,10 @@ upper, forward lower, backward upper and backward lower, respectively.}
 \item{conf.level}{(If \code{conf.int == TRUE}) Confidence level of the CIs.}
 
 \item{conf.aes}{(If \code{conf.int == TRUE}) A character string indicating 
-the aesthetic to display for the CIs, \code{"ribbon"} (gray area) or 
+the aesthetic to display for the CIs, \code{"ribbon"} (grey area) or 
 \code{"errorbar"} (vertical lines).}
 
-\item{conf.col}{Color used to plot the expected value and (if 
+\item{conf.col}{Colour used to plot the expected value and (if 
 \code{conf.int == TRUE}) CIs.}
 }
 \value{
@@ -58,20 +57,21 @@ A ggplot object.
 \description{
 This function builds a ggplot object to compare the sample
   means of the (weighted) number of records in a vector up to time \eqn{t}, 
-  \eqn{\bar N_t^\omega}, and the expected values \eqn{\textrm{E}(N_t)} 
-  under the classical record model.
+  \eqn{\bar N_{t.}^\omega}, and the expected values 
+  \eqn{\textrm{E}(N_t^{\omega})} 
+  under the classical record model (i.e., of IID continuous RVs).
 }
 \details{
-This plot is associated with the \code{\link{N.test}} test.
+This plot is associated to the test \code{\link{N.test}}.
   It calculates the sample means of the number of records in a set of
   vectors up to every time \eqn{t} (see \code{\link{Nmean.record}}). 
-  These sample means \eqn{\bar N_t} are calculated from the sample of
+  These sample means \eqn{\bar N_{t.}^\omega} are calculated from the sample of
   \eqn{M} values obtained from \eqn{M} vectors, the columns of matrix 
   \code{X}. Then, these values are plotted and compared with the expected 
-  values \eqn{\textrm{E}(N_t)} and their confidence intervals (CIs), under
-  the hypothesis of the classical record model. The CIs of \eqn{E(N_t)} 
-  uses the fact that, under the classical record model, the statistic 
-  \eqn{\bar N_t} is asymptotically Normal.
+  values \eqn{\textrm{E}(N_t^{\omega})} and their confidence intervals (CIs), under
+  the hypothesis of the classical record model. The CIs of 
+  \eqn{\bar N_{t.}^\omega} uses the fact that, under the classical record 
+  model, the statistic is asymptotically Normal.
   
   The plot can show the four types of record at the same time (i.e., 
   forward upper, forward lower, backward upper and backward lower).
@@ -92,7 +92,7 @@ N.plot(ZaragozaSeries, weights = function(t) t-1, conf.aes = "errorbar")
 # Plot only upper records
 N.plot(ZaragozaSeries, record = c(1, 0, 1, 0))
 
-# Change point color and shape
+# Change point colour and shape
 Zplot <- N.plot(ZaragozaSeries, 
   point.col = c("red", "red", "blue", "blue"), 
   point.shape = c(19, 4, 19, 4))
@@ -102,19 +102,19 @@ Zplot <- N.plot(ZaragozaSeries,
 ## Remove legend
 #Zplot + ggplot2::theme(legend.position = "none")
 ## Fancy axis
-#Zplot + 
-# ggplot2::scale_x_continuous(name = "Forward (Year)", 
-#   breaks = c(8, 28, 48, 68), 
-#   labels=c("1960", "1980", "2000", "2020"), 
-#   sec.axis = ggplot2::sec_axis(~ nrow(ZaragozaSeries) - . + 1953, name = "Backward (Year)")) +
-# ggplot2::theme(axis.title.x = ggplot2::element_text(color = "red"), 
-#   axis.text.x = ggplot2::element_text(color = "red"),
-#   axis.title.x.top = ggplot2::element_text(color = "blue"), 
-#   axis.text.x.top = ggplot2::element_text(color = "blue"))
+# Zplot + 
+#   ggplot2::scale_x_continuous(name = "Year (forward)",
+#     breaks = c(10, 30, 50, 70), 
+#     labels=c("1960", "1980", "2000", "2020"), 
+#     sec.axis = ggplot2::sec_axis(~ nrow(ZaragozaSeries) - . + 1951, name = "Year (backward)")) +
+#   ggplot2::theme(axis.title.x = ggplot2::element_text(colour = "red"), 
+#     axis.text.x = ggplot2::element_text(colour = "red"),
+#     axis.title.x.top = ggplot2::element_text(colour = "blue"), 
+#     axis.text.x.top = ggplot2::element_text(colour = "blue"))
 }
 \references{
 Cebrián A, Castillo-Mateo J, Asín J (2021).
-“Record Tests to detect non stationarity in the tails with an application to climate change.”
+“Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
 Available at Research Square \doi{10.21203/rs.3.rs-214787/v1}
 }
 \seealso{

@@ -59,16 +59,16 @@ A \code{"htest"} object with elements:
 \description{
 Performs Foster-Stuart, Diersen-Trenkler and 
   Cebrián-Castillo-Asín records tests for trend in location, variation or 
-  the tails. The hypothesis of the classical record model (i.e., of 
-  randomness) is tested against the alternative hypothesis.
+  the tails. The hypothesis of the classical record model (i.e., 
+  of IID continuous RVs) is tested against the alternative hypothesis.
 }
 \details{
 In this function, the tests are implemented as given by Foster and Stuart
   (1954), Diersen and Trenkler (1996, 2001) and some modifications in the
-  standardization of the previous statistics given by Cebrián, 
+  standardisation of the previous statistics given by Cebrián, 
   Castillo-Mateo and Asín (2021). The null hypothesis is that the data come
   from a population with independent and identically distributed
-  realizations. The one-sided alternative hypothesis is that the chosen
+  realisations. The one-sided alternative hypothesis is that the chosen
   statistic is greater (or less) than under the null hypothesis. The
   different statistics are calculated according to:
   
@@ -91,12 +91,12 @@ In this function, the tests are implemented as given by Foster and Stuart
   \deqn{\sum_{m=1}^{M} \sum_{t=1}^{T} \omega_t \left( I_{tm}^{(BL)} - I_{tm}^{(FL)}\right).}
 
   If \code{statistic == "W"}, 
-  \deqn{\sum_{t=1}^{T} \omega_t \left( I_{tm}^{(FU)} + I_{tm}^{(BL)}\right).}
+  \deqn{\sum_{m=1}^{M} \sum_{t=1}^{T} \omega_t \left( I_{tm}^{(FU)} + I_{tm}^{(BL)}\right).}
  
   Where \eqn{\omega_t} are weights given to the different records
   according to their position in the series, \eqn{I_{tm}} are the record
   indicators (see \code{\link{I.record}}), and \eqn{(FU)}, \eqn{(FL)}, 
-  \eqn{(BU)} and \eqn{(BL)} represents forward upper, forward lower,
+  \eqn{(BU)}, and \eqn{(BL)} represent forward upper, forward lower,
   backward upper and backward lower records, respectively. The statistics 
   \eqn{d}, \eqn{D} and \eqn{W} may be used for trend in location;
   \eqn{s} and \eqn{S} may be used for trend in variation; and \eqn{U} and
@@ -108,7 +108,7 @@ In this function, the tests are implemented as given by Foster and Stuart
   while the mean \eqn{\mu} of the particular statistic considered is simple
   to calculate, its variance \eqn{\sigma^2} become a cumbersome expression
   and some are given by Diersen and Trenkler (2001) and all of them can be
-  computed out of the expression of the covariances given by Cebrián, 
+  easily computed out of the expression of the covariances given by Cebrián, 
   Castillo-Mateo and Asín (2021). 
   
   If \code{correct = TRUE}, then a continuity correction will be employed:
@@ -142,7 +142,7 @@ foster.test(ZaragozaSeries, statistic = "L", weights = function(t) t-1)
 }
 \references{
 Cebrián A, Castillo-Mateo J, Asín J (2021).
-“Record Tests to detect non stationarity in the tails with an application to climate change.”
+“Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
 Available at Research Square \doi{10.21203/rs.3.rs-214787/v1}
 
 Diersen J, Trenkler G (1996). “Records Tests for Trend in Location.”

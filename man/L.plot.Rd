@@ -8,9 +8,9 @@ L.plot(
   X,
   all = TRUE,
   record = c("upper", "lower"),
-  point.col = "gray23",
+  point.col = "grey23",
   point.alpha = 0.8,
-  line.col = "gray95"
+  line.col = "grey95"
 )
 }
 \arguments{
@@ -22,9 +22,9 @@ are displayed.}
 \item{record}{If \code{all = FALSE}, a character string indicating the type
 of record to be calculated, "upper" or "lower".}
 
-\item{point.col, point.alpha}{Color and transparency of the points.}
+\item{point.col, point.alpha}{Colour and transparency of the points.}
 
-\item{line.col}{Color to plot lines.}
+\item{line.col}{Colour to plot lines.}
 }
 \value{
 A ggplot object.

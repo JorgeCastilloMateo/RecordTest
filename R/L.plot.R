@@ -21,8 +21,8 @@
 #'   are displayed.
 #' @param record If \code{all = FALSE}, a character string indicating the type
 #'   of record to be calculated, "upper" or "lower".
-#' @param point.col,point.alpha Color and transparency of the points.
-#' @param line.col Color to plot lines.
+#' @param point.col,point.alpha Colour and transparency of the points.
+#' @param line.col Colour to plot lines.
 #' @return A ggplot object.
 #' @author Jorge Castillo-Mateo
 #' @seealso \code{\link{L.record}}
@@ -41,9 +41,9 @@
 L.plot <- function(X, 
                    all = TRUE, 
                    record = c("upper", "lower"), 
-                   point.col = "gray23", 
+                   point.col = "grey23", 
                    point.alpha = 0.8, 
-                   line.col = "gray95"){
+                   line.col = "grey95"){
   
   record <- match.arg(record)
   

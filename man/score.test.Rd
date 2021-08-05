@@ -48,13 +48,12 @@ A list of class \code{"htest"}  with the following elements:
 \description{
 This function performs score (or Lagrange multiplier) tests
   for the likelihood of the record indicators \eqn{I_t} to study the 
-  hypothesis of the classical record model.
+  hypothesis of the classical record model (i.e., of IID continuous RVs).
 }
 \details{
 The null hypothesis of the score tests is that in every vector 
   (columns of the matrix \code{X}), the probability of record at 
-  time \eqn{t} is \eqn{1/t} as in the classical record model (i.e., 
-  sequences of independent and identically distributed realizations), and 
+  time \eqn{t} is \eqn{1/t} as in the classical record model, and 
   the alternative depends on the \code{alternative} and \code{probabilities}
   arguments. The probability at time \eqn{t} is any value, but equal in the
   \eqn{M} series if \code{probabilities = "equal"}  or different in the 
@@ -72,7 +71,7 @@ The null hypothesis of the score tests is that in every vector
   Otherwise, a \code{simulate.p.value} can be computed.
   
   If \code{alternative = "two.sided" & probabilities = "different"}, the 
-  asymptotic behavior of the Lagrange multiplier statistic is not 
+  asymptotic behaviour of the Lagrange multiplier statistic is not 
   fulfilled, but the Monte Carlo approach to simulate the p-value is 
   applied.
   
@@ -86,7 +85,7 @@ The null hypothesis of the score tests is that in every vector
   If \code{alternative} is one-sided and \code{probabilities = "different"},
   the statistic of the test is
   \deqn{\mathcal{S} = \frac{\sum_{t=2}^T t (t S_t - M) / (t - 1)}{\sqrt{M \sum_{t=2}^T t^2 / (t - 1)}},}
-  which is asymptotically standarnd normal distributed in \eqn{M}. It is 
+  which is asymptotically standard normal distributed in \eqn{M}. It is 
   equivalent to the statistic of the weighted number of records 
   \code{\link{N.test}} with weights \eqn{\omega_t = t^2 / (t-1)}  
   \eqn{(t=2,\ldots,T)}.
@@ -110,7 +109,7 @@ score.test(ZaragozaSeries, alternative = "greater", probabilities = "equal")
 }
 \references{
 Cebrián A, Castillo-Mateo J, Asín J (2021).
-“Record Tests to detect non stationarity in the tails with an application to climate change.”
+“Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
 Available at Research Square \doi{10.21203/rs.3.rs-214787/v1}
 }
 \seealso{

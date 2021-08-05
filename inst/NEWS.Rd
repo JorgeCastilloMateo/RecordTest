@@ -13,6 +13,8 @@
   }
   \subsection{MODIFICATIONS}{
     \itemize{
+      \item The three missing values of the \code{TX_Zaragoza} dataset now take the value \code{NA}, in previous Versions these values were imputed. This change does not affect the \code{ZaragozaSeries} dataset.
+      \item The \sQuote{MANUAL} help pages were updated.
       \item The \sQuote{VIGNETTES} file was updated.
     }
   }
@@ -33,7 +35,7 @@
   }
   \subsection{MODIFICATIONS}{
     \itemize{
-      \item The description of all the functions was updated and improved.
+      \item The \sQuote{MANUAL} help pages were updated.
       \item The \sQuote{VIGNETTES} file was updated.
       \item All functions have undergone a change in their arguments, providing new features in most cases.
       \item The functions \code{foster.test} and \code{foster.plot} now admit more statistics based on different combinations of records.

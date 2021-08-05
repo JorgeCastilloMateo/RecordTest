@@ -24,7 +24,7 @@
 #' @param type Character string indicating if \code{X} is shown with 
 #'   \code{"lines"} or \code{"points"}.
 #' @param col,alpha Character and numeric vectors of length four, respectively.
-#'   These arguments represent respectively the color and transparency of the
+#'   These arguments represent respectively the colour and transparency of the
 #'   points or lines: trivial record, upper records, lower records and 
 #'   observations respectively. 
 #'   Vector names in the default are only indicative.
@@ -86,7 +86,7 @@ records <- function(X,
   
   Tlength <- length(X)
   
-  Xrev <- series_rev(X)
+  Xrev <- rev(X)
   I.FU <- I.record(X, record = "upper")
   I.FL <- I.record(X, record = "lower")
   I.BU <- I.record(Xrev, record = "upper")
@@ -120,8 +120,10 @@ records <- function(X,
       levels(recordFactor)[levels(recordFactor) == "-1"] <- "Forward Lower"
       levels(recordFactor)[levels(recordFactor) == "0"]  <- "Observation"
       levels(recordFactor)[levels(recordFactor) == "1"]  <- "Forward Upper"
-      recordUpper <- cummax(X)
-      recordLower <- cummin(X)
+      Xna <- X
+      Xna[is.na(X)] <- X[1]
+      recordUpper <- cummax(Xna)
+      recordLower <- cummin(Xna)
       
       graf <- graf +
         ggplot2::geom_step(ggplot2::aes(y = recordUpper), direction = "hv", colour = col[2], alpha = alpha[2], linetype = linetype[1]) +
@@ -143,8 +145,10 @@ records <- function(X,
       levels(recordFactor.B)[levels(recordFactor.B) == "-1"] <- "Backward Lower"
       levels(recordFactor.B)[levels(recordFactor.B) == "0"]  <- "Observation"
       levels(recordFactor.B)[levels(recordFactor.B) == "1"]  <- "Backward Upper"
-      recordUpper.B <- cummax(Xrev)
-      recordLower.B <- cummin(Xrev)
+      Xrevna <- Xrev
+      Xrevna[is.na(Xrevna)] <- Xrev[1]
+      recordUpper.B <- cummax(Xrevna)
+      recordLower.B <- cummin(Xrevna)
       
       graf <- graf +
         ggplot2::geom_step(ggplot2::aes(x = rev(seq_len(Tlength)), y = recordUpper.B), direction = "vh", colour = col[2], alpha = alpha[2], linetype = linetype[2]) +
@@ -166,8 +170,10 @@ records <- function(X,
       levels(recordFactor)[levels(recordFactor) == "-1"] <- "Forward Lower"
       levels(recordFactor)[levels(recordFactor) == "0"]  <- "Observation"
       levels(recordFactor)[levels(recordFactor) == "1"]  <- "Forward Upper"
-      recordUpper <- cummax(X)
-      recordLower <- cummin(X)
+      Xna <- X
+      Xna[is.na(Xna)] <- X[1]
+      recordUpper <- cummax(Xna)
+      recordLower <- cummin(Xna)
       # Backward
       I.B <- I.BU - I.BL
       recordFactor.B <- as.factor(I.B)
@@ -176,8 +182,10 @@ records <- function(X,
       levels(recordFactor.B)[levels(recordFactor.B) == "-1"] <- "Backward Lower"
       levels(recordFactor.B)[levels(recordFactor.B) == "0"]  <- "Observation"
       levels(recordFactor.B)[levels(recordFactor.B) == "1"]  <- "Backward Upper"
-      recordUpper.B <- cummax(Xrev)
-      recordLower.B <- cummin(Xrev)
+      Xrevna <- Xrev
+      Xrevna[is.na(Xrevna)] <- Xrev[1]
+      recordUpper.B <- cummax(Xrevna)
+      recordLower.B <- cummin(Xrevna)
       remove.F <- as.logical((recordFactor == "Observation") + (rev(recordFactor.B) != "Observation") == 2)
       remove.B <- as.logical((rev(recordFactor) != "Observation") + (recordFactor.B == "Observation") == 2)
       recordFactor[remove.F] <- "NA"

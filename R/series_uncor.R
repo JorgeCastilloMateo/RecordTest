@@ -1,7 +1,7 @@
 #' @title Subset of Uncorrelated Series
 #' @importFrom stats cor.test
-#' @description Given a matrix this function extracts a subset of columns which
-#'   are uncorrelated vector in some sense (see Details).
+#' @description Given a matrix this function extracts a subset of uncorrelated
+#'   columns (see Details).
 #' @details This function is used in the data preparation (or pre-processing) 
 #'   often required to apply the exploratory and inference tools based on 
 #'   theory of records within this package.
@@ -50,7 +50,7 @@
 #'   \code{\link{series_ties}}, \code{\link{series_untie}}
 #' @references 
 #' Cebrián A, Castillo-Mateo J, Asín J (2021).
-#' “Record Tests to detect non stationarity in the tails with an application to climate change.”
+#' “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
 #' Available at Research Square \doi{10.21203/rs.3.rs-214787/v1}
 #' 
 #' @examples

@@ -26,7 +26,7 @@ Performs Fisher's method, which is used to combine the p-values
 Fisher's method (Fisher, 1925) combines the p-values from \eqn{k} 
   independent tests, into one test statistic using the following formula:
   \deqn{-2 \sum_{i=1}^{k} \log(p_{i}) \sim \chi_{2k}^{2},}
-  where \eqn{p_i} is the p-value for the i-th hypothesis test.
+  where \eqn{p_i} is the p-value for the \eqn{i}th hypothesis test.
   
   For example, Foster and Stuart (1954) proposed this method to combine the
   information of the p-values from the \eqn{D} and \eqn{S}-statistics (see 
@@ -35,10 +35,10 @@ Fisher's method (Fisher, 1925) combines the p-values from \eqn{k}
 \examples{
 # Join the independent p-values of the D and S-statistics
 fisher.method(c(foster.test(ZaragozaSeries, statistic = "D")$p.value,
-                foster.test(ZaragozaSeries, statistic = "S")$p.value))
+  foster.test(ZaragozaSeries, statistic = "S")$p.value))
 # Adding weights
 fisher.method(c(foster.test(ZaragozaSeries, weights = function(t) t-1, statistic = "D")$p.value,
-                foster.test(ZaragozaSeries, weights = function(t) t-1, statistic = "S")$p.value))
+  foster.test(ZaragozaSeries, weights = function(t) t-1, statistic = "S")$p.value))
 
 }
 \references{

@@ -1,5 +1,5 @@
 #' @title Record Times
-#' @description Returns the sample record times of the values in a vector.
+#' @description Returns the record times of the values in a vector.
 #'   The record times are the positions in a vector where a record occurs. 
 #'   
 #'   If the argument \code{X} is a matrix, then each column is treated as a 

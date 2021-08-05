@@ -40,7 +40,7 @@ Given a matrix formed by \eqn{M} vectors (columns), measured at
   \deqn{\hat p_t = \frac{S_t}{M} = \frac{I_{t,1} + \ldots + I_{t,M}}{M},}
   this proportion is an estimation of the probability of record at that time.
  
-  Following the notation in \code{\link{I.record}}, summarily:
+  Following the notation in \code{\link{I.record}}, in summary:
   \deqn{\code{X} = \left(
                  \begin{array}{cccc} 
                    X_{1,1} & X_{1,2} & \cdots & X_{1,M} \\ 
@@ -72,8 +72,8 @@ p.record(ZaragozaSeries, record = "l")
 }
 \references{
 Cebrián A, Castillo-Mateo J, Asín J (2021).
-“Record Tests to detect non stationarity in the tails with an application to climate change.”
-Unpublished manuscript.
+“Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
+Available at Research Square \doi{10.21203/rs.3.rs-214787/v1}
 }
 \seealso{
 \code{\link{I.record}}, \code{\link{L.record}}, 

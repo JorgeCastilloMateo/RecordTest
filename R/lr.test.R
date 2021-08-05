@@ -2,12 +2,11 @@
 #' @importFrom stats pchisq
 #' @description This function performs likelihood-ratio tests
 #'   for the likelihood of the record indicators \eqn{I_t} to study the 
-#'   hypothesis of the classical record model.
+#'   hypothesis of the classical record model (i.e., of IID continuous RVs).
 #' @details 
 #'   The null hypothesis of the likelihood-ratio tests is that in every vector 
 #'   (columns of the matrix \code{X}), the probability of record at 
-#'   time \eqn{t} is \eqn{1 / t} as in the classical record model (i.e., 
-#'   sequences of independent and identically distributed realizations), and 
+#'   time \eqn{t} is \eqn{1 / t} as in the classical record model, and 
 #'   the alternative depends on the \code{alternative} and \code{probabilities}
 #'   arguments. The probability at time \eqn{t} is any value, but equal in the
 #'   \eqn{M} series if \code{probabilities = "equal"}  or different in the 
@@ -15,8 +14,8 @@
 #'   hypothesis is more specific in the first case than in the second one.
 #'   Furthermore, the \code{"two.sided"} \code{alternative} is tested with 
 #'   the usual likelihood ratio statistic, while the one-sided 
-#'   \code{alternatives} use specific statistics based on likelihoods. 
-#'   (See Cebrián, Castillo-Mateo and Asín (2021) for details on these tests.)
+#'   \code{alternatives} use specific statistics based on likelihoods
+#'   (see Cebrián, Castillo-Mateo and Asín, 2021, for the details).
 #'
 #'   If \code{alternative = "two.sided" & probabilities = "equal"}, under the
 #'   null, the likelihood ratio statistic has an asymptotic \eqn{\chi^2} 
@@ -25,7 +24,7 @@
 #'   greater than \eqn{T}. Otherwise, a \code{simulate.p.value} is recommended.
 #'   
 #'   If \code{alternative = "two.sided" & probabilities = "different"}, the 
-#'   asymptotic behavior is not fulfilled, but the Monte Carlo approach to 
+#'   asymptotic behaviour is not fulfilled, but the Monte Carlo approach to 
 #'   simulate the p-value is applied. This statistic is the same as \eqn{\ell} 
 #'   below multiplied by a factor of 2, so the p-value is the same.
 #'   
@@ -58,7 +57,7 @@
 #' @seealso \code{\link{global.test}}, \code{\link{score.test}}
 #' @references 
 #' Cebrián A, Castillo-Mateo J, Asín J (2021).
-#' “Record Tests to detect non stationarity in the tails with an application to climate change.”
+#' “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
 #' Available at Research Square \doi{10.21203/rs.3.rs-214787/v1}
 #' 
 #' @examples

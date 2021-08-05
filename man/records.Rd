@@ -33,7 +33,7 @@ to \code{X} and measured at the same times. Only used if
 \code{"lines"} or \code{"points"}.}
 
 \item{col, alpha}{Character and numeric vectors of length four, respectively.
-These arguments represent respectively the color and transparency of the
+These arguments represent respectively the colour and transparency of the
 points or lines: trivial record, upper records, lower records and 
 observations respectively. 
 Vector names in the default are only indicative.}

@@ -7,18 +7,18 @@
 #'  theory of records within this package.
 #'  
 #'  The theory of records on which the hypothesis tests are based assumes 
-#'  that the random variables are continuous, proving that the probability 
+#'  that the random variables are continuous, so that the probability 
 #'  that two observations take the same value is zero. Most of the data 
 #'  collected is rounded, giving a certain probability to the tie between 
 #'  records, thereby reducing the number of new records (see, e.g., Wergen 
 #'  et al. 2012). 
 #'  
-#'  This function breaks ties by adding a sample from a uniform random variable 
+#'  This function breaks ties by adding a uniform random variable 
 #'  to each element of \code{X}. The function computes the maximum number of 
 #'  decimal digits (let it be \eqn{n}) for any element in \code{X}. Then the
 #'  uniform variable is sampled in the interval 
 #'  \eqn{(-5 \times 10^{-(n+1)}, 5 \times 10^{-(n+1)})}, so the records in the
-#'  original (rounded) series will also be in the new series.
+#'  original (rounded) series are also records in the new series.
 #'
 #' @return A matrix equal to \code{X} whose elements have been added a 
 #'   sample from a uniform variable, different for each element.

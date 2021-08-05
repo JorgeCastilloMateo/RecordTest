@@ -2,16 +2,17 @@
 #' @importFrom stats pchisq
 #' @description Performs Brown's method on the p-values of \code{\link{N.test}}
 #'   as proposed by Cebrián, Castillo-Mateo and Asín (2021). The null 
-#'   hypothesis of the classical record model (i.e., of randomness) is tested
-#'   against the alternative hypothesis.
+#'   hypothesis of the classical record model (i.e., of IID continuous RVs) is 
+#'   tested against the alternative hypothesis.
 #' @details 
-#'   In this function, the test is implemented as given by Cebrián, 
-#'   Castillo-Mateo and Asín (2021), where the
-#'   p-values \eqn{p^{(FU)}}, \eqn{p^{(FL)}}, \eqn{p^{(BU)}} and \eqn{p^{(BL)}}
+#'   The test is implemented as given by Cebrián, 
+#'   Castillo-Mateo and Asín (2021), where the p-values 
+#'   \eqn{p^{(FU)}}, \eqn{p^{(FL)}}, \eqn{p^{(BU)}}, and \eqn{p^{(BL)}}
 #'   of the test \code{\link{N.test}} for the four types of record are used for
 #'   the statistic:
 #'   \deqn{-2 \left(\log(p^{(FU)}) + \log(p^{(FL)}) + \log(p^{(BU)}) + \log(p^{(BL)})\right).}
-#'   (Any other combination of p-values for the test is also allowed.)
+#'   Any other combination of p-values for the test is also allowed (see 
+#'   argument \code{record}).
 #'   
 #'   According to Brown's method (Brown, 1975) for the union of dependent 
 #'   p-values, the statistic follows a \eqn{c \chi^2_{df}} distribution, 
@@ -23,28 +24,28 @@
 #'   statistics.
 #'   
 #'   Power studies indicate that this and \code{\link{foster.test}} using all
-#'   four types of records and linear weights are the two most powerful records
+#'   four types of record and linear weights are the two most powerful records
 #'   tests for trend detection against a linear drift model. In particular, 
 #'   this test is more powerful than Mann-Kendall test against alternatives 
-#'   with a linear drift in location in series of generalized Pareto variables
-#'   and some cases of the generalized extreme value variables. See Cebrián, 
-#'   Castillo-Mateo and Asín (2021) for the details.
+#'   with a linear drift in location in series of generalised Pareto variables
+#'   and some cases of the generalised extreme value variables (see Cebrián, 
+#'   Castillo-Mateo and Asín, 2021).
 #'   
 #' @param X A numeric vector, matrix (or data frame).
 #' @param weights A function indicating the weight given to the different 
 #'   records according to their position in the series,
 #'   e.g., if \code{function(t) t-1} then \eqn{\omega_t = t-1}.
-#' @param record Logical vector. Vector with four elements indicating if the 
-#'   p-value of the test for forward upper, forward lower, backward upper and
-#'   backward lower are going to be used, respectively. Logical values or 0,1 
-#'   values are accepted.
-#' @param alternative Vector with four character string taking values 
+#' @param record Vector of length four. Each element is a logical indicating if
+#'   the p-value of the test for forward upper, forward lower, backward upper 
+#'   and backward lower are going to be used, respectively. Logical values or 
+#'   0,1 values are accepted.
+#' @param alternative Vector of length four. Each element is one of 
 #'   \code{"greater"} or \code{"less"} indicating the alternative hypothesis 
 #'   in every test (for forward upper, forward lower, backward upper and 
-#'   backward lower records , respectively). Under the alternative hypothesis 
+#'   backward lower records, respectively). Under the alternative hypothesis 
 #'   of linear trend the FU and BL records will be greater and the FL and BU
 #'   records will be less than under the null, but other combinations (e.g., 
-#'   for trend in variability) could be considered.
+#'   for trend in variation) could be considered.
 #' @param correct Logical. Indicates, whether a continuity correction 
 #'   should be applied in \code{\link{N.test}}; defaults to \code{TRUE}.
 #' @return A \code{"htest"} object with elements:
@@ -61,7 +62,7 @@
 #' \emph{Biometrics}. \strong{31}(4), 987–992. 
 #' 
 #' Cebrián A, Castillo-Mateo J, Asín J (2021).
-#' “Record Tests to detect non stationarity in the tails with an application to climate change.”
+#' “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
 #' Available at Research Square \doi{10.21203/rs.3.rs-214787/v1}
 #' 
 #' Kost JT, McDermott MP (2002). “Combining Dependent P-Values.”
