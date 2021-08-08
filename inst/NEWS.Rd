@@ -3,7 +3,7 @@
 \newcommand{\cpkg}{\href{https://CRAN.R-project.org/package=#1}{\pkg{#1}}}
 \newcommand{\issue}{\href{https://github.com/JorgeCastilloMateo/RecordTest/issues/#1}{(issue #1)}}
 
-\section{Changes in Version 2.1.0 ()}{
+\section{Changes in Version 2.1.0 (05 August 2021)}{
   \subsection{NEW FEATURES}{
     \itemize{
       \item New function \code{change.point} to perform the Castillo-Mateo change-point detection tests was added. 

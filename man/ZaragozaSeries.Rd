@@ -11,7 +11,7 @@ A matrix with 70 rows and 76 columns.
 data(ZaragozaSeries)
 }
 \description{
-The matrix resulting from the data-preparation (or 
+The matrix resulting from the data preparation (or 
   pre-processing) of \code{\link{TX_Zaragoza}$TX}.
 }
 \details{
@@ -21,8 +21,8 @@ The matrix is the result from applying:
   The data matrix corresponds to the 70 years with observations in 
   \code{\link{TX_Zaragoza}$TX} and to the 76 days in the year where adjacent
   daily maximum temperature subseries are uncorrelated. By coincidence, 
-  none of the subseries 4, 90 or 278 with imputed values is kept within the
-  76 uncorrelated days.
+  none of the subseries 4, 90 or 278 with missing observations is kept 
+  within the 76 uncorrelated days.
 }
 \seealso{
 \code{\link{TX_Zaragoza}}
