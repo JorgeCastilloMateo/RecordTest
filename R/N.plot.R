@@ -107,6 +107,7 @@ N.plot <- function(X,
   if (!is.function(weights)) { stop("'weights' should be a function") }
   backward <- match.arg(backward)
   conf.aes <- match.arg(conf.aes)
+  record   <- as.logical(record)
   
   DNAME <- deparse(substitute(X))
   fun   <- deparse(weights)[2]
@@ -171,8 +172,8 @@ N.plot <- function(X,
     ggplot2::labs(title = METHOD, subtitle = paste("Data:", DNAME), x = "Time", y = ylabel) +
     ggplot2::geom_line(ggplot2::aes(y = mu, linetype = "CI"), colour = conf.col) +
     ggplot2::theme(legend.position = "bottom") +
-    ggplot2::scale_colour_manual(name = "Records", values = point.col, label = c("FU" = "Forward Upper", "FL" = "Forward Lower", "BU" = "Backward Upper", "BL" = "Backward Lower"), breaks = c("FU", "FL", "BU", "BL")) +
-    ggplot2::scale_shape_manual(name = "Records", values = point.shape, label = c("FU" = "Forward Upper", "FL" = "Forward Lower", "BU" = "Backward Upper", "BL" = "Backward Lower"), breaks = c("FU", "FL", "BU", "BL")) +
+    ggplot2::scale_colour_manual(name = "Records", values = point.col[record], label = c("FU" = "Forward Upper", "FL" = "Forward Lower", "BU" = "Backward Upper", "BL" = "Backward Lower")[record], breaks = c("FU", "FL", "BU", "BL")[record]) +
+    ggplot2::scale_shape_manual(name = "Records", values = point.shape[record], label = c("FU" = "Forward Upper", "FL" = "Forward Lower", "BU" = "Backward Upper", "BL" = "Backward Lower")[record], breaks = c("FU", "FL", "BU", "BL")[record]) +
     ggplot2::guides(colour = ggplot2::guide_legend(order = 1), shape = ggplot2::guide_legend(order = 1), linetype = ggplot2::guide_legend(order = 2))
   ###################################
   # plot CI

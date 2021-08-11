@@ -124,6 +124,7 @@ p.plot <- function(X,
   plot <- as.character(plot)
   plot <- match.arg(plot)
   conf.aes <- match.arg(conf.aes)
+  record   <- as.logical(record)
   
   DNAME <- deparse(substitute(X))
   Trows <- NROW(X)
@@ -219,13 +220,13 @@ p.plot <- function(X,
     if (record[1]) { graf <- graf + ggplot2::geom_smooth(formula = smooth.formula, method = smooth.method, ..., mapping = ggplot2::aes(y = p.FU, weight = weights, colour = "FU", linetype = "FU"), se = FALSE, alpha = 0.1) }
   
     graf <- graf + 
-      ggplot2::scale_linetype_manual(name = "Records", values = smooth.linetype, label = c("FU" = "Forward Upper", "FL" = "Forward Lower", "BU" = "Backward Upper", "BL" = "Backward Lower"), breaks = c("FU", "FL", "BU", "BL"))
+      ggplot2::scale_linetype_manual(name = "Records", values = smooth.linetype[record], label = c("FU" = "Forward Upper", "FL" = "Forward Lower", "BU" = "Backward Upper", "BL" = "Backward Lower")[record], breaks = c("FU", "FL", "BU", "BL")[record])
   }
   ###################################
      
   graf <- graf + 
-    ggplot2::scale_colour_manual(name = "Records", values = point.col, label = c("FU" = "Forward Upper", "FL" = "Forward Lower", "BU" = "Backward Upper", "BL" = "Backward Lower"), breaks = c("FU", "FL", "BU", "BL")) +
-    ggplot2::scale_shape_manual(name = "Records", values = point.shape, label = c("FU" = "Forward Upper", "FL" = "Forward Lower", "BU" = "Backward Upper", "BL" = "Backward Lower"), breaks = c("FU", "FL", "BU", "BL")) +
+    ggplot2::scale_colour_manual(name = "Records", values = point.col[record], label = c("FU" = "Forward Upper", "FL" = "Forward Lower", "BU" = "Backward Upper", "BL" = "Backward Lower")[record], breaks = c("FU", "FL", "BU", "BL")[record]) +
+    ggplot2::scale_shape_manual(name = "Records", values = point.shape[record], label = c("FU" = "Forward Upper", "FL" = "Forward Lower", "BU" = "Backward Upper", "BL" = "Backward Lower")[record], breaks = c("FU", "FL", "BU", "BL")[record]) +
     ggplot2::theme(legend.position = "bottom")
   
   return(graf)

@@ -3,6 +3,24 @@
 \newcommand{\cpkg}{\href{https://CRAN.R-project.org/package=#1}{\pkg{#1}}}
 \newcommand{\issue}{\href{https://github.com/JorgeCastilloMateo/RecordTest/issues/#1}{(issue #1)}}
 
+\section{Changes in Version 2.1.1 ()}{
+  \subsection{NEW FEATURES}{
+    \itemize{
+      \item 
+    }
+  }
+  \subsection{MODIFICATIONS}{
+    \itemize{
+      \item 
+    }
+  }
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item Functions \code{N.plot} and \code{p.plot} displayed all four types of records in the legend, even when only one type of record was plotted. Now the legend only shows the type of records that are plotted.
+    }
+  }
+}
+
 \section{Changes in Version 2.1.0 (05 August 2021)}{
   \subsection{NEW FEATURES}{
     \itemize{
