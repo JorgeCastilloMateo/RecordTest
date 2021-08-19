@@ -1,8 +1,8 @@
 Package: RecordTest
 Type: Package
 Title: Inference Tools in Time Series Based on Record Statistics
-Version: 2.1.0.9000
-Date: 2021-08-05
+Version: 2.1.0.9001
+Date: 2021-08-19
 Authors@R: c(
   person("Jorge", "Castillo-Mateo", role = c("aut","cre","cph"), email = "jorgecastillomateo@gmail.com", comment = c(ORCID = "0000-0003-3859-0248")),
   person("Ana C.", "Cebrián", role = "ths", comment = c(ORCID = "0000-0002-9052-9674")),

@@ -3,14 +3,14 @@
 #'   geom_ribbon geom_errorbar labs
 #' @importFrom stats qnorm
 #' @description This function builds a ggplot object to display two-sided
-#'   confidence intervals based on Foster-Stuart and Diersen-Trenkler 
+#'   reference intervals based on Foster-Stuart and Diersen-Trenkler 
 #'   statistics to study the hypothesis of the classical record model (i.e., 
 #'   of IID continuous RVs).
 #' @details 
 #'   The function plots the observed values of the statistic selected with 
 #'   \code{statistic}, obtained with the series up to time \eqn{t} for 
 #'   \eqn{t=1,\ldots,T}. The plot also includes the expected values and 
-#'   confidence intervals (CIs) based on the asymptotic normal distribution 
+#'   reference intervals (RIs) based on the asymptotic normal distribution 
 #'   of the statistics under the null hypothesis.
 #' 
 #'   This function implements the same ideas that \code{\link{N.plot}}, but with
@@ -28,13 +28,13 @@
 #'   calculated, i.e., one of \code{"D"}, \code{"d"}, \code{"S"}, \code{"s"},
 #'   \code{"U"}, \code{"L"} or \code{"W"} (see \code{\link{foster.test}}).
 #' @param point.col,point.shape Value with the colour and shape of the points. 
-#' @param conf.int Logical. Indicates if the CIs are also shown.
-#' @param conf.level (If \code{conf.int == TRUE}) Confidence level of the CIs.
+#' @param conf.int Logical. Indicates if the RIs are also shown.
+#' @param conf.level (If \code{conf.int == TRUE}) Confidence level of the RIs.
 #' @param conf.aes (If \code{conf.int == TRUE}) A character string indicating 
-#'   the aesthetic to display for the CIs, \code{"ribbon"} (grey area) or 
+#'   the aesthetic to display for the RIs, \code{"ribbon"} (grey area) or 
 #'   \code{"errorbar"} (vertical lines).
 #' @param conf.col Colour used to plot the expected value and (if 
-#'   \code{conf.int == TRUE}) CIs.
+#'   \code{conf.int == TRUE}) RIs.
 #' @return A ggplot graph object.
 #' @author Jorge Castillo-Mateo
 #' @seealso \code{\link{foster.test}}, \code{\link{N.plot}}, 
@@ -191,11 +191,11 @@ foster.plot <- function(X,
   if (conf.int && conf.aes == "ribbon") {
     graf <- graf +
       ggplot2::geom_ribbon(ggplot2::aes(ymin = CI1, ymax = CI2, linetype = "CI"), alpha = 0.1, colour = conf.col) +
-      ggplot2::scale_linetype_manual(name = "Null hyp. IID", values = c("CI" = 1), label = c("CI" = paste0("Expectation and ", 100 * conf.level, "% Normal CI")))
+      ggplot2::scale_linetype_manual(name = "Null hyp. IID", values = c("CI" = 1), label = c("CI" = paste0("Expectation and ", 100 * conf.level, "% Normal RI")))
   } else if (conf.int && conf.aes == "errorbar") { 
     graf <- graf +
       ggplot2::geom_errorbar(ggplot2::aes(ymin = CI1, ymax = CI2, linetype = 'CI'), width = 0.2, colour = conf.col) +
-      ggplot2::scale_linetype_manual(name = "Null hyp. IID", values = c("CI" = 1), label = c("CI" = paste0("Expectation and ", 100 * conf.level, "% Normal CI")))
+      ggplot2::scale_linetype_manual(name = "Null hyp. IID", values = c("CI" = 1), label = c("CI" = paste0("Expectation and ", 100 * conf.level, "% Normal RI")))
   } else {
     graf <- graf +
       ggplot2::scale_linetype_manual(name = "Null hyp. IID", values = c("CI" = 1), label = c("CI" = "Expectation"))

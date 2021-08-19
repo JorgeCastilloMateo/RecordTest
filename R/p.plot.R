@@ -20,12 +20,12 @@
 #'   The expected values under the classical record model are \eqn{1} for any
 #'   value \eqn{t}, so that a cloud of points around \eqn{1} and with no trend
 #'   should be expected. The estimated values are plotted, together with 
-#'   binomial confidence intervals (CIs). In addition, a smoothing function
+#'   binomial reference intervals (RIs). In addition, a smoothing function
 #'   can be fitted to the cloud of points.
 #'   
 #'   Type 2 is the plot of the estimated record probabilities \eqn{p_t} versus
 #'   time \eqn{t}. The expected probabilities under the classical record model, 
-#'   \eqn{p_t=1/t}, are also plotted, together with binomial CIs. 
+#'   \eqn{p_t=1/t}, are also plotted, together with binomial RIs. 
 #'   
 #'   Type 3 is the same plot but on a logarithmic scale, so that the
 #'   expected value is \eqn{-\log(t)}. In this case, another smoothing 
@@ -44,13 +44,13 @@
 #' @param point.col,point.shape Vector with four elements indicating the colour
 #'   and shape of the points. Every one of the four elements represents forward
 #'   upper, forward lower, backward upper and backward lower, respectively.
-#' @param conf.int Logical. Indicates if the CIs are also shown.
-#' @param conf.level (If \code{conf.int == TRUE}) Confidence level of the CIs.
+#' @param conf.int Logical. Indicates if the RIs are also shown.
+#' @param conf.level (If \code{conf.int == TRUE}) Confidence level of the RIs.
 #' @param conf.aes (If \code{conf.int == TRUE}) A character string indicating 
-#'   the aesthetic to display for the CIs, \code{"ribbon"} (grey area) or 
+#'   the aesthetic to display for the RIs, \code{"ribbon"} (grey area) or 
 #'   \code{"errorbar"} (vertical lines).
 #' @param conf.col Colour used to plot the expected value and (if 
-#'   \code{conf.int == TRUE}) CIs.
+#'   \code{conf.int == TRUE}) RIs.
 #' @param smooth (If \code{plot = 1} or \code{3}) Logical. If \code{TRUE}, a
 #'   smoothing in the probabilities is also plotted.
 #' @param smooth.formula (\code{smooth = TRUE}) \code{\link{formula}} to use 
@@ -197,11 +197,11 @@ p.plot <- function(X,
   if (conf.int && conf.aes == "ribbon") {
     graf <- graf + 
       ggplot2::geom_ribbon(ggplot2::aes(ymin = CI1, ymax = CI2, size = "CI"), alpha = 0.1, colour = conf.col) +
-      ggplot2::scale_size_manual(name = "Null hyp. IID", values = c("CI" = 0.5), label = c("CI" = paste0("Expectation and ", 100 * conf.level, "% Binomial CI")))
+      ggplot2::scale_size_manual(name = "Null hyp. IID", values = c("CI" = 0.5), label = c("CI" = paste0("Expectation and ", 100 * conf.level, "% Binomial RI")))
   } else if (conf.int && conf.aes == "errorbar") {
     graf <- graf + 
       ggplot2::geom_errorbar(ggplot2::aes(ymin = CI1, ymax = CI2, size = "CI"), width = 0.2, colour = conf.col) +
-      ggplot2::scale_size_manual(name = "Null hyp. IID", values = c("CI" = 0.5), label = c("CI" = paste0("Expectation and ", 100 * conf.level, "% Binomial CI")))
+      ggplot2::scale_size_manual(name = "Null hyp. IID", values = c("CI" = 0.5), label = c("CI" = paste0("Expectation and ", 100 * conf.level, "% Binomial RI")))
   } else {
     graf <- graf +
       ggplot2::scale_size_manual(name = "Null hyp. IID", values = c("CI" = 0.5), label = c("CI" = "Expectation"))

@@ -4,14 +4,9 @@
 \newcommand{\issue}{\href{https://github.com/JorgeCastilloMateo/RecordTest/issues/#1}{(issue #1)}}
 
 \section{Changes in Version 2.1.1 ()}{
-  \subsection{NEW FEATURES}{
-    \itemize{
-      \item 
-    }
-  }
   \subsection{MODIFICATIONS}{
     \itemize{
-      \item 
+      \item Confidence intervals (CIs) are renamed to reference intervals (RIs) in the \sQuote{MANUAL} and legends for being a more appropriate definition for these intervals (no argument will be modified).
     }
   }
   \subsection{BUG FIXES}{

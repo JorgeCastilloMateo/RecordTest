@@ -40,16 +40,16 @@ that until each time \eqn{t} the series has only been observed up to
 and shape of the points. Every one of the four elements represents forward
 upper, forward lower, backward upper and backward lower, respectively.}
 
-\item{conf.int}{Logical. Indicates if the CIs are also shown.}
+\item{conf.int}{Logical. Indicates if the RIs are also shown.}
 
-\item{conf.level}{(If \code{conf.int == TRUE}) Confidence level of the CIs.}
+\item{conf.level}{(If \code{conf.int == TRUE}) Confidence level of the RIs.}
 
 \item{conf.aes}{(If \code{conf.int == TRUE}) A character string indicating 
-the aesthetic to display for the CIs, \code{"ribbon"} (grey area) or 
+the aesthetic to display for the RIs, \code{"ribbon"} (grey area) or 
 \code{"errorbar"} (vertical lines).}
 
 \item{conf.col}{Colour used to plot the expected value and (if 
-\code{conf.int == TRUE}) CIs.}
+\code{conf.int == TRUE}) RIs.}
 }
 \value{
 A ggplot object.
@@ -57,7 +57,7 @@ A ggplot object.
 \description{
 This function builds a ggplot object to compare the sample
   means of the (weighted) number of records in a vector up to time \eqn{t}, 
-  \eqn{\bar N_{t.}^\omega}, and the expected values 
+  \eqn{\bar N_{t}^\omega}, and the expected values 
   \eqn{\textrm{E}(N_t^{\omega})} 
   under the classical record model (i.e., of IID continuous RVs).
 }
@@ -65,12 +65,12 @@ This function builds a ggplot object to compare the sample
 This plot is associated to the test \code{\link{N.test}}.
   It calculates the sample means of the number of records in a set of
   vectors up to every time \eqn{t} (see \code{\link{Nmean.record}}). 
-  These sample means \eqn{\bar N_{t.}^\omega} are calculated from the sample of
+  These sample means \eqn{\bar N_{t}^\omega} are calculated from the sample of
   \eqn{M} values obtained from \eqn{M} vectors, the columns of matrix 
   \code{X}. Then, these values are plotted and compared with the expected 
-  values \eqn{\textrm{E}(N_t^{\omega})} and their confidence intervals (CIs), under
-  the hypothesis of the classical record model. The CIs of 
-  \eqn{\bar N_{t.}^\omega} uses the fact that, under the classical record 
+  values \eqn{\textrm{E}(N_t^{\omega})} and their reference intervals (RIs), under
+  the hypothesis of the classical record model. The RIs of 
+  \eqn{\bar N_{t}^\omega} uses the fact that, under the classical record 
   model, the statistic is asymptotically Normal.
   
   The plot can show the four types of record at the same time (i.e., 
@@ -86,7 +86,7 @@ This plot is associated to the test \code{\link{N.test}}.
   (2021).
 }
 \examples{
-# Plot at Zaragoza, with linear weights and error bar as CIs aesthetic
+# Plot at Zaragoza, with linear weights and error bar as RIs aesthetic
 N.plot(ZaragozaSeries, weights = function(t) t-1, conf.aes = "errorbar")
 
 # Plot only upper records

@@ -29,16 +29,16 @@ calculated, i.e., one of \code{"D"}, \code{"d"}, \code{"S"}, \code{"s"},
 
 \item{point.col, point.shape}{Value with the colour and shape of the points.}
 
-\item{conf.int}{Logical. Indicates if the CIs are also shown.}
+\item{conf.int}{Logical. Indicates if the RIs are also shown.}
 
-\item{conf.level}{(If \code{conf.int == TRUE}) Confidence level of the CIs.}
+\item{conf.level}{(If \code{conf.int == TRUE}) Confidence level of the RIs.}
 
 \item{conf.aes}{(If \code{conf.int == TRUE}) A character string indicating 
-the aesthetic to display for the CIs, \code{"ribbon"} (grey area) or 
+the aesthetic to display for the RIs, \code{"ribbon"} (grey area) or 
 \code{"errorbar"} (vertical lines).}
 
 \item{conf.col}{Colour used to plot the expected value and (if 
-\code{conf.int == TRUE}) CIs.}
+\code{conf.int == TRUE}) RIs.}
 }
 \value{
 A ggplot graph object.
@@ -53,7 +53,7 @@ This function builds a ggplot object to display two-sided
 The function plots the observed values of the statistic selected with 
   \code{statistic}, obtained with the series up to time \eqn{t} for 
   \eqn{t=1,\ldots,T}. The plot also includes the expected values and 
-  confidence intervals (CIs) based on the asymptotic normal distribution 
+  reference intervals (RIs) based on the asymptotic normal distribution 
   of the statistics under the null hypothesis.
 
   This function implements the same ideas that \code{\link{N.plot}}, but with
