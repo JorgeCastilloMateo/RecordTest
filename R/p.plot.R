@@ -227,7 +227,8 @@ p.plot <- function(X,
   graf <- graf + 
     ggplot2::scale_colour_manual(name = "Records", values = point.col[record], label = c("FU" = "Forward Upper", "FL" = "Forward Lower", "BU" = "Backward Upper", "BL" = "Backward Lower")[record], breaks = c("FU", "FL", "BU", "BL")[record]) +
     ggplot2::scale_shape_manual(name = "Records", values = point.shape[record], label = c("FU" = "Forward Upper", "FL" = "Forward Lower", "BU" = "Backward Upper", "BL" = "Backward Lower")[record], breaks = c("FU", "FL", "BU", "BL")[record]) +
-    ggplot2::theme(legend.position = "bottom")
+    ggplot2::theme(legend.position = "bottom") +
+    ggplot2::guides(colour = ggplot2::guide_legend(order = 1), shape = ggplot2::guide_legend(order = 1), linetype = ggplot2::guide_legend(order = 1), size = ggplot2::guide_legend(order = 2))
   
   return(graf)
 }
