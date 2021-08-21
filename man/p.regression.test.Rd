@@ -24,8 +24,8 @@ By default \code{formula = y ~ x}. See Note for a caveat.}
 
 \item{simulate.p.value}{Logical. Indicates whether to compute p-values by
 Monte Carlo simulation. It is recommended if the number of columns of
-\code{X} (i.e., the number of series) is lower than 12, since for lower 
-values the size of the test is not fulfilled.}
+\code{X} (i.e., the number of series) is equal or lower than 10, since 
+for low values the size of the test is not fulfilled.}
 
 \item{B}{If \code{simulate.p.value = TRUE}, an integer specifying the 
 number of replicates used in the Monte Carlo estimation.}
