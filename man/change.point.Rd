@@ -28,11 +28,9 @@ showed that the weights that get more power for this test are
 \code{record = "s"}.}
 
 \item{record}{A character string that indicates the type of statistic used.
-If \code{record = "upper"} or \code{= "lower"}, the \eqn{I_{tm}}'s are the
-upper or lower record indicators, respectively. If \code{record = "d"} or 
-\code{= "s"}, \eqn{I_{tm}} is substituted in the expressions above by 
-\eqn{I_{tm}^{(FU)} - I_{tm}^{(FL)}} or 
-\eqn{I_{tm}^{(FU)} + I_{tm}^{(FL)}}, respectively.}
+The statistic with \code{"upper"} or \code{= "lower"} records, or the 
+statistic with the difference, \code{"d"}, or the sum, \code{"s"}, of 
+upper and lower records.}
 
 \item{correct}{A character string that indicates the continuity correction
 in the Kolmogorov distribution made to the statistic. "fisher" (Fisher and
@@ -67,44 +65,28 @@ The test is implemented as given by Castillo-Mateo (2021). The null
   hypothesis is that 
   \deqn{H_0: p_t = 1/t, \qquad t=1,\ldots,T,}
   where \eqn{p_t} is the probability of (upper and/or lower) record at time 
-  \eqn{t} and \eqn{T} is the length of the series, which corresponds to the 
-  setup where the data come from a population with continuous independent 
-  and identically distributed realisations. The two-sided alternative 
-  hypothesis is that 
+  \eqn{t}. The two-sided alternative hypothesis is that 
   \deqn{H_1: p_t = 1/t, \quad t=1,\ldots,t_0, \qquad p_t \neq 1/t, \quad t=t_0+1,\ldots,T,}
   for a change-point \eqn{t_0}.
   
   The variables used for the statistic are
-  \deqn{
-  \xi_{Tt} = \omega_t \frac{\left( \frac{1}{M}\sum_{m=1}^{M}  I_{tm} -  E(I_{tm})\right)}{\sigma_T},
-  }
-  where \eqn{\sigma_t^2 = \sum_{k=1}^{t} \omega_k^2 Var(I_k) / M} and
-  \eqn{\omega_t} are weights given to the different records according
-  to their position in the \eqn{m}th series of length \eqn{T}. If 
-  \code{record = "upper"} or \code{= "lower"},
-  the \eqn{I_{tm}}'s are the upper or lower record indicators, respectively
-  (see \code{\link{I.record}}). If \code{record = "d"} or \code{= "s"},
-  \eqn{I_{tm}} is substituted in the expressions above by 
-  \eqn{I_{tm}^{(FU)} - I_{tm}^{(FL)}} or 
-  \eqn{I_{tm}^{(FU)} + I_{tm}^{(FL)}}, respectively. Let 
-  \eqn{S_{Tt} = \sum_{k=1}^{t} \xi_{Tk}}, 
-  \eqn{s_{Tt} = \sum_{k=1}^{t} Var(\xi_{Tk})} and define the statistic
-  \deqn{
-  W_T(s) = S_{Tt} + \xi_{T,t+1} \frac{s - s_{Tt}}{s_{T,t+1} - s_{Tt}},
-  }
-  where \eqn{s \in [s_{Tt}, s_{T,t+1}]}.
+  \deqn{K^{\omega}_T = \max_{1\le t \le T} \left| \frac{N_{t}^{\omega} - \textrm{E}(N_{t}^{\omega})}{\sqrt{\textrm{VAR}(N_{T}^{\omega})}} - \frac{\textrm{VAR}(N_{t}^{\omega})}{\textrm{VAR}(N_{T}^{\omega})} \frac{N_{T}^{\omega} - \textrm{E}(N_{T}^{\omega})}{\sqrt{\textrm{VAR}(N_{T}^{\omega})}} \right|,}
+  where \eqn{N_{t}^\omega = \sum_{m=1}^M \sum_{j=1}^t \omega_j I_{jm}}, and
+  the estimated change-point \eqn{\hat{t}_0} is the value \eqn{t} where 
+  \eqn{K^{\omega}_T} attains its maximum.
   
-  The test statistic is the maximum of the absolute value of the vector
-  \deqn{
-  K_T = \max_{1\le t \le T} |B_T(s_{Tt})|,
-  }
-  where \eqn{B_T(s) = W_T(s) - s W_T(1)}, \eqn{s \in [0,1]}.
+  Argument \code{record} indicates if the \eqn{I_{tm}}'s are the 
+  \code{"upper"} or \code{"lower"} record indicators (see 
+  \code{\link{I.record}}). If \code{record = "d"} or \code{= "s"},
+  \eqn{N_{t}^\omega} is substituted in the expressions above by 
+  \eqn{d_{t}^{\omega,(F)} = N_{t}^{\omega,(FU)} - N_{t}^{\omega,(FL)}} or 
+  \eqn{s_{t}^{\omega,(F)} = N_{t}^{\omega,(FU)} + N_{t}^{\omega,(FL)}}, 
+  respectively.
   
-  The probable change-point \eqn{\hat{t}_0} is located where \eqn{|B_T(s_{Tt})|} has its 
-  maximum. The p-value is calculated by means of the asymptotic Kolmogorov
+  The p-value is calculated by means of the asymptotic Kolmogorov
   distribution. When \eqn{\omega_t \neq 1}, the asymptotic result is not 
-  fulfilled. In that case, the p-value can be simulated using Monte Carlo 
-  techniques with the option \code{simulate.p.value = TRUE}.
+  fulfilled. In that case, the p-value should be simulated using Monte Carlo 
+  simulations with the option \code{simulate.p.value = TRUE}.
   
   As this is an asymptotic result, it has been seen that the size and power
   may be a little below than expected, to correct this, any of the 

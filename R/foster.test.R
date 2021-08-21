@@ -24,7 +24,7 @@
 #'   \deqn{\sum_{m=1}^{M} \sum_{t=1}^{T} \omega_t \left( I_{tm}^{(FU)} + I_{tm}^{(FL)}\right).}
 #'
 #'   If \code{statistic == "S"}, 
-#'   \deqn{\sum_{m=1}^{M} \sum_{t=1}^{T} \omega_t \left( I_{tm}^{(FU)} + I_{tm}^{(FL)} + I_{tm}^{(BU)} + I_{tm}^{(BL)}\right).}
+#'   \deqn{\sum_{m=1}^{M} \sum_{t=1}^{T} \omega_t \left( I_{tm}^{(FU)} + I_{tm}^{(FL)} - I_{tm}^{(BU)} - I_{tm}^{(BL)}\right).}
 #' 
 #'   If \code{statistic == "U"}, 
 #'   \deqn{\sum_{m=1}^{M} \sum_{t=1}^{T} \omega_t \left( I_{tm}^{(FU)} - I_{tm}^{(BU)}\right).}
