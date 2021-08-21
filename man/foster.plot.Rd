@@ -45,7 +45,7 @@ A ggplot graph object.
 }
 \description{
 This function builds a ggplot object to display two-sided
-  confidence intervals based on Foster-Stuart and Diersen-Trenkler 
+  reference intervals based on Foster-Stuart and Diersen-Trenkler 
   statistics to study the hypothesis of the classical record model (i.e., 
   of IID continuous RVs).
 }

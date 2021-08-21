@@ -9,27 +9,27 @@
 #'   one-sided alternative hypothesis is that the (weighted) number of records
 #'   is greater (or less) than under the null hypothesis. The 
 #'   (weighted)-number-of-records statistic is calculated according to:
-#'   \deqn{N_{..}^\omega = \sum_{m=1}^M \sum_{t=1}^T \omega_t I_{tm},} 
+#'   \deqn{N^\omega = \sum_{m=1}^M \sum_{t=1}^T \omega_t I_{tm},} 
 #'   where \eqn{\omega_t} are weights given to the different records
 #'   according to their position in the series and \eqn{I_{tm}} are the record
 #'   indicators (see \code{\link{I.record}}).
 #'   
-#'   The statistic \eqn{N_{..}^\omega} is exact Poisson binomial distributed
+#'   The statistic \eqn{N^\omega} is exact Poisson binomial distributed
 #'   when the \eqn{\omega_t}'s only take values in \eqn{\{0,1\}}. In any case,
 #'   it is also approximately normally distributed, with
-#'   \deqn{Z = \frac{N_{..}^\omega - \mu}{\sigma},}
+#'   \deqn{Z = \frac{N^\omega - \mu}{\sigma},}
 #'   where its mean and variance are
 #'   \deqn{\mu = M \sum_{t=1}^T \omega_t \frac{1}{t},} 
 #'   \deqn{\sigma^2 = M \sum_{t=2}^T \omega_t^2 \frac{1}{t} \left(1-\frac{1}{t}\right).} 
 #'   
 #'   If \code{correct = TRUE}, then a continuity correction will be employed:
-#'   \deqn{Z = \frac{N_{..}^\omega \pm 0.5 - \mu}{\sigma},}
+#'   \deqn{Z = \frac{N^\omega \pm 0.5 - \mu}{\sigma},}
 #'   with ``\eqn{-}'' if the alternative is greater and ``\eqn{+}'' if the 
 #'   alternative is less.
 #'   
 #'   When \eqn{M>1}, the expression of the variance under the null hypothesis
 #'   can be substituted by the sample variance in the \eqn{M} series, 
-#'   \eqn{\hat{\sigma}^2}. In this case, the statistic \eqn{N_{S,..}^\omega}
+#'   \eqn{\hat{\sigma}^2}. In this case, the statistic \eqn{N_{S}^\omega}
 #'   is asymptotically \eqn{t} distributed, which is a more robust alternative
 #'   against serial correlation.
 #'   
@@ -74,7 +74,7 @@
 #'   \item{p.value}{P-value.}
 #'   \item{alternative}{The alternative hypothesis.}
 #'   \item{estimate}{(If \code{distribution = "normal"}) A vector with the
-#'     value of \eqn{N_{..}^\omega}, \eqn{\mu} and \eqn{\sigma^2}.}
+#'     value of \eqn{N^\omega}, \eqn{\mu} and \eqn{\sigma^2}.}
 #'   \item{method}{A character string indicating the type of test performed.}
 #'   \item{data.name}{A character string giving the name of the data.}
 #' @author Jorge Castillo-Mateo
