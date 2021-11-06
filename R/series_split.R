@@ -47,9 +47,10 @@
 #'   \code{\link{series_rev}}, \code{\link{series_ties}},
 #'   \code{\link{series_uncor}}, \code{\link{series_untie}}
 #' @references 
-#' Cebrián A, Castillo-Mateo J, Asín J (2021).
+#' Cebrián AC, Castillo-Mateo J, Asín J (2021).
 #' “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
-#' Available at Research Square \doi{10.21203/rs.3.rs-214787/v1}
+#' \emph{Stochastic Environmental Research and Risk Assessment}. 
+#' \doi{10.1007/s00477-021-02122-w}
 #' 
 #' @examples
 #' series_split(1:100, Mcols = 10)

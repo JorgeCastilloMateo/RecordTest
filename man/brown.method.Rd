@@ -91,9 +91,10 @@ brown.method(ZaragozaSeries, weights = function(t) t-1, record = c(0,1,0,1))
 Brown M (1975). “A Method for Combining Non-Independent, One-Sided Tests of Significance.” 
 \emph{Biometrics}. \strong{31}(4), 987–992. 
 
-Cebrián A, Castillo-Mateo J, Asín J (2021).
+Cebrián AC, Castillo-Mateo J, Asín J (2021).
 “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
-Available at Research Square \doi{10.21203/rs.3.rs-214787/v1}
+\emph{Stochastic Environmental Research and Risk Assessment}. 
+\doi{10.1007/s00477-021-02122-w}
 
 Kost JT, McDermott MP (2002). “Combining Dependent P-Values.”
 \emph{Statistics & Probability Letters}, \strong{60}(2), 183-190.

@@ -3,10 +3,12 @@
 \newcommand{\cpkg}{\href{https://CRAN.R-project.org/package=#1}{\pkg{#1}}}
 \newcommand{\issue}{\href{https://github.com/JorgeCastilloMateo/RecordTest/issues/#1}{(issue #1)}}
 
-\section{Changes in Version 2.1.1 ()}{
+\section{Changes in Version 2.1.1 (07 November 2021)}{
   \subsection{MODIFICATIONS}{
     \itemize{
-      \item Confidence intervals (CIs) are renamed to reference intervals (RIs) in the \sQuote{MANUAL} and legends for being a more appropriate definition for these intervals (no argument will be modified).
+      \item References update for the publication of Cebrian, Castillo-Mateo and Asin (2021) <doi:10.1007/s00477-021-02122-w>.
+      \item The \sQuote{MANUAL} help pages were updated.
+      \item Confidence intervals (CIs) are renamed to reference intervals (RIs) in the \sQuote{MANUAL} and legends for being a more appropriate definition for these intervals (no argument is modified).
     }
   }
   \subsection{BUG FIXES}{

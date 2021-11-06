@@ -137,9 +137,10 @@ Benestad RE (2004).
 “Record-Values, Nonstationarity Tests and Extreme Value Distributions.” 
 \emph{Global and Planetary Change}, \strong{44}(1–4), 11–26. 
 
-Cebrián A, Castillo-Mateo J and Asín J (2021).
+Cebrián AC, Castillo-Mateo J, Asín J (2021).
 “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
-Available at Research Square \doi{10.21203/rs.3.rs-214787/v1}
+\emph{Stochastic Environmental Research and Risk Assessment}. 
+\doi{10.1007/s00477-021-02122-w}
 }
 \seealso{
 \code{\link{p.regression.test}}

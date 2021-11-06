@@ -87,9 +87,10 @@
 #' \emph{Methodology and Computing in Applied Probability}, \strong{19}(2), 557-571.
 #' \doi{10.1007/s11009-016-9533-4}
 #' 
-#' Cebrián A, Castillo-Mateo J and Asín J (2021).
+#' Cebrián AC, Castillo-Mateo J, Asín J (2021).
 #' “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
-#' Available at Research Square \doi{10.21203/rs.3.rs-214787/v1}
+#' \emph{Stochastic Environmental Research and Risk Assessment}. 
+#' \doi{10.1007/s00477-021-02122-w}
 #' 
 #' Hong Y (2013). 
 #' “On Computing the Distribution Function for the Poisson Binomial Distribution.”
