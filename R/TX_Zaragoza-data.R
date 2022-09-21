@@ -1,21 +1,24 @@
 #' @title Time Series of Daily Maximum Temperature at Zaragoza (Spain)
-#' @description A dataset containing the series of daily maximum temperature at 
-#'   Zaragoza aeropuerto (Spain), from 01/01/1951 to 31/12/2020. Zaragoza is 
-#'   located at the north-east (+41:39:42 N, -001:00:29 W) of Iberian Peninsula
-#'   at 247 m above mean sea level. This series is obtained from the ECA&D 
-#'   series but it has been transformed, by removing days February
-#'   29th. The series has three \code{NA} missing observations corresponding 
-#'   to 31/03/1951, 04/01/1965, and 05/10/1965. The variables are the 
-#'   following:
+#' @description A dataset containing the non-blended series of daily maximum
+#'   temperatures at Zaragoza Aeropuerto (Spain), from 1951-01-01 to 
+#'   2020-12-31. The variables are the following:
 #'
 #' \itemize{
-#'   \item STAID : Station identifier
-#'   \item SOUID : Source identifier
-#'   \item DATE  : Date YYYYMMDD
-#'   \item TX    : Maximum temperature in 0.1ºC
-#'   \item Q_TX  : quality code for TX (0='valid'; 1='suspect'; 9='missing')
+#'   \item DATE  : Date \code{"\%Y-\%m-\%d"}
+#'   \item TX    : Maximum temperature in 0.1\eqn{^\circ}C
 #' }
-#'
+#' @details 
+#'   This series is obtained from the ECA&D series Station identifier (STAID)
+#'   238 and Source identifier (SOUID) 100734. Zaragoza is located at the 
+#'   north-east (+41:39:42 N, -001:00:29 W) of the Iberian Peninsula at 247 m.
+#'   
+#'   \code{TX_Zaragoza29F} is the original series. \code{TX_Zaragoza} is the
+#'   same but it does not include data for 29th of February, since when the 
+#'   series is splitted these days would yield a four-year time series
+#'   that is difficult to join to the analysis of the other yearly time series. 
+#'   
+#'   The series has three \code{NA} missing observations corresponding 
+#'   to 1951-03-31, 1965-01-04, and 1965-10-05. 
 #' @docType data
 #' @keywords datasets
 #' @name TX_Zaragoza
@@ -25,7 +28,14 @@
 #' Daily Dataset of 20th-Century Surface Air Temperature and Precipitation 
 #' Series for the European Climate Assessment.
 #' \emph{International Journal of Climatology}, \strong{22}(12), 1441-1453. 
-#' @usage data(TX_Zaragoza)
+#' @usage 
+#' data("TX_Zaragoza29F")
+#' data("TX_Zaragoza")
 #' @seealso \code{\link{ZaragozaSeries}}
-#' @format A data frame with 25550 rows and 5 variables.
+#' @format 
+#' \itemize{
+#'   \item \code{TX_Zaragoza29F} is a data frame with 25568 rows and 2 variables.
+#'   \item \code{TX_Zaragoza} is a data frame with 25550 rows and 2 variables.
+#' } 
+"TX_Zaragoza29F"
 "TX_Zaragoza"

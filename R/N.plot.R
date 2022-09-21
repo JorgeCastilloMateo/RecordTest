@@ -30,7 +30,7 @@
 #'   \code{backward}).
 #'   
 #'   More details of this plot are shown in Cebrián, Castillo-Mateo, Asín 
-#'   (2021).
+#'   (2022).
 #'   
 #' @param X A numeric vector, matrix (or data frame).
 #' @param weights A function indicating the weight given to the different 
@@ -61,9 +61,9 @@
 #' @seealso \code{\link{N.record}}, \code{\link{N.test}}, 
 #'   \code{\link{foster.test}}, \code{\link{foster.plot}}
 #' @references 
-#' Cebrián AC, Castillo-Mateo J, Asín J (2021).
+#' Cebrián AC, Castillo-Mateo J, Asín J (2022).
 #' “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
-#' \emph{Stochastic Environmental Research and Risk Assessment}. 
+#' \emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2): 313-330. 
 #' \doi{10.1007/s00477-021-02122-w}
 #' 
 #' @examples

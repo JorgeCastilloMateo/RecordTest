@@ -18,7 +18,7 @@
 #'   
 #'   These plots are useful to see the evolution in the record occurrence 
 #'   and to follow the evolution of the trend. The plot was proposed by 
-#'   Cebrián, Castillo-Mateo, Asín (2021) where its application is shown. 
+#'   Cebrián, Castillo-Mateo, Asín (2022) where its application is shown. 
 #'   
 #' @param X A numeric vector, matrix (or data frame).
 #' @param weights A function indicating the weight given to the different 
@@ -40,9 +40,9 @@
 #' @seealso \code{\link{foster.test}}, \code{\link{N.plot}}, 
 #'   \code{\link{N.test}}
 #' @references
-#' Cebrián AC, Castillo-Mateo J, Asín J (2021).
+#' Cebrián AC, Castillo-Mateo J, Asín J (2022).
 #' “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
-#' \emph{Stochastic Environmental Research and Risk Assessment}. 
+#' \emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2): 313-330. 
 #' \doi{10.1007/s00477-021-02122-w}
 #' 
 #' Diersen J, Trenkler G (1996). “Records Tests for Trend in Location.”
@@ -59,6 +59,7 @@
 #' “Distribution-Free Tests in Time-Series Based on the Breaking of Records.”
 #' \emph{Journal of the Royal Statistical Society. Series B (Methodological)}, 
 #' \strong{16}(1), 1-22.
+#' 
 #' @examples
 #' # D-statistic
 #' foster.plot(ZaragozaSeries)

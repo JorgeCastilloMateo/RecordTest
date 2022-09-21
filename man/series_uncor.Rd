@@ -51,7 +51,7 @@ This function is used in the data preparation (or pre-processing)
   theory of records within this package.
 
   Given a matrix \code{X} considered as a set of \eqn{M^*} vectors, which
-  are the columns of \code{X}, this function extracts the biggest subset 
+  are the columns of \code{X}, this function extracts a subset 
   of uncorrelated vectors (columns), using the following procedure: starting
   from column \code{m}, the test \code{\link[stats]{cor.test}} is applied to
   study the correlation between columns depending on argument \code{type}.

@@ -7,7 +7,7 @@
 #'   theory of records within this package.
 #'
 #'   Given a matrix \code{X} considered as a set of \eqn{M^*} vectors, which
-#'   are the columns of \code{X}, this function extracts the biggest subset 
+#'   are the columns of \code{X}, this function extracts a subset 
 #'   of uncorrelated vectors (columns), using the following procedure: starting
 #'   from column \code{m}, the test \code{\link[stats]{cor.test}} is applied to
 #'   study the correlation between columns depending on argument \code{type}.
@@ -49,9 +49,9 @@
 #'   \code{\link{series_rev}}, \code{\link{series_split}},
 #'   \code{\link{series_ties}}, \code{\link{series_untie}}
 #' @references 
-#' Cebrián AC, Castillo-Mateo J, Asín J (2021).
+#' Cebrián AC, Castillo-Mateo J, Asín J (2022).
 #' “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
-#' \emph{Stochastic Environmental Research and Risk Assessment}. 
+#' \emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2): 313-330. 
 #' \doi{10.1007/s00477-021-02122-w}
 #' 
 #' @examples

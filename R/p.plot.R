@@ -31,7 +31,7 @@
 #'   expected value is \eqn{-\log(t)}. In this case, another smoothing 
 #'   function can be fitted to the cloud of points.
 #'   
-#'   Type 1 plot was proposed by Cebrián, Castillo-Mateo, Asín (2021), while 
+#'   Type 1 plot was proposed by Cebrián, Castillo-Mateo, Asín (2022), while 
 #'   type 2 and 3 appear in Benestad (2003, Figures 8 and 9, 2004, Figure 4).
 #'
 #' @param X A numeric vector, matrix (or data frame).
@@ -78,10 +78,11 @@
 #' “Record-Values, Nonstationarity Tests and Extreme Value Distributions.” 
 #' \emph{Global and Planetary Change}, \strong{44}(1–4), 11–26. 
 #' 
-#' Cebrián AC, Castillo-Mateo J, Asín J (2021).
+#' Cebrián AC, Castillo-Mateo J, Asín J (2022).
 #' “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
-#' \emph{Stochastic Environmental Research and Risk Assessment}. 
+#' \emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2): 313-330. 
 #' \doi{10.1007/s00477-021-02122-w}
+#' 
 #' @examples
 #' # three plots available
 #' p.plot(ZaragozaSeries, plot = 1)

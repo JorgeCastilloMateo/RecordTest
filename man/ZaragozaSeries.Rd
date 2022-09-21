@@ -8,7 +8,7 @@
 A matrix with 70 rows and 76 columns.
 }
 \usage{
-data(ZaragozaSeries)
+data("ZaragozaSeries")
 }
 \description{
 The matrix resulting from the data preparation (or 

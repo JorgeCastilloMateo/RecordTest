@@ -31,3 +31,23 @@ Get started in *RecordTest* with the vignettes
 ```s
 vignette("RecordTest")
 ```
+
+## References
+Castillo-Mateo J (2022).
+“Distribution-Free Changepoint Detection Tests Based on the Breaking of Records.”
+*Environmental and Ecological Statistics*, **29**(3), 655-676. 
+\doi{10.1007/s10651-022-00539-2}
+
+Cebrián AC, Castillo-Mateo J, Asín J (2022).
+“Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
+*Stochastic Environmental Research and Risk Assessment*, **36**(2): 313-330. 
+\doi{10.1007/s00477-021-02122-w}
+
+Diersen J, Trenkler G (1996). “Records Tests for Trend in Location.”
+*Statistics*, **28**(1), 1-12.
+\doi{10.1080/02331889708802543}
+
+Foster FG, Stuart A (1954). 
+“Distribution-Free Tests in Time-Series Based on the Breaking of Records.”
+*Journal of the Royal Statistical Society. Series B (Methodological)*, 
+**16**(1), 1-22.

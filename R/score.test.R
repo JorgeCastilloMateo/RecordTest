@@ -15,7 +15,7 @@
 #'   Furthermore, the \code{"two.sided"} \code{alternative} is tested with 
 #'   the usual Lagrange multiplier statistic, while the one-sided 
 #'   \code{alternatives} use specific statistics based on scores. 
-#'   (See Cebrián, Castillo-Mateo and Asín (2021) for details on these tests.)
+#'   (See Cebrián, Castillo-Mateo and Asín (2022) for details on these tests.)
 #'
 #'   If \code{alternative = "two.sided" & probabilities = "equal"}, under the
 #'   null, the Lagrange multiplier statistic has an asymptotic \eqn{\chi^2} 
@@ -69,9 +69,9 @@
 #' @author Jorge Castillo-Mateo
 #' @seealso \code{\link{lr.test}}, \code{\link{global.test}}
 #' @references 
-#' Cebrián AC, Castillo-Mateo J, Asín J (2021).
+#' Cebrián AC, Castillo-Mateo J, Asín J (2022).
 #' “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
-#' \emph{Stochastic Environmental Research and Risk Assessment}. 
+#' \emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2): 313-330. 
 #' \doi{10.1007/s00477-021-02122-w}
 #' 
 #' @examples

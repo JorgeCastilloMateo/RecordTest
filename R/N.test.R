@@ -38,7 +38,7 @@
 #'   
 #'   The size of the tests is adequate for any values of \eqn{T} and \eqn{M}.
 #'   Some comments and a power study are given by Cebrián, Castillo-Mateo and
-#'   Asín (2021).
+#'   Asín (2022).
 #'   
 #' @param X A numeric vector, matrix (or data frame).
 #' @param weights A function indicating the weight given to the different 
@@ -87,15 +87,16 @@
 #' \emph{Methodology and Computing in Applied Probability}, \strong{19}(2), 557-571.
 #' \doi{10.1007/s11009-016-9533-4}
 #' 
-#' Cebrián AC, Castillo-Mateo J, Asín J (2021).
+#' Cebrián AC, Castillo-Mateo J, Asín J (2022).
 #' “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
-#' \emph{Stochastic Environmental Research and Risk Assessment}. 
+#' \emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2): 313-330. 
 #' \doi{10.1007/s00477-021-02122-w}
 #' 
 #' Hong Y (2013). 
 #' “On Computing the Distribution Function for the Poisson Binomial Distribution.”
 #' \emph{Computational Statistics & Data Analysis}, \strong{59}(1), 41-51.
 #' \doi{10.1016/j.csda.2012.10.006}
+#' 
 #' @examples
 #' # Forward Upper records
 #' N.test(ZaragozaSeries)

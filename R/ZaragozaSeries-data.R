@@ -15,7 +15,7 @@
 #' @docType data
 #' @keywords datasets
 #' @name ZaragozaSeries
-#' @usage data(ZaragozaSeries)
+#' @usage data("ZaragozaSeries")
 #' @seealso \code{\link{TX_Zaragoza}}
 #' @format A matrix with 70 rows and 76 columns.
 "ZaragozaSeries"

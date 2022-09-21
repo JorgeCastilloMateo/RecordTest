@@ -1,12 +1,12 @@
 #' @title Brown's Method on the Number of Records
 #' @importFrom stats pchisq
 #' @description Performs Brown's method on the p-values of \code{\link{N.test}}
-#'   as proposed by Cebrián, Castillo-Mateo and Asín (2021). The null 
+#'   as proposed by Cebrián, Castillo-Mateo and Asín (2022). The null 
 #'   hypothesis of the classical record model (i.e., of IID continuous RVs) is 
 #'   tested against the alternative hypothesis.
 #' @details 
 #'   The test is implemented as given by Cebrián, 
-#'   Castillo-Mateo and Asín (2021), where the p-values 
+#'   Castillo-Mateo and Asín (2022), where the p-values 
 #'   \eqn{p^{(FU)}}, \eqn{p^{(FL)}}, \eqn{p^{(BU)}}, and \eqn{p^{(BL)}}
 #'   of the test \code{\link{N.test}} for the four types of record are used for
 #'   the statistic:
@@ -29,7 +29,7 @@
 #'   this test is more powerful than Mann-Kendall test against alternatives 
 #'   with a linear drift in location in series of generalised Pareto variables
 #'   and some cases of the generalised extreme value variables (see Cebrián, 
-#'   Castillo-Mateo and Asín, 2021).
+#'   Castillo-Mateo and Asín, 2022).
 #'   
 #' @param X A numeric vector, matrix (or data frame).
 #' @param weights A function indicating the weight given to the different 
@@ -61,9 +61,9 @@
 #' Brown M (1975). “A Method for Combining Non-Independent, One-Sided Tests of Significance.” 
 #' \emph{Biometrics}. \strong{31}(4), 987–992. 
 #' 
-#' Cebrián AC, Castillo-Mateo J, Asín J (2021).
+#' Cebrián AC, Castillo-Mateo J, Asín J (2022).
 #' “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
-#' \emph{Stochastic Environmental Research and Risk Assessment}. 
+#' \emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2): 313-330. 
 #' \doi{10.1007/s00477-021-02122-w}
 #' 
 #' Kost JT, McDermott MP (2002). “Combining Dependent P-Values.”
