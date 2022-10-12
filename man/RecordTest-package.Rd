@@ -3,6 +3,7 @@
 \docType{package}
 \name{RecordTest-package}
 \alias{RecordTest-package}
+\alias{RecordTest}
 \title{\strong{RecordTest}: A Package for Testing the Classical Record Model}
 \description{
 \strong{RecordTest} provides data preparation, exploratory data 
@@ -29,8 +30,8 @@ The Classical Record Model:
   See Arnold, Balakrishnan and Nagaraja (1998) for an extensive theoretical
   introduction to the theory of records and in particular the classical 
   record model. See Foster and Stuart (1954), Diersen and Trenkler (1996, 
-  2001) and Cebrián, Castillo-Mateo and Asín (2021) for the 
-  distribution-free trend detection tests and Castillo-Mateo (2021) for the
+  2001) and Cebrián, Castillo-Mateo and Asín (2022) for the 
+  distribution-free trend detection tests and Castillo-Mateo (2022) for the
   distribution-free change-point detection tests based on the classical 
   record model. For an easy introduction to \strong{RecordTest} use 
   \code{vignette("RecordTest")}.
@@ -177,13 +178,14 @@ Arnold BC, Balakrishnan N, Nagaraja HN (1998).
 \emph{Records}. 
 Wiley Series in Probability and Statistics. Wiley, New York.
 
-Castillo-Mateo J (2021).
+Castillo-Mateo J (2022).
 “Distribution-Free Changepoint Detection Tests Based on the Breaking of Records.”
-Available at \href{https://arxiv.org/abs/2105.08186}{arXiv:2105.08186} 
+\emph{Environmental and Ecological Statistics}, \strong{29}(3), 655-676. 
+\doi{10.1007/s10651-022-00539-2}
 
-Cebrián AC, Castillo-Mateo J, Asín J (2021).
+Cebrián AC, Castillo-Mateo J, Asín J (2022).
 “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
-\emph{Stochastic Environmental Research and Risk Assessment}. 
+\emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2): 313-330. 
 \doi{10.1007/s00477-021-02122-w}
 
 Diersen J, Trenkler G (1996). “Records Tests for Trend in Location.”
@@ -202,5 +204,5 @@ Foster FG, Stuart A (1954).
 \strong{16}(1), 1-22.
 }
 \author{
-Jorge Castillo-Mateo, AC Cebrián, J Asín
+Jorge Castillo-Mateo  <jorgecm@unizar.es>, AC Cebrián, J Asín
 }

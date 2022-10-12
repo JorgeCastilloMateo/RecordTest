@@ -1,4 +1,6 @@
 #' @title \strong{RecordTest}: A Package for Testing the Classical Record Model
+#' @aliases RecordTest-package
+#' @aliases RecordTest
 #' @description \strong{RecordTest} provides data preparation, exploratory data 
 #'   analysis and inference tools based on theory of records to describe the 
 #'   record occurrence and detect trends, change-points or non-stationarities 
@@ -164,7 +166,7 @@
 #'   
 #'   To see how to cite \strong{RecordTest} in publications or elsewhere,
 #'   use \code{citation("RecordTest")}. 
-#' @author Jorge Castillo-Mateo, AC Cebrián, J Asín
+#' @author Jorge Castillo-Mateo  <jorgecm@unizar.es>, AC Cebrián, J Asín
 #' @references 
 #' Arnold BC, Balakrishnan N, Nagaraja HN (1998). 
 #' \emph{Records}. 

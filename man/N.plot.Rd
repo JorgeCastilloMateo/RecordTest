@@ -83,7 +83,7 @@ This plot is associated to the test \code{\link{N.test}}.
   \code{backward}).
   
   More details of this plot are shown in Cebrián, Castillo-Mateo, Asín 
-  (2021).
+  (2022).
 }
 \examples{
 # Plot at Zaragoza, with linear weights and error bar as RIs aesthetic
@@ -113,9 +113,9 @@ Zplot <- N.plot(ZaragozaSeries,
 #     axis.text.x.top = ggplot2::element_text(colour = "blue"))
 }
 \references{
-Cebrián AC, Castillo-Mateo J, Asín J (2021).
+Cebrián AC, Castillo-Mateo J, Asín J (2022).
 “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
-\emph{Stochastic Environmental Research and Risk Assessment}. 
+\emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2): 313-330. 
 \doi{10.1007/s00477-021-02122-w}
 }
 \seealso{

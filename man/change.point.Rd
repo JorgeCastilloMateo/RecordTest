@@ -17,7 +17,7 @@ change.point(
 \item{X}{A numeric vector, matrix (or data frame).}
 
 \item{weights}{A function indicating the weight given to the different 
-records according to their position in the series. Castillo-Mateo (2021)
+records according to their position in the series. Castillo-Mateo (2022)
 showed that the weights that get more power for this test are 
 \eqn{\omega_t = \sqrt{t^2 / (t-1)}}, i.e., 
 \code{weights = function(t) ifelse(t == 1, 0, sqrt(t^2 / (t-1)))} if
@@ -61,7 +61,7 @@ Performs change-point detection tests based on the record
   certain time the series stops being stationary.
 }
 \details{
-The test is implemented as given by Castillo-Mateo (2021). The null 
+The test is implemented as given by Castillo-Mateo (2022). The null 
   hypothesis is that 
   \deqn{H_0: p_t = 1/t, \qquad t=1,\ldots,T,}
   where \eqn{p_t} is the probability of (upper and/or lower) record at time 
@@ -114,9 +114,10 @@ test.result
 
 }
 \references{
-Castillo-Mateo J (2021).
+Castillo-Mateo J (2022).
 “Distribution-Free Changepoint Detection Tests Based on the Breaking of Records.”
-Available at \href{https://arxiv.org/abs/2105.08186}{arXiv:2105.08186}
+\emph{Environmental and Ecological Statistics}, \strong{29}(3), 655-676. 
+\doi{10.1007/s10651-022-00539-2}
 
 Fisher TJ, Robbins MW (2019). 
 “A Cheap Trick to Improve the Power of a Conservative Hypothesis Test.”

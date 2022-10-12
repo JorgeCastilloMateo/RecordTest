@@ -66,7 +66,7 @@ Performs Foster-Stuart, Diersen-Trenkler and
 In this function, the tests are implemented as given by Foster and Stuart
   (1954), Diersen and Trenkler (1996, 2001) and some modifications in the
   standardisation of the previous statistics given by Cebrián, 
-  Castillo-Mateo and Asín (2021). The null hypothesis is that the data come
+  Castillo-Mateo and Asín (2022). The null hypothesis is that the data come
   from a population with independent and identically distributed
   realisations. The one-sided alternative hypothesis is that the chosen
   statistic is greater (or less) than under the null hypothesis. The
@@ -109,7 +109,7 @@ In this function, the tests are implemented as given by Foster and Stuart
   to calculate, its variance \eqn{\sigma^2} become a cumbersome expression
   and some are given by Diersen and Trenkler (2001) and all of them can be
   easily computed out of the expression of the covariances given by Cebrián, 
-  Castillo-Mateo and Asín (2021). 
+  Castillo-Mateo and Asín (2022). 
   
   If \code{correct = TRUE}, then a continuity correction will be employed:
   \deqn{Z = \frac{X \pm 0.5 - \mu}{\sigma},}
@@ -141,9 +141,9 @@ foster.test(ZaragozaSeries, statistic = "L", weights = function(t) t-1)
 
 }
 \references{
-Cebrián AC, Castillo-Mateo J, Asín J (2021).
+Cebrián AC, Castillo-Mateo J, Asín J (2022).
 “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
-\emph{Stochastic Environmental Research and Risk Assessment}. 
+\emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2): 313-330. 
 \doi{10.1007/s00477-021-02122-w}
 
 Diersen J, Trenkler G (1996). “Records Tests for Trend in Location.”

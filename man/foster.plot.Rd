@@ -61,7 +61,7 @@ The function plots the observed values of the statistic selected with
   
   These plots are useful to see the evolution in the record occurrence 
   and to follow the evolution of the trend. The plot was proposed by 
-  Cebrián, Castillo-Mateo, Asín (2021) where its application is shown.
+  Cebrián, Castillo-Mateo, Asín (2022) where its application is shown.
 }
 \examples{
 # D-statistic
@@ -77,9 +77,9 @@ foster.plot(ZaragozaSeries, statistic = "L", weights = function(t) t-1)
 
 }
 \references{
-Cebrián AC, Castillo-Mateo J, Asín J (2021).
+Cebrián AC, Castillo-Mateo J, Asín J (2022).
 “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
-\emph{Stochastic Environmental Research and Risk Assessment}. 
+\emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2): 313-330. 
 \doi{10.1007/s00477-021-02122-w}
 
 Diersen J, Trenkler G (1996). “Records Tests for Trend in Location.”
