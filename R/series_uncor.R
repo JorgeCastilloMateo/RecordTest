@@ -9,7 +9,7 @@
 #'   Given a matrix \code{X} considered as a set of \eqn{M^*} vectors, which
 #'   are the columns of \code{X}, this function extracts a subset 
 #'   of uncorrelated vectors (columns), using the following procedure: starting
-#'   from column \code{m}, the test \code{\link[stats]{cor.test}} is applied to
+#'   from column \code{m}, the test \code{test.fun} is applied to
 #'   study the correlation between columns depending on argument \code{type}.
 #'   
 #'   If \code{type = "adjacent"}, the test is computed between \code{m}
@@ -24,11 +24,20 @@
 #'   the function requires \code{first.last = TRUE}.
 #'   
 #'   If \code{type = "all"}, the procedure is similar as above but the new kept
-#'   column cannot be significant correlated with any other column already 
+#'   column cannot be significantly correlated with any other column already 
 #'   kept, not only the previous one. So this option results in a fewer number
 #'   of columns.
 #' @param X A numeric matrix (or data frame) where the uncorrelated vectors 
 #'   are extracted from.
+#' @param test.fun A function that tests the correlation (it could also
+#'   test dependence or other feature that is desired to test on the columns). 
+#'   It must take as arguments two numeric vectors of the same length to apply 
+#'   the test to. The alternative hypothesis between both vectors is that the 
+#'   true correlation is not equal to 0 (or that they are dependent, etc). The 
+#'   return value should be a list object with a component \code{p.value} with 
+#'   the p-value of the test. Default is \code{\link[stats]{cor.test}}. Other 
+#'   function to test tail dependence is found in the package \code{extRemes}
+#'   as \code{taildep.test}.
 #' @param return.value A character string indicating the return of the function,
 #'  \code{"series"} for a matrix with uncorrelated columns or \code{"indexes"}
 #'  for a vector with the position of the uncorrelated columns in \code{X}.
@@ -38,11 +47,10 @@
 #' @param first.last Logical. Indicates if the first and last columns have also
 #'   to be uncorrelated (when \code{type = "adjacent"}).
 #' @param m Integer value giving the starting column.
-#' @param alpha Numeric value in \eqn{(0,1)}. It gives the significance level 
-#'   of the correlation test where alternative hypothesis is that the true 
-#'   correlation is not equal to 0.
-#' @param ... Further arguments to be passed to \code{\link[stats]{cor.test}} 
-#'   function (see \code{\link[stats]{cor.test}} for possible arguments).
+#' @param alpha Numeric value in \eqn{(0,1)}. It gives the significance level. 
+#'   For \code{\link[stats]{cor.test}} the alternative hypothesis is that the 
+#'   true correlation is not equal to 0.
+#' @param ... Further arguments to be passed to \code{test.fun} function.
 #' @return A matrix or a vector as specified by \code{return.value}.
 #' @author Jorge Castillo-Mateo
 #' @seealso \code{\link{series_double}}, \code{\link{series_record}},
@@ -67,6 +75,7 @@
 #' 
 #' @export series_uncor
 series_uncor <- function(X, 
+                         test.fun = stats::cor.test,
                          return.value = c("series", "indexes"), 
                          type = c("adjacent", "all"),
                          first.last = TRUE,
@@ -77,6 +86,7 @@ series_uncor <- function(X,
   return.value <- match.arg(return.value)
   type <- match.arg(type)
   if (!(0 < alpha & alpha < 1)) { stop("'alpha' should be in (0,1)") }
+  if(!is.function(test.fun)) stop("'test.fun' should be a function")
   
   m0 <- m
   Mcols <- ncol(X)
@@ -90,7 +100,7 @@ series_uncor <- function(X,
       pv <- 0
       while (pv < alpha && m + separation < Mcols) {
         separation <- separation + 1
-        pv <- stats::cor.test(X[, m], X[, m + separation], ...)$p.value
+        pv <- test.fun(X[, m], X[, m + separation], ...)$p.value
       }
       if (m + separation == Mcols && pv < alpha) { break }
       m <- m + separation
@@ -104,12 +114,12 @@ series_uncor <- function(X,
         
         a  <- X[, 1]
         b  <- X[, sep[length(sep)]]
-        pv <- stats::cor.test(a, b, ...)$p.value
+        pv <- test.fun(a, b, ...)$p.value
         
         while (pv < alpha) {
           sep <- sep[-length(sep)]
           b   <- X[, sep[length(sep)]]
-          pv  <- stats::cor.test(a, b, ...)$p.value
+          pv  <- test.fun(a, b, ...)$p.value
         }
       }
     }
@@ -121,7 +131,7 @@ series_uncor <- function(X,
       pv <- 0
       while (pv < alpha && m + separation < Mcols) {
         separation <- separation + 1
-        for(i in seq_along(sep)) { pv[i] <- stats::cor.test(X[, sep[i]], X[, m + separation], ...)$p.value }
+        for(i in seq_along(sep)) { pv[i] <- test.fun(X[, sep[i]], X[, m + separation], ...)$p.value }
         pv <- min(pv)
       }
       if (m + separation == Mcols && pv < alpha) { break }

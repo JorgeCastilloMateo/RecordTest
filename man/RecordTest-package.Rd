@@ -164,7 +164,7 @@ The Classical Record Model:
   \code{\link{TX_Zaragoza}} - Daily maximum temperatures at Zaragoza 
   (Spain).
   
-  \code{\link{ZaragozaSeries}} - Splitted and uncorrelated subseries 
+  \code{\link{ZaragozaSeries}} - Split and uncorrelated subseries 
   \code{\link{TX_Zaragoza}$TX}.
   
   \code{\link{Olympic_records_200m}} - 200-meter Olympic records from 1900

@@ -1,4 +1,4 @@
-#' @title Splitted Series
+#' @title Split Series
 #' @description The vector \code{X} of length \eqn{T} is broken into 
 #'   \code{Mcols} blocks, each part containing \eqn{T/\code{Mcols}} elements.
 #' 

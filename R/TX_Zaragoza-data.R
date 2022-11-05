@@ -14,7 +14,7 @@
 #'   
 #'   \code{TX_Zaragoza29F} is the original series. \code{TX_Zaragoza} is the
 #'   same but it does not include data for 29th of February, since when the 
-#'   series is splitted these days would yield a four-year time series
+#'   series is split these days would yield a four-year time series
 #'   that is difficult to join to the analysis of the other yearly time series. 
 #'   
 #'   The series has three \code{NA} missing observations corresponding 

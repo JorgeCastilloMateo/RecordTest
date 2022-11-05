@@ -3,10 +3,11 @@
 \newcommand{\cpkg}{\href{https://CRAN.R-project.org/package=#1}{\pkg{#1}}}
 \newcommand{\issue}{\href{https://github.com/JorgeCastilloMateo/RecordTest/issues/#1}{(issue #1)}}
 
-\section{Changes in Version 2.1.1 (21 September 2022)}{
+\section{Changes in Version 2.1.1 (03 November 2022)}{
   \subsection{NEW FEATURES}{
     \itemize{
       \item New dataset \code{TX_Zaragoza29F} that includes Zaragoza series with the observations from the 29th of February.
+      \item Function \code{series_uncor} now admits any test introduced as an argument to test correlation or dependence across columns. Default is \code{cor.test}, which is the test used in previous versions.
     }
   }
   \subsection{MODIFICATIONS}{

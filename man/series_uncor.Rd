@@ -6,6 +6,7 @@
 \usage{
 series_uncor(
   X,
+  test.fun = stats::cor.test,
   return.value = c("series", "indexes"),
   type = c("adjacent", "all"),
   first.last = TRUE,
@@ -17,6 +18,16 @@ series_uncor(
 \arguments{
 \item{X}{A numeric matrix (or data frame) where the uncorrelated vectors 
 are extracted from.}
+
+\item{test.fun}{A function that tests the correlation (it could also
+test dependence or other feature that is desired to test on the columns). 
+It must take as arguments two numeric vectors of the same length to apply 
+the test to. The alternative hypothesis between both vectors is that the 
+true correlation is not equal to 0 (or that they are dependent, etc). The 
+return value should be a list object with a component \code{p.value} with 
+the p-value of the test. Default is \code{\link[stats]{cor.test}}. Other 
+function to test tail dependence is found in the package \code{extRemes}
+as \code{taildep.test}.}
 
 \item{return.value}{A character string indicating the return of the function,
 \code{"series"} for a matrix with uncorrelated columns or \code{"indexes"}
@@ -31,12 +42,11 @@ to be uncorrelated (when \code{type = "adjacent"}).}
 
 \item{m}{Integer value giving the starting column.}
 
-\item{alpha}{Numeric value in \eqn{(0,1)}. It gives the significance level 
-of the correlation test where alternative hypothesis is that the true 
-correlation is not equal to 0.}
+\item{alpha}{Numeric value in \eqn{(0,1)}. It gives the significance level. 
+For \code{\link[stats]{cor.test}} the alternative hypothesis is that the 
+true correlation is not equal to 0.}
 
-\item{...}{Further arguments to be passed to \code{\link[stats]{cor.test}} 
-function (see \code{\link[stats]{cor.test}} for possible arguments).}
+\item{...}{Further arguments to be passed to \code{test.fun} function.}
 }
 \value{
 A matrix or a vector as specified by \code{return.value}.
@@ -53,7 +63,7 @@ This function is used in the data preparation (or pre-processing)
   Given a matrix \code{X} considered as a set of \eqn{M^*} vectors, which
   are the columns of \code{X}, this function extracts a subset 
   of uncorrelated vectors (columns), using the following procedure: starting
-  from column \code{m}, the test \code{\link[stats]{cor.test}} is applied to
+  from column \code{m}, the test \code{test.fun} is applied to
   study the correlation between columns depending on argument \code{type}.
   
   If \code{type = "adjacent"}, the test is computed between \code{m}
@@ -68,7 +78,7 @@ This function is used in the data preparation (or pre-processing)
   the function requires \code{first.last = TRUE}.
   
   If \code{type = "all"}, the procedure is similar as above but the new kept
-  column cannot be significant correlated with any other column already 
+  column cannot be significantly correlated with any other column already 
   kept, not only the previous one. So this option results in a fewer number
   of columns.
 }

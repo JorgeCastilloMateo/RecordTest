@@ -2,7 +2,7 @@
 % Please edit documentation in R/series_split.R
 \name{series_split}
 \alias{series_split}
-\title{Splitted Series}
+\title{Split Series}
 \usage{
 series_split(X, Mcols = 365)
 }
