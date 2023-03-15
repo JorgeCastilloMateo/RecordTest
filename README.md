@@ -44,15 +44,15 @@ Castillo-Mateo J, Cebrián AC, Asín J (2023).
 
 A BibTeX entry for LaTeX users is
 
-@Article{,
-  title = {{RecordTest}: An {R} Package to Analyze Non-Stationarity in the Extremes Based on Record-Breaking Events},
-  author = {Jorge Castillo-Mateo and Ana C. Cebri\'an and Jes\'us As\'in},
-  journal = {Journal of Statistical Software},
-  year = {2023},
-  volume = {106},
-  number = {5},
-  pages = {1--28},
-  doi = {10.18637/jss.v106.i05}
+@Article{,  
+&nbsp;&nbsp;  title = {{RecordTest}: An {R} Package to Analyze Non-Stationarity in the Extremes Based on Record-Breaking Events},  
+&nbsp;&nbsp;  author = {Jorge Castillo-Mateo and Ana C. Cebri\\\'an and Jes\\\'us As\\\'in},  
+&nbsp;&nbsp;  journal = {Journal of Statistical Software},  
+&nbsp;&nbsp;  year = {2023},  
+&nbsp;&nbsp;  volume = {106},  
+&nbsp;&nbsp;  number = {5},  
+&nbsp;&nbsp;  pages = {1--28},  
+&nbsp;&nbsp;  doi = {10.18637/jss.v106.i05}  
 }
 
   
