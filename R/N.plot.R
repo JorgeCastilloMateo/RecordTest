@@ -87,7 +87,8 @@
 #' #   ggplot2::scale_x_continuous(name = "Year (forward)",
 #' #     breaks = c(10, 30, 50, 70), 
 #' #     labels=c("1960", "1980", "2000", "2020"), 
-#' #     sec.axis = ggplot2::sec_axis(~ nrow(ZaragozaSeries) - . + 1951, name = "Year (backward)")) +
+#' #     sec.axis = ggplot2::sec_axis(~ 2021 - ., name = "Year (backward)",
+#' #                                  breaks = 1950 + c(10, 30, 50, 70))) +
 #' #   ggplot2::theme(axis.title.x = ggplot2::element_text(colour = "red"), 
 #' #     axis.text.x = ggplot2::element_text(colour = "red"),
 #' #     axis.title.x.top = ggplot2::element_text(colour = "blue"), 

@@ -3,6 +3,14 @@
 \newcommand{\cpkg}{\href{https://CRAN.R-project.org/package=#1}{\pkg{#1}}}
 \newcommand{\issue}{\href{https://github.com/JorgeCastilloMateo/RecordTest/issues/#1}{(issue #1)}}
 
+\section{Changes in Version 2.1.2 (15 March 2023)}{
+  \subsection{MODIFICATIONS}{
+    \itemize{
+      \item \sQuote{CITATION} and references update for the new JSS publication of Castillo-Mateo, Cebrian and Asin (2023) <doi:10.18637/jss.v106.i05>.
+    }
+  }
+}
+
 \section{Changes in Version 2.1.1 (03 November 2022)}{
   \subsection{NEW FEATURES}{
     \itemize{

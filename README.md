@@ -2,12 +2,12 @@ RecordTest <img src="man/figures/logoRecordTest.png" width="175px" align="right"
 ======================
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/RecordTest)](https://CRAN.R-project.org/package=RecordTest)
-[![cran_checks](https://cranchecks.info/badges/worst/RecordTest)](https://cran.r-project.org/web/checks/check_results_RecordTest.html)
+[![cran_checks](https://badges.cranchecks.info/worst/RecordTest.svg)](https://cran.r-project.org/web/checks/check_results_RecordTest.html)
 [![Downloads](http://cranlogs.r-pkg.org/badges/RecordTest)](https://CRAN.R-project.org/package=RecordTest)
 [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/RecordTest?color=red)](https://CRAN.R-project.org/package=RecordTest)
 [![Licence](https://img.shields.io/badge/licence-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
   
-The R package *RecordTest* provides exploratory data analysis and inference tools based on theory of records to describe the record occurrence and detect trends and change-points in time series. In particular, *RecordTest* consists of graphical tools, distribution-free tests for trend in location, variation or non-stationarity in the tails, and change-point detection tests, all of them based on the record occurrence. 
+The R package *RecordTest* provides exploratory data analysis and inference tools based on theory of records to describe the record occurrence and detect trends and change-points in time series. In particular, *RecordTest* consists of graphical tools, distribution-free tests for trend in location, variation or non-stationarity in the tails, and change-point detection tests, all of them based on the record occurrence. Details about the implemented tools can be found in Castillo-Mateo et al. (2023) <doi:10.18637/jss.v106.i05>.
   
   
 ## Installation
@@ -33,11 +33,27 @@ Get started in *RecordTest* with the vignettes
 vignette("RecordTest")
 ```
 
+
 ## How to cite?
-Castillo-Mateo J (2022).
-“RecordTest: Inference Tools in Time Series Based on Record Statistics.”
-R package version 2.1.1. 
-https://CRAN.R-project.org/package=RecordTest
+To cite *RecordTest* in publications use:
+
+Castillo-Mateo J, Cebrián AC, Asín J (2023).
+“RecordTest: An R Package to Analyze Non-Stationarity in the Extremes Based on Record-Breaking Events.”
+*Journal of Statistical Software*, **106**(5), 1-28.
+<doi:10.18637/jss.v106.i05>
+
+A BibTeX entry for LaTeX users is
+
+@Article{,
+  title = {{RecordTest}: An {R} Package to Analyze Non-Stationarity in the Extremes Based on Record-Breaking Events},
+  author = {Jorge Castillo-Mateo and Ana C. Cebri\'an and Jes\'us As\'in},
+  journal = {Journal of Statistical Software},
+  year = {2023},
+  volume = {106},
+  number = {5},
+  pages = {1--28},
+  doi = {10.18637/jss.v106.i05}
+}
 
   
 ## References
@@ -45,6 +61,11 @@ Castillo-Mateo J (2022).
 “Distribution-Free Changepoint Detection Tests Based on the Breaking of Records.”
 *Environmental and Ecological Statistics*, **29**(3), 655-676. 
 <doi:10.1007/s10651-022-00539-2>
+
+Castillo-Mateo J, Cebrián AC, Asín J (2023).
+“RecordTest: An R Package to Analyze Non-Stationarity in the Extremes Based on Record-Breaking Events.”
+*Journal of Statistical Software*, **106**(5), 1-28.
+<doi:10.18637/jss.v106.i05>
 
 Cebrián AC, Castillo-Mateo J, Asín J (2022).
 “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”

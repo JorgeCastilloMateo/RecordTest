@@ -1,16 +1,20 @@
-utils::citHeader("To cite RecordTest in publications use:")
-
-utils::bibentry(
-  bibtype  = "Manual",
-  title  = "{RecordTest}: Inference Tools in Time Series Based on Record Statistics",
-  author = "Jorge Castillo-Mateo",
-  year   = "2022",
-  note   = "R package version 2.1.1",
-  url    = "https://CRAN.R-project.org/package=RecordTest",
-
-  textVersion =
-  paste("Jorge Castillo-Mateo (2022).",
-        "RecordTest: Inference Tools in Time Series Based on Record Statistics.",
-        "R package version 2.1.1.",
-        "URL https://CRAN.R-project.org/package=RecordTest.")
+bibentry(bibtype = "Article",
+  title        = "{RecordTest}: An {R} Package to Analyze Non-Stationarity in the Extremes Based on Record-Breaking Events",
+  author       = c(person(given = "Jorge",
+                          family = "Castillo-Mateo",
+                          email = "jorgecm@unizar.es"),
+                   person(given = c("Ana", "C."),
+                          family = "Cebri\\'an",
+                          email = "acebrian@unizar.es"),
+                   person(given = "Jes\\'us",
+                          family = "As\\'in",
+                          email = "jasin@unizar.es")),
+  journal      = "Journal of Statistical Software",
+  year         = "2023",
+  volume       = "106",
+  number       = "5",
+  pages        = "1--28",
+  doi          = "10.18637/jss.v106.i05",
+  header       = "To cite RecordTest in publications use:"
 )
+

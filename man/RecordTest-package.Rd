@@ -9,7 +9,8 @@
 \strong{RecordTest} provides data preparation, exploratory data 
   analysis and inference tools based on theory of records to describe the 
   record occurrence and detect trends, change-points or non-stationarities 
-  in the tails of the time series.
+  in the tails of the time series. Details about the implemented tools can
+  be found in Castillo-Mateo, Cebrián and Asín (2023).
 }
 \details{
 The Classical Record Model:
@@ -182,6 +183,11 @@ Castillo-Mateo J (2022).
 “Distribution-Free Changepoint Detection Tests Based on the Breaking of Records.”
 \emph{Environmental and Ecological Statistics}, \strong{29}(3), 655-676. 
 \doi{10.1007/s10651-022-00539-2}
+
+Castillo-Mateo J, Cebrián AC, Asín J (2023).
+“\strong{RecordTest}: An \code{R} Package to Analyze Non-Stationarity in the Extremes Based on Record-Breaking Events.”
+\emph{Journal of Statistical Software}, \strong{106}(5), 1-28. 
+\doi{10.18637/jss.v106.i05}
 
 Cebrián AC, Castillo-Mateo J, Asín J (2022).
 “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
