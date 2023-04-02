@@ -64,13 +64,23 @@
 #'   \eqn{t} distributed, which is a more robust alternative against serial 
 #'   correlation.
 #'   
+#'   If \code{permutation.test = TRUE}, the p-value is estimated by permutation
+#'   simulations. This is the only method of calculating p-values that does not
+#'   require that the columns of \code{X} be independent.
+#'   
 #'   If \code{simulate.p.value = TRUE}, the p-value is estimated by Monte Carlo
-#'   simulations.
+#'   simulations. If the normal asymptotic \code{statistic} \code{"D"}, 
+#'   \code{"S"} or \code{"W"} is used when the length of the 
+#'   series \eqn{T} is greater than 1000 or 1500, permutations or this approach
+#'   are preferable due to the computational cost of calculating the variance
+#'   of the statistic under the null hypothesis. The exception is \code{"D"} 
+#'   without weights, which has an alternative algorithm implemented to 
+#'   calculate the variance quickly.
 #'   
 #' @param X A numeric vector, matrix (or data frame).
 #' @param weights A function indicating the weight given to the different 
 #'   records according to their position in the series,
-#'   e.g., if \code{function(t) t-1} then \eqn{\omega_t = t-1}.
+#'   e.g., if \code{function(t) t - 1} then \eqn{\omega_t = t - 1}.
 #' @param statistic A character string indicating the type of statistic to be 
 #'   calculated, i.e., one of \code{"D"}, \code{"d"}, \code{"S"}, \code{"s"},
 #'   \code{"U"}, \code{"L"} or \code{"W"} (see Details).
@@ -83,10 +93,16 @@
 #' @param correct Logical. Indicates, whether a continuity correction 
 #'   should be done; defaults to \code{FALSE}. No correction is done if
 #'   \code{simulate.p.value = TRUE}. 
+#' @param permutation.test Logical. Indicates whether to compute p-values by
+#'   permutation simulation. It does not require that the columns of \code{X} 
+#'   be independent. If \code{TRUE} and \code{simulate.p.value = TRUE}, 
+#'   permutations take precedence and permutations are performed.
 #' @param simulate.p.value Logical. Indicates whether to compute p-values by
-#'   Monte Carlo simulation. 
-#' @param B If \code{simulate.p.value = TRUE}, an integer specifying the 
-#'   number of replicates used in the Monte Carlo estimation.
+#'   Monte Carlo simulation. If \code{permutation.test = TRUE}, permutations
+#'   take precedence and permutations are performed. 
+#' @param B If \code{permutation.test = TRUE} or \code{simulate.p.value = TRUE}, 
+#'   an integer specifying the number of replicates used in the permutation or
+#'   Monte Carlo estimation.
 #' @return A \code{"htest"} object with elements:
 #'   \item{statistic}{Value of the test statistic.}
 #'   \item{parameter}{(If \code{distribution = "t"}) Degrees of freedom of
@@ -94,7 +110,11 @@
 #'   \item{p.value}{P-value.}
 #'   \item{alternative}{The alternative hypothesis.}
 #'   \item{estimate}{(If \code{distribution = "normal"}) A vector with the
-#'     value of the statistic, \eqn{\mu} and \eqn{\sigma^2}.}
+#'     value of the statistic, \eqn{\mu} and \eqn{\sigma^2}. \eqn{\sigma^2}
+#'     is \code{NA} if \code{statistic} is one of \code{"D"}, \code{"S"} or 
+#'     \code{"W"} (with the exception of \code{"D"} without weights); the
+#'     p-value is computed with permutations or Monte Carlo simulations; and 
+#'     \eqn{T > 500}.}
 #'   \item{method}{A character string indicating the type of test performed.}
 #'   \item{data.name}{A character string giving the name of the data.}
 #' @author Jorge Castillo-Mateo
@@ -103,12 +123,12 @@
 #' @references
 #' Cebrián AC, Castillo-Mateo J, Asín J (2022).
 #' “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
-#' \emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2): 313-330. 
-#' \doi{10.1007/s00477-021-02122-w}
+#' \emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2), 313-330. 
+#' \doi{10.1007/s00477-021-02122-w}.
 #' 
 #' Diersen J, Trenkler G (1996). “Records Tests for Trend in Location.”
 #' \emph{Statistics}, \strong{28}(1), 1-12.
-#' \doi{10.1080/02331889708802543}
+#' \doi{10.1080/02331889708802543}.
 #' 
 #' Diersen J, Trenkler G (2001). 
 #' “Weighted Records Tests for Splitted Series of Observations.”
@@ -118,30 +138,32 @@
 #' 
 #' Foster FG, Stuart A (1954). 
 #' “Distribution-Free Tests in Time-Series Based on the Breaking of Records.”
-#' \emph{Journal of the Royal Statistical Society. Series B (Methodological)}, 
+#' \emph{Journal of the Royal Statistical Society B}, 
 #' \strong{16}(1), 1-22.
+#' \doi{10.1111/j.2517-6161.1954.tb00143.x}.
+#' 
 #' @examples
 #' # D-statistic
 #' foster.test(ZaragozaSeries)
 #' # D-statistic with linear weights
-#' foster.test(ZaragozaSeries, weights = function(t) t-1)
+#' foster.test(ZaragozaSeries, weights = function(t) t - 1)
 #' # S-statistic with linear weights
-#' foster.test(ZaragozaSeries, statistic = "S", weights = function(t) t-1)
+#' foster.test(ZaragozaSeries, statistic = "S", weights = function(t) t - 1)
 #' # D-statistic with weights and t approach
-#' foster.test(ZaragozaSeries, distribution = "t", weights = function(t) t-1)
+#' foster.test(ZaragozaSeries, distribution = "t", weights = function(t) t - 1)
 #' # U-statistic with weights (upper tail)
-#' foster.test(ZaragozaSeries, statistic = "U", weights = function(t) t-1)
+#' foster.test(ZaragozaSeries, statistic = "U", weights = function(t) t - 1)
 #' # L-statistic with weights (lower tail)
-#' foster.test(ZaragozaSeries, statistic = "L", weights = function(t) t-1)
+#' foster.test(ZaragozaSeries, statistic = "L", weights = function(t) t - 1)
 #' 
 #' @export foster.test
-
 foster.test <- function(X, 
                         weights = function(t) 1,
                         statistic = c("D", "d", "S", "s", "U", "L", "W"), 
                         distribution = c("normal", "t"), 
                         alternative = c("greater", "less"), 
                         correct = FALSE,
+                        permutation.test = FALSE,
                         simulate.p.value = FALSE,
                         B = 1000) {
   
@@ -173,232 +195,249 @@ foster.test <- function(X,
   if (!all(w == 1)) { METHOD <- paste(METHOD, "with weights =", fun) }
   
   # Continuity correction
-  n <- ifelse(correct && !simulate.p.value, 0.5, 0)
+  n <- ifelse(correct && !permutation.test && !simulate.p.value, 0.5, 0)
   `%+-%` <- ifelse(alternative == "greater", `-`, `+`) 
   ###########
   switch(statistic,
-    "D" = {
-      switch(distribution,
-        "normal" = {
-          stat.fun <- function(X) {
-            Xrev <- series_rev(X)
-            I.FU <- .I.record(X, record = "upper", Trows = Trows)    
-            I.FL <- .I.record(X, record = "lower", Trows = Trows)
-            I.BU <- .I.record(Xrev, record = "upper", Trows = Trows) 
-            I.BL <- .I.record(Xrev, record = "lower", Trows = Trows) 
-            I <- I.FU - I.FL - I.BU + I.BL
-            return(sum(w * rowSums(I)))
-          }
-          stat  <- stat.fun(X)
-          mu    <- 0
-          sigma <- ifelse(length(w) == 1,
-                 w * sqrt(4 * Mcols * sum(((t[-1] + 1 + (t[-1] - 1) / choose(Trows, t[-1])) / t[-1]^2))),
-                 sqrt(4 * Mcols * (.var_N(t, w) - .cov_NFU_NFL(t, w) - .cov_NFU_NBU(t, w) + .cov_NFU_NBL(t, w)))
-                 )
-          statS <- (stat %+-% n) / sigma
-        },
-        "t" = {
-          stat.fun <- function(X) {
-            Xrev <- series_rev(X)
-            I.FU <- .I.record(X, record = "upper", Trows = Trows)    
-            I.FL <- .I.record(X, record = "lower", Trows = Trows)    
-            I.BU <- .I.record(Xrev, record = "upper", Trows = Trows) 
-            I.BL <- .I.record(Xrev, record = "lower", Trows = Trows) 
-            I    <- I.FU - I.FL - I.BU + I.BL
-            return(colSums(sweep(I, MARGIN = 1, STATS = w, FUN = `*`)))
-          }
-          stat  <- stat.fun(X)
-          mu    <- 0
-          sigma <- stats::sd(stat)
-          statS <- (mean(stat) %+-% (n / Mcols)) / (sigma / sqrt(Mcols))
-        }
-      )
-    },
-    "d" = {
-      switch(distribution,
-             "normal" = {
-               stat.fun <- function(X) {
-                 I.FU <- .I.record(X, record = "upper", Trows = Trows)    
-                 I.FL <- .I.record(X, record = "lower", Trows = Trows)
-                 I <- I.FU - I.FL
-                 return(sum(w * rowSums(I)))
-               }
-               stat  <- stat.fun(X)
-               mu    <- 0
-               sigma <- sqrt(2 * Mcols * (.var_N(t, w) - .cov_NFU_NFL(t, w)))
-               statS <- (stat %+-% n) / sigma
-             },
-             "t" = {
-               stat.fun <- function(X) {
-                 I.FU <- .I.record(X, record = "upper", Trows = Trows)    
-                 I.FL <- .I.record(X, record = "lower", Trows = Trows)    
-                 I    <- I.FU - I.FL
-                 return(colSums(sweep(I, MARGIN = 1, STATS = w, FUN = `*`)))
-               }
-               stat  <- stat.fun(X)
-               mu    <- 0
-               sigma <- stats::sd(stat)
-               statS <- (mean(stat)  %+-% (n / Mcols)) / (sigma / sqrt(Mcols))
-             }
-      )
-    },
-    "S" = {
-      switch(distribution,
-             "normal" = {
-               stat.fun <- function(X) {
-                 Xrev <- series_rev(X)
-                 I.FU <- .I.record(X, record = "upper", Trows = Trows)    
-                 I.FL <- .I.record(X, record = "lower", Trows = Trows)
-                 I.BU <- .I.record(Xrev, record = "upper", Trows = Trows) 
-                 I.BL <- .I.record(Xrev, record = "lower", Trows = Trows) 
-                 I <- I.FU + I.FL - I.BU - I.BL
-                 return(sum(w * rowSums(I)))
-               }
-               stat  <- stat.fun(X)
-               mu    <- 0
-               sigma <- sqrt(4 * Mcols * (.var_N(t, w) + .cov_NFU_NFL(t, w) - .cov_NFU_NBU(t, w) - .cov_NFU_NBL(t, w)))
-               statS <- (stat %+-% n) / sigma
-             },
-             "t" = {
-               stat.fun <- function(X) {
-                 Xrev <- series_rev(X)
-                 I.FU <- .I.record(X, record = "upper", Trows = Trows)    
-                 I.FL <- .I.record(X, record = "lower", Trows = Trows)    
-                 I.BU <- .I.record(Xrev, record = "upper", Trows = Trows) 
-                 I.BL <- .I.record(Xrev, record = "lower", Trows = Trows) 
-                 I    <- I.FU + I.FL - I.BU - I.BL
-                 return(colSums(sweep(I, MARGIN = 1, STATS = w, FUN = `*`)))
-               }
-               stat  <- stat.fun(X)
-               mu    <- 0
-               sigma <- stats::sd(stat)
-               statS <- (mean(stat)  %+-% (n / Mcols)) / (sigma / sqrt(Mcols))
-             }
-      )
-    },
-    "s" = {
-      switch(distribution,
-             "normal" = {
-               stat.fun <- function(X) {
-                 I.FU <- .I.record(X, record = "upper", Trows = Trows)    
-                 I.FL <- .I.record(X, record = "lower", Trows = Trows)
-                 I <- I.FU + I.FL
-                 return(sum(w * rowSums(I)))
-               }
-               stat  <- stat.fun(X)
-               mu    <- 2 * Mcols * sum(w / t)
-               sigma <- sqrt(2 * Mcols * (.var_N(t, w) + .cov_NFU_NFL(t, w)))
-               statS <- (stat %+-% n - mu) / sigma
-             },
-             "t" = {
-               stat.fun <- function(X) {
-                 I.FU <- .I.record(X, record = "upper", Trows = Trows)    
-                 I.FL <- .I.record(X, record = "lower", Trows = Trows)    
-                 I    <- I.FU + I.FL
-                 return(colSums(sweep(I, MARGIN = 1, STATS = w, FUN = `*`)))
-               }
-               stat  <- stat.fun(X)
-               mu    <- 2 * sum(w / t)
-               sigma <- stats::sd(stat)
-               statS <- (mean(stat)  %+-% (n / Mcols) - mu) / (sigma / sqrt(Mcols))
-             }
-      )
-    },
-    "U" = {
-      switch(distribution,
-             "normal" = {
-               stat.fun <- function(X) {
-                 Xrev <- series_rev(X)
-                 I.FU <- .I.record(X, record = "upper", Trows = Trows)    
-                 I.BU <- .I.record(Xrev, record = "upper", Trows = Trows) 
-                 I <- I.FU - I.BU
-                 return(sum(w * rowSums(I)))
-               }
-               stat  <- stat.fun(X)
-               mu    <- 0
-               sigma <- sqrt(2 * Mcols * (.var_N(t, w) - .cov_NFU_NBU(t, w)))
-               statS <- (stat %+-% n) / sigma
-             },
-             "t" = {
-               stat.fun <- function(X) {
-                 Xrev <- series_rev(X)
-                 I.FU <- .I.record(X, record = "upper", Trows = Trows)    
-                 I.BU <- .I.record(Xrev, record = "upper", Trows = Trows)    
-                 I    <- I.FU - I.BU
-                 return(colSums(sweep(I, MARGIN = 1, STATS = w, FUN = `*`)))
-               }
-               stat  <- stat.fun(X)
-               mu    <- 0
-               sigma <- stats::sd(stat)
-               statS <- (mean(stat)  %+-% (n / Mcols)) / (sigma / sqrt(Mcols))
-             }
-      )
-    },
-    "L" = {
-      switch(distribution,
-             "normal" = {
-               stat.fun <- function(X) {
-                 Xrev <- series_rev(X)
-                 I.FL <- .I.record(X, record = "lower", Trows = Trows)    
-                 I.BL <- .I.record(Xrev, record = "lower", Trows = Trows) 
-                 I <- I.BL - I.FL
-                 return(sum(w * rowSums(I)))
-               }
-               stat  <- stat.fun(X)
-               mu    <- 0
-               sigma <- sqrt(2 * Mcols * (.var_N(t, w) - .cov_NFU_NBU(t, w)))
-               statS <- (stat %+-% n) / sigma
-             },
-             "t" = {
-               stat.fun <- function(X) {
-                 Xrev <- series_rev(X)
-                 I.FL <- .I.record(X, record = "lower", Trows = Trows)    
-                 I.BL <- .I.record(Xrev, record = "lower", Trows = Trows) 
-                 I    <- I.BL - I.FL
-                 return(colSums(sweep(I, MARGIN = 1, STATS = w, FUN = `*`)))
-               }
-               stat  <- stat.fun(X)
-               mu    <- 0
-               sigma <- stats::sd(stat)
-               statS <- (mean(stat) %+-% (n / Mcols)) / (sigma / sqrt(Mcols))
-             }
-      )
-    },
-    "W" = {
-      switch(distribution,
-             "normal" = {
-               stat.fun <- function(X) {
-                 Xrev <- series_rev(X)
-                 I.FU <- .I.record(X, record = "upper", Trows = Trows)    
-                 I.BL <- .I.record(Xrev, record = "lower", Trows = Trows) 
-                 I <- I.FU + I.BL
-                 return(sum(w * rowSums(I)))
-               }
-               stat  <- stat.fun(X)
-               mu    <- 2 * Mcols * sum(w / t)
-               sigma <- sqrt(2 * Mcols * (.var_N(t, w) + .cov_NFU_NBL(t, w)))
-               statS <- (stat %+-% n - mu) / sigma
-             },
-             "t" = {
-               stat.fun <- function(X) {
-                 Xrev <- series_rev(X)
-                 I.FU <- .I.record(X, record = "upper", Trows = Trows)    
-                 I.BL <- .I.record(Xrev, record = "lower", Trows = Trows) 
-                 I <- I.FU + I.BL
-                 return(colSums(sweep(I, MARGIN = 1, STATS = w, FUN = `*`)))
-               }
-               stat  <- stat.fun(X)
-               mu    <- 2 * sum(w / t)
-               sigma <- stats::sd(stat)
-               statS <- (mean(stat)  %+-% (n / Mcols) - mu) / (sigma / sqrt(Mcols))
-             }
-      )
-    }
+         "D" = {
+           switch(distribution,
+                  "normal" = {
+                    stat.fun <- function(X) {
+                      Xrev <- series_rev(X)
+                      I.FU <- .I.record(X, record = "upper", Trows = Trows)    
+                      I.FL <- .I.record(X, record = "lower", Trows = Trows)
+                      I.BU <- .I.record(Xrev, record = "upper", Trows = Trows) 
+                      I.BL <- .I.record(Xrev, record = "lower", Trows = Trows) 
+                      I <- I.FU - I.FL - I.BU + I.BL
+                      return(sum(w * rowSums(I)))
+                    }
+                    stat  <- stat.fun(X)
+                    mu    <- 0
+                    sigma <- ifelse(length(w) == 1,
+                                    w * sqrt(4 * Mcols * sum(((t[-1] + 1 + (t[-1] - 1) / choose(Trows, t[-1])) / t[-1]^2))),
+                                    ifelse(
+                                      (permutation.test || simulate.p.value) && Trows > 500,
+                                      NA,
+                                      sqrt(4 * Mcols * (.var_N(t, w) - .cov_NFU_NFL(t, w) - .cov_NFU_NBU(t, w) + .cov_NFU_NBL(t, w)))
+                                    )
+                    )
+                    statS <- (stat %+-% n) / sigma
+                  },
+                  "t" = {
+                    stat.fun <- function(X) {
+                      Xrev <- series_rev(X)
+                      I.FU <- .I.record(X, record = "upper", Trows = Trows)    
+                      I.FL <- .I.record(X, record = "lower", Trows = Trows)    
+                      I.BU <- .I.record(Xrev, record = "upper", Trows = Trows) 
+                      I.BL <- .I.record(Xrev, record = "lower", Trows = Trows) 
+                      I    <- I.FU - I.FL - I.BU + I.BL
+                      return(colSums(sweep(I, MARGIN = 1, STATS = w, FUN = `*`)))
+                    }
+                    stat  <- stat.fun(X)
+                    mu    <- 0
+                    sigma <- stats::sd(stat)
+                    statS <- (mean(stat) %+-% (n / Mcols)) / (sigma / sqrt(Mcols))
+                  }
+           )
+         },
+         "d" = {
+           switch(distribution,
+                  "normal" = {
+                    stat.fun <- function(X) {
+                      I.FU <- .I.record(X, record = "upper", Trows = Trows)    
+                      I.FL <- .I.record(X, record = "lower", Trows = Trows)
+                      I <- I.FU - I.FL
+                      return(sum(w * rowSums(I)))
+                    }
+                    stat  <- stat.fun(X)
+                    mu    <- 0
+                    sigma <- sqrt(2 * Mcols * (.var_N(t, w) - .cov_NFU_NFL(t, w)))
+                    statS <- (stat %+-% n) / sigma
+                  },
+                  "t" = {
+                    stat.fun <- function(X) {
+                      I.FU <- .I.record(X, record = "upper", Trows = Trows)    
+                      I.FL <- .I.record(X, record = "lower", Trows = Trows)    
+                      I    <- I.FU - I.FL
+                      return(colSums(sweep(I, MARGIN = 1, STATS = w, FUN = `*`)))
+                    }
+                    stat  <- stat.fun(X)
+                    mu    <- 0
+                    sigma <- stats::sd(stat)
+                    statS <- (mean(stat)  %+-% (n / Mcols)) / (sigma / sqrt(Mcols))
+                  }
+           )
+         },
+         "S" = {
+           switch(distribution,
+                  "normal" = {
+                    stat.fun <- function(X) {
+                      Xrev <- series_rev(X)
+                      I.FU <- .I.record(X, record = "upper", Trows = Trows)    
+                      I.FL <- .I.record(X, record = "lower", Trows = Trows)
+                      I.BU <- .I.record(Xrev, record = "upper", Trows = Trows) 
+                      I.BL <- .I.record(Xrev, record = "lower", Trows = Trows) 
+                      I <- I.FU + I.FL - I.BU - I.BL
+                      return(sum(w * rowSums(I)))
+                    }
+                    stat  <- stat.fun(X)
+                    mu    <- 0
+                    sigma <- ifelse(
+                      (permutation.test || simulate.p.value) && Trows > 500,
+                      NA,
+                      sqrt(4 * Mcols * (.var_N(t, w) + .cov_NFU_NFL(t, w) - .cov_NFU_NBU(t, w) - .cov_NFU_NBL(t, w)))
+                    )
+                    statS <- (stat %+-% n) / sigma
+                  },
+                  "t" = {
+                    stat.fun <- function(X) {
+                      Xrev <- series_rev(X)
+                      I.FU <- .I.record(X, record = "upper", Trows = Trows)    
+                      I.FL <- .I.record(X, record = "lower", Trows = Trows)    
+                      I.BU <- .I.record(Xrev, record = "upper", Trows = Trows) 
+                      I.BL <- .I.record(Xrev, record = "lower", Trows = Trows) 
+                      I    <- I.FU + I.FL - I.BU - I.BL
+                      return(colSums(sweep(I, MARGIN = 1, STATS = w, FUN = `*`)))
+                    }
+                    stat  <- stat.fun(X)
+                    mu    <- 0
+                    sigma <- stats::sd(stat)
+                    statS <- (mean(stat)  %+-% (n / Mcols)) / (sigma / sqrt(Mcols))
+                  }
+           )
+         },
+         "s" = {
+           switch(distribution,
+                  "normal" = {
+                    stat.fun <- function(X) {
+                      I.FU <- .I.record(X, record = "upper", Trows = Trows)    
+                      I.FL <- .I.record(X, record = "lower", Trows = Trows)
+                      I <- I.FU + I.FL
+                      return(sum(w * rowSums(I)))
+                    }
+                    stat  <- stat.fun(X)
+                    mu    <- 2 * Mcols * sum(w / t)
+                    sigma <- sqrt(2 * Mcols * (.var_N(t, w) + .cov_NFU_NFL(t, w)))
+                    statS <- (stat %+-% n - mu) / sigma
+                  },
+                  "t" = {
+                    stat.fun <- function(X) {
+                      I.FU <- .I.record(X, record = "upper", Trows = Trows)    
+                      I.FL <- .I.record(X, record = "lower", Trows = Trows)    
+                      I    <- I.FU + I.FL
+                      return(colSums(sweep(I, MARGIN = 1, STATS = w, FUN = `*`)))
+                    }
+                    stat  <- stat.fun(X)
+                    mu    <- 2 * sum(w / t)
+                    sigma <- stats::sd(stat)
+                    statS <- (mean(stat)  %+-% (n / Mcols) - mu) / (sigma / sqrt(Mcols))
+                  }
+           )
+         },
+         "U" = {
+           switch(distribution,
+                  "normal" = {
+                    stat.fun <- function(X) {
+                      Xrev <- series_rev(X)
+                      I.FU <- .I.record(X, record = "upper", Trows = Trows)    
+                      I.BU <- .I.record(Xrev, record = "upper", Trows = Trows) 
+                      I <- I.FU - I.BU
+                      return(sum(w * rowSums(I)))
+                    }
+                    stat  <- stat.fun(X)
+                    mu    <- 0
+                    sigma <- sqrt(2 * Mcols * (.var_N(t, w) - .cov_NFU_NBU(t, w)))
+                    statS <- (stat %+-% n) / sigma
+                  },
+                  "t" = {
+                    stat.fun <- function(X) {
+                      Xrev <- series_rev(X)
+                      I.FU <- .I.record(X, record = "upper", Trows = Trows)    
+                      I.BU <- .I.record(Xrev, record = "upper", Trows = Trows)    
+                      I    <- I.FU - I.BU
+                      return(colSums(sweep(I, MARGIN = 1, STATS = w, FUN = `*`)))
+                    }
+                    stat  <- stat.fun(X)
+                    mu    <- 0
+                    sigma <- stats::sd(stat)
+                    statS <- (mean(stat)  %+-% (n / Mcols)) / (sigma / sqrt(Mcols))
+                  }
+           )
+         },
+         "L" = {
+           switch(distribution,
+                  "normal" = {
+                    stat.fun <- function(X) {
+                      Xrev <- series_rev(X)
+                      I.FL <- .I.record(X, record = "lower", Trows = Trows)    
+                      I.BL <- .I.record(Xrev, record = "lower", Trows = Trows) 
+                      I <- I.BL - I.FL
+                      return(sum(w * rowSums(I)))
+                    }
+                    stat  <- stat.fun(X)
+                    mu    <- 0
+                    sigma <- sqrt(2 * Mcols * (.var_N(t, w) - .cov_NFU_NBU(t, w)))
+                    statS <- (stat %+-% n) / sigma
+                  },
+                  "t" = {
+                    stat.fun <- function(X) {
+                      Xrev <- series_rev(X)
+                      I.FL <- .I.record(X, record = "lower", Trows = Trows)    
+                      I.BL <- .I.record(Xrev, record = "lower", Trows = Trows) 
+                      I    <- I.BL - I.FL
+                      return(colSums(sweep(I, MARGIN = 1, STATS = w, FUN = `*`)))
+                    }
+                    stat  <- stat.fun(X)
+                    mu    <- 0
+                    sigma <- stats::sd(stat)
+                    statS <- (mean(stat) %+-% (n / Mcols)) / (sigma / sqrt(Mcols))
+                  }
+           )
+         },
+         "W" = {
+           switch(distribution,
+                  "normal" = {
+                    stat.fun <- function(X) {
+                      Xrev <- series_rev(X)
+                      I.FU <- .I.record(X, record = "upper", Trows = Trows)    
+                      I.BL <- .I.record(Xrev, record = "lower", Trows = Trows) 
+                      I <- I.FU + I.BL
+                      return(sum(w * rowSums(I)))
+                    }
+                    stat  <- stat.fun(X)
+                    mu    <- 2 * Mcols * sum(w / t)
+                    sigma <- ifelse(
+                      (permutation.test || simulate.p.value) && Trows > 500,
+                      NA,
+                      sqrt(2 * Mcols * (.var_N(t, w) + .cov_NFU_NBL(t, w)))
+                    )
+                    statS <- (stat %+-% n - mu) / sigma
+                  },
+                  "t" = {
+                    stat.fun <- function(X) {
+                      Xrev <- series_rev(X)
+                      I.FU <- .I.record(X, record = "upper", Trows = Trows)    
+                      I.BL <- .I.record(Xrev, record = "lower", Trows = Trows) 
+                      I <- I.FU + I.BL
+                      return(colSums(sweep(I, MARGIN = 1, STATS = w, FUN = `*`)))
+                    }
+                    stat  <- stat.fun(X)
+                    mu    <- 2 * sum(w / t)
+                    sigma <- stats::sd(stat)
+                    statS <- (mean(stat)  %+-% (n / Mcols) - mu) / (sigma / sqrt(Mcols))
+                  }
+           )
+         }
   )
   
   switch(distribution,
          "normal" = {
-           if (simulate.p.value) {
+           if (permutation.test) {
+             METHOD <- paste(METHOD, "with permuted p-value (based on", B, "permutations)")
+             pv <- .permutation(stat, alternative = alternative,
+                                FUN = stat.fun, B = B, X = X,
+                                Trows = Trows, Mcols = Mcols)
+           } else if (simulate.p.value) {
              METHOD <- paste(METHOD, "with simulated p-value (based on", B, "replicates)")
              pv <- .MonteCarlo(stat, alternative = alternative,
                                FUN = stat.fun, B = B,
@@ -417,7 +456,16 @@ foster.test <- function(X,
                           method = METHOD, data.name = DNAME), class = "htest")
          },
          "t" = {
-           if (simulate.p.value) {
+           if (permutation.test) {
+             METHOD <- paste(METHOD, "with permuted p-value (based on", B, "permutations)")
+             statB.fun <- function(X) {
+               statB <- stat.fun(X)
+               return((mean(statB) - mu) / stats::sd(statB))
+             }
+             pv <- .permutation(statB.fun(X), alternative = alternative,
+                                FUN = statB.fun, B = B, X = X,
+                                Trows = Trows, Mcols = Mcols)
+           } else if (simulate.p.value) {
              METHOD <- paste(METHOD, "with simulated p-value (based on", B, "replicates)")
              statB.fun <- function(X) {
                statB <- stat.fun(X)

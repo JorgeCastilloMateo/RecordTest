@@ -1,8 +1,11 @@
 #' @title Pearson's Chi-Square Test for Probabilities of Record
+#' 
 #' @importFrom stats pchisq
+#' 
 #' @description This function performs a chi-square goodness-of-fit test
 #'   based on the record probabiliteis \eqn{p_t} to study the hypothesis
 #'   of the classical record model (i.e., of IID continuous RVs).
+#'   
 #' @details 
 #'   The null hypothesis of this chi-square test is that in every vector 
 #'   (columns of the matrix \code{X}), the probability of record at 
@@ -36,6 +39,7 @@
 #'   \item{p.value}{P-value.}
 #'   \item{method}{A character string indicating the type of test performed.}
 #'   \item{data.name}{A character string giving the name of the data.}
+#'   
 #' @author Jorge Castillo-Mateo
 #' @seealso \code{\link{global.test}}, \code{\link{score.test}},
 #'   \code{\link{p.record}}, \code{\link{p.regression.test}}, 
@@ -43,11 +47,13 @@
 #' @references 
 #' Benestad RE (2003). 
 #' “How Often Can We Expect a Record Event?” 
-#' \emph{Climate Research}, \strong{25}(1), 3–13.
+#' \emph{Climate Research}, \strong{25}(1), 3-13.
+#' \doi{10.3354/cr025003}.
 #' 
 #' Benestad RE (2004). 
 #' “Record-Values, Nonstationarity Tests and Extreme Value Distributions.” 
-#' \emph{Global and Planetary Change}, \strong{44}(1–4), 11–26. 
+#' \emph{Global and Planetary Change}, \strong{44}(1-4), 11–26. 
+#' \doi{10.1016/j.gloplacha.2004.06.002}.
 #' 
 #' @export p.chisq.test
 #' @examples

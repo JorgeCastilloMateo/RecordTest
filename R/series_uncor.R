@@ -1,7 +1,10 @@
 #' @title Subset of Uncorrelated Series
+#' 
 #' @importFrom stats cor.test
+#' 
 #' @description Given a matrix this function extracts a subset of uncorrelated
 #'   columns (see Details).
+#'   
 #' @details This function is used in the data preparation (or pre-processing) 
 #'   often required to apply the exploratory and inference tools based on 
 #'   theory of records within this package.
@@ -27,6 +30,7 @@
 #'   column cannot be significantly correlated with any other column already 
 #'   kept, not only the previous one. So this option results in a fewer number
 #'   of columns.
+#'   
 #' @param X A numeric matrix (or data frame) where the uncorrelated vectors 
 #'   are extracted from.
 #' @param test.fun A function that tests the correlation (it could also
@@ -52,6 +56,7 @@
 #'   true correlation is not equal to 0.
 #' @param ... Further arguments to be passed to \code{test.fun} function.
 #' @return A matrix or a vector as specified by \code{return.value}.
+#' 
 #' @author Jorge Castillo-Mateo
 #' @seealso \code{\link{series_double}}, \code{\link{series_record}},
 #'   \code{\link{series_rev}}, \code{\link{series_split}},
@@ -59,8 +64,8 @@
 #' @references 
 #' Cebrián AC, Castillo-Mateo J, Asín J (2022).
 #' “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
-#' \emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2): 313-330. 
-#' \doi{10.1007/s00477-021-02122-w}
+#' \emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2), 313-330. 
+#' \doi{10.1007/s00477-021-02122-w}.
 #' 
 #' @examples
 #' # Split Zaragoza series

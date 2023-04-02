@@ -1,4 +1,5 @@
 #' @title Double the Number of Series
+#' 
 #' @description This function changes the format of a matrix transforming a
 #'   \eqn{T \times M} matrix in a 
 #'   \eqn{\lfloor T/\code{k} \rfloor \times \code{k}\,M} matrix in the 
@@ -9,6 +10,7 @@
 #'   remainder of the division of the row number by \code{k} is 
 #'   \eqn{1,2,\ldots,\code{k}-1,0}, respectively;
 #'   and secondly those matrices are \code{cbind}ed.
+#'   
 #' @details This function is used in the data preparation (or pre-processing) 
 #'   often required to apply the exploratory and inference tools based on 
 #'   theory of records within this package.
@@ -32,6 +34,7 @@
 #' @param X A numeric vector, matrix (or data frame).
 #' @param k Integer \eqn{> 1}, times to increase the number of columns.
 #' @return A \eqn{\lfloor T/\code{k} \rfloor \times \code{k}\,M} matrix.
+#' 
 #' @author Jorge Castillo-Mateo
 #' @seealso \code{\link{series_record}}, \code{\link{series_rev}},
 #'   \code{\link{series_split}}, \code{\link{series_ties}}

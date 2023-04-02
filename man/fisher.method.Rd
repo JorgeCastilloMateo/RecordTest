@@ -48,8 +48,9 @@ Oliver and Boyd, Edinburgh.
 
 Foster FG, Stuart A (1954). 
 “Distribution-Free Tests in Time-Series Based on the Breaking of Records.”
-\emph{Journal of the Royal Statistical Society. Series B (Methodological)}, 
+\emph{Journal of the Royal Statistical Society B}, 
 \strong{16}(1), 1-22.
+\doi{10.1111/j.2517-6161.1954.tb00143.x}.
 }
 \seealso{
 \code{\link{brown.method}}, \code{\link{foster.test}}

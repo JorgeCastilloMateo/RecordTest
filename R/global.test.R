@@ -1,5 +1,7 @@
 #' @title Global Statistic for Two-Sided Tests
+#' 
 #' @importFrom stats runif
+#' 
 #' @description Performs a more powerful generalisation of the 
 #'   two-sided tests in this package by means of the sum of the statistics of 
 #'   upper and lower records in the forward and backward directions to study 
@@ -9,6 +11,7 @@
 #'   \code{\link{p.regression.test}},
 #'   the likelihood-ratio test \code{\link{lr.test}}, and the score test
 #'   \code{\link{score.test}}.
+#'   
 #' @details 
 #'   The statistics, say \eqn{X}, of the tests \code{\link{p.chisq.test}},
 #'   \code{\link{p.regression.test}}, \code{\link{lr.test}} or
@@ -36,6 +39,7 @@
 #'   \item{p.value}{Simulated p-value.}
 #'   \item{method}{A character string indicating the type of test.}
 #'   \item{data.name}{A character string giving the name of the data.}
+#'   
 #' @author Jorge Castillo-Mateo
 #' @seealso \code{\link{p.chisq.test}}, \code{\link{p.regression.test}}, 
 #'   \code{\link{lr.test}}, \code{\link{score.test}}
@@ -53,7 +57,6 @@
 #' #global.test(ZaragozaSeries, FUN = lr.test, record = c(1,0,0,1), probabilities = "different")
 #' 
 #' @export global.test
-#'
 global.test <- function(X, 
                         FUN, 
                         record = c("FU" = 1, "FL" = 1, "BU" = 1, "BL" = 1), 

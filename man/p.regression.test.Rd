@@ -101,6 +101,12 @@ p.regression.test(ZaragozaSeries, record = "lower",
 TxZ <- apply(series_split(TX_Zaragoza$TX), 1, max, na.rm = TRUE)
 p.regression.test(TxZ, simulate.p.value = TRUE)
 }
+\references{
+Castillo-Mateo J, Cebrián AC, Asín J (2023).
+“\strong{RecordTest}: An \code{R} Package to Analyze Non-Stationarity in the Extremes Based on Record-Breaking Events.”
+\emph{Journal of Statistical Software}, \strong{106}(5), 1-28. 
+\doi{10.18637/jss.v106.i05}.
+}
 \seealso{
 \code{\link{p.chisq.test}}, \code{\link{p.plot}}
 }

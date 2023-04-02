@@ -9,6 +9,7 @@ change.point(
   weights = function(t) 1,
   record = c("upper", "lower", "d", "s"),
   correct = c("none", "fisher", "vrbik"),
+  permutation.test = FALSE,
   simulate.p.value = FALSE,
   B = 1000
 )
@@ -19,8 +20,8 @@ change.point(
 \item{weights}{A function indicating the weight given to the different 
 records according to their position in the series. Castillo-Mateo (2022)
 showed that the weights that get more power for this test are 
-\eqn{\omega_t = \sqrt{t^2 / (t-1)}}, i.e., 
-\code{weights = function(t) ifelse(t == 1, 0, sqrt(t^2 / (t-1)))} if
+\eqn{\omega_t = \sqrt{t^2 / (t - 1)}}, i.e., 
+\code{weights = function(t) ifelse(t == 1, 0, sqrt(t^2 / (t - 1)))} if
 \code{record = "upper"} or \code{= "lower"}.
 \eqn{\omega_t = \sqrt{t}}, i.e., \code{weights = function(t) sqrt(t)} if
 \code{record = "d"} and \eqn{\omega_t = \sqrt{t^2 / (t-2)}}, i.e., 
@@ -39,11 +40,18 @@ default) if no correction is made. The former shows better
 size and power, but if the value of the statistic is too large it becomes 
 \code{NaN} and p-value \code{NA}.}
 
-\item{simulate.p.value}{Logical. Indicates whether to compute p-values by
-Monte Carlo simulation.}
+\item{permutation.test}{Logical. Indicates whether to compute p-values by
+permutation simulation. It does not require that the columns of \code{X}     
+be independent. If \code{TRUE} and \code{simulate.p.value = TRUE},     
+permutations take precedence and permutations are performed.}
 
-\item{B}{If \code{simulate.p.value = TRUE}, an integer specifying the 
-number of replicates used in the Monte Carlo estimation.}
+\item{simulate.p.value}{Logical. Indicates whether to compute p-values by
+Monte Carlo simulation. If \code{permutation.test = TRUE}, permutations    
+take precedence and permutations are performed.}
+
+\item{B}{If \code{permutation.test = TRUE} or \code{simulate.p.value = TRUE},
+an integer specifying the number of replicates used in the permutation or    
+Monte Carlo estimation.}
 }
 \value{
 A \code{"htest"} object with elements:
@@ -58,7 +66,7 @@ A \code{"htest"} object with elements:
 Performs change-point detection tests based on the record
   occurrence. The hypothesis of the classical record model (i.e., of IID 
   continuous RVs) is tested against the alternative hypothesis that after a 
-  certain time the series stops being stationary.
+  certain time the series stops being IID.
 }
 \details{
 The test is implemented as given by Castillo-Mateo (2022). The null 
@@ -85,12 +93,15 @@ The test is implemented as given by Castillo-Mateo (2022). The null
   
   The p-value is calculated by means of the asymptotic Kolmogorov
   distribution. When \eqn{\omega_t \neq 1}, the asymptotic result is not 
-  fulfilled. In that case, the p-value should be simulated using Monte Carlo 
-  simulations with the option \code{simulate.p.value = TRUE}.
-  
-  As this is an asymptotic result, it has been seen that the size and power
-  may be a little below than expected, to correct this, any of the 
-  continuity corrections can be used:
+  fulfilled. In that case, the p-value should be simulated using 	
+  permutation or Monte Carlo simulations with the option 	
+  \code{permutation.test = TRUE} or \code{simulate.p.value = TRUE}, 	
+  respectively. Permutations is the only method of calculating p-values that	
+  does not require that the columns of \code{X} be independent.	
+  	
+  As the Kolmogorov distribution is an asymptotic result, it has been seen 	
+  that the size and power may be a little below than expected, to correct 	
+  this, any of the continuity corrections can be used:
   
   If \code{correct = "fisher"},
   \deqn{K_T = - \sqrt{T} \log\left(1 - \frac{K_T}{\sqrt{T}}\right).}
@@ -100,6 +111,10 @@ The test is implemented as given by Castillo-Mateo (2022). The null
 }
 \examples{
 change.point(ZaragozaSeries)
+
+change.point(series_split(TX_Zaragoza$TX), record = "d", 	
+  weights = function(t) sqrt(t), 
+  permutation.test = TRUE, B = 50)
 
 change.point(ZaragozaSeries, record = "d", 
   weights = function(t) sqrt(t), simulate.p.value = TRUE)
@@ -116,18 +131,18 @@ test.result
 \references{
 Castillo-Mateo J (2022).
 “Distribution-Free Changepoint Detection Tests Based on the Breaking of Records.”
-\emph{Environmental and Ecological Statistics}, \strong{29}(3), 655-676. 
-\doi{10.1007/s10651-022-00539-2}
+\emph{Environmental and Ecological Statistics}, \strong{29}(3), 655-676.
+\doi{10.1007/s10651-022-00539-2}.
 
 Fisher TJ, Robbins MW (2019). 
 “A Cheap Trick to Improve the Power of a Conservative Hypothesis Test.”
 \emph{The American Statistician}, \strong{73}(3), 232-242.
-\doi{10.1080/00031305.2017.1395364}
+\doi{10.1080/00031305.2017.1395364}.
 
 Vrbik J (2020). 
 “Deriving CDF of Kolmogorov-Smirnov Test Statistic.”
 \emph{Applied Mathematics}, \strong{11}(3), 227-246.
-\doi{10.4236/am.2020.113018}
+\doi{10.4236/am.2020.113018}.
 }
 \seealso{
 \code{\link{records}}, \code{\link{foster.test}}

@@ -1,4 +1,5 @@
 #' @title Split Series
+#' 
 #' @description The vector \code{X} of length \eqn{T} is broken into 
 #'   \code{Mcols} blocks, each part containing \eqn{T/\code{Mcols}} elements.
 #' 
@@ -6,6 +7,7 @@
 #'   \code{Mcols = 365} is preferred. This function rearranges \code{X} into a 
 #'   matrix format, where each column is the vector of values at the same day 
 #'   of the year. For monthly data in a year, \code{Mcols = 12} should be used.
+#'   
 #' @details This function is used in the data preparation (or pre-processing) 
 #'   often required to apply the exploratory and inference tools based on 
 #'   theory of records within this package when the time series presents 
@@ -38,10 +40,12 @@
 #'   this function but without requiring that the length of \code{X} be 
 #'   divisible by \code{Mcols}. It removes the first elements of \code{X} until
 #'   its length is divisible by \code{Mcols}.
+#'   
 #' @param X A numeric vector.
 #' @param Mcols An integer number, giving the number of columns in the 
 #'   final matrix.
 #' @return A matrix with \code{Mcols} columns.
+#' 
 #' @author Jorge Castillo-Mateo
 #' @seealso \code{\link{series_double}}, \code{\link{series_record}}, 
 #'   \code{\link{series_rev}}, \code{\link{series_ties}},
@@ -49,8 +53,8 @@
 #' @references 
 #' Cebrián AC, Castillo-Mateo J, Asín J (2022).
 #' “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
-#' \emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2): 313-330. 
-#' \doi{10.1007/s00477-021-02122-w}
+#' \emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2), 313-330. 
+#' \doi{10.1007/s00477-021-02122-w}.
 #' 
 #' @examples
 #' series_split(1:100, Mcols = 10)

@@ -1,8 +1,11 @@
 #' @title The Classical Record Model
+#' 
 #' @importFrom stats rnorm
+#' 
 #' @description Random generation for the classical record model, i.e.,
 #'   sequences of independent and identically distributed (IID) continuous
 #'   random variables (RVs).  
+#'   
 #' @param Trows,Mcols Integers indicating the number of rows and columns of the
 #'   returned matrix, i.e., the length and number of series for the record 
 #'   analysis.
@@ -12,6 +15,7 @@
 #' @param ... Further arguments to introduce in the \code{rdist} function.
 #' @return A matrix of draws of IID continuous RVs with common distribution 
 #'   \code{rdist}.
+#'   
 #' @author Jorge Castillo-Mateo
 #' @seealso \code{\link{L.record}}, \code{\link{S.record}}, 
 #'   \code{\link{N.record}}, \code{\link{Nmean.record}}, 
@@ -20,6 +24,8 @@
 #' Arnold BC, Balakrishnan N, Nagaraja HN (1998). 
 #' \emph{Records}. 
 #' Wiley Series in Probability and Statistics. Wiley, New York.
+#' \doi{10.1002/9781118150412}.
+#' 
 #' @examples
 #' # By default, draw a sample of 100 series of length 50 
 #' # with observations coming from a standard normal distribution 

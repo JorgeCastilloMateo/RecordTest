@@ -11,6 +11,7 @@ foster.test(
   distribution = c("normal", "t"),
   alternative = c("greater", "less"),
   correct = FALSE,
+  permutation.test = FALSE,
   simulate.p.value = FALSE,
   B = 1000
 )
@@ -20,7 +21,7 @@ foster.test(
 
 \item{weights}{A function indicating the weight given to the different 
 records according to their position in the series,
-e.g., if \code{function(t) t-1} then \eqn{\omega_t = t-1}.}
+e.g., if \code{function(t) t - 1} then \eqn{\omega_t = t - 1}.}
 
 \item{statistic}{A character string indicating the type of statistic to be 
 calculated, i.e., one of \code{"D"}, \code{"d"}, \code{"S"}, \code{"s"},
@@ -38,11 +39,18 @@ records.}
 should be done; defaults to \code{FALSE}. No correction is done if
 \code{simulate.p.value = TRUE}.}
 
-\item{simulate.p.value}{Logical. Indicates whether to compute p-values by
-Monte Carlo simulation.}
+\item{permutation.test}{Logical. Indicates whether to compute p-values by
+permutation simulation. It does not require that the columns of \code{X} 
+be independent. If \code{TRUE} and \code{simulate.p.value = TRUE}, 
+permutations take precedence and permutations are performed.}
 
-\item{B}{If \code{simulate.p.value = TRUE}, an integer specifying the 
-number of replicates used in the Monte Carlo estimation.}
+\item{simulate.p.value}{Logical. Indicates whether to compute p-values by
+Monte Carlo simulation. If \code{permutation.test = TRUE}, permutations
+take precedence and permutations are performed.}
+
+\item{B}{If \code{permutation.test = TRUE} or \code{simulate.p.value = TRUE}, 
+an integer specifying the number of replicates used in the permutation or
+Monte Carlo estimation.}
 }
 \value{
 A \code{"htest"} object with elements:
@@ -52,7 +60,11 @@ A \code{"htest"} object with elements:
   \item{p.value}{P-value.}
   \item{alternative}{The alternative hypothesis.}
   \item{estimate}{(If \code{distribution = "normal"}) A vector with the
-    value of the statistic, \eqn{\mu} and \eqn{\sigma^2}.}
+    value of the statistic, \eqn{\mu} and \eqn{\sigma^2}. \eqn{\sigma^2}
+    is \code{NA} if \code{statistic} is one of \code{"D"}, \code{"S"} or 
+    \code{"W"} (with the exception of \code{"D"} without weights); the
+    p-value is computed with permutations or Monte Carlo simulations; and 
+    \eqn{T > 500}.}
   \item{method}{A character string indicating the type of test performed.}
   \item{data.name}{A character string giving the name of the data.}
 }
@@ -122,33 +134,43 @@ In this function, the tests are implemented as given by Foster and Stuart
   \eqn{t} distributed, which is a more robust alternative against serial 
   correlation.
   
+  If \code{permutation.test = TRUE}, the p-value is estimated by permutation
+  simulations. This is the only method of calculating p-values that does not
+  require that the columns of \code{X} be independent.
+  
   If \code{simulate.p.value = TRUE}, the p-value is estimated by Monte Carlo
-  simulations.
+  simulations. If the normal asymptotic \code{statistic} \code{"D"}, 
+  \code{"S"} or \code{"W"} is used when the length of the 
+  series \eqn{T} is greater than 1000 or 1500, permutations or this approach
+  are preferable due to the computational cost of calculating the variance
+  of the statistic under the null hypothesis. The exception is \code{"D"} 
+  without weights, which has an alternative algorithm implemented to 
+  calculate the variance quickly.
 }
 \examples{
 # D-statistic
 foster.test(ZaragozaSeries)
 # D-statistic with linear weights
-foster.test(ZaragozaSeries, weights = function(t) t-1)
+foster.test(ZaragozaSeries, weights = function(t) t - 1)
 # S-statistic with linear weights
-foster.test(ZaragozaSeries, statistic = "S", weights = function(t) t-1)
+foster.test(ZaragozaSeries, statistic = "S", weights = function(t) t - 1)
 # D-statistic with weights and t approach
-foster.test(ZaragozaSeries, distribution = "t", weights = function(t) t-1)
+foster.test(ZaragozaSeries, distribution = "t", weights = function(t) t - 1)
 # U-statistic with weights (upper tail)
-foster.test(ZaragozaSeries, statistic = "U", weights = function(t) t-1)
+foster.test(ZaragozaSeries, statistic = "U", weights = function(t) t - 1)
 # L-statistic with weights (lower tail)
-foster.test(ZaragozaSeries, statistic = "L", weights = function(t) t-1)
+foster.test(ZaragozaSeries, statistic = "L", weights = function(t) t - 1)
 
 }
 \references{
 Cebrián AC, Castillo-Mateo J, Asín J (2022).
 “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
-\emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2): 313-330. 
-\doi{10.1007/s00477-021-02122-w}
+\emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2), 313-330. 
+\doi{10.1007/s00477-021-02122-w}.
 
 Diersen J, Trenkler G (1996). “Records Tests for Trend in Location.”
 \emph{Statistics}, \strong{28}(1), 1-12.
-\doi{10.1080/02331889708802543}
+\doi{10.1080/02331889708802543}.
 
 Diersen J, Trenkler G (2001). 
 “Weighted Records Tests for Splitted Series of Observations.”
@@ -158,8 +180,9 @@ pp. 163–178. Lohmar: Josef Eul Verlag.
 
 Foster FG, Stuart A (1954). 
 “Distribution-Free Tests in Time-Series Based on the Breaking of Records.”
-\emph{Journal of the Royal Statistical Society. Series B (Methodological)}, 
+\emph{Journal of the Royal Statistical Society B}, 
 \strong{16}(1), 1-22.
+\doi{10.1111/j.2517-6161.1954.tb00143.x}.
 }
 \seealso{
 \code{\link{foster.plot}}, \code{\link{N.plot}}, 

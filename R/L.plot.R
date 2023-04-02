@@ -1,8 +1,11 @@
 #' @title Times of Record Plot
+#' 
 #' @importFrom ggplot2 ggplot aes theme_bw theme element_blank element_rect
 #'   element_text labs geom_hline geom_point xlim facet_grid vars 
+#'   
 #' @description This function builds a ggplot object to display the upper 
 #'   and lower record times for both forward and backward directions.
+#'   
 #' @details The function can be applied to plot the record times in a vector 
 #'   (if argument \code{X} is a vector) or to plot and compare the record 
 #'   times in a set of vectors (if argument \code{X} is a matrix). In the 
@@ -24,11 +27,13 @@
 #' @param point.col,point.alpha Colour and transparency of the points.
 #' @param line.col Colour to plot lines.
 #' @return A ggplot object.
+#' 
 #' @author Jorge Castillo-Mateo
 #' @seealso \code{\link{L.record}}
 #' @references
 #' Benestad RE (2004). “Record-Values, Nonstationarity Tests and Extreme Value Distributions.”
 #' \emph{Global and Planetary Change}, \strong{44}(1-4), 11-26.
+#' \doi{10.1016/j.gloplacha.2004.06.002}.
 #' 
 #' @examples
 #' Y <- c(1, 5, 3, 6, 6, 9, 2, 11, 17, 8)

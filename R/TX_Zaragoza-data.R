@@ -1,4 +1,5 @@
 #' @title Time Series of Daily Maximum Temperature at Zaragoza (Spain)
+#' 
 #' @description A dataset containing the non-blended series of daily maximum
 #'   temperatures at Zaragoza Aeropuerto (Spain), from 1951-01-01 to 
 #'   2020-12-31. The variables are the following:
@@ -7,6 +8,7 @@
 #'   \item DATE  : Date \code{"\%Y-\%m-\%d"}
 #'   \item TX    : Maximum temperature in 0.1\eqn{^\circ}C
 #' }
+#' 
 #' @details 
 #'   This series is obtained from the ECA&D series Station identifier (STAID)
 #'   238 and Source identifier (SOUID) 100734. Zaragoza is located at the 
@@ -18,20 +20,23 @@
 #'   that is difficult to join to the analysis of the other yearly time series. 
 #'   
 #'   The series has three \code{NA} missing observations corresponding 
-#'   to 1951-03-31, 1965-01-04, and 1965-10-05. 
+#'   to 1951-03-31, 1965-01-04, and 1965-10-05.
+#'   
 #' @docType data
 #' @keywords datasets
 #' @name TX_Zaragoza
 #' @source \href{https://www.ecad.eu}{EUROPEAN CLIMATE ASSESSMENT & DATASET (ECA&D)}
+#' @seealso \code{\link{ZaragozaSeries}}
 #' @references 
 #' Klein Tank AMG and Coauthors (2002). 
 #' Daily Dataset of 20th-Century Surface Air Temperature and Precipitation 
 #' Series for the European Climate Assessment.
-#' \emph{International Journal of Climatology}, \strong{22}(12), 1441-1453. 
+#' \emph{International Journal of Climatology}, \strong{22}(12), 1441-1453.
+#' \doi{10.1002/joc.773}.
+#' 
 #' @usage 
 #' data("TX_Zaragoza29F")
 #' data("TX_Zaragoza")
-#' @seealso \code{\link{ZaragozaSeries}}
 #' @format 
 #' \itemize{
 #'   \item \code{TX_Zaragoza29F} is a data frame with 25568 rows and 2 variables.

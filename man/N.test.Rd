@@ -12,6 +12,7 @@ N.test(
   alternative = c("greater", "less"),
   correct = TRUE,
   method = c("mixed", "dft", "butler"),
+  permutation.test = FALSE,
   simulate.p.value = FALSE,
   B = 1000
 )
@@ -21,7 +22,7 @@ N.test(
 
 \item{weights}{A function indicating the weight given to the different 
 records according to their position in the series,
-e.g., if \code{function(t) t-1} then \eqn{\omega_t = t-1}.}
+e.g., if \code{function(t) t - 1} then \eqn{\omega_t = t - 1}.}
 
 \item{record}{A character string indicating the type of record to be 
 calculated, \code{"upper"} or \code{"lower"}.}
@@ -34,9 +35,10 @@ distribution of the statistic, \code{"normal"} distribution, Student's
 hypothesis, \code{"greater"} number of records or \code{"less"} number of
 records.}
 
-\item{correct}{Logical. Indicates, whether a continuity correction 
-should be done; defaults to \code{TRUE}. No correction is done if
-\code{simulate.p.value = TRUE} or \code{distribution = "poisson-binomial"}.}
+\item{correct}{Logical. Indicates, whether a continuity correction
+should be done; defaults to \code{TRUE}. No correction is done if    
+\code{permutation.test = TRUE}, \code{simulate.p.value = TRUE} or     
+\code{distribution = "poisson-binomial"}.}
 
 \item{method}{(If \code{distribution = "poisson-binomial"}.) A character 
 string that indicates the method by which the cdf
@@ -46,12 +48,20 @@ more efficient combination of the later algorithms. \code{"dft"} uses the
 discrete Fourier transform which algorithm is given in Hong (2013). 
 \code{"butler"} use the algorithm given by Butler and Stephens (2016).}
 
+\item{permutation.test}{Logical. Indicates whether to compute p-values by
+permutation simulation. It does not require that the columns of \code{X}     
+be independent. If \code{TRUE} and \code{simulate.p.value = TRUE},     
+permutations take precedence and permutations are performed. No simulation    
+is done if \code{distribution = "poisson-binomial"}.}
+
 \item{simulate.p.value}{Logical. Indicates whether to compute p-values by
-Monte Carlo simulation. No simulation is done if 
+Monte Carlo simulation. If \code{permutation.test = TRUE}, permutations    
+take precedence and permutations are performed. No simulation is done if     
 \code{distribution = "poisson-binomial"}.}
 
-\item{B}{If \code{simulate.p.value = TRUE}, an integer specifying the 
-number of replicates used in the Monte Carlo estimation.}
+\item{B}{If \code{permutation.test = TRUE} or \code{simulate.p.value = TRUE},
+an integer specifying the number of replicates used in the permutation or    
+Monte Carlo estimation.}
 }
 \value{
 A \code{"htest"} object with elements:
@@ -100,6 +110,11 @@ The null hypothesis is that the data come from a population with
   is asymptotically \eqn{t} distributed, which is a more robust alternative
   against serial correlation.
   
+  If \code{permutation.test = TRUE}, the p-value is estimated by permutation	
+  simulations. This is the only method of calculating p-values that does not	
+  require that the columns of \code{X} be independent.	
+  
+  
   If \code{simulate.p.value = TRUE}, the p-value is estimated by Monte Carlo
   simulations.
   
@@ -122,24 +137,24 @@ N.test(ZaragozaSeries, distribution = "poisson-binom")
 # Exact test for records in the last decade
 N.test(ZaragozaSeries, weights = function(t) ifelse(t < 61, 0, 1), distribution = "poisson-binom")
 # Linear weights for a more powerful test (without continuity correction)
-N.test(ZaragozaSeries, weights = function(t) t-1, correct = FALSE)
+N.test(ZaragozaSeries, weights = function(t) t - 1, correct = FALSE)
 
 }
 \references{
 Butler K, Stephens MA (2017).
 “The Distribution of a Sum of Independent Binomial Random Variables.”
 \emph{Methodology and Computing in Applied Probability}, \strong{19}(2), 557-571.
-\doi{10.1007/s11009-016-9533-4}
+\doi{10.1007/s11009-016-9533-4}.
 
 Cebrián AC, Castillo-Mateo J, Asín J (2022).
 “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
 \emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2): 313-330. 
-\doi{10.1007/s00477-021-02122-w}
+\doi{10.1007/s00477-021-02122-w}.
 
 Hong Y (2013). 
 “On Computing the Distribution Function for the Poisson Binomial Distribution.”
 \emph{Computational Statistics & Data Analysis}, \strong{59}(1), 41-51.
-\doi{10.1016/j.csda.2012.10.006}
+\doi{10.1016/j.csda.2012.10.006}.
 }
 \seealso{
 \code{\link{N.record}}, \code{\link{N.plot}}, 

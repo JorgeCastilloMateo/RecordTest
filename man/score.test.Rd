@@ -110,8 +110,8 @@ score.test(ZaragozaSeries, alternative = "greater", probabilities = "equal")
 \references{
 Cebrián AC, Castillo-Mateo J, Asín J (2022).
 “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
-\emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2): 313-330. 
-\doi{10.1007/s00477-021-02122-w}
+\emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2), 313-330. 
+\doi{10.1007/s00477-021-02122-w}.
 }
 \seealso{
 \code{\link{lr.test}}, \code{\link{global.test}}

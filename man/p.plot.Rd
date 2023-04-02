@@ -131,16 +131,18 @@ p.plot(ZaragozaSeries, record = c(1,0,0,0),
 \references{
 Benestad RE (2003). 
 “How Often Can We Expect a Record Event?” 
-\emph{Climate Research}, \strong{25}(1), 3–13.
+\emph{Climate Research}, \strong{25}(1), 3-13.
+\doi{10.3354/cr025003}.
 
 Benestad RE (2004). 
 “Record-Values, Nonstationarity Tests and Extreme Value Distributions.” 
-\emph{Global and Planetary Change}, \strong{44}(1–4), 11–26. 
+\emph{Global and Planetary Change}, \strong{44}(1-4), 11–26. 
+\doi{10.1016/j.gloplacha.2004.06.002}.
 
 Cebrián AC, Castillo-Mateo J, Asín J (2022).
 “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
-\emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2): 313-330. 
-\doi{10.1007/s00477-021-02122-w}
+\emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2), 313-330. 
+\doi{10.1007/s00477-021-02122-w}.
 }
 \seealso{
 \code{\link{p.regression.test}}

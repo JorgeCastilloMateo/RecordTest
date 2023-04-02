@@ -86,6 +86,7 @@ Nmean.record(ZaragozaSeries, record = 'l')
 Arnold BC, Balakrishnan N, Nagaraja HN (1998). 
 \emph{Records}. 
 Wiley Series in Probability and Statistics. Wiley, New York.
+\doi{10.1002/9781118150412}.
 }
 \seealso{
 \code{\link{I.record}}, \code{\link{L.record}}, 

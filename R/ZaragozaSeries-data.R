@@ -1,4 +1,5 @@
 #' @title Split and Uncorrelated Time Series \code{\link{TX_Zaragoza}}
+#' 
 #' @description The matrix resulting from the data preparation (or 
 #'   pre-processing) of \code{\link{TX_Zaragoza}$TX}. 
 #' 
@@ -15,7 +16,7 @@
 #' @docType data
 #' @keywords datasets
 #' @name ZaragozaSeries
-#' @usage data("ZaragozaSeries")
 #' @seealso \code{\link{TX_Zaragoza}}
+#' @usage data("ZaragozaSeries")
 #' @format A matrix with 70 rows and 76 columns.
 "ZaragozaSeries"

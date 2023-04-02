@@ -67,6 +67,7 @@ The Poisson binomial distribution with \code{size = 1} and
 Hong Y (2013). 
 “On Computing the Distribution Function for the Poisson Binomial Distribution.”
 \emph{Computational Statistics & Data Analysis}, \strong{59}(1), 41-51.
+\doi{10.1016/j.csda.2012.10.006}.
 }
 \author{
 Jorge Castillo-Mateo

@@ -1,8 +1,11 @@
 #' @title Likelihood-Ratio Test for the Likelihood of the Record Indicators
+#' 
 #' @importFrom stats pchisq
+#' 
 #' @description This function performs likelihood-ratio tests
 #'   for the likelihood of the record indicators \eqn{I_t} to study the 
 #'   hypothesis of the classical record model (i.e., of IID continuous RVs).
+#'   
 #' @details 
 #'   The null hypothesis of the likelihood-ratio tests is that in every vector 
 #'   (columns of the matrix \code{X}), the probability of record at 
@@ -43,7 +46,6 @@
 #'   \eqn{(t=2,\ldots,T)}.
 #' 
 #' @inheritParams score.test   
-#' 
 #' @return A list of class \code{"htest"} with the following elements:
 #'   \item{statistic}{Value of the statistic.}
 #'   \item{parameter}{Degrees of freedom of the approximate \eqn{\chi^2} 
@@ -53,13 +55,14 @@
 #'   \item{data.name}{A character string giving the name of the data.}
 #'   \item{alternative}{A character string indicating the alternative
 #'     hypothesis.}
+#'     
 #' @author Jorge Castillo-Mateo
 #' @seealso \code{\link{global.test}}, \code{\link{score.test}}
 #' @references 
 #' Cebrián AC, Castillo-Mateo J, Asín J (2022).
 #' “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
 #' \emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2): 313-330. 
-#' \doi{10.1007/s00477-021-02122-w}
+#' \doi{10.1007/s00477-021-02122-w}.
 #' 
 #' @examples
 #' set.seed(23)

@@ -3,6 +3,24 @@
 \newcommand{\cpkg}{\href{https://CRAN.R-project.org/package=#1}{\pkg{#1}}}
 \newcommand{\issue}{\href{https://github.com/JorgeCastilloMateo/RecordTest/issues/#1}{(issue #1)}}
 
+\section{Changes in Version 2.2.0 (?? ?? 2023)}{
+  \subsection{NEW FEATURES}{
+    \itemize{
+      \item Implementation of "approximate" or "random" permutation tests with the argument \code{permutation.test} in the functions \code{change.point}, \code{foster.test}, and \code{N.test}. The tests use samples with repetition of permutations, they do not use all possible permutations. Unlike previous exact, asymptotic, or Monte Carlo tests, permutation tests still ensure test size by introducing a matrix \code{X} with dependent columns as an argument.
+    }
+  }
+  \subsection{MODIFICATIONS}{
+    \itemize{
+      \item \pkg{RecordTest} logo update.
+    }
+  }
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item Function \code{series_untie} now admits \code{NA} or \code{NaN} values without returning \code{NaN}'s.
+    }
+  }
+}
+
 \section{Changes in Version 2.1.2 (15 March 2023)}{
   \subsection{MODIFICATIONS}{
     \itemize{

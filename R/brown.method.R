@@ -1,9 +1,12 @@
 #' @title Brown's Method on the Number of Records
+#' 
 #' @importFrom stats pchisq
+#' 
 #' @description Performs Brown's method on the p-values of \code{\link{N.test}}
 #'   as proposed by Cebrián, Castillo-Mateo and Asín (2022). The null 
 #'   hypothesis of the classical record model (i.e., of IID continuous RVs) is 
 #'   tested against the alternative hypothesis.
+#'   
 #' @details 
 #'   The test is implemented as given by Cebrián, 
 #'   Castillo-Mateo and Asín (2022), where the p-values 
@@ -54,20 +57,23 @@
 #'   \item{p.value}{P-value.}
 #'   \item{method}{A character string indicating the type of test performed.}
 #'   \item{data.name}{A character string giving the name of the data.}
+#'   
 #' @author Jorge Castillo-Mateo
 #' @seealso \code{\link{fisher.method}}, \code{\link{foster.test}}, 
 #'   \code{\link{N.test}}
 #' @references
 #' Brown M (1975). “A Method for Combining Non-Independent, One-Sided Tests of Significance.” 
-#' \emph{Biometrics}. \strong{31}(4), 987–992. 
+#' \emph{Biometrics}, \strong{31}(4), 987-992.
+#' \doi{10.2307/2529826}.
 #' 
 #' Cebrián AC, Castillo-Mateo J, Asín J (2022).
 #' “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
-#' \emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2): 313-330. 
-#' \doi{10.1007/s00477-021-02122-w}
+#' \emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2), 313-330.
+#' \doi{10.1007/s00477-021-02122-w}.
 #' 
 #' Kost JT, McDermott MP (2002). “Combining Dependent P-Values.”
 #' \emph{Statistics & Probability Letters}, \strong{60}(2), 183-190.
+#' \doi{10.1016/S0167-7152(02)00310-3}.
 #' 
 #' @examples
 #' brown.method(ZaragozaSeries)
@@ -80,7 +86,6 @@
 #' brown.method(ZaragozaSeries, weights = function(t) t-1, record = c(0,1,0,1))
 #' 
 #' @export brown.method
-
 brown.method <- function(X, 
                          weights = function(t) 1, 
                          record = c("FU" = 1, "FL" = 1, "BU" = 1, "BL" = 1),

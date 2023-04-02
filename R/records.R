@@ -1,10 +1,13 @@
 #' @title Record Values and Record Times
+#' 
 #' @importFrom ggplot2 ggplot aes geom_step geom_point scale_colour_manual 
 #'   scale_alpha_manual theme_bw theme labs
+#'   
 #' @description This function identifies (and plots if argument 
 #'   \code{plot = TRUE}) the record values (\eqn{R_i}), and the record times 
 #'   (\eqn{L_i}) in a vector, for all upper and lower records in forward and
 #'   backward directions. 
+#'   
 #' @details 
 #'   Customarily, the records in a time series \eqn{(X_t)} observed in \eqn{T} 
 #'   instances \eqn{t = 1, 2, \ldots, T} can be obtained using chronological 
@@ -13,6 +16,7 @@
 #'   from the last observation, i.e., \eqn{t' = T, \ldots, 2, 1}. The analysis 
 #'   of series with reversed order is customarily referred to as backward, as 
 #'   opposed to a forward analysis. 
+#'   
 #' @param X A numeric vector.
 #' @param plot Logical. If \code{TRUE} (the default) the records are plotted.
 #' @param direction A character string indicating the type of record to show 
@@ -40,6 +44,7 @@
 #'   record values and, if \code{variable} is not null, the third column are 
 #'   their values at the record times, respectively for upper and lower records
 #'   in forward and backward series.
+#'   
 #' @author Jorge Castillo-Mateo
 #' @seealso \code{\link{I.record}}, \code{\link{series_double}}, 
 #'   \code{\link{series_rev}}, \code{\link{series_split}}, 
@@ -66,7 +71,6 @@
 #' records(TxZ, plot = FALSE, variable = 1951:2020)
 #' 
 #' @export records
-
 records <- function(X, 
                     plot = TRUE, 
                     direction = c("forward", "backward", "both"),

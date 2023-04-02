@@ -1,11 +1,14 @@
 #' @title Probabilities of Record Plots
+#' 
 #' @importFrom ggplot2 ggplot aes theme_bw geom_line geom_smooth labs 
 #'   geom_ribbon geom_errorbar geom_point geom_step
 #' @importFrom stats qbinom
+#' 
 #' @description This function builds a ggplot object to display different 
 #'   functions of the record probabilities at time \eqn{t}, \eqn{p_t}.
 #'   A graphical tool to study the hypothesis of the classical record model 
 #'   (i.e., of IID continuous RVs).
+#'   
 #' @details 
 #'   Three different types of plots which aim to analyse the hypothesis
 #'   of the classical record model using the record probabilities are 
@@ -67,21 +70,24 @@
 #' @param ... Further arguments to pass through the smooth 
 #'   (see \code{ggplot2::geom_smooth}).
 #' @return A ggplot object.
+#' 
 #' @author Jorge Castillo-Mateo
 #' @seealso \code{\link{p.regression.test}}
 #' @references 
 #' Benestad RE (2003). 
 #' “How Often Can We Expect a Record Event?” 
-#' \emph{Climate Research}, \strong{25}(1), 3–13.
+#' \emph{Climate Research}, \strong{25}(1), 3-13.
+#' \doi{10.3354/cr025003}.
 #' 
 #' Benestad RE (2004). 
 #' “Record-Values, Nonstationarity Tests and Extreme Value Distributions.” 
-#' \emph{Global and Planetary Change}, \strong{44}(1–4), 11–26. 
+#' \emph{Global and Planetary Change}, \strong{44}(1-4), 11–26. 
+#' \doi{10.1016/j.gloplacha.2004.06.002}.
 #' 
 #' Cebrián AC, Castillo-Mateo J, Asín J (2022).
 #' “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
-#' \emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2): 313-330. 
-#' \doi{10.1007/s00477-021-02122-w}
+#' \emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2), 313-330. 
+#' \doi{10.1007/s00477-021-02122-w}.
 #' 
 #' @examples
 #' # three plots available
@@ -105,7 +111,6 @@
 #' p.plot(ZaragozaSeries, record = c(1,0,0,0), 
 #'   smooth.method = stats::loess, span = 0.25)
 #' @export
-
 p.plot <- function(X, 
                    plot = c("1", "2", "3"),
                    record = c("FU" = 1, "FL" = 1, "BU" = 1, "BL" = 1),

@@ -1,4 +1,4 @@
-RecordTest <img src="man/figures/logoRecordTest.png" width="175px" align="right" />
+RecordTest <img src="man/figures/logoRecordTest_2.2.0.png" width="175px" align="right" />
 ======================
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/RecordTest)](https://CRAN.R-project.org/package=RecordTest)
@@ -39,44 +39,45 @@ To cite *RecordTest* in publications use:
 
 Castillo-Mateo J, Cebrián AC, Asín J (2023).
 “RecordTest: An R Package to Analyze Non-Stationarity in the Extremes Based on Record-Breaking Events.”
-*Journal of Statistical Software*, **106**(5), 1-28.
-<doi:10.18637/jss.v106.i05>
+*Journal of Statistical Software*, **106**(5), 1--28.
+<doi:10.18637/jss.v106.i05>.
 
 A BibTeX entry for LaTeX users is
 
 @Article{,  
 &nbsp;&nbsp;  title = {{RecordTest}: An {R} Package to Analyze Non-Stationarity in the Extremes Based on Record-Breaking Events},  
-&nbsp;&nbsp;  author = {Jorge Castillo-Mateo and Ana C. Cebri\\\'an and Jes\\\'us As\\\'in},  
+&nbsp;&nbsp;  author = {Jorge Castillo-Mateo and Ana C. Cebri\\\'an and Jes\\\'us As{\\\'\\i}n},  
 &nbsp;&nbsp;  journal = {Journal of Statistical Software},  
 &nbsp;&nbsp;  year = {2023},  
 &nbsp;&nbsp;  volume = {106},  
 &nbsp;&nbsp;  number = {5},  
 &nbsp;&nbsp;  pages = {1--28},  
-&nbsp;&nbsp;  doi = {10.18637/jss.v106.i05}  
+&nbsp;&nbsp;  doi = {10.18637/jss.v106.i05},  
 }
 
   
 ## References
 Castillo-Mateo J (2022).
 “Distribution-Free Changepoint Detection Tests Based on the Breaking of Records.”
-*Environmental and Ecological Statistics*, **29**(3), 655-676. 
-<doi:10.1007/s10651-022-00539-2>
+*Environmental and Ecological Statistics*, **29**(3), 655--676. 
+<doi:10.1007/s10651-022-00539-2>.
 
 Castillo-Mateo J, Cebrián AC, Asín J (2023).
 “RecordTest: An R Package to Analyze Non-Stationarity in the Extremes Based on Record-Breaking Events.”
-*Journal of Statistical Software*, **106**(5), 1-28.
-<doi:10.18637/jss.v106.i05>
+*Journal of Statistical Software*, **106**(5), 1--28.
+<doi:10.18637/jss.v106.i05>.
 
 Cebrián AC, Castillo-Mateo J, Asín J (2022).
 “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
-*Stochastic Environmental Research and Risk Assessment*, **36**(2): 313-330. 
-<doi:10.1007/s00477-021-02122-w>
+*Stochastic Environmental Research and Risk Assessment*, **36**(2), 313--330. 
+<doi:10.1007/s00477-021-02122-w>.
 
-Diersen J, Trenkler G (1996). “Records Tests for Trend in Location.”
-*Statistics*, **28**(1), 1-12.
-<doi:10.1080/02331889708802543>
+Diersen J, Trenkler G (1996). 
+“Records Tests for Trend in Location.”
+*Statistics*, **28**(1), 1--12.
+<doi:10.1080/02331889708802543>.
 
 Foster FG, Stuart A (1954). 
 “Distribution-Free Tests in Time-Series Based on the Breaking of Records.”
-*Journal of the Royal Statistical Society. Series B (Methodological)*, 
-**16**(1), 1-22.
+*Journal of the Royal Statistical Society B*, **16**(1), 1--22.
+<doi:10.1111/j.2517-6161.1954.tb00143.x>.

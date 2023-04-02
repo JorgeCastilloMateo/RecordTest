@@ -47,6 +47,7 @@ series_untie(ZaragozaSeries)
 Wergen G, Volovik D, Redner S, Krug J (2012). 
 “Rounding Effects in Record Statistics.”
 \emph{Physical Review Letters}, \strong{109}(16), 164102.
+\doi{10.1103/physrevlett.109.164102}.
 }
 \seealso{
 \code{\link{series_double}}, \code{\link{series_record}}, 

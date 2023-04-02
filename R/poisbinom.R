@@ -1,13 +1,16 @@
 #' @name Poisson-Binomial
 #' @title The Poisson Binomial Distribution
 #' @aliases dpoisbinom qpoisbinom ppoisbinom rpoisbinom
+#' 
 #' @importFrom stats fft dbinom rbinom
+#' 
 #' @description Density, distribution function, quantile function and random
 #'   generation for the Poisson binomial distribution with parameters 
 #'   \code{size} and \code{prob}.
 #'   
 #'   This is conventionally interpreted as the number of successes in 
 #'   \code{size * length(prob)} trials with success probabilities \code{prob}.
+#'   
 #' @details The Poisson binomial distribution with \code{size = 1} and 
 #'   \code{prob} \eqn{= (p_1,p_2,\ldots,p_n)} has density
 #'   \deqn{p(x) = \sum_{A \in F_x} \prod_{i \in A} p_i \prod_{j \in A^c} (1-p_j)}
@@ -19,6 +22,7 @@
 #'   
 #'   The quantile is defined as the smallest value \eqn{x} such that 
 #'   \eqn{F(x) \ge p}, where \eqn{F} is the cumulative distribution function.
+#'   
 #' @param x,q Vector of quantiles.
 #' @param p Vector of probabilities.
 #' @param n Number of observations.
@@ -36,11 +40,14 @@
 #'   
 #'   The length of the result is determined by \code{x}, \code{q}, \code{p}
 #'   or \code{n}.
+#'   
 #' @author Jorge Castillo-Mateo 
 #' @references 
 #' Hong Y (2013). 
 #' “On Computing the Distribution Function for the Poisson Binomial Distribution.”
 #' \emph{Computational Statistics & Data Analysis}, \strong{59}(1), 41-51.
+#' \doi{10.1016/j.csda.2012.10.006}.
+#' 
 #' @rdname dpoisbinom
 #' @export dpoisbinom
 dpoisbinom <- function(x, size = 1, prob, log = FALSE) {

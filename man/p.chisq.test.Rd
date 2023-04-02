@@ -66,11 +66,13 @@ p.chisq.test(ZaragozaSeries, simulate.p.value = TRUE, B = 10000)
 \references{
 Benestad RE (2003). 
 “How Often Can We Expect a Record Event?” 
-\emph{Climate Research}, \strong{25}(1), 3–13.
+\emph{Climate Research}, \strong{25}(1), 3-13.
+\doi{10.3354/cr025003}.
 
 Benestad RE (2004). 
 “Record-Values, Nonstationarity Tests and Extreme Value Distributions.” 
-\emph{Global and Planetary Change}, \strong{44}(1–4), 11–26.
+\emph{Global and Planetary Change}, \strong{44}(1-4), 11–26. 
+\doi{10.1016/j.gloplacha.2004.06.002}.
 }
 \seealso{
 \code{\link{global.test}}, \code{\link{score.test}},

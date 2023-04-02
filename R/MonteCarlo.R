@@ -59,8 +59,28 @@
   ###################################
   # estimated p-value
   pvalue <- switch(alternative,
-                   "greater" = { sum(statistic_B >= statistic) / B },
-                   "less"    = { sum(statistic_B <= statistic) / B }
+                   "greater" = { mean(statistic_B >= statistic) },
+                   "less"    = { mean(statistic_B <= statistic) }
+  )
+  
+  return(pvalue)
+}
+
+.permutation <- function(statistic, alternative,
+                         FUN, B = 1000, X,
+                         Trows, Mcols, ...) {
+  
+  X <- as.matrix(X)
+  
+  statistic_B <- sapply(1:B, 
+                        FUN = function(iter) FUN(X[sample(Trows),]), 
+                        simplify = TRUE
+  )
+  
+  # estimated p-value
+  pvalue <- switch(alternative,
+                   "greater" = { mean(statistic_B >= statistic) },
+                   "less"    = { mean(statistic_B <= statistic) }
   )
   
   return(pvalue)

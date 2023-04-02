@@ -1,7 +1,9 @@
 #' @title Breaking Record Ties
-#' @importFrom stats runif rnorm
+#' 
+#' @importFrom stats na.omit rnorm runif
+#' 
 #' @description Breaks record ties when observations have been rounded.
-#' @param X A numeric vector, matrix (or data frame).
+#' 
 #' @details This function is used in the data preparation (or pre-processing) 
 #'  often required to apply the exploratory and inference tools based on 
 #'  theory of records within this package.
@@ -20,8 +22,10 @@
 #'  \eqn{(-5 \times 10^{-(n+1)}, 5 \times 10^{-(n+1)})}, so the records in the
 #'  original (rounded) series are also records in the new series.
 #'
+#' @param X A numeric vector, matrix (or data frame).
 #' @return A matrix equal to \code{X} whose elements have been added a 
 #'   sample from a uniform variable, different for each element.
+#'   
 #' @author Jorge Castillo-Mateo
 #' @seealso \code{\link{series_double}}, \code{\link{series_record}}, 
 #'   \code{\link{series_rev}}, \code{\link{series_split}}, 
@@ -29,7 +33,9 @@
 #' @references 
 #' Wergen G, Volovik D, Redner S, Krug J (2012). 
 #' “Rounding Effects in Record Statistics.”
-#' \emph{Physical Review Letters}, \strong{109}(16), 164102. 
+#' \emph{Physical Review Letters}, \strong{109}(16), 164102.
+#' \doi{10.1103/physrevlett.109.164102}.
+#' 
 #' @examples
 #' set.seed(23)
 #' X <- matrix(round(stats::rnorm(100), digits = 1), nrow = 10, ncol = 10)
@@ -43,7 +49,7 @@ series_untie <- function(X) {
   Trows <- NROW(X)
   Mcols <- NCOL(X)
   
-  digits <- max(nchar(sub("^0+", "", sub("\\.", "", X %% 1)))) + 1
+  digits <- max(nchar(sub("^0+", "", sub("\\.", "", stats::na.omit(X) %% 1)))) + 1
   a <- -5 * 10^-digits
   b <-  5 * 10^-digits
   

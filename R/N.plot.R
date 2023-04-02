@@ -1,13 +1,16 @@
 #' @title Number of Records Plot
+#' 
 #' @importFrom ggplot2 ggplot aes theme_bw labs geom_line theme
 #'   scale_colour_manual scale_shape_manual scale_linetype_manual geom_ribbon 
 #'   geom_errorbar geom_point annotate guides guide_legend
 #' @importFrom stats qnorm
+#' 
 #' @description This function builds a ggplot object to compare the sample
 #'   means of the (weighted) number of records in a vector up to time \eqn{t}, 
 #'   \eqn{\bar N_{t}^\omega}, and the expected values 
 #'   \eqn{\textrm{E}(N_t^{\omega})} 
 #'   under the classical record model (i.e., of IID continuous RVs).
+#'   
 #' @details 
 #'   This plot is associated to the test \code{\link{N.test}}.
 #'   It calculates the sample means of the number of records in a set of
@@ -57,6 +60,7 @@
 #' @param conf.col Colour used to plot the expected value and (if 
 #'   \code{conf.int == TRUE}) RIs.
 #' @return A ggplot object.
+#' 
 #' @author Jorge Castillo-Mateo
 #' @seealso \code{\link{N.record}}, \code{\link{N.test}}, 
 #'   \code{\link{foster.test}}, \code{\link{foster.plot}}
@@ -64,7 +68,7 @@
 #' Cebrián AC, Castillo-Mateo J, Asín J (2022).
 #' “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
 #' \emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2): 313-330. 
-#' \doi{10.1007/s00477-021-02122-w}
+#' \doi{10.1007/s00477-021-02122-w}.
 #' 
 #' @examples
 #' # Plot at Zaragoza, with linear weights and error bar as RIs aesthetic

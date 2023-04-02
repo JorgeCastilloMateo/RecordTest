@@ -89,15 +89,17 @@ brown.method(ZaragozaSeries, weights = function(t) t-1, record = c(0,1,0,1))
 }
 \references{
 Brown M (1975). “A Method for Combining Non-Independent, One-Sided Tests of Significance.” 
-\emph{Biometrics}. \strong{31}(4), 987–992. 
+\emph{Biometrics}, \strong{31}(4), 987-992.
+\doi{10.2307/2529826}.
 
 Cebrián AC, Castillo-Mateo J, Asín J (2022).
 “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
-\emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2): 313-330. 
-\doi{10.1007/s00477-021-02122-w}
+\emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2), 313-330.
+\doi{10.1007/s00477-021-02122-w}.
 
 Kost JT, McDermott MP (2002). “Combining Dependent P-Values.”
 \emph{Statistics & Probability Letters}, \strong{60}(2), 183-190.
+\doi{10.1016/S0167-7152(02)00310-3}.
 }
 \seealso{
 \code{\link{fisher.method}}, \code{\link{foster.test}}, 

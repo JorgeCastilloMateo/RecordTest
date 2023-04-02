@@ -1,8 +1,11 @@
 #' @title Probabilities of Record Regression Test
+#' 
 #' @importFrom stats pf lm
+#' 
 #' @description This function performs a linear hypothesis test based on a
 #'   regression for the record probabilities \eqn{p_t} to study the hypothesis
 #'   of the classical record model (i.e., of IID continuous RVs).
+#'   
 #' @details 
 #'   The null hypothesis is that the data come from a population with 
 #'   independent and identically distributed realisations. This implies that
@@ -31,6 +34,9 @@
 #'   If the sample size (i.e., the number of series or columns of \code{X})
 #'   is lower than 8 or 12 the \code{simulate.p.value} option is recommended.
 #'
+#' @note IMPORTANT: In \code{formula} the intercept has to be free or fixed
+#'   to 1 so that the test is correct.
+#'
 #' @param X A numeric vector, matrix (or data frame).
 #' @param record A character string indicating the type of records to be 
 #'   calculated, "upper" or "lower".
@@ -54,10 +60,15 @@
 #'   \item{statistic}{Value of the \eqn{F} statistic.}
 #'   \item{parameters}{Degrees of freedom of the \eqn{F} statistic.}
 #'   \item{p.value}{P-value.}
-#' @note IMPORTANT: In \code{formula} the intercept has to be free or fixed
-#'   to 1 so that the test is correct.
+#'   
 #' @author Jorge Castillo-Mateo
 #' @seealso \code{\link{p.chisq.test}}, \code{\link{p.plot}}
+#' @references 
+#' Castillo-Mateo J, Cebrián AC, Asín J (2023).
+#' “\strong{RecordTest}: An \code{R} Package to Analyze Non-Stationarity in the Extremes Based on Record-Breaking Events.”
+#' \emph{Journal of Statistical Software}, \strong{106}(5), 1-28. 
+#' \doi{10.18637/jss.v106.i05}.
+#' 
 #' @examples
 #' # Simple test for upper records (p-value = 0.01202)
 #' p.regression.test(ZaragozaSeries)
@@ -79,7 +90,6 @@
 #' TxZ <- apply(series_split(TX_Zaragoza$TX), 1, max, na.rm = TRUE)
 #' p.regression.test(TxZ, simulate.p.value = TRUE)
 #' @export p.regression.test
-
 p.regression.test <- function(X, 
                               record = c("upper", "lower"), 
                               formula = y ~ x, 

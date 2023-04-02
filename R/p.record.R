@@ -1,11 +1,14 @@
 #' @title Probabilities of Record
+#' @aliases S.record p.record
+#' 
 #' @description 
 #'   \code{S.record} and \code{p.record} return the sample number of 
 #'   records and mean number of records at each time \eqn{t} in a set of \eqn{M}
 #'   vectors (columns of \code{X}), respectively. In particular, 
 #'   \code{p.record} is the estimated record probability at each time \eqn{t}.
 #'   
-#'   (For the introduccion to records see Details in \code{\link{I.record}}.) 
+#'   (For the introduccion to records see Details in \code{\link{I.record}}.)
+#'    
 #' @details Given a matrix formed by \eqn{M} vectors (columns), measured at 
 #'   \eqn{T} times (rows), \code{M.record} calculates the number of records in 
 #'   the \eqn{M} vectors at each observed time \eqn{t}, \eqn{S_t}.
@@ -32,10 +35,10 @@
 #' 
 #'   Summaries for both upper and lower records can be calculated.
 #' 
-#' @aliases S.record p.record
 #' @inheritParams I.record
 #' @return A vector with the number (or proportion in the case of 
 #'   \code{p.record}) of records at each time \eqn{t} (row).
+#'   
 #' @author Jorge Castillo-Mateo
 #' @seealso \code{\link{I.record}}, \code{\link{L.record}}, 
 #'   \code{\link{N.record}}, \code{\link{Nmean.record}}, 
@@ -43,8 +46,8 @@
 #' @references 
 #' Cebrián AC, Castillo-Mateo J, Asín J (2022).
 #' “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
-#' \emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2): 313-330. 
-#' \doi{10.1007/s00477-021-02122-w}
+#' \emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2), 313-330. 
+#' \doi{10.1007/s00477-021-02122-w}.
 #' 
 #' @examples
 #' Y1 <- c( 1,  5,  3,  6,  6,  9,  2)

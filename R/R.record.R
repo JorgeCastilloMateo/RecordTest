@@ -1,9 +1,11 @@
 #' @title Record Values
+#' 
 #' @description Returns the record values of the values in a vector.
 #'   A record value is the magnitude of a record observation. 
 #'   
 #'   If the argument \code{X} is a matrix, then each column is treated as a 
 #'   different vector.
+#'   
 #' @details The sequence of record values \eqn{\{R_1,\ldots,R_I\}} can be 
 #'   expressed in terms of the record times 
 #'   \code{\link{L.record}} by
@@ -16,6 +18,7 @@
 #'   containing the record values. If \code{X} is a matrix, the function 
 #'   returns a list where each element is a vector indicating the record values 
 #'   of the corresponding \code{X} column.
+#'   
 #' @author Jorge Castillo-Mateo
 #' @seealso \code{\link{I.record}}, \code{\link{L.record}}, 
 #'   \code{\link{N.record}}, \code{\link{Nmean.record}}, 
@@ -25,6 +28,8 @@
 #' Arnold BC, Balakrishnan N, Nagaraja HN (1998). 
 #' \emph{Records}. 
 #' Wiley Series in Probability and Statistics. Wiley, New York.
+#' \doi{10.1002/9781118150412}.
+#' 
 #' @examples
 #' Y1 <- c( 1,  5,  3,  6,  6,  9,  2)
 #' Y2 <- c(10,  5,  3,  6,  6,  9,  2)

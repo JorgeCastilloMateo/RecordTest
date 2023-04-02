@@ -1,9 +1,12 @@
 #' @title Number of Records
+#' @aliases N.record Nmean.record
+#' 
 #' @description Returns the number of records up to time \eqn{t} of the
 #'   values in a vector.
 #'   
 #'   If the argument \code{X} is a matrix, then each column is treated as a 
 #'   different vector. 
+#'   
 #' @details The record counting process \eqn{\{N_1,\ldots,N_T\}} is defined by 
 #'   the number of records up to time \eqn{t}, and can be expressed in terms of 
 #'   the record indicator random variables \code{\link{I.record}} by
@@ -39,12 +42,13 @@
 #'   
 #' @note If \code{X} is a vector both functions return the same values, 
 #'   \code{N.record} as a matrix and \code{Nmean.record} as a vector.
-#' @aliases N.record Nmean.record
+#'   
 #' @inheritParams I.record
 #' @return \code{N.record} returns a numeric matrix with the number of records 
 #'   up to each time (row) \eqn{t} for a vector or each column in \code{X}. 
 #'   \code{Nmean.record} returns a numeric vector with the mean number of 
 #'   records in \eqn{M} series (columns) up to each time (row) \eqn{t}. 
+#'   
 #' @author Jorge Castillo-Mateo
 #' @seealso \code{\link{I.record}}, \code{\link{L.record}}, 
 #'   \code{\link{p.record}}, \code{\link{R.record}},
@@ -53,6 +57,8 @@
 #' Arnold BC, Balakrishnan N, Nagaraja HN (1998). 
 #' \emph{Records}. 
 #' Wiley Series in Probability and Statistics. Wiley, New York.
+#' \doi{10.1002/9781118150412}.
+#' 
 #' @examples
 #' Y1 <- c( 1,  5,  3,  6,  6,  9,  2)
 #' Y2 <- c(10,  5,  3,  6,  6,  9,  2)
@@ -81,4 +87,3 @@ Nmean.record <- function(X, record = c("upper", "lower"), weak = FALSE) {
   
   return(rowMeans(X))
 }
-

@@ -17,17 +17,16 @@ The Classical Record Model:
 
   Record statistics are used primarily to quantify the stochastic behaviour
   of a process at never-seen-before values, either upper or lower. The setup
-  of independent and identically distibuted (IID) continuous random 
+  of independent and identically distributed (IID) continuous random 
   variables (RVs), often called the classical record model, is 
   particularly interesting because the common continuous distribution 
-  underlying the IID continuous RVs will not affect the distribution of the variables 
-  relative to the record occurrence.  
-  Many fields have begun to use the theory of records to study these 
-  remarkable events. Particularly productive is the study of 
-  record-breaking temperatures and their connection with climate change, 
-  but also records in other environmental fields (precipitations, floods, 
-  earthquakes, etc.), economy, biology, physics or even sports have been 
-  analysed.
+  underlying the IID continuous RVs will not affect the distribution of the 
+  variables relative to the record occurrence. Many fields have begun to use
+  the theory of records to study these remarkable events. Particularly 
+  productive is the study of record-breaking temperatures and their 
+  connection with climate change, but also records in other environmental
+  fields (precipitations, floods, earthquakes, etc.), economy, biology, 
+  physics or even sports have been analysed.
   See Arnold, Balakrishnan and Nagaraja (1998) for an extensive theoretical
   introduction to the theory of records and in particular the classical 
   record model. See Foster and Stuart (1954), Diersen and Trenkler (1996, 
@@ -35,7 +34,8 @@ The Classical Record Model:
   distribution-free trend detection tests and Castillo-Mateo (2022) for the
   distribution-free change-point detection tests based on the classical 
   record model. For an easy introduction to \strong{RecordTest} use 
-  \code{vignette("RecordTest")}.
+  \code{vignette("RecordTest")}, and see Castillo-Mateo, Cebrián and Asín 
+  (2023).
 
   This package provides tests to study the hypothesis of the classical 
   record model, that is that the record occurrence from a series of values 
@@ -62,6 +62,8 @@ The Classical Record Model:
   Those problems can be solved by preparing the data adequately. 
   A wide set of tools to carry out a preliminary analysis and to prepare 
   data with a seasonal pattern are implemented in the following functions.
+  Note that the \eqn{M} series can be dependent if the p-values are 	
+  approximated by permutations.
   
   \code{\link{series_record}}: If only the record times are available.
   
@@ -178,25 +180,26 @@ The Classical Record Model:
 Arnold BC, Balakrishnan N, Nagaraja HN (1998). 
 \emph{Records}. 
 Wiley Series in Probability and Statistics. Wiley, New York.
+\doi{10.1002/9781118150412}.
 
 Castillo-Mateo J (2022).
 “Distribution-Free Changepoint Detection Tests Based on the Breaking of Records.”
 \emph{Environmental and Ecological Statistics}, \strong{29}(3), 655-676. 
-\doi{10.1007/s10651-022-00539-2}
+\doi{10.1007/s10651-022-00539-2}.
 
 Castillo-Mateo J, Cebrián AC, Asín J (2023).
 “\strong{RecordTest}: An \code{R} Package to Analyze Non-Stationarity in the Extremes Based on Record-Breaking Events.”
 \emph{Journal of Statistical Software}, \strong{106}(5), 1-28. 
-\doi{10.18637/jss.v106.i05}
+\doi{10.18637/jss.v106.i05}.
 
 Cebrián AC, Castillo-Mateo J, Asín J (2022).
 “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
-\emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2): 313-330. 
-\doi{10.1007/s00477-021-02122-w}
+\emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2), 313-330. 
+\doi{10.1007/s00477-021-02122-w}.
 
 Diersen J, Trenkler G (1996). “Records Tests for Trend in Location.”
 \emph{Statistics}, \strong{28}(1), 1-12.
-\doi{10.1080/02331889708802543}
+\doi{10.1080/02331889708802543}.
 
 Diersen J, Trenkler G (2001). 
 “Weighted Records Tests for Splitted Series of Observations.”
@@ -206,8 +209,9 @@ pp. 163–178. Lohmar: Josef Eul Verlag.
 
 Foster FG, Stuart A (1954). 
 “Distribution-Free Tests in Time-Series Based on the Breaking of Records.”
-\emph{Journal of the Royal Statistical Society. Series B (Methodological)}, 
+\emph{Journal of the Royal Statistical Society B}, 
 \strong{16}(1), 1-22.
+\doi{10.1111/j.2517-6161.1954.tb00143.x}.
 }
 \author{
 Jorge Castillo-Mateo  <jorgecm@unizar.es>, AC Cebrián, J Asín

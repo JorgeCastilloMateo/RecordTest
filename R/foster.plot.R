@@ -1,11 +1,14 @@
 #' @title Plots Based on Foster-Stuart and Diersen-Trenkler Statistics
+#' 
 #' @importFrom ggplot2 ggplot aes geom_point theme_bw geom_line theme
 #'   geom_ribbon geom_errorbar labs
 #' @importFrom stats qnorm
+#' 
 #' @description This function builds a ggplot object to display two-sided
 #'   reference intervals based on Foster-Stuart and Diersen-Trenkler 
 #'   statistics to study the hypothesis of the classical record model (i.e., 
 #'   of IID continuous RVs).
+#'   
 #' @details 
 #'   The function plots the observed values of the statistic selected with 
 #'   \code{statistic}, obtained with the series up to time \eqn{t} for 
@@ -36,18 +39,19 @@
 #' @param conf.col Colour used to plot the expected value and (if 
 #'   \code{conf.int == TRUE}) RIs.
 #' @return A ggplot graph object.
+#' 
 #' @author Jorge Castillo-Mateo
 #' @seealso \code{\link{foster.test}}, \code{\link{N.plot}}, 
 #'   \code{\link{N.test}}
 #' @references
 #' Cebrián AC, Castillo-Mateo J, Asín J (2022).
 #' “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
-#' \emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2): 313-330. 
-#' \doi{10.1007/s00477-021-02122-w}
+#' \emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2), 313-330. 
+#' \doi{10.1007/s00477-021-02122-w}.
 #' 
 #' Diersen J, Trenkler G (1996). “Records Tests for Trend in Location.”
 #' \emph{Statistics}, \strong{28}(1), 1-12.
-#' \doi{10.1080/02331889708802543}
+#' \doi{10.1080/02331889708802543}.
 #' 
 #' Diersen J, Trenkler G (2001). 
 #' “Weighted Records Tests for Splitted Series of Observations.”
@@ -57,8 +61,9 @@
 #' 
 #' Foster FG, Stuart A (1954). 
 #' “Distribution-Free Tests in Time-Series Based on the Breaking of Records.”
-#' \emph{Journal of the Royal Statistical Society. Series B (Methodological)}, 
+#' \emph{Journal of the Royal Statistical Society B}, 
 #' \strong{16}(1), 1-22.
+#' \doi{10.1111/j.2517-6161.1954.tb00143.x}.
 #' 
 #' @examples
 #' # D-statistic
