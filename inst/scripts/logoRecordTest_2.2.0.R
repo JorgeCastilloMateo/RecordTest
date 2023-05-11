@@ -36,4 +36,4 @@ hexSticker::sticker(p, package = "RecordTest",
   p_x = 1, p_y = 0.6, p_size = 23, h_size = 1.5,
   h_fill = grDevices::rgb(229, 184, 183, maxColorValue = 255), 
   h_color = grDevices::rgb(148, 54, 52, maxColorValue = 255),
-  filename = "/inst/img/logoRecordTest_2.2.0.png")
+  filename = paste0(getwd(), "/inst/img/logoRecordTest_2.2.0.png"))
