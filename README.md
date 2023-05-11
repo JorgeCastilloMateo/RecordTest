@@ -1,4 +1,4 @@
-RecordTest <img src="man/figures/logoRecordTest_2.2.0.png" width="175px" align="right" />
+RecordTest <img src="inst/img/logoRecordTest_2.2.0.png" width="175px" align="right" />
 ======================
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/RecordTest)](https://CRAN.R-project.org/package=RecordTest)
@@ -22,7 +22,7 @@ You can install the **development** version from
 [GitHub](https://github.com/JorgeCastilloMateo/RecordTest)
 
 ```s
-# install.packages("remotes")
+if (!require("remotes")) install.packages("remotes")
 remotes::install_github("JorgeCastilloMateo/RecordTest")
 ```
 
