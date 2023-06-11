@@ -16,7 +16,8 @@
   }
   \subsection{BUG FIXES}{
     \itemize{
-      \item Function \code{L.record} returned a matrix instead of a list when all series had the same number of records. Function \code{R.record} returned incorrect output when all series had the same number of records or there were only one series. These issues were fixed.
+      \item Function \code{records} when \code{plot = FALSE} returned the wrong backward record values. It returned the values of the forward series on the backward record times. This issue was fixed.
+      \item Function \code{L.record} returned a matrix instead of a list when all series had the same number of records. Function \code{R.record} returned incorrect output when all series had the same number of records or there were only one series. These issues were fixed and both functions return a list in any case.
       \item Function \code{series_untie} now admits \code{NA} or \code{NaN} values without returning \code{NaN}'s.
     }
   }

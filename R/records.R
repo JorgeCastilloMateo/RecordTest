@@ -224,9 +224,9 @@ records <- function(X,
     L.FL <- which(I.FL == 1)
     R.FL <- X[L.FL]
     L.BU <- which(I.BU == 1)
-    R.BU <- X[L.BU]
+    R.BU <- rev(X)[L.BU]
     L.BL <- which(I.BL == 1)
-    R.BL <- X[L.BL]
+    R.BL <- rev(X)[L.BL]
   }
   
   if (!missing(variable)) {
