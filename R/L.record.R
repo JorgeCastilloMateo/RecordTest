@@ -43,5 +43,5 @@ L.record <- function(X, record = c("upper", "lower"), weak = FALSE){
   
   X <- I.record(X, record = record, weak = weak)
   
-  return(apply(X, 2, function(x) which(x == 1)), simplify = FALSE)
+  return(apply(X, 2, function(x) which(x == 1), simplify = FALSE))
 }

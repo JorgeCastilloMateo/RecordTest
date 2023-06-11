@@ -45,5 +45,5 @@ R.record <- function(X, record = c("upper", "lower"), weak = FALSE){
   X <- as.matrix(X)
   L <- L.record(X, record = record, weak = weak)
   
-  return(apply(as.matrix(1:ncol(X)), 1, function(i) X[L[[i]], i]))
+  return(apply(as.matrix(1:ncol(X)), 1, function(i) X[L[[i]], i], simplify = FALSE))
 }
