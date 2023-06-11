@@ -214,5 +214,5 @@ Foster FG, Stuart A (1954).
 \doi{10.1111/j.2517-6161.1954.tb00143.x}.
 }
 \author{
-Jorge Castillo-Mateo  <jorgecm@unizar.es>, AC Cebrián, J Asín
+Jorge Castillo-Mateo  <jorgecastillomateo@gmail.com>, AC Cebrián, J Asín
 }

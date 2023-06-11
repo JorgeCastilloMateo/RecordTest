@@ -14,10 +14,10 @@
 #'   Record values can be calculated for both upper and lower records.
 #'
 #' @inheritParams I.record
-#' @return If \code{X} is a vector, the function returns a column matrix 
-#'   containing the record values. If \code{X} is a matrix, the function 
-#'   returns a list where each element is a vector indicating the record values 
-#'   of the corresponding \code{X} column.
+#' @return If \code{X} is a vector, the function returns a list containing the 
+#'   vector of record values. If \code{X} is a matrix, the function returns a 
+#'   list where each element is a vector indicating the record values of the 
+#'   corresponding \code{X} column.
 #'   
 #' @author Jorge Castillo-Mateo
 #' @seealso \code{\link{I.record}}, \code{\link{L.record}}, 

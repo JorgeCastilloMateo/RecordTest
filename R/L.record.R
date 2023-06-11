@@ -14,10 +14,10 @@
 #'   Record times can be calculated for both upper and lower records.
 #'
 #' @inheritParams I.record
-#' @return If \code{X} is a vector, the function returns a column matrix 
-#'   containing the record times. If \code{X} is a matrix, the function 
-#'   returns a list where each element is a vector indicating the record times 
-#'   of the corresponding \code{X} column.
+#' @return If \code{X} is a vector, the function returns a list containing the 
+#'   vector of record times. If \code{X} is a matrix, the function returns a 
+#'   list where each element is a vector indicating the record times of the 
+#'   corresponding \code{X} column.
 #'   
 #' @author Jorge Castillo-Mateo
 #' @seealso \code{\link{I.record}}, \code{\link{N.record}},
@@ -43,5 +43,5 @@ L.record <- function(X, record = c("upper", "lower"), weak = FALSE){
   
   X <- I.record(X, record = record, weak = weak)
   
-  return(apply(X, 2, function(x) which(x == 1)))
+  return(apply(X, 2, function(x) which(x == 1)), simplify = FALSE)
 }

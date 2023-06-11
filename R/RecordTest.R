@@ -172,7 +172,7 @@
 #'   To see how to cite \strong{RecordTest} in publications or elsewhere,
 #'   use \code{citation("RecordTest")}. 
 #'   
-#' @author Jorge Castillo-Mateo  <jorgecm@unizar.es>, AC Cebrián, J Asín
+#' @author Jorge Castillo-Mateo  <jorgecastillomateo@gmail.com>, AC Cebrián, J Asín
 #' @references 
 #' Arnold BC, Balakrishnan N, Nagaraja HN (1998). 
 #' \emph{Records}. 

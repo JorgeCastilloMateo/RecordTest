@@ -16,10 +16,10 @@ calculated, "upper" or "lower".}
 to \code{FALSE}.}
 }
 \value{
-If \code{X} is a vector, the function returns a column matrix 
-  containing the record times. If \code{X} is a matrix, the function 
-  returns a list where each element is a vector indicating the record times 
-  of the corresponding \code{X} column.
+If \code{X} is a vector, the function returns a list containing the 
+  vector of record times. If \code{X} is a matrix, the function returns a 
+  list where each element is a vector indicating the record times of the 
+  corresponding \code{X} column.
 }
 \description{
 Returns the record times of the values in a vector.
