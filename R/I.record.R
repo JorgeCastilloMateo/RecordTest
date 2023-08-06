@@ -93,6 +93,7 @@ I.record <- function(X, record = c("upper", "lower"), weak = FALSE) {
 
 #' @rdname I.record
 #' @method I.record default
+#' @export I.record.default
 #' @export 
 I.record.default <- function(X, record = c("upper", "lower"), weak = FALSE) {
   
@@ -101,6 +102,7 @@ I.record.default <- function(X, record = c("upper", "lower"), weak = FALSE) {
 
 #' @rdname I.record
 #' @method I.record numeric
+#' @export I.record.numeric
 #' @export 
 I.record.numeric <- function(X, record = c("upper", "lower"), weak = FALSE) {
   
@@ -129,6 +131,7 @@ I.record.numeric <- function(X, record = c("upper", "lower"), weak = FALSE) {
 
 #' @rdname I.record
 #' @method I.record matrix
+#' @export I.record.matrix
 #' @export 
 I.record.matrix <- function(X, record = c("upper", "lower"), weak = FALSE) {
   
@@ -144,15 +147,17 @@ I.record.matrix <- function(X, record = c("upper", "lower"), weak = FALSE) {
 ##########################
 ### INTERNAL FUNCTIONS ###
 ##########################
-.I.record <- function(X, ...) { UseMethod(".I.record") }
+.I.record <- function(X, record, Trows) { UseMethod(".I.record", X) }
 
 #' @method .I.record default
+#' @export 
 .I.record.default <- function(X, record, Trows) {
   
   return(.I.record.matrix(X = as.matrix(X), record = record, Trows = Trows))
 }
 
 #' @method .I.record numeric
+#' @export 
 .I.record.numeric <- function(X, record, Trows) {
   
   if (anyNA(X)) {
@@ -167,6 +172,7 @@ I.record.matrix <- function(X, record = c("upper", "lower"), weak = FALSE) {
 }
 
 #' @method .I.record matrix
+#' @export 
 .I.record.matrix <- function(X, record, Trows) {
   
   if (anyNA(X)) {

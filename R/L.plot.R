@@ -106,7 +106,7 @@ L.plot <- function(X,
     
   } else {
     
-    L <- L.fun(I.record(X, record = record))
+    L <- L.fun(.I.record(X, record = record, Trows = Trows))
 
     # plot
     graf <- 

@@ -135,17 +135,17 @@ N.plot <- function(X,
   ###################################  
   # Statistic
   NmeanF.fun <- function(X, record) {
-    return(cumsum(w * rowMeans(I.record(X, record = record))))
+    return(cumsum(w * rowMeans(.I.record(X, record = record, Trows = Trows))))
   } 
   
   NmeanB.fun <- function(X, record) {
     if (backward == "T") {
-      return(cumsum(w * rowMeans(I.record(X, record = record))))
+      return(cumsum(w * rowMeans(.I.record(X, record = record, Trows = Trows))))
     } else {
       N <- rep(w[1], Trows)
       if (length(w) == 1) w <- rep(w, Trows)
       for (t in 2:Trows) {
-        N[t] <- sum(w[1:t] * rowMeans(I.record(X[(Trows-t+1):Trows,], record = record)))
+        N[t] <- sum(w[1:t] * rowMeans(.I.record(X[(Trows-t+1):Trows,], record = record, Trows = Trows)))
       }
       return(N)
     }  

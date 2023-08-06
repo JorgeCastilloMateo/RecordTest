@@ -64,15 +64,16 @@
 #'   statistic with the difference, \code{"d"}, or the sum, \code{"s"}, of 
 #'   upper and lower records.
 #' @param correct A character string that indicates the continuity correction
-#'   in the Kolmogorov distribution made to the statistic. "fisher" (Fisher and
-#'   Robbins 2019), "vrbik" for the proposal by Vrbik (2020) or "none" (the 
-#'   default) if no correction is made. The former shows better 
-#'   size and power, but if the value of the statistic is too large it becomes 
-#'   \code{NaN} and p-value \code{NA}.
+#'   in the Kolmogorov distribution made to the statistic: "fisher" (Fisher and
+#'   Robbins 2019), "vrbik" (Vrbik 2020) or "none" (the default) if no 
+#'   correction is made. The former shows better size and power, but if the 
+#'   value of the statistic is too large it becomes \code{NaN} and p-value 
+#'   \code{NA}.
 #' @param permutation.test Logical. Indicates whether to compute p-values by	
-#'   permutation simulation. It does not require that the columns of \code{X} 	
-#'   be independent. If \code{TRUE} and \code{simulate.p.value = TRUE}, 	
-#'   permutations take precedence and permutations are performed.	
+#'   permutation simulation (Castillo-Mateo et al. 2023). It does not require 
+#'   that the columns of \code{X} be independent. If \code{TRUE} and 
+#'   \code{simulate.p.value = TRUE}, permutations take precedence and 
+#'   permutations are performed.	
 #' @param simulate.p.value Logical. Indicates whether to compute p-values by	
 #'   Monte Carlo simulation. If \code{permutation.test = TRUE}, permutations	
 #'   take precedence and permutations are performed.	
@@ -94,6 +95,11 @@
 #' “Distribution-Free Changepoint Detection Tests Based on the Breaking of Records.”
 #' \emph{Environmental and Ecological Statistics}, \strong{29}(3), 655-676.
 #' \doi{10.1007/s10651-022-00539-2}.
+#' 
+#' Castillo-Mateo J, Cebrián AC, Asín J (2023).
+#' “Statistical Analysis of Extreme and Record-Breaking Daily Maximum Temperatures in Peninsular Spain during 1960--2021.”
+#' \emph{Atmospheric Research}, \strong{293}, 106934.
+#' \doi{10.1016/j.atmosres.2023.106934}.
 #' 
 #' Fisher TJ, Robbins MW (2019). 
 #' “A Cheap Trick to Improve the Power of a Conservative Hypothesis Test.”

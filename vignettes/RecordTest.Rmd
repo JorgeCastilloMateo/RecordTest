@@ -164,6 +164,13 @@ foster.test(TxZ, distribution = "normal", weights = function(t) t-1)
 foster.test(TxZ, distribution = "t", weights = function(t) t-1)
 ```
 
+It is possible to use all the series if we compute the p-value with permutations, say 10,000:
+```{r}
+set.seed(23)
+foster.test(TxZ365, distribution = "normal", weights = function(t) t-1, 
+  permutation.test = TRUE, B = 10000)
+```
+
 Under the null hypothesis of randomness, the record probability meets $t p_t = 1$. An exploratory tool can be proposed where $E(t \hat p_t) = \alpha t + \beta$ and also a regression test for the hypothesis
 \[
 H_0:\,\alpha=0,\,\beta=1 \qquad \text{and} \qquad H_1:\,\alpha\neq0\,\text{or}\,\beta\neq1.

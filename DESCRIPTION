@@ -1,8 +1,8 @@
 Package: RecordTest
 Type: Package
 Title: Inference Tools in Time Series Based on Record Statistics
-Version: 2.1.2.9002
-Date: 2023-06-12
+Version: 2.2.0
+Date: 2023-08-06
 Authors@R: c(
   person("Jorge", "Castillo-Mateo", role = c("aut","cre","cph"), email = "jorgecastillomateo@gmail.com", comment = c(ORCID = "0000-0003-3859-0248")),
   person("Ana C.", "Cebrián", role = "ths", comment = c(ORCID = "0000-0002-9052-9674")),
@@ -20,7 +20,8 @@ Description: Statistical tools based on the probabilistic properties of the
   continuous random variables. In particular, tools to prepare a time series 
   as well as distribution-free trend and change-point tests and graphical 
   tools to study the record occurrence. Details about the implemented tools 
-  can be found in Castillo-Mateo et al. (2023) <doi:10.18637/jss.v106.i05>.
+  can be found in Castillo-Mateo et al. (2023a) <doi:10.18637/jss.v106.i05> 
+  and Castillo-Mateo et al. (2023b) <doi:10.1016/j.atmosres.2023.106934>.
 License: GPL-3
 URL: https://github.com/JorgeCastilloMateo/RecordTest
 BugReports: https://github.com/JorgeCastilloMateo/RecordTest/issues

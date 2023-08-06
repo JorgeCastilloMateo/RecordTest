@@ -40,9 +40,10 @@ should be done; defaults to \code{FALSE}. No correction is done if
 \code{simulate.p.value = TRUE}.}
 
 \item{permutation.test}{Logical. Indicates whether to compute p-values by
-permutation simulation. It does not require that the columns of \code{X} 
-be independent. If \code{TRUE} and \code{simulate.p.value = TRUE}, 
-permutations take precedence and permutations are performed.}
+permutation simulation (Castillo-Mateo et al. 2023). It does not require 
+that the columns of \code{X} be independent. If \code{TRUE} and 
+\code{simulate.p.value = TRUE}, permutations take precedence and 
+permutations are performed.}
 
 \item{simulate.p.value}{Logical. Indicates whether to compute p-values by
 Monte Carlo simulation. If \code{permutation.test = TRUE}, permutations
@@ -163,6 +164,11 @@ foster.test(ZaragozaSeries, statistic = "L", weights = function(t) t - 1)
 
 }
 \references{
+Castillo-Mateo J, Cebrián AC, Asín J (2023).
+“Statistical Analysis of Extreme and Record-Breaking Daily Maximum Temperatures in Peninsular Spain during 1960--2021.”
+\emph{Atmospheric Research}, \strong{293}, 106934.
+\doi{10.1016/j.atmosres.2023.106934}.
+
 Cebrián AC, Castillo-Mateo J, Asín J (2022).
 “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
 \emph{Stochastic Environmental Research and Risk Assessment}, \strong{36}(2), 313-330. 

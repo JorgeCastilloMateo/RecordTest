@@ -7,7 +7,7 @@ RecordTest <img src="inst/img/logoRecordTest_2.2.0.png" width="175px" align="rig
 [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/RecordTest?color=red)](https://CRAN.R-project.org/package=RecordTest)
 [![Licence](https://img.shields.io/badge/licence-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
   
-The R package *RecordTest* provides exploratory data analysis and inference tools based on theory of records to describe the record occurrence and detect trends and change-points in time series. In particular, *RecordTest* consists of graphical tools, distribution-free tests for trend in location, variation or non-stationarity in the tails, and change-point detection tests, all of them based on the record occurrence. Details about the implemented tools can be found in Castillo-Mateo et al. (2023) <doi:10.18637/jss.v106.i05>.
+The R package *RecordTest* provides exploratory data analysis and inference tools based on theory of records to describe the record occurrence and detect trends and change-points in time series. In particular, *RecordTest* consists of graphical tools, distribution-free tests for trend in location, variation or non-stationarity in the tails, and change-point detection tests, all of them based on the record occurrence. Details about the implemented tools can be found in Castillo-Mateo et al. (2023a) <doi:10.18637/jss.v106.i05> and Castillo-Mateo et al. (2023b) <doi:10.1016/j.atmosres.2023.106934>.
   
   
 ## Installation
@@ -55,6 +55,13 @@ A BibTeX entry for LaTeX users is
 &nbsp;&nbsp;  doi = {10.18637/jss.v106.i05},  
 }
 
+
+## Award winner
+
+Best Oral Communication Award (Student Category) of the I Conference \& XII Meeting of R users. I Congreso \& XII Jornadas de usuarios de R, Córdoba, Spain.
+
+<img src="inst/img/awardRecordTest.png" width="400px" align="center" />
+
   
 ## References
 Castillo-Mateo J (2022).
@@ -62,10 +69,15 @@ Castillo-Mateo J (2022).
 *Environmental and Ecological Statistics*, **29**(3), 655--676. 
 <doi:10.1007/s10651-022-00539-2>.
 
-Castillo-Mateo J, Cebrián AC, Asín J (2023).
+Castillo-Mateo J, Cebrián AC, Asín J (2023a).
 “RecordTest: An R Package to Analyze Non-Stationarity in the Extremes Based on Record-Breaking Events.”
 *Journal of Statistical Software*, **106**(5), 1--28.
 <doi:10.18637/jss.v106.i05>.
+
+Castillo-Mateo J, Cebrián AC, Asín J (2023b).
+“Statistical Analysis of Extreme and Record-Breaking Daily Maximum Temperatures in Peninsular Spain during 1960--2021.”
+*Atmospheric Research*, **293**, 106934.
+<doi:10.1016/j.atmosres.2023.106934>.
 
 Cebrián AC, Castillo-Mateo J, Asín J (2022).
 “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”

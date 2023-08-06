@@ -6,7 +6,7 @@
 #'   analysis and inference tools based on theory of records to describe the 
 #'   record occurrence and detect trends, change-points or non-stationarities 
 #'   in the tails of the time series. Details about the implemented tools can
-#'   be found in Castillo-Mateo, Cebrián and Asín (2023).
+#'   be found in Castillo-Mateo, Cebrián and Asín (2023a, 2023b).
 #'   
 #' @details 
 #'   The Classical Record Model:
@@ -27,11 +27,12 @@
 #'   introduction to the theory of records and in particular the classical 
 #'   record model. See Foster and Stuart (1954), Diersen and Trenkler (1996, 
 #'   2001) and Cebrián, Castillo-Mateo and Asín (2022) for the 
-#'   distribution-free trend detection tests and Castillo-Mateo (2022) for the
+#'   distribution-free trend detection tests, and Castillo-Mateo (2022) for the
 #'   distribution-free change-point detection tests based on the classical 
-#'   record model. For an easy introduction to \strong{RecordTest} use 
+#'   record model. See Castillo-Mateo, Cebrián and Asín (2023b) for the version
+#'   as permutation tests. For an easy introduction to \strong{RecordTest} use 
 #'   \code{vignette("RecordTest")}, and see Castillo-Mateo, Cebrián and Asín 
-#'   (2023).
+#'   (2023a).
 #' 
 #'   This package provides tests to study the hypothesis of the classical 
 #'   record model, that is that the record occurrence from a series of values 
@@ -184,10 +185,15 @@
 #' \emph{Environmental and Ecological Statistics}, \strong{29}(3), 655-676. 
 #' \doi{10.1007/s10651-022-00539-2}.
 #' 
-#' Castillo-Mateo J, Cebrián AC, Asín J (2023).
+#' Castillo-Mateo J, Cebrián AC, Asín J (2023a).
 #' “\strong{RecordTest}: An \code{R} Package to Analyze Non-Stationarity in the Extremes Based on Record-Breaking Events.”
 #' \emph{Journal of Statistical Software}, \strong{106}(5), 1-28. 
 #' \doi{10.18637/jss.v106.i05}.
+#' 
+#' Castillo-Mateo J, Cebrián AC, Asín J (2023b).
+#' “Statistical Analysis of Extreme and Record-Breaking Daily Maximum Temperatures in Peninsular Spain during 1960--2021.”
+#' \emph{Atmospheric Research}, \strong{293}, 106934.
+#' \doi{10.1016/j.atmosres.2023.106934}.
 #'
 #' Cebrián AC, Castillo-Mateo J, Asín J (2022).
 #' “Record Tests to Detect Non Stationarity in the Tails with an Application to Climate Change.”
